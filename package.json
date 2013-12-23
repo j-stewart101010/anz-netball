@@ -1,0 +1,19 @@
+{
+  "name": "ANZ Netball",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-compass": "*",
+    "grunt-contrib-watch": "~0.4.4"
+  },
+  "readmeFilename": "README",
+  "gitHead": "",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-compass": "~0.5.0",
+    "grunt-contrib-watch": "~0.4.4"
+  },
+  "author": "",
+  "license": "BSD"
+}

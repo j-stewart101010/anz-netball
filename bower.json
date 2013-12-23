@@ -1,0 +1,12 @@
+{
+  "name": "anz-nnn",
+  "version": "0.0.0",
+  "dependencies": {
+    "backbone": "~0.9.10",
+    "underscore": "~1.4.4",
+    "modernizr": "~2.6.1",
+    "jquery": "~1.9.1",
+    "requirejs": "~2.1.5",
+    "requirejs-text": "~2.0.5"
+  }
+}

@@ -1,0 +1,62 @@
+@import "compass/css3";
+
+// Import all the variables into the main css file.
+@import "variables";
+@import "mixins";
+@import "utilities";
+@import "fonts";
+@import "scaffolding";
+@import "normalize";
+@import "grid";
+
+
+// Main Navigation Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.main-nav {
+	margin: -10px 0 0;
+	padding: 0;
+	list-style-type: none;
+
+	.nav-headline {
+		display: block;
+		margin-top: -500px;
+		@include transition-property(margin);
+		@include transition-duration(2s);
+		@include transition-timing-function(ease-in);
+	}
+}
+
+// Menu Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.menu {
+	// @extend %textured-item;
+	@include make-row();
+	padding-top: 1px;
+
+	&:after {
+		position: static;
+	}
+
+	.menu-media {
+		margin-top: 3px;
+		@include make-column(6);
+
+		@media (max-width: $container-desktop) {
+			margin-top: 20px;
+		}
+	}
+
+	.menu-content {
+		@include make-column(6);
+		font-size: $font-size-big;
+
+		@media (max-width: $container-desktop) {
+			margin-top: 20px;
+			text-align: left;
+		}
+	}
+}

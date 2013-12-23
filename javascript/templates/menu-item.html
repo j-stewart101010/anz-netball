@@ -1,0 +1,63 @@
+
+	<a href="#<%- id %>" class="cube-container">
+	    <div data-reveal="spin" class="cube show-top">
+	      	<div class="front edge <%- style %>"><div data-reveal="initial-text" class="container headline nav-headline"></div></div>
+	      	<div class="back edge <%- style %>"><div data-reveal="initial-text" class="container headline nav-headline"><%- title %></div></div>
+	      	<div class="top edge <%- style %>"><div data-reveal="initial-text" class="container headline nav-headline"><%- title %></div></div>
+	      	<div class="bottom edge <%- style %>"><div data-reveal="initial-text" class="container headline nav-headline"><%- title %></div></div>
+	    </div>
+	</a>
+
+
+	<% if (subItems.length >= 2) { %>
+		<% for(var i = 0; i < subItems.length; i++) { %>
+			<div data-toggle="collapse" data-target="#running-man" class="cube-sub-container">
+				<div data-reveal="spin" class="cube show-front">
+					<div class="front edge nav-sub-item <%- subItems[i].subStyle %>"><div data-reveal="text" class="container headline nav-subheadline text-hide"><%- subItems[i].menuItems[0] %></div></div>
+					<div class="back edge nav-sub-item <%- subItems[i].subStyle %>"><div data-reveal="text" class="container headline nav-subheadline text-hide"><%- subItems[i].menuItems[0] %></div></div>
+					<div class="top edge nav-sub-item <%- subItems[i].subStyle %>"><div data-reveal="text" class="container headline nav-subheadline text-hide"><%- subItems[i].menuItems[0] %></div></div>
+					<div class="bottom edge nav-sub-item <%- subItems[i].subStyle %>"><div data-reveal="text" class="container headline nav-subheadline text-hide"><%- subItems[i].menuItems[0] %></div></div>
+				</div>
+			</div>
+		<% } %>
+	<% } else { %>
+	   <% for(var i = 0; i < subItems.length; i++) { %>
+			<div data-trigger="carousel" class="cube-sub-container">
+			    <div data-reveal="spin" class="cube show-front">
+			      	<div class="front edge nav-sub-item <%- subItems[i].subStyle %>"><div data-reveal="text" class="container headline nav-subheadline text-hide"></div></div>
+			      	<div class="back edge nav-sub-item <%- subItems[i].subStyle %>"><div data-reveal="text" class="container headline nav-subheadline text-hide"></div></div>
+			      	<div class="top edge nav-sub-item <%- subItems[i].subStyle %>"><div data-reveal="text" class="container headline nav-subheadline text-hide"></div></div>
+			      	<div class="bottom edge nav-sub-item <%- subItems[i].subStyle %>"><div data-reveal="text" class="container headline nav-subheadline text-hide"></div></div>
+			    </div>
+			</div>
+		<% } %>
+  	<% } %>
+
+
+	<% if (items.length > 0) { %>
+		<div data-reveal="slide" class="menu hide">
+			<% for(var i = 0; i < items.length; i++) { %>
+				<% if (typeof items[i].contentStyle === "undefined") { %>
+						<section class="container">
+							<figure class="menu-media">
+								<img class="img-responsive" src="<%- items[i].media %>" alt="Place Holder">
+							</figure>
+							<div class="menu-content">
+								<p>
+									<%- items[i].content %>
+									<a class="show-more" href="#" data-toggle="more">Read More&hellip;</a>
+									<span data-reveal="more" class="hide"><%- items[i].morecontent %></span>
+								</p>
+
+							</div>
+						</section>
+				<% } else { %>
+					<section class="nav-item <%- items[i].contentStyle %>">
+						<div class="container headline nav-subheadline">
+							<%= items[i].content.replace(new RegExp('\r?\n', 'g'), '<br />') %>
+						</div>
+					</section>
+				<% } %>
+	   		<% } %>
+		</div>
+	<% } %>
