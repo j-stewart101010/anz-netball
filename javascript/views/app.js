@@ -136,11 +136,11 @@ define([
         },
 
         onMouseDown : function (a) {
-            // a.preventDefault(), Config.downTarget.x = Config.mouse.x, Config.downTarget.y = Config.mouse.y, browseMode && grid.down()
+            a.preventDefault(), Config.downTarget.x = Config.mouse.x, Config.downTarget.y = Config.mouse.y, browseMode && grid.down()
         },
 
         onMouseUp : function (a) {
-            // a.preventDefault(), browseMode && grid.up()
+            a.preventDefault(), browseMode && grid.up()
         },
 
         onTouchStart : function (a) {
@@ -166,12 +166,12 @@ define([
         },
 
         onMouseMove : function (a) {
-            // if (Config.mouse.x = a.clientX + document.body.scrollLeft, Config.mouse.y = a.clientY + document.body.scrollTop, holding) {
-            //     var b = window.innerWidth || document.documentElement.clientWidth,
-            //         c = window.innerHeight || document.documentElement.clientHeight;
-            //     Config.mouse.x = b / 2, Config.mouse.y = c / 2
-            // }
-            // _self.testDidMove();
+            if (Config.mouse.x = a.clientX + document.body.scrollLeft, Config.mouse.y = a.clientY + document.body.scrollTop, holding) {
+                var b = window.innerWidth || document.documentElement.clientWidth,
+                    c = window.innerHeight || document.documentElement.clientHeight;
+                Config.mouse.x = b / 2, Config.mouse.y = c / 2
+            }
+            _self.testDidMove();
         },
 
         testDidMove : function () {

@@ -13,7 +13,7 @@ define([
 	    this.vignetteTexture.src = Config.REMOTE_PATH + "img/smoothVignette.png", 
 	    this.dottedLine = new Image, 
 	    this.dottedLine.src = Config.REMOTE_PATH + "img/xmas/dotLine.png", 
-	    this.padding = 1, this.xmasScale = 2, 
+	    this.padding = 1, 
 	    this.textCanvas = document.createElement("canvas"), 
 	    this.textCanvas.width = 500, 
 	    this.textCanvas.height = 100, 
@@ -24,8 +24,6 @@ define([
 	    this.tellUsButton = new GridButton(["img/xmas/doorPrompts_open_01.png", "img/xmas/doorPrompts_open_02.png", "img/xmas/doorPrompts_open_03.png", "img/xmas/doorPrompts_open_04.png", "img/xmas/doorPrompts_open_05.png", "img/xmas/doorPrompts_open_06.png", "img/xmas/doorPrompts_open_07.png", "img/xmas/doorPrompts_open_08.png", "img/xmas/doorPrompts_open_08.png", "img/xmas/doorPrompts_open_07.png", "img/xmas/doorPrompts_open_06.png", "img/xmas/doorPrompts_open_05.png", "img/xmas/doorPrompts_open_04.png", "img/xmas/doorPrompts_open_03.png", "img/xmas/doorPrompts_open_02.png", "img/xmas/doorPrompts_open_01.png"]), 
 	    this.tellMeMoreButton = new GridButton(["img/xmas/doorPrompts_discover_01.png", "img/xmas/doorPrompts_discover_02.png", "img/xmas/doorPrompts_discover_03.png", "img/xmas/doorPrompts_discover_04.png", "img/xmas/doorPrompts_discover_05.png", "img/xmas/doorPrompts_discover_06.png", "img/xmas/doorPrompts_discover_07.png", "img/xmas/doorPrompts_discover_08.png", "img/xmas/doorPrompts_discover_09.png", "img/xmas/doorPrompts_discover_10.png", "img/xmas/doorPrompts_discover_10.png", "img/xmas/doorPrompts_discover_09.png", "img/xmas/doorPrompts_discover_08.png", "img/xmas/doorPrompts_discover_07.png", "img/xmas/doorPrompts_discover_06.png", "img/xmas/doorPrompts_discover_05.png", "img/xmas/doorPrompts_discover_04.png", "img/xmas/doorPrompts_discover_03.png", "img/xmas/doorPrompts_discover_02.png", "img/xmas/doorPrompts_discover_01.png"]), 
 	    this.lockedButton = new GridButton(["img/xmas/doorPrompts_locked.png"]), 
-	    this.andMaybeText = new Image, 
-	    this.andMaybeText.src = Config.REMOTE_PATH + "img/appearHere.png", 
 	    this.peelColors = {}, 
 	    this.peelColors["#ffa400"] = ["img/xmas/peelBack_tab_lightBlue.png", "img/xmas/peelBack_under_lightBlue.png", "img/xmas/full_tab_lightBlue.png", "img/xmas/opened_tab_lightBlue.png", "img/xmas/stitchBorder_lightBlue.png"], 
 	    this.peelColors["#78b8dd"] = ["img/xmas/peelBack_tab_lightBlue.png", "img/xmas/peelBack_under_lightBlue.png", "img/xmas/full_tab_lightBlue.png", "img/xmas/opened_tab_lightBlue.png", "img/xmas/stitchBorder_lightBlue.png"], 
@@ -62,8 +60,8 @@ define([
 	        y: 0
 	    },
 
-	    this.squareWidth = 250, 
-	    this.nodePool = [], 
+	    this.squareWidth = 250,
+	    this.nodePool = [],
 	    this.points = [], 
 	    this.colors = ["#b494bb", "#a2b878", "#af98ad", "#d9d3c5", "#6ca86c", "#aea677", "#4fb4c6", "#80c6e8"], 
 	    this.start = !0, 
@@ -77,10 +75,18 @@ define([
 	Grid.constructor = Grid;
 
 	Grid.prototype.resize = function (a, b) {
-	    this.width = a, this.height = b, this.gridWidth = Math.ceil(this.width / this.squareWidth) + 2 + this.padding + 1, this.gridHeight = Math.ceil(this.height / this.squareWidth) + 2 + this.padding + 1;
+	    this.width = a,
+	    this.height = b,
+	    this.gridWidth = Math.ceil(this.width / this.squareWidth) + 2 + this.padding + 1, 
+	    this.gridHeight = Math.ceil(this.height / this.squareWidth) + 2 + this.padding + 1;
+	    console.log(this.gridWidth);
+	    console.log(Math.ceil(this.width / this.squareWidth));
+	    console.log(this.height);
 	    var c = this.gridWidth * this.gridHeight;
-	    this.odd = this.gridWidth % 2;
-	    for (var d = 0; d < this.points.length; d++) this.nodePool.push(this.points[d]);
+	    // this.odd = this.gridWidth % 2;
+	    for (var d = 0; d < this.points.length; d++) { 
+	    	this.nodePool.push(this.points[d]);
+		}
 	    this.points = [];
 	    for (var d = 0; c > d; d++) {
 	        var e = this.nodePool.pop();
@@ -90,12 +96,13 @@ define([
 	            color: this.colors[Math.round(25 * Math.random()) % 2],
 	            image: new Image,
 	            ratio: 0
+	            // squareWidth: model.content[d].squareWidth
 	        });
 	        var f = d % this.gridWidth,
 	            g = Math.floor(d / this.gridWidth);
 	        e.x = e.xHome = f, e.y = e.yHome = g, this.points.push(e)
 	    }
-	    this.scale = 1
+	    this.scale = 1;
 	};
 
 	Grid.prototype.startIntro = function () {
@@ -112,7 +119,9 @@ define([
 	};
 
 	Grid.prototype.onZoomedOut = function () {
-	    this.start = !1, this.locked = !1, this.onStartComplete()
+	    this.start = !1, 
+	    this.locked = !1, 
+	    this.onStartComplete()
 	};
 
 	Grid.prototype.render = function (a) {
@@ -121,6 +130,7 @@ define([
 	        c = .4 * (Config.track.y - this.camera.y),
 	        d = Math.sqrt(c * c + b * b),
 	        e = Math.abs(d);
+
 	    e > 40 && (e = 40), e /= 40, e *= .25;
 
 	    var f = Math.floor((this.camera.x - this.width / 2) / this.squareWidth) + 2,
@@ -138,7 +148,7 @@ define([
 	    this.scale += f >= -2 && 3 > f && g >= -2 && 3 > g ? .1 * (.6 + (1 - e) - this.scale) : .1 * (1 - e - this.scale);
 
 	    var h = 4 * e;
-	    .1 > h && (h = 0), 
+	    .1 > h && (h = 0),
 	    h > 1 && (h = 1), 
 	    this.start ? (this.scale = this.startZoom, this.camera.x = Config.track.x, this.camera.y = Config.track.y, 5 == this.scale) : (this.camera.x += b, this.camera.y += c);
 	    var i = this.scale + (1 - this.scale) * this.zoomRatio;
@@ -146,7 +156,7 @@ define([
 	    
 	    for (var j = (this.squareWidth, this.squareWidth * this.gridWidth), k = this.squareWidth * this.gridHeight, l = 0; l < this.points.length; l++) {
 	        var m = this.points[l];
-	        // m.spring.update();
+				m.spring.update();
 	        var n = m.x * this.squareWidth + this.camera.x,
 	            o = m.y * this.squareWidth + this.camera.y,
 	            p = Math.floor(n / j);
@@ -165,6 +175,7 @@ define([
 	        }
 	        m.xid = p, m.yid = q, n %= j, 0 > n && (n += j), o %= k, 0 > o && (o += k), m.xReal = n, m.yReal = o, m.xReals = n + m.spring.x * (1 - this.zoomRatio), m.yReals = o + m.spring.y * (1 - this.zoomRatio), m.spring.tx = m.xHome, m.spring.ty = m.yHome, a.fillStyle = "black", a.globalAlpha = 1
 	    }
+
 	    for (var l = 0; l < this.points.length; l++) {
 	        var m = this.points[l];
 	        if (m.xReal < (this.gridWidth - 1) * this.squareWidth && m.yReal < (this.gridHeight - 1) * this.squareWidth) {
@@ -175,100 +186,129 @@ define([
 	            a.globalAlpha = 1, m.isStart && (a.globalAlpha = this.startFade), a.fillStyle = m.color, a.beginPath(), a.moveTo(u.xReals - 1, u.yReals - 1), a.lineTo(v.xReals + 1, v.yReals - 1), a.lineTo(w.xReals + 1, w.yReals + 1), a.lineTo(x.xReals - 1, x.yReals + 1), a.closePath(), a.fill(), m.moment.locked || (a.fillStyle = m.moment.colorInner, a.globalAlpha = 1, a.beginPath(), a.moveTo(u.xReals + 16, u.yReals + 16), a.lineTo(v.xReals - 16, v.yReals + 16), a.lineTo(w.xReals - 16, w.yReals - 16), a.lineTo(x.xReals + 16, x.yReals - 16), a.closePath(), a.fill(), a.globalAlpha = 1);
 	            var y = (u.xReals + v.xReals + w.xReals + x.xReals) / 4,
 	                z = (u.yReals + v.yReals + w.yReals + x.yReals) / 4;
-	            if (m.moment.xmas === !0) {
-	                var A = 15;
-	                a.save(), a.translate(u.xReals + A, u.yReals + A);
-	                var B = u.xReals - v.xReals,
-	                    C = u.yReals - v.yReals,
-	                    D = Math.atan2(C, B) + Math.PI,
-	                    E = Math.sqrt(B * B + C * C);
-	                a.rotate(D), a.drawImage(this.dottedLine, 2, -5, E - 2 * A, this.dottedLine.height), a.restore(), a.save(), a.translate(u.xReals + A, u.yReals + A);
-	                var B = u.xReals - x.xReals,
-	                    C = u.yReals - x.yReals,
-	                    D = Math.atan2(C, B) + Math.PI,
-	                    E = Math.sqrt(B * B + C * C);
-	                a.rotate(D), a.drawImage(this.dottedLine, 2, -4, E - 2 * A, this.dottedLine.height), a.restore(), a.save(), a.translate(x.xReals + A, x.yReals - A);
-	                var B = x.xReals - w.xReals,
-	                    C = x.yReals - w.yReals,
-	                    D = Math.atan2(C, B) + Math.PI,
-	                    E = Math.sqrt(B * B + C * C);
-	                a.rotate(D), a.drawImage(this.dottedLine, 2, -5, E - 2 * A, this.dottedLine.height), a.restore(), a.save(), a.translate(v.xReals - A, v.yReals + A);
-	                var B = v.xReals - w.xReals,
-	                    C = v.yReals - w.yReals,
-	                    D = Math.atan2(C, B) + Math.PI,
-	                    E = Math.sqrt(B * B + C * C);
-	                a.rotate(D), a.drawImage(this.dottedLine, 2, -4, E - 2 * A, this.dottedLine.height), a.restore()
-	            }
-	            var F = v.xReals - u.xReals,
-	                G = w.xReals - x.xReals;
-	            var averageWidth3 = G > F ? F : G;
-	            var H = u.yReals - x.yReals,
-	                I = v.yReals - w.yReals;
-	            var averageHeight3 = H > I ? H : I;
-	            var t = m.image,
-	                J = averageWidth3 / this.squareWidth * 250,
-	                K = averageHeight3 / this.squareWidth * 250;
-	            0 > J && (J *= -1), 0 > K && (K *= -1);
-	            var L = G / F,
-	                M = F / G;
-	            L = L > M ? L : M;
-	            var N = H / I,
-	                O = I / H;
-	            if (N = N > O ? N : O, a.fillStyle = "#000000", 1 == m.moment.xmas)
-	                if (m.moment.locked) {
-	                    var P = (v.xReals + w.xReals) / 2,
-	                        z = (u.yReals + v.yReals + w.yReals + x.yReals) / 4;
-	                    a.drawImage(this.peelColors[m.color][2], P - 27.5, z - 24.75, 27.5, 49.5)
-	                } else {
-	                    var P = (v.xReals + w.xReals) / 2,
-	                        z = (u.yReals + v.yReals + w.yReals + x.yReals) / 4;
-	                    a.drawImage(this.peelColors[m.color][3], P - 27.5, z - 24.75, 27.5, 49.5)
-	                }
-	            if (this.overCell != m) {
-	                if (m.ratio *= .9, a.globalAlpha = 1, m.isStart) a.globalAlpha = this.startFade, this.startFade < 1 && (J = 250, K = 250), a.drawImage(t, y - J / 2, z - K / 2, J, K);
-	                else if (m.moment.locked) a.drawImage(t, y - J / 2 / 2, z - K / 2 / 2, J / 2, K / 2);
-	                else if (a.drawImage(t, y - J / 2, z - K / 2, J, K), m.moment.xmas) {
-	                    var Q = averageWidth3 / this.squareWidth,
-	                        R = averageHeight3 / this.squareWidth;
-	                    0 > Q && (Q *= -1), 0 > R && (R *= -1);
-	                    var S = (w.yReals + x.yReals) / 2;
-	                    a.globalAlpha = 1 - m.ratio, a.drawImage(m.moment.smallNumber, y - 20, S - 60, 40 * Q, 39.5 * R)
-	                }
-	            } else {
-	                a.globalAlpha = 1;
-	                var T = averageWidth3 / this.squareWidth,
-	                    U = averageHeight3 / this.squareWidth;
-	                0 > T && (T *= -1), 0 > U && (U *= -1);
-	                var V = (u.yReals + v.yReals) / 2,
-	                    W = m.ratio,
-	                    X = 1 - .2 * W,
-	                    Y = z - K / 2,
-	                    Z = V,
-	                    $ = Y + (Z - Y) * W;
-	                if ("share" == m.moment.id) {
-	                    var _ = 1 - W * m.scale;
-	                    $ -= 30 * W, a.drawImage(t, y - J * _ / 2, $, J * _, K * _), T *= 1 / 1.37, U *= 1 / 1.37, a.globalAlpha = this.overCell.alpha1, a.drawImage(this.andMaybeText, y - 141 * T, V + K * X + 10 * U, 282 * T, 39 * U), a.globalAlpha = this.overCell.alpha2, a.drawImage(this.tellUsButton.getNextImage(), y - 113 * T, V + K * X - 70 * U, 226 * T, 67 * U)
-	                } else if ("startx" == m.moment.id) a.drawImage(t, y - J * X / 2, $, J * X, K * X), T *= 1 / 1.37, U *= 1 / 1.37, a.globalAlpha = this.overCell.alpha1, a.drawImage(this.tellMeMoreButton.getNextImage(), y - 113 * T, V + K * X - 35 * U, 226 * T, 67 * U);
-	                else {
-	                    var ab = 1 - W * m.scale;
-	                    if (m.moment.locked)
-	                        if (a.drawImage(t, y - J / 2 / 2, z - K / 2 / 2, J / 2, K / 2), m.moment.superlocked) {
-	                            a.globalAlpha = this.overCell.alpha2;
-	                            var bb = x.yReals;
-	                            a.drawImage(this.lockedButton.getNextImage(), y - 146 * T * .5, bb - 60 * U, 292 * T * .5, 60 * U * .5)
-	                        } else a.globalAlpha = this.overCell.alpha2, m.moment._state == a.drawImage(this.button.getNextImage(), y - 146 * T * .5, V + K * X - 10 * U, 292 * T * .5, 60 * U * .5);
-	                        else a.drawImage(t, y - J * ab / 2, $, J * ab, K * ab), m.moment.xmas ? (a.globalAlpha = this.overCell.alpha1, a.drawImage(this.textCanvas, y - 125 * T, V + K * X - 45 - 14 * U, 250 * T, 50 * U), a.globalAlpha = this.overCell.alpha2, a.drawImage(this.tellMeMoreButton.getNextImage(), y - 146 * T * .5, V + K * X - 10 * U, 292 * T * .5, 60 * U * .5)) : (a.globalAlpha = this.overCell.alpha1, a.drawImage(this.textCanvas, y - 125 * T, V + K * X - 45 * U, 250 * T, 50 * U), a.globalAlpha = this.overCell.alpha2, a.drawImage(this.button.getNextImage(), y - 100 * T, V + K * X - 0 * U, 200 * T, 40 * U));
-	                    if (m.moment.locked && !m.moment.superlocked) {
-	                        a.globalAlpha = 1;
-	                        var cb = m.alpha2;
-	                        cb *= .9;
-	                        var db = 110 - 56 * cb,
-	                            eb = 112 - 18 * cb;
-	                        a.drawImage(this.peelColors[m.color][1], 0, 0, 1 + 40 * cb, 18, y + eb * T, V + 11.5 * U, 1 + 18 * cb * T, 226 * U), a.drawImage(this.peelColors[m.color][0], 0, 0, 1 + 90 * cb, 438, y + db * T, V + 11.5 * U - 0 * U, 1 + 40 * cb * T, 226 * U)
-	                    }
-	                }
-	            }
-	            a.fillStyle = "#463e40", a.globalAlpha = (L + N) / 2 - 1, a.globalAlpha > 0 && (a.beginPath(), a.moveTo(u.xReals - 1, u.yReals - 1), a.lineTo(v.xReals + 1, v.yReals - 1), a.lineTo(w.xReals + 1, w.yReals + 1), a.lineTo(x.xReals - 1, x.yReals + 1), a.closePath(), a.fill())
+
+
+	            //Dotted lines
+                var A = 15;
+                a.save(), a.translate(u.xReals + A, u.yReals + A);
+                var B = u.xReals - v.xReals,
+                    C = u.yReals - v.yReals,
+                    D = Math.atan2(C, B) + Math.PI,
+                    E = Math.sqrt(B * B + C * C);
+                a.rotate(D), a.drawImage(this.dottedLine, 2, -5, E - 2 * A, this.dottedLine.height), a.restore(), a.save(), a.translate(u.xReals + A, u.yReals + A);
+                var B = u.xReals - x.xReals,
+                    C = u.yReals - x.yReals,
+                    D = Math.atan2(C, B) + Math.PI,
+                    E = Math.sqrt(B * B + C * C);
+                a.rotate(D), a.drawImage(this.dottedLine, 2, -4, E - 2 * A, this.dottedLine.height), a.restore(), a.save(), a.translate(x.xReals + A, x.yReals - A);
+                var B = x.xReals - w.xReals,
+                    C = x.yReals - w.yReals,
+                    D = Math.atan2(C, B) + Math.PI,
+                    E = Math.sqrt(B * B + C * C);
+                a.rotate(D), a.drawImage(this.dottedLine, 2, -5, E - 2 * A, this.dottedLine.height), a.restore(), a.save(), a.translate(v.xReals - A, v.yReals + A);
+                var B = v.xReals - w.xReals,
+                    C = v.yReals - w.yReals,
+                    D = Math.atan2(C, B) + Math.PI,
+                    E = Math.sqrt(B * B + C * C);
+                a.rotate(D), a.drawImage(this.dottedLine, 2, -4, E - 2 * A, this.dottedLine.height), a.restore()
+
+
+
+
+
+
+
+
+
+	            // var F = v.xReals - u.xReals,
+	            //     G = w.xReals - x.xReals;
+	            // var averageWidth3 = G > F ? F : G;
+	            // var H = u.yReals - x.yReals,
+	            //     I = v.yReals - w.yReals;
+	            // var averageHeight3 = H > I ? H : I;
+	            // var t = m.image,
+	            //     J = averageWidth3 / this.squareWidth * 250,
+	            //     K = averageHeight3 / this.squareWidth * 250;
+	            // 0 > J && (J *= -1), 0 > K && (K *= -1);
+	            // var L = G / F,
+	            //     M = F / G;
+	            // L = L > M ? L : M;
+	            // var N = H / I,
+	            //     O = I / H;
+	            // if (N = N > O ? N : O, a.fillStyle = "#000000", 1 == m.moment.xmas)
+	            //     if (m.moment.locked) {
+	            //         var P = (v.xReals + w.xReals) / 2,
+	            //             z = (u.yReals + v.yReals + w.yReals + x.yReals) / 4;
+	            //         a.drawImage(this.peelColors[m.color][2], P - 27.5, z - 24.75, 27.5, 49.5)
+	            //     } else {
+	            //         var P = (v.xReals + w.xReals) / 2,
+	            //             z = (u.yReals + v.yReals + w.yReals + x.yReals) / 4;
+	            //         a.drawImage(this.peelColors[m.color][3], P - 27.5, z - 24.75, 27.5, 49.5)
+	            //     }
+	            // if (this.overCell != m) {
+	            // 	// console.log('overcell');
+	            //     if (m.ratio *= .9, a.globalAlpha = 1, m.isStart) a.globalAlpha = this.startFade, this.startFade < 1 && (J = 250, K = 250), a.drawImage(t, y - J / 2, z - K / 2, J, K);
+	            //     else if (m.moment.locked) a.drawImage(t, y - J / 2 / 2, z - K / 2 / 2, J / 2, K / 2);
+	            //     else if (a.drawImage(t, y - J / 2, z - K / 2, J, K), m.moment.xmas) {
+	            //         var Q = averageWidth3 / this.squareWidth,
+	            //             R = averageHeight3 / this.squareWidth;
+	            //         0 > Q && (Q *= -1), 0 > R && (R *= -1);
+	            //         var S = (w.yReals + x.yReals) / 2;
+	            //         a.globalAlpha = 1 - m.ratio, a.drawImage(m.moment.smallNumber, y - 20, S - 60, 40 * Q, 39.5 * R)
+	            //     }
+	            // } else {
+	            // 	console.log('overcell else');
+	            //     a.globalAlpha = 1;
+	            //     var T = averageWidth3 / this.squareWidth,
+	            //         U = averageHeight3 / this.squareWidth;
+	            //     0 > T && (T *= -1), 0 > U && (U *= -1);
+	            //     var V = (u.yReals + v.yReals) / 2,
+	            //         W = m.ratio,
+	            //         X = 1 - .2 * W,
+	            //         Y = z - K / 2,
+	            //         Z = V,
+	            //         $ = Y + (Z - Y) * W;
+	            //     if ("share" == m.moment.id) {
+	            //         var _ = 1 - W * m.scale;
+	            //         $ -= 30 * W, a.drawImage(t, y - J * _ / 2, $, J * _, K * _), T *= 1 / 1.37, U *= 1 / 1.37, a.globalAlpha = this.overCell.alpha1, a.drawImage(this.andMaybeText, y - 141 * T, V + K * X + 10 * U, 282 * T, 39 * U), a.globalAlpha = this.overCell.alpha2, a.drawImage(this.tellUsButton.getNextImage(), y - 113 * T, V + K * X - 70 * U, 226 * T, 67 * U)
+	            //     } else if ("startx" == m.moment.id) a.drawImage(t, y - J * X / 2, $, J * X, K * X), T *= 1 / 1.37, U *= 1 / 1.37, a.globalAlpha = this.overCell.alpha1, a.drawImage(this.tellMeMoreButton.getNextImage(), y - 113 * T, V + K * X - 35 * U, 226 * T, 67 * U);
+	            //     else {
+	            //         var ab = 1 - W * m.scale;
+	            //         if (m.moment.locked)
+	            //             if (a.drawImage(t, y - J / 2 / 2, z - K / 2 / 2, J / 2, K / 2), m.moment.superlocked) {
+	            //                 a.globalAlpha = this.overCell.alpha2;
+	            //                 var bb = x.yReals;
+	            //                 a.drawImage(this.lockedButton.getNextImage(), y - 146 * T * .5, bb - 60 * U, 292 * T * .5, 60 * U * .5)
+	            //             } else a.globalAlpha = this.overCell.alpha2, m.moment._state == a.drawImage(this.button.getNextImage(), y - 146 * T * .5, V + K * X - 10 * U, 292 * T * .5, 60 * U * .5);
+	            //             else a.drawImage(t, y - J * ab / 2, $, J * ab, K * ab), m.moment.xmas ? (a.globalAlpha = this.overCell.alpha1, a.drawImage(this.textCanvas, y - 125 * T, V + K * X - 45 - 14 * U, 250 * T, 50 * U), a.globalAlpha = this.overCell.alpha2, a.drawImage(this.tellMeMoreButton.getNextImage(), y - 146 * T * .5, V + K * X - 10 * U, 292 * T * .5, 60 * U * .5)) : (a.globalAlpha = this.overCell.alpha1, a.drawImage(this.textCanvas, y - 125 * T, V + K * X - 45 * U, 250 * T, 50 * U), a.globalAlpha = this.overCell.alpha2, a.drawImage(this.button.getNextImage(), y - 100 * T, V + K * X - 0 * U, 200 * T, 40 * U));
+	            //         if (m.moment.locked && !m.moment.superlocked) {
+	            //             a.globalAlpha = 1;
+	            //             var cb = m.alpha2;
+	            //             cb *= .9;
+	            //             var db = 110 - 56 * cb,
+	            //                 eb = 112 - 18 * cb;
+	            //             a.drawImage(this.peelColors[m.color][1], 0, 0, 1 + 40 * cb, 18, y + eb * T, V + 11.5 * U, 1 + 18 * cb * T, 226 * U), a.drawImage(this.peelColors[m.color][0], 0, 0, 1 + 90 * cb, 438, y + db * T, V + 11.5 * U - 0 * U, 1 + 40 * cb * T, 226 * U)
+	            //         }
+	            //     }
+	            // }
+	            // a.fillStyle = "#463e40", a.globalAlpha = (L + N) / 2 - 1, a.globalAlpha > 0 && (a.beginPath(), a.moveTo(u.xReals - 1, u.yReals - 1), a.lineTo(v.xReals + 1, v.yReals - 1), a.lineTo(w.xReals + 1, w.yReals + 1), a.lineTo(x.xReals - 1, x.yReals + 1), a.closePath(), a.fill())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	        }
 	        m.moment._state == m.moment.locked && (a.globalAlpha = 1, a.drawImage(this.tellUsButton.getNextImage(), y - 67.25, z + 60, 146, 30))
 	    }
@@ -340,9 +380,9 @@ define([
 	    })
 	};
 
-	// Grid.prototype.down = function () {
-	//     this.overCell = this.hittest(), this.overCell.moment.superlocked || (this.overCell.down = !0, this.didMove = !1, this.overCell.count = 0, this.overCell.ratio = 0, this.overCell.alpha1 = 0, this.overCell.alpha2 = 0)
-	// };
+	Grid.prototype.down = function () {
+	    this.overCell = this.hittest(), this.overCell.moment.superlocked || (this.overCell.down = !0, this.didMove = !1, this.overCell.count = 0, this.overCell.ratio = 0, this.overCell.alpha1 = 0, this.overCell.alpha2 = 0)
+	};
 
 	Grid.prototype.stabilize = function () {
 	    for (var a = 0; a < this.points.length; a++) {
@@ -372,33 +412,33 @@ define([
 	    return m %= this.gridWidth, 0 > m && (m += this.gridWidth), n %= this.gridHeight, 0 > n && (n += this.gridHeight), this.points[n % this.gridHeight * this.gridWidth + m]
 	};
 
-	// Grid.prototype.up = function () {
-	//     if (this.overCell.down && (this.overCell.down = !1, !this.didMove)) {
-	//         var a = this.overCell.xid;
-	//         a < -this.gridWidth && (a += this.gridWidth);
-	//         var b = this.overCell.yid;
-	//         var point = this.overCell;
-	//         var c = point,
-	//             d = this.points[this.gridWidth * (point.y % this.gridHeight) + (point.x + 1) % this.gridWidth],
-	//             e = this.points[this.gridWidth * ((point.y + 1) % this.gridHeight) + (point.x + 1) % this.gridWidth],
-	//             f = this.points[this.gridWidth * ((point.y + 1) % this.gridHeight) + point.x % this.gridWidth],
-	//             g = -this.width / 2 - this.squareWidth * (this.padding + 1),
-	//             h = -this.height / 2 - 1.5 * this.squareWidth;
-	//         this.overCell.moment.corners = [{
-	//             x: c.xReals + g,
-	//             y: c.yReals + h
-	//         }, {
-	//             x: d.xReals + g,
-	//             y: d.yReals + h
-	//         }, {
-	//             x: e.xReals + g,
-	//             y: e.yReals + h
-	//         }, {
-	//             x: f.xReals + g,
-	//             y: f.yReals + h
-	//         }], this.overCell.moment.positionX = (this.overCell.xid + 2 - .5) * this.squareWidth + this.width / 2 - this.squareWidth / 2 + 1, this.overCell.moment.positionY = (b + 1.5 - .5) * this.squareWidth + this.height / 2 - this.squareWidth / 2 + 1, this.overCell.moment.positionX = Math.floor(this.overCell.moment.positionX), this.overCell.moment.positionY = Math.floor(this.overCell.moment.positionY), 0 == this.overCell.y && (this.overCell.moment.positionY -= 2), 0 == this.overCell.x && (this.overCell.moment.positionX -= 1), this.overCell.moment.color = point.color, this.overCell.moment.image = point.image
-	//     }
-	// };
+	Grid.prototype.up = function () {
+	    if (this.overCell.down && (this.overCell.down = !1, !this.didMove)) {
+	        var a = this.overCell.xid;
+	        a < -this.gridWidth && (a += this.gridWidth);
+	        var b = this.overCell.yid;
+	        var point = this.overCell;
+	        var c = point,
+	            d = this.points[this.gridWidth * (point.y % this.gridHeight) + (point.x + 1) % this.gridWidth],
+	            e = this.points[this.gridWidth * ((point.y + 1) % this.gridHeight) + (point.x + 1) % this.gridWidth],
+	            f = this.points[this.gridWidth * ((point.y + 1) % this.gridHeight) + point.x % this.gridWidth],
+	            g = -this.width / 2 - this.squareWidth * (this.padding + 1),
+	            h = -this.height / 2 - 1.5 * this.squareWidth;
+	        this.overCell.moment.corners = [{
+	            x: c.xReals + g,
+	            y: c.yReals + h
+	        }, {
+	            x: d.xReals + g,
+	            y: d.yReals + h
+	        }, {
+	            x: e.xReals + g,
+	            y: e.yReals + h
+	        }, {
+	            x: f.xReals + g,
+	            y: f.yReals + h
+	        }], this.overCell.moment.positionX = (this.overCell.xid + 2 - .5) * this.squareWidth + this.width / 2 - this.squareWidth / 2 + 1, this.overCell.moment.positionY = (b + 1.5 - .5) * this.squareWidth + this.height / 2 - this.squareWidth / 2 + 1, this.overCell.moment.positionX = Math.floor(this.overCell.moment.positionX), this.overCell.moment.positionY = Math.floor(this.overCell.moment.positionY), 0 == this.overCell.y && (this.overCell.moment.positionY -= 2), 0 == this.overCell.x && (this.overCell.moment.positionX -= 1), this.overCell.moment.color = point.color, this.overCell.moment.image = point.image
+	    }
+	};
 
 	Grid.getId = function (a, b) {
 	    var c = model.dimensions[0],
