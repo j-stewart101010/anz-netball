@@ -12,6 +12,8 @@ define([
     'modules/loader-screen'
 ], function ($, _, Backbone, Config, model, Grid, DoubleSpring, GridDom, Trackpad, LoaderScreen) {
 
+    var _self;
+
     var AppView = Backbone.View.extend({
 
         initialize : function () {
@@ -136,11 +138,11 @@ define([
         },
 
         onMouseDown : function (a) {
-            a.preventDefault(), Config.downTarget.x = Config.mouse.x, Config.downTarget.y = Config.mouse.y, browseMode && grid.down()
+            // a.preventDefault(), Config.downTarget.x = Config.mouse.x, Config.downTarget.y = Config.mouse.y, browseMode && grid.down()
         },
 
         onMouseUp : function (a) {
-            a.preventDefault(), browseMode && grid.up()
+            // a.preventDefault(), browseMode && grid.up()
         },
 
         onTouchStart : function (a) {

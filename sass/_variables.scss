@@ -2,8 +2,8 @@
 // Brand colors
 // -------------------------
 
-$darkAccent:					#222;
-$lightAccent:					#fff;
+$darkAccent:					#004165;
+$lightAccent:					#0098db;
 
 $textHighlightOne:				#e11e26;
 $highlightOne:					#44090b;
@@ -14,7 +14,7 @@ $highlightOne:					#44090b;
 // Scaffolding
 // -------------------------
 
-$body-bg:               #0098db !default;
+$body-bg:               $lightAccent !default;
 $text-color:            #FFF !default;
 $link-color:            $text-color !default;
 $link-hover-color:      darken($link-color, 15%) !default;
@@ -24,9 +24,9 @@ $link-hover-color:      darken($link-color, 15%) !default;
 // Typography
 // -------------------------
 
-$font-family-sans-serif:  "MostraNuova", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
-$font-family-serif:       "Beppo", Georgia, "Times New Roman", Times, serif !default;
-$font-family-base:        $font-family-sans-serif !default;
+$font-family-sans-serif:  		"Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif-two:	"Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-base:        		$font-family-sans-serif !default;
 
 $font-size-base:          14px !default;
 $font-size-large:         ceil($font-size-base * 1.25) !default; // ~18px

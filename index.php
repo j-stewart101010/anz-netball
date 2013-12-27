@@ -5,12 +5,11 @@
 	<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 	<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 	    <head>
-			<title>ANZ - Netball Nation</title>
+			<title>ANZ Netball Nation - Home</title>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 			<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
 			<link href="css/styles.css" rel="stylesheet" type="text/css">
-			<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 	        <!--[if lt IE 9]>
 	            <link href="/stylesheets/ie.css" rel="stylesheet" type="text/css">
@@ -21,7 +20,6 @@
 	        <![endif]-->
 
 			<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
-
 	    </head>
 
 	    <body>

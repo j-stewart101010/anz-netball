@@ -1,14 +1,20 @@
 /*global define*/
 define([
 	'jquery',
+	'underscore',
 	'config/config',
 	'models/tile',
 	'modules/grid-button',
 	'modules/double-spring',
-], function ($, Config, model, GridButton, DoubleSpring) {
+], function ($, _, Config, model, GridButton, DoubleSpring) {
 	'use strict';
 
+	var _self;
+
 	var Grid = function (a, b) {
+		_self = this;
+		// this.previouslyRendered = [];
+
 	    this.vignetteTexture = new Image, 
 	    this.vignetteTexture.src = Config.REMOTE_PATH + "img/smoothVignette.png", 
 	    this.dottedLine = new Image, 
@@ -79,9 +85,6 @@ define([
 	    this.height = b,
 	    this.gridWidth = Math.ceil(this.width / this.squareWidth) + 2 + this.padding + 1, 
 	    this.gridHeight = Math.ceil(this.height / this.squareWidth) + 2 + this.padding + 1;
-	    console.log(this.gridWidth);
-	    console.log(Math.ceil(this.width / this.squareWidth));
-	    console.log(this.height);
 	    var c = this.gridWidth * this.gridHeight;
 	    // this.odd = this.gridWidth % 2;
 	    for (var d = 0; d < this.points.length; d++) { 
@@ -156,7 +159,7 @@ define([
 	    
 	    for (var j = (this.squareWidth, this.squareWidth * this.gridWidth), k = this.squareWidth * this.gridHeight, l = 0; l < this.points.length; l++) {
 	        var m = this.points[l];
-				m.spring.update();
+				// m.spring.update();
 	        var n = m.x * this.squareWidth + this.camera.x,
 	            o = m.y * this.squareWidth + this.camera.y,
 	            p = Math.floor(n / j);
@@ -167,13 +170,41 @@ define([
 	            var r = Grid.getId(p, q),
 	                s = model.content[r];
 
-				m.moment = s, m.scale = m.moment.scale ? 1 - m.moment.scale : .2, m.color = m.moment.color, m.isStart = !1;
+
+	   //          var previouslyRenderedLength = _self.previouslyRendered.length - 1;
+				// var indices = [];
+				// var idx = model.layout.indexOf(_self.previouslyRendered[previouslyRenderedLength]);
+				// while (idx != -1) {
+				//     indices.push(idx);
+				//     idx = model.layout.indexOf(_self.previouslyRendered[previouslyRenderedLength], idx + 1);
+				// }
+
+				// if (indices.length > 1 && !indices)
+				// {
+				// 	console.log(indices);
+				// }
+
+				m.moment = s, 
+				m.scale = m.moment.scale ? 1 - m.moment.scale : .2, 
+				m.color = m.moment.color, 
+				m.isStart = !1;
 
 	            // "share" == s.id && (s = model.share[s.visualId || 0], s.id = "share"), m.moment = s, m.scale = m.moment.scale ? 1 - m.moment.scale : .2, m.color = m.moment.color, m.isStart = !1;
 	            var t = m.moment.gridImage[0];
 	            m.moment.xmas === !0 && m.moment.locked && (t = m.moment.lockedImage), m.image.src = Config.REMOTE_PATH_2 + t, m.image.onerror = function () {}
 	        }
-	        m.xid = p, m.yid = q, n %= j, 0 > n && (n += j), o %= k, 0 > o && (o += k), m.xReal = n, m.yReal = o, m.xReals = n + m.spring.x * (1 - this.zoomRatio), m.yReals = o + m.spring.y * (1 - this.zoomRatio), m.spring.tx = m.xHome, m.spring.ty = m.yHome, a.fillStyle = "black", a.globalAlpha = 1
+	        m.xid = p;
+	        m.yid = q; 
+	        n %= j, 0 > n && (n += j);
+	        o %= k, 0 > o && (o += k);
+	        m.xReal = n;
+	        m.yReal = o;
+	        m.xReals = n + m.spring.x * (1 - this.zoomRatio);
+	        m.yReals = o + m.spring.y * (1 - this.zoomRatio);
+	        m.spring.tx = m.xHome;
+	        m.spring.ty = m.yHome;
+	        a.fillStyle = "black";
+	        a.globalAlpha = 1
 	    }
 
 	    for (var l = 0; l < this.points.length; l++) {
@@ -186,6 +217,8 @@ define([
 	            a.globalAlpha = 1, m.isStart && (a.globalAlpha = this.startFade), a.fillStyle = m.color, a.beginPath(), a.moveTo(u.xReals - 1, u.yReals - 1), a.lineTo(v.xReals + 1, v.yReals - 1), a.lineTo(w.xReals + 1, w.yReals + 1), a.lineTo(x.xReals - 1, x.yReals + 1), a.closePath(), a.fill(), m.moment.locked || (a.fillStyle = m.moment.colorInner, a.globalAlpha = 1, a.beginPath(), a.moveTo(u.xReals + 16, u.yReals + 16), a.lineTo(v.xReals - 16, v.yReals + 16), a.lineTo(w.xReals - 16, w.yReals - 16), a.lineTo(x.xReals + 16, x.yReals - 16), a.closePath(), a.fill(), a.globalAlpha = 1);
 	            var y = (u.xReals + v.xReals + w.xReals + x.xReals) / 4,
 	                z = (u.yReals + v.yReals + w.yReals + x.yReals) / 4;
+
+
 
 
 	            //Dotted lines
@@ -300,15 +333,6 @@ define([
 
 
 
-
-
-
-
-
-
-
-
-
 	        }
 	        m.moment._state == m.moment.locked && (a.globalAlpha = 1, a.drawImage(this.tellUsButton.getNextImage(), y - 67.25, z + 60, 146, 30))
 	    }
@@ -381,7 +405,7 @@ define([
 	};
 
 	Grid.prototype.down = function () {
-	    this.overCell = this.hittest(), this.overCell.moment.superlocked || (this.overCell.down = !0, this.didMove = !1, this.overCell.count = 0, this.overCell.ratio = 0, this.overCell.alpha1 = 0, this.overCell.alpha2 = 0)
+	    // this.overCell = this.hittest(), this.overCell.moment.superlocked || (this.overCell.down = !0, this.didMove = !1, this.overCell.count = 0, this.overCell.ratio = 0, this.overCell.alpha1 = 0, this.overCell.alpha2 = 0)
 	};
 
 	Grid.prototype.stabilize = function () {
@@ -391,53 +415,53 @@ define([
 	};
 
 	Grid.prototype.hittest = function () {
-	    if (document.body.style.cursor = "default", this.overCell) {
-	        var a = this.overCell,
-	            b = this.points[this.gridWidth * (a.y % this.gridHeight) + (a.x + 1) % this.gridWidth],
-	            c = this.points[this.gridWidth * ((a.y + 1) % this.gridHeight) + (a.x + 1) % this.gridWidth],
-	            d = (this.points[this.gridWidth * ((a.y + 1) % this.gridHeight) + a.x % this.gridWidth], b.xReal - a.xReal),
-	            e = c.yReal - a.yReal,
-	            f = Config.mouse.x,
-	            g = Config.mouse.y,
-	            h = f - a.xReal + 2 * this.squareWidth,
-	            i = g - a.yReal + 1.5 * this.squareWidth;
-	        if (h > 0 && d > h && i > 0 && e + 40 > i) return "share" == a.moment.id ? h > 18 && d - 22 > h && i > 165 && e - 30 > i && (document.body.style.cursor = "pointer") : "startx" == a.moment.id ? h > 18 && d - 22 > h && i > 195 && e + 10 > i && (document.body.style.cursor = "pointer") : h > 5 && d - 5 > h && i > 230 && e + 24 > i && (document.body.style.cursor = "pointer"), this.overCell
-	    }
-	    var j = Config.mouse.x,
-	        k = Config.mouse.y;
-	    j -= this.width / 2, k -= this.height / 2, j /= this.scale, k /= this.scale, j -= -this.squareWidth * (this.padding + 1), k -= 1.5 * -this.squareWidth, j += this.width / 2, k += this.height / 2;
-	    var l = this.squareWidth,
-	        m = Math.floor((j - this.camera.x) / l),
-	        n = Math.floor((k - this.camera.y) / l);
-	    return m %= this.gridWidth, 0 > m && (m += this.gridWidth), n %= this.gridHeight, 0 > n && (n += this.gridHeight), this.points[n % this.gridHeight * this.gridWidth + m]
+	    // if (document.body.style.cursor = "default", this.overCell) {
+	    //     var a = this.overCell,
+	    //         b = this.points[this.gridWidth * (a.y % this.gridHeight) + (a.x + 1) % this.gridWidth],
+	    //         c = this.points[this.gridWidth * ((a.y + 1) % this.gridHeight) + (a.x + 1) % this.gridWidth],
+	    //         d = (this.points[this.gridWidth * ((a.y + 1) % this.gridHeight) + a.x % this.gridWidth], b.xReal - a.xReal),
+	    //         e = c.yReal - a.yReal,
+	    //         f = Config.mouse.x,
+	    //         g = Config.mouse.y,
+	    //         h = f - a.xReal + 2 * this.squareWidth,
+	    //         i = g - a.yReal + 1.5 * this.squareWidth;
+	    //     if (h > 0 && d > h && i > 0 && e + 40 > i) return "share" == a.moment.id ? h > 18 && d - 22 > h && i > 165 && e - 30 > i && (document.body.style.cursor = "pointer") : "startx" == a.moment.id ? h > 18 && d - 22 > h && i > 195 && e + 10 > i && (document.body.style.cursor = "pointer") : h > 5 && d - 5 > h && i > 230 && e + 24 > i && (document.body.style.cursor = "pointer"), this.overCell
+	    // }
+	    // var j = Config.mouse.x,
+	    //     k = Config.mouse.y;
+	    // j -= this.width / 2, k -= this.height / 2, j /= this.scale, k /= this.scale, j -= -this.squareWidth * (this.padding + 1), k -= 1.5 * -this.squareWidth, j += this.width / 2, k += this.height / 2;
+	    // var l = this.squareWidth,
+	    //     m = Math.floor((j - this.camera.x) / l),
+	    //     n = Math.floor((k - this.camera.y) / l);
+	    // return m %= this.gridWidth, 0 > m && (m += this.gridWidth), n %= this.gridHeight, 0 > n && (n += this.gridHeight), this.points[n % this.gridHeight * this.gridWidth + m]
 	};
 
 	Grid.prototype.up = function () {
-	    if (this.overCell.down && (this.overCell.down = !1, !this.didMove)) {
-	        var a = this.overCell.xid;
-	        a < -this.gridWidth && (a += this.gridWidth);
-	        var b = this.overCell.yid;
-	        var point = this.overCell;
-	        var c = point,
-	            d = this.points[this.gridWidth * (point.y % this.gridHeight) + (point.x + 1) % this.gridWidth],
-	            e = this.points[this.gridWidth * ((point.y + 1) % this.gridHeight) + (point.x + 1) % this.gridWidth],
-	            f = this.points[this.gridWidth * ((point.y + 1) % this.gridHeight) + point.x % this.gridWidth],
-	            g = -this.width / 2 - this.squareWidth * (this.padding + 1),
-	            h = -this.height / 2 - 1.5 * this.squareWidth;
-	        this.overCell.moment.corners = [{
-	            x: c.xReals + g,
-	            y: c.yReals + h
-	        }, {
-	            x: d.xReals + g,
-	            y: d.yReals + h
-	        }, {
-	            x: e.xReals + g,
-	            y: e.yReals + h
-	        }, {
-	            x: f.xReals + g,
-	            y: f.yReals + h
-	        }], this.overCell.moment.positionX = (this.overCell.xid + 2 - .5) * this.squareWidth + this.width / 2 - this.squareWidth / 2 + 1, this.overCell.moment.positionY = (b + 1.5 - .5) * this.squareWidth + this.height / 2 - this.squareWidth / 2 + 1, this.overCell.moment.positionX = Math.floor(this.overCell.moment.positionX), this.overCell.moment.positionY = Math.floor(this.overCell.moment.positionY), 0 == this.overCell.y && (this.overCell.moment.positionY -= 2), 0 == this.overCell.x && (this.overCell.moment.positionX -= 1), this.overCell.moment.color = point.color, this.overCell.moment.image = point.image
-	    }
+	    // if (this.overCell.down && (this.overCell.down = !1, !this.didMove)) {
+	    //     var a = this.overCell.xid;
+	    //     a < -this.gridWidth && (a += this.gridWidth);
+	    //     var b = this.overCell.yid;
+	    //     var point = this.overCell;
+	    //     var c = point,
+	    //         d = this.points[this.gridWidth * (point.y % this.gridHeight) + (point.x + 1) % this.gridWidth],
+	    //         e = this.points[this.gridWidth * ((point.y + 1) % this.gridHeight) + (point.x + 1) % this.gridWidth],
+	    //         f = this.points[this.gridWidth * ((point.y + 1) % this.gridHeight) + point.x % this.gridWidth],
+	    //         g = -this.width / 2 - this.squareWidth * (this.padding + 1),
+	    //         h = -this.height / 2 - 1.5 * this.squareWidth;
+	    //     this.overCell.moment.corners = [{
+	    //         x: c.xReals + g,
+	    //         y: c.yReals + h
+	    //     }, {
+	    //         x: d.xReals + g,
+	    //         y: d.yReals + h
+	    //     }, {
+	    //         x: e.xReals + g,
+	    //         y: e.yReals + h
+	    //     }, {
+	    //         x: f.xReals + g,
+	    //         y: f.yReals + h
+	    //     }], this.overCell.moment.positionX = (this.overCell.xid + 2 - .5) * this.squareWidth + this.width / 2 - this.squareWidth / 2 + 1, this.overCell.moment.positionY = (b + 1.5 - .5) * this.squareWidth + this.height / 2 - this.squareWidth / 2 + 1, this.overCell.moment.positionX = Math.floor(this.overCell.moment.positionX), this.overCell.moment.positionY = Math.floor(this.overCell.moment.positionY), 0 == this.overCell.y && (this.overCell.moment.positionY -= 2), 0 == this.overCell.x && (this.overCell.moment.positionX -= 1), this.overCell.moment.color = point.color, this.overCell.moment.image = point.image
+	    // }
 	};
 
 	Grid.getId = function (a, b) {
@@ -448,6 +472,7 @@ define([
 	    var f = (b - 3) % d;
 	    0 > f && (f += d);
 	    var g = model.layout[f * c + e];
+		// _self.previouslyRendered.push(g);
 	    if (g >= model.content.length - 1) {
 	        var h = g % model.content.length;
 	        0 > h && (h += model.content.length);
