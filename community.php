@@ -33,18 +33,34 @@
 			</div>
 			<nav class="main-nav">
 				<span class="sharp-brand-angle"></span>
-				<ul class="navigation">
-					<li class="active"><a href="/community-grants">Community grants</a></li>
-					<li><a href="/getting-started">Getting started</a></li>
-					<li><a href="/all-about-netball">All about netball</a></li>
-					<li><a href="/clinics">Clinics</a></li>
-					<li><a href="/sign-up">Sign up</a></li>
 
+				<div class="nav-items">
+					<ul class="navigation">
+						<li class="active"><a href="/community-grants">Community grants</a></li>
+						<li><a href="/getting-started">Getting started</a></li>
+						<li><a href="/all-about-netball">All about netball</a></li>
+						<li><a href="/clinics">Clinics</a></li>
+						<li><a href="/sign-up">Sign up</a></li>
+					
+						<li class="social-media"><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li class="social-media"><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li class="social-media"><a href="#"><i class="fa fa-instagram"></i></a></li>
+					</ul>
+
+<!-- 					<ul class="social-media">
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+					</ul> -->
+				</div>				
+			</nav>
+<!-- 			<nav class="social-media">
+				<ul class="navigation">
 					<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 					<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 					<li><a href="#"><i class="fa fa-instagram"></i></a></li>
 				</ul>
-			</nav>
+			</nav> -->
 		</header>
 
 		<main>
