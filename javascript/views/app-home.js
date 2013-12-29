@@ -20,8 +20,7 @@ define([
             _self = this;
 
             IS_IE8 = !Modernizr.canvas, IS_IE8;
-            model.dimensions || (model.dimensions = [5, 5]);
-            if (mobilecheck() && (a.width = 61.5, a.height = 114.5), this.load(), Config.mouse) {
+            if (mobilecheck(), this.load(), Config.mouse) {
                 var d = window.innerWidth || document.documentElement.clientWidth,
                     e = window.innerHeight || document.documentElement.clientHeight;
                 Config.mouse.x = d / 2, Config.mouse.y = e / 2
@@ -52,9 +51,9 @@ define([
             document.body.appendChild(canvas), 
             canvas.style.display = "none", 
             $(canvas).fadeIn("slow"), 
-            $(canvas).mousedown(_self.onMouseDown), 
-            $(canvas).mouseup(_self.onMouseUp), 
-            $(canvas).mousemove(_self.onMouseMove), 
+            // $(canvas).mousedown(_self.onMouseDown), 
+            // $(canvas).mouseup(_self.onMouseUp), 
+            // $(canvas).mousemove(_self.onMouseMove), 
             $(canvas).bind("touchstart", _self.onTouchStart), 
             $(canvas).bind("touchend", _self.onTouchEnd), 
             $(canvas).bind("touchmove", _self.onTouchMove), 
@@ -67,9 +66,8 @@ define([
             IS_IE8 && ($(grid.domView).mousedown(onMouseDown), $(grid.domView).mouseup(onMouseUp), $(grid.domView).mousemove(onMouseMove));
 
             trackpad = IS_IE8 ? new Trackpad(grid.domView) : new Trackpad(canvas), browseMode = !1, pauseGridRender = !1, _self.onResize(), resizeCount = 19, trackpad.lock();
-            var c = (model.layout.indexOf(0), model.dimensions[0], -2),
-                d = -2;
-            trackpad.setPosition(a / 2 + 250 * c + 125, b / 2 + 250 * d), grid.onStartComplete = _self.onGridStartComplete, grid.startIntro(), requestAnimFrame(_self.update)
+            
+            trackpad.setPosition(a / 2, b / 2), grid.onStartComplete = _self.onGridStartComplete, requestAnimFrame(_self.update)
         },
 
         onGridStartComplete :  function () {
@@ -98,6 +96,7 @@ define([
         },
 
         update : function () {
+            //console.log(Config.isMobile);
             Config.isMobile || (resizeCount++, 20 == resizeCount && _self.realResize()), 
             loaded && browseMode && trackpad.update(), 
             Config.track && (Config.track.x = trackpad.value, Config.track.y = trackpad.valueY), 
@@ -129,6 +128,10 @@ define([
         onViewerHidden : function () {
             trackpad.unlock(), grid.unlock(), browseMode = !0
         },
+
+        // resize : function () { 
+        //     console.log("app.resize");
+        // },
 
         onResize : function () {
             resizeCount = 0;
@@ -188,3 +191,4 @@ define([
     return AppView;
 
 });
+

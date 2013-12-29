@@ -30,7 +30,19 @@ require.config({
 		},
 		mobile_check : {
 			exports : 'mobilecheck'
-		}
+		},
+        bootstrap_transition : {
+			deps: [
+				'jquery'
+			],
+			exports: '$.fn.transition'
+        }, 		
+        bootstrap_collapse : {
+			deps: [
+				'jquery'
+			],
+			exports: '$.fn.collapse'
+        }		
 	},
 	paths: {
 		jquery: '../bower_components/jquery/jquery',
@@ -41,7 +53,9 @@ require.config({
 		expo: 'vendor/EasePack.min',
 		console_log: 'helpers/console-log',
 		request_anim_frame: 'helpers/request-anim-frame',
-		mobile_check: 'helpers/mobile-check'
+		mobile_check: 'helpers/mobile-check',
+		bootstrap_transition : 'vendor/bootstrap-transition',		
+        bootstrap_collapse : 'vendor/bootstrap-collapse',		
 	}
 });
 
