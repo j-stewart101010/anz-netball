@@ -38,7 +38,7 @@
 				
 			</footer>
 
-		<script data-main="javascript/main" src="bower_components/requirejs/require.js"></script>
+		<script data-main="javascript/main-home" src="bower_components/requirejs/require.js"></script>
 
     </body>
 </html>
