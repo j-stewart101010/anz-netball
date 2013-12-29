@@ -7,13 +7,14 @@ define([
 
 var Trackpad = function (a) {
     this.target = a, this.value = 0, this.easingValue = 0, this.dragOffset = 0, this.dragging, this.speed = 0, this.prevPosition = 0, this.valueY = 0, this.easingValueY = 0, this.dragOffsetY = 0, this.speedY = 0, this.prevPositionY = 0;
-    var b = 1500;
-    this.xmasBounds = {
-        minX: 0,
-        maxX: b,
-        minY: -b,
-        maxY: 0
-    }, $(this.target).mousedown(this.onMouseDown.bind(this)), this.target.onmousewheel = this.onMouseWheel.bind(this), document.ontouchstart = this.onTouchStart.bind(this), $(document).keydown(this.onArrow.bind(this))
+    // var b = 1500;
+    // this.xmasBounds = {
+    //     minX: 0,
+    //     maxX: b,
+    //     minY: -b,
+    //     maxY: 0
+    // }, 
+    $(this.target).mousedown(this.onMouseDown.bind(this)), this.target.onmousewheel = this.onMouseWheel.bind(this), document.ontouchstart = this.onTouchStart.bind(this), $(document).keydown(this.onArrow.bind(this))
 };
 
 Trackpad.constructor = Trackpad, Trackpad.prototype.unlock = function () {

@@ -1,11 +1,11 @@
 /*global define*/
 define([
-	'jquery',
+	'jquery'
 ], function ($) {
 
       var Config = {
 
-            isMobile : window.mobilecheck(),
+            isMobile : false, //window.mobilecheck(),
 
             REMOTE_PATH : "http://gbd.abulia.org.uk/",
 

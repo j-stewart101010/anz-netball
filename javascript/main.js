@@ -56,5 +56,6 @@ require([
 	/*jshint nonew:false*/
 
 	// Initialize the application view
+	console.log("New AppView");
 	new AppView();
 });

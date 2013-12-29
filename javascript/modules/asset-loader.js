@@ -17,6 +17,7 @@ define([
             c.srcToLoad = a[b], this.images.push(c)
         }
         this.total = this.images.length
+        console.log("batch load complete");
     };
 
     AssetLoader.prototype.load = function () {
