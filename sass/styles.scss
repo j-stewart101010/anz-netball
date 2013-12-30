@@ -3,11 +3,15 @@
 // Import all the variables into the main css file.
 @import "variables";
 @import "mixins";
-@import "utilities";
 @import "fonts";
 @import "scaffolding";
 @import "normalize";
 @import "grid";
+@import "utilities";
+
+// Master Head Module
+//====================================================================================================================================
+//====================================================================================================================================
 
 .master-head {
 	@include make-row();
@@ -15,6 +19,12 @@
 
 	.branding {
 		@include make-column(3);
+	}
+
+	.logos {
+		position: absolute;
+		top: 50%;
+		margin-top: -20px;
 	}
 
 	.main-nav {
@@ -25,20 +35,47 @@
 		position: relative;
 		float: right;
 		max-width: 95%;
-		height: 100%;
+		height: 100%;	
 	}
 
 	.navigation {
-		float: left;
+		float: left;		
+		height: 100%;
 
 		li {
+			padding-top: 20px;
+			padding-bottom: 20px;
 			width: 10%;	
+		}
+
+		a {
+			padding: 0 5%;
+			color: white;
 		}
 
 		.social-media {
 			width: 3%;	
 		}
 	}
+
+	.menu-icon {
+		display: none;
+		float: right;
+		padding: 12px 0;
+	}
+
+	@media screen and (min-width: $screen-xsmall) {
+		.navigation {
+			display: table;
+			height: 100%!important;
+			
+			li {
+				padding-top: 0;
+				padding-bottom: 0;				
+				display: table-cell;
+			}			
+		}
+	}	
 
 	@media screen and (max-width: $screen-desktop) {
 		.nav-items {
@@ -72,14 +109,38 @@
 		.main-nav {	
 			padding-left: 0;
 			padding-right: 0;
-		}
+		}	
 
 		.nav-items {
 			max-width: none;	
 		}
 
 		.sharp-brand-angle {
-			display: none;
+			left: 70%;
+		}
+	}
+
+	@media screen and (max-width: $screen-xsmall) {
+		height: auto;
+
+		.menu-icon {
+			display: block;
+		}
+
+		.nav-items {
+			float: none;
+		}
+
+		.navigation {
+			height: auto;			
+			// display: none;
+			// @extend .collapse;
+			float: none;
+
+			li {
+				display: list-item;
+				width: auto;
+			}
 		}
 	}
 }
@@ -90,60 +151,80 @@
 
 .main-nav {
 	height: 100%;
-	@include gradient-vertical($start-color: lighten($lightAccent, 5%), $end-color: darken($lightAccent, 10%));
+	@include gradient-vertical($start-color: lighten($light-accent, 5%), $end-color: darken($light-accent, 10%));
 }
 
 // Navigation Module
 //====================================================================================================================================
 //====================================================================================================================================
 
-.navigation {
-	display: table;
-	height: 100%;
+%navigation {
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
 
 	li {
-		display: table-cell;
 		vertical-align: middle;
-		text-align: center;
-		text-transform: uppercase;
-	
-		&.active, &:hover {
-			background-color: white;
-
-			a {
-				border-left: 1px solid transparent;
-				color: lighten($lightAccent, 20%);
-
-				&:before {
-					border-right: 1px solid transparent;
-				}
-			}
-		}
 	}
 
 	a {
-		display: block;
 		position: relative;
-		padding: 0 5%;
-		border-left: 1px solid lighten($lightAccent, 5%);
-
-		&:before {
-			position: absolute;
-			content: "";
-			left: -1px;
-			top: 0;
-			width: 1px;
-			height: 100%;			
-			border-right: 1px solid darken($lightAccent, 5%);
-		}
+		padding: 0 10px;
+		border-left: 1px solid lighten($light-accent, 40%);
 	}
 
 	li:first-child a, li:first-child a:before {
 		border-left: 0;
 		border-right: 0;
+	}
+}
+
+.navigation {
+	@extend %navigation;
+
+	&.horizontal {
+		@include horizontal-list;
+
+		li {
+			@include horizontal-list-item;
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+
+	&.block {
+		li {
+			text-align: center;
+			text-transform: uppercase;
+		
+			&.active, &:hover {
+				background-color: white;
+
+				a {
+					border-left: 1px solid transparent;
+					color: lighten($light-accent, 20%);
+
+					&:before {
+						border-right: 1px solid transparent;
+					}
+				}
+			}
+		}
+
+		a {
+			display: block;
+			border-left: 1px solid lighten($light-accent, 5%);
+
+			&:before {
+				position: absolute;
+				content: "";
+				left: -1px;
+				top: 0;
+				width: 1px;
+				height: 100%;			
+				border-right: 1px solid darken($light-accent, 5%);
+			}			
+		}
 	}
 }
 
@@ -161,14 +242,12 @@
 	width: 20px;
 	height: 100%;
 	margin: 15px;
-	left: -9px;
+	top: 0;
+	right: -11px;
 	margin: 0px;
+	z-index: 999;
 	@include skew(-16deg, 0deg);
-	// -webkit-transform: skew(-16deg);
-	// -moz-transform: skew(-16deg);
-	// -o-transform: skew(-16deg);
-	// -ms-transform: skew(-16deg);
-	@include gradient-vertical($start-color: lighten($lightAccent, 2%), $end-color: darken($lightAccent, 13%));	
+	@include gradient-vertical($start-color: lighten($light-accent, 2%), $end-color: darken($light-accent, 13%));	
 
 	&:before {
 		content: "";
@@ -178,37 +257,17 @@
 		bottom: 0;
 		width: 18px;
 		@include skew(-12deg, 0deg);
-		// -webkit-transform: skew(-12deg);
-		// -moz-transform: skew(-12deg);
-		// -o-transform: skew(-12deg);
-		// -ms-transform: skew(-12deg);
-		// transform: skew(-12deg);
-	@include gradient-vertical($start-color: lighten($lightAccent, 2%), $end-color: darken($lightAccent, 13%));			
+		@include gradient-vertical($start-color: lighten($light-accent, 2%), $end-color: darken($light-accent, 13%));			
 	}
-
-	// display: inline-block;
-	// height: 100%;
-	// position: relative;
-	// width: 50px;
-
- //    -webkit-transform: skew(-35deg, 0deg);
- //    -moz-transform: skew(-35deg, 0deg);
- //    -o-transform: skew(-35deg, 0deg);
- //    -ms-transform: skew(-35deg, 0deg);
- //    transform: skew(-35deg, 0deg);
-
-	// // height: 50px;	
-	// margin-bottom: -5px;
-	// @include gradient-vertical($start-color: darken($lightAccent, 5%), $end-color: darken($lightAccent, 12%));
-	// @include gradient-striped($color: lighten($darkAccent, 8%), $angle: 75deg, $start-percent: 100%, $end-percent: 100%);
 }
 
 .brand {
 	height: 100%;	
 	padding-left: 15px;
+	padding-right: 15px;
 	margin-left: -15px;
 	margin-right: -15px;
-	@include gradient-radial($inner-color: lighten($darkAccent, 8%), $outer-color: $darkAccent);
+	@include gradient-radial($inner-color: lighten($dark-accent, 8%), $outer-color: $dark-accent);
 
 	.anz-logo {
 		display: inline-block;
@@ -219,6 +278,7 @@
 
 	.nbn-logo {
 		text-transform: uppercase;
+		color: white;
 	}
 }
 
@@ -252,5 +312,151 @@
 			margin-top: 20px;
 			text-align: left;
 		}
+	}
+}
+
+// Icon Modules
+//====================================================================================================================================
+//====================================================================================================================================
+
+%icon {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.menu-icon {
+	@extend %icon;
+
+	.fa-circle-o {
+		position: relative;
+		font-size: 50px;
+	}
+
+	.fa-bars {
+		position: absolute;
+		top: 27%;
+		left: 30%;
+		font-size: 21px;
+	}
+}
+
+// Main Content Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.content  {
+
+	.grid {
+		@include make-row();		
+		height: 50%;
+
+		.row {
+			margin-left: 0;
+			margin-right: 0;
+		}		
+	}
+
+	img {
+		max-width: 100%;
+	}
+
+	.image-wrap {
+		overflow: hidden;
+		max-width: 100%;
+
+		width: 50%;
+		float: left;
+	}
+
+	.col {
+		height: 100%;
+		overflow: hidden;
+		padding-left: 0;
+		padding-right: 0;		
+	}
+
+	@media screen and (min-width: $screen-desktop) {
+		height: 82%;
+
+		.image-wrap {
+			float: none;
+			width: auto;
+		}
+	}
+
+	@media screen and (max-width: $screen-xsmall) {
+		.image-wrap {
+			float: none;
+			width: auto;
+		}				
+	}
+}
+
+// Heading Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.heading {
+	text-transform: uppercase;
+}
+
+.subheading {
+	
+}
+
+.tile-heading {
+	@extend .heading;
+
+	color: $heading-accent-one;
+}
+
+// Tile Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.outter-tile {
+	display: table;
+	height: 100%;
+}
+
+.tile  {
+	display: table-cell;
+	padding-left: 15px;
+	padding-right: 15px;	
+	vertical-align: middle;	
+
+	&.shade-one {
+		background-color: $highlight-one;
+	}
+
+	&.shade-two {
+		background-color: darken($highlight-one, 10%);
+	}	
+}
+
+// Master Foot Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.master-foot  {
+	@include make-row();
+	position: relative;
+	height: 8%;
+	background-color: $dark-accent;
+
+	.nav-items {
+		position: absolute;
+		top: 50%;
+		margin-top: -15px;
+	}
+
+	.navigation, .copyright {
+		@include make-column(12);
+		font-size: 11px;
+		margin: 0;
+	}
+
+	.navigation a, .copyright {
+		color: $highlight-one;
 	}
 }

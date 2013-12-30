@@ -34,9 +34,18 @@
 }
 
 
-// For Affix plugin
+// For Collapse plugin
 // -------------------------
 
-.affix {
-  position: fixed;
+.collapse {
+  display: none;
+  &.in {
+    display: block;
+  }
+}
+.collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  @include transition(height .35s ease);
 }

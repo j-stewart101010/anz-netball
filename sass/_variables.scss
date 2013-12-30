@@ -2,20 +2,19 @@
 // Brand colors
 // -------------------------
 
-$darkAccent:					#004165;
-$lightAccent:					#0098db;
+$dark-accent:					#004165;	//Oxford blue
+$light-accent:					#0098db;	//Bleu de France
 
-$textHighlightOne:				#e11e26;
-$highlightOne:					#44090b;
+$highlight-one:					#d0eef8;	//Baby blue
 
-
+$heading-accent-one:			#36778a;	//Puuissan blue
 
 
 // Scaffolding
 // -------------------------
 
-$body-bg:               $lightAccent !default;
-$text-color:            #FFF !default;
+$body-bg:               $light-accent !default;
+$text-color:            #444444 !default;
 $link-color:            $text-color !default;
 $link-hover-color:      darken($link-color, 15%) !default;
 
@@ -102,7 +101,7 @@ $screen-desktop-max:         ($screen-large-desktop - 1) !default;
 // -------------------------
 
 // Hr border color
-$hr-border:                   $darkAccent !default;
+$hr-border:                   $dark-accent !default;
 
 
 
