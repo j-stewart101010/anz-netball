@@ -15,10 +15,6 @@
 	            <link href="/stylesheets/ie.css" rel="stylesheet" type="text/css">
 	        <![endif]-->
 
-	        <!--[if lt IE 8]>
-	            <link href="/stylesheets/font-awesome-ie7.min.css" rel="stylesheet" type="text/css">
-	        <![endif]-->
-
 			<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
 	    </head>
 

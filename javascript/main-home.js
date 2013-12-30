@@ -42,7 +42,13 @@ require.config({
 				'jquery'
 			],
 			exports: '$.fn.collapse'
-        }		
+        },
+        bootstrap_modal : {
+			deps: [
+				'jquery'
+			],
+			exports: '$.fn.modal'
+        }          
 	},
 	paths: {
 		jquery: '../bower_components/jquery/jquery',
@@ -55,7 +61,8 @@ require.config({
 		request_anim_frame: 'helpers/request-anim-frame',
 		mobile_check: 'helpers/mobile-check',
 		bootstrap_transition : 'vendor/bootstrap-transition',		
-        bootstrap_collapse : 'vendor/bootstrap-collapse',		
+        bootstrap_collapse : 'vendor/bootstrap-collapse',
+        bootstrap_modal : 'vendor/bootstrap-modal'			
 	}
 });
 

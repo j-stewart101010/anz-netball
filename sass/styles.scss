@@ -8,6 +8,7 @@
 @import "normalize";
 @import "grid";
 @import "utilities";
+@import "modals";
 
 // Master Head Module
 //====================================================================================================================================
@@ -416,6 +417,7 @@
 
 .outter-tile {
 	display: table;
+	width: 100%;
 	height: 100%;
 }
 
