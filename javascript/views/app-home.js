@@ -40,32 +40,71 @@ define([
             var a = window.innerWidth || document.documentElement.clientWidth,
                 b = window.innerHeight || document.documentElement.clientHeight;
             
-            IS_IE8 ? grid = new GridDom(a, b) : (canvas = document.createElement("canvas"), 
+            if (IS_IE8) {
+                grid = new GridDom(a, b);
+            }
+            else {
+                canvas = document.createElement("canvas"), 
+                canvas.width = a, 
+                canvas.height = b, 
+                context = canvas.getContext("2d"),
+                canvas.style.position = "absolute",
+                canvas.style.top = "0px", 
+                canvas.style.left = "0px", 
+                document.body.appendChild(canvas), 
+                canvas.style.display = "none", 
+                $(canvas).fadeIn("slow"), 
+                // $(canvas).mousedown(_self.onMouseDown), 
+                // $(canvas).mouseup(_self.onMouseUp), 
+                // $(canvas).mousemove(_self.onMouseMove), 
+                $(canvas).bind("touchstart", _self.onTouchStart), 
+                $(canvas).bind("touchend", _self.onTouchEnd), 
+                $(canvas).bind("touchmove", _self.onTouchMove), 
+                grid = new Grid(a, b)                
+            }
+            // IS_IE8 ? grid = new GridDom(a, b) : (canvas = document.createElement("canvas"), 
             
-            canvas.width = a, 
-            canvas.height = b, 
-            context = canvas.getContext("2d"),
-            canvas.style.position = "absolute",
-            canvas.style.top = "0px", 
-            canvas.style.left = "0px", 
-            document.body.appendChild(canvas), 
-            canvas.style.display = "none", 
-            $(canvas).fadeIn("slow"), 
-            // $(canvas).mousedown(_self.onMouseDown), 
-            // $(canvas).mouseup(_self.onMouseUp), 
-            // $(canvas).mousemove(_self.onMouseMove), 
-            $(canvas).bind("touchstart", _self.onTouchStart), 
-            $(canvas).bind("touchend", _self.onTouchEnd), 
-            $(canvas).bind("touchmove", _self.onTouchMove), 
-            grid = new Grid(a, b));
+            // canvas.width = a, 
+            // canvas.height = b, 
+            // context = canvas.getContext("2d"),
+            // canvas.style.position = "absolute",
+            // canvas.style.top = "0px", 
+            // canvas.style.left = "0px", 
+            // document.body.appendChild(canvas), 
+            // canvas.style.display = "none", 
+            // $(canvas).fadeIn("slow"), 
+            // // $(canvas).mousedown(_self.onMouseDown), 
+            // // $(canvas).mouseup(_self.onMouseUp), 
+            // // $(canvas).mousemove(_self.onMouseMove), 
+            // $(canvas).bind("touchstart", _self.onTouchStart), 
+            // $(canvas).bind("touchend", _self.onTouchEnd), 
+            // $(canvas).bind("touchmove", _self.onTouchMove), 
+            // grid = new Grid(a, b));
 
             grid.onTransitionFinished = function () {
                 loaderScreen.destroy(), document.body.removeChild(loaderScreen.view)
             };
 
-            IS_IE8 && ($(grid.domView).mousedown(onMouseDown), $(grid.domView).mouseup(onMouseUp), $(grid.domView).mousemove(onMouseMove));
+            if (IS_IE8) {
+                $(grid.domView).mousedown(_self.onMouseDown);
+                $(grid.domView).mouseup(_self.onMouseUp);
+                $(grid.domView).mousemove(_self.onMouseMove);
+            }
 
-            trackpad = IS_IE8 ? new Trackpad(grid.domView) : new Trackpad(canvas), browseMode = !1, pauseGridRender = !1, _self.onResize(), resizeCount = 19, trackpad.lock();
+            // IS_IE8 && ($(grid.domView).mousedown(onMouseDown), $(grid.domView).mouseup(onMouseUp), $(grid.domView).mousemove(onMouseMove));
+
+            if (IS_IE8) {
+                trackpad = new Trackpad(grid.domView);
+            }
+            else {
+                trackpad =  new Trackpad(canvas);
+            }
+
+            browseMode = !1,
+            pauseGridRender = !1,
+            _self.onResize(),
+            resizeCount = 19,
+            trackpad.lock();
             
             trackpad.setPosition(a / 2, b / 2), grid.onStartComplete = _self.onGridStartComplete, requestAnimFrame(_self.update)
         },

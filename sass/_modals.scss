@@ -24,6 +24,7 @@
   left: 0;
   z-index: $zindex-modal;
   -webkit-overflow-scrolling: touch;
+  background: red;
 
   // Prevent Chrome on Windows from adding a focus outline. For details, see
   // https://github.com/twbs/bootstrap/pull/10951.
@@ -35,6 +36,11 @@
     @include transition-transform(0.3s ease-out);
   }
   &.in .modal-dialog { @include translate(0, 0)}
+}
+
+.modal.cover {
+  margin-top: 0!important;
+  margin-left: 0!important;
 }
 
 // Shell div to position the modal with bottom padding

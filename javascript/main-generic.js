@@ -39,6 +39,7 @@ require.config({
 		jquery: '../bower_components/jquery/jquery',
 		underscore: '../bower_components/underscore/underscore',
 		backbone: '../bower_components/backbone/backbone',
+		text: '../bower_components/requirejs-text/text',
 		bootstrap_transition : 'vendor/bootstrap-transition',		
         bootstrap_collapse : 'vendor/bootstrap-collapse',
         bootstrap_modal : 'vendor/bootstrap-modal'			

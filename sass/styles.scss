@@ -92,7 +92,7 @@
 		 	.social-media {
 				display: block;
 				width: auto;
-				margin-top: 4px;
+				margin-top: 3px;
 
 				a {
 					padding: 0 20px;
@@ -102,7 +102,7 @@
 						border-right: 0;
 					}
 				}
-			}
+			}			
 		}
 	}
 
@@ -346,15 +346,22 @@
 //====================================================================================================================================
 
 .content  {
+	background-color: $dark-accent;
 
 	.grid {
-		@include make-row();		
-		height: 50%;
+		position: relative;
+		@include make-row();
+		overflow: hidden;
+		// min-height: 50%;
 
 		.row {
 			margin-left: 0;
 			margin-right: 0;
-		}		
+		}
+
+		&.resizing {
+			top: -30px;
+		}
 	}
 
 	img {
@@ -371,13 +378,31 @@
 
 	.col {
 		height: 100%;
-		overflow: hidden;
+		margin-right: -1px; //Handle subpixel level rendering issues in browers e.g: http://ejohn.org/blog/sub-pixel-problems-in-css/ 
 		padding-left: 0;
-		padding-right: 0;		
-	}
+		padding-right: 0;
+
+		&.shade-one {
+			padding-bottom: 50em;
+			margin-bottom: -50em;
+			background-color: $highlight-one;
+		}				
+	}	
+
+	// .grid:first-child {
+	// 	.col {
+	// 		padding-bottom: 20px;
+	// 	}
+	// }
+
+	// .grid + .grid {
+	// 	.col {
+	// 		margin-top: -30px;
+	// 	}
+	// }	
 
 	@media screen and (min-width: $screen-desktop) {
-		height: 82%;
+		min-height: 82%;
 
 		.image-wrap {
 			float: none;
@@ -419,20 +444,48 @@
 	display: table;
 	width: 100%;
 	height: 100%;
+
+	min-height: 250px;
 }
 
 .tile  {
 	display: table-cell;
+	position: relative;
+	z-index: 99;
 	padding-left: 15px;
 	padding-right: 15px;	
-	vertical-align: middle;	
+	vertical-align: middle;
 
 	&.shade-one {
 		background-color: $highlight-one;
+
+		// &:before {
+		// 	content: "";
+		// 	position: absolute;
+		// 	z-index: -1;
+		// 	top: 0;
+		// 	bottom: -200px;
+		// 	left: 0;
+		// 	right: 0;
+		// 	// margin: -50px;
+		// 	background-color: $highlight-one;
+		// }		
 	}
 
 	&.shade-two {
 		background-color: darken($highlight-one, 10%);
+
+		// &:before {
+		// 	content: "";
+		// 	position: absolute;
+		// 	z-index: -1;
+		// 	top: 0;
+		// 	bottom: -200px;
+		// 	left: 0;
+		// 	right: 0;
+		// 	// margin: -50px;
+		// 	background-color: darken($highlight-one, 10%);
+		// }		
 	}	
 }
 

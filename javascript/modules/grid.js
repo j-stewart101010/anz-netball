@@ -65,12 +65,8 @@ define([
 
 	    scalex = Math.abs(Math.cos(this.fliptile.angle*.01745329252));
 
-	    if(this.fliptile.angle<90) {
+	    if((this.fliptile.angle % 180) <90) {
 	        overcolor="0,0,0";
-	    } else if(this.fliptile.angle<180) {
-            overcolor="255,255,255";
-	    } else if(this.fliptile.angle<270) {
-            overcolor="0,0,0";
 	    } else {
             overcolor="255,255,255";
 	    };
