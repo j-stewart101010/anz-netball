@@ -108,15 +108,15 @@
 					<div class="outter-tile">
 						<article class="tile shade-two">
 							<hgroup>
-								<h1>Community Grants</h1>
-								<h2>We’re giving back and need your help!</h2>
-								<p>Grants are non-repayable funds disbursed by one party (grant makers), often a government department tion, foundation or trust, to a recipient, often (but not always) a nonprofit entity, educational stitution, business or an individual. In order to receive a grant, some form of "Grant Writing" often referred to as either a proposal or an application is usually required.</p>
+								<h1>Get involved</h1>
+								<a class="btn" href="/get-involved">Apply for a grant</a>
 							</hgroup>
 						</article>
 					</div>
 				</div>	
-				<div class="col col-md-6">
-					<p>Test</p>
+				<div class="video-tile col col-md-6">
+				<!-- Button trigger modal -->
+					<a data-toggle="modal" data-cover=".video-tile" href="#video-modal">Test</a>
 				</div>			
 			</section>			
 
@@ -136,6 +136,20 @@
 		</footer>
 
 		<script data-main="javascript/main-generic" src="bower_components/requirejs/require.js"></script>
+
+		<!-- Modal -->
+		<div class="modal fade" id="video-modal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+					</div>
+				</div>
+			</div>
+		</div>
+
 
     </body>
 </html>
