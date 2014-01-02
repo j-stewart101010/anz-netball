@@ -51,9 +51,13 @@ define([
             document.body.appendChild(canvas), 
             canvas.style.display = "none", 
             $(canvas).fadeIn("slow"), 
-            // $(canvas).mousedown(_self.onMouseDown), 
-            // $(canvas).mouseup(_self.onMouseUp), 
-            // $(canvas).mousemove(_self.onMouseMove), 
+            
+            console.log($(canvas));
+
+            $(canvas).mousedown(_self.onMouseDown), 
+            $(canvas).mouseup(_self.onMouseUp), 
+            $(canvas).mousemove(_self.onMouseMove), 
+            
             $(canvas).bind("touchstart", _self.onTouchStart), 
             $(canvas).bind("touchend", _self.onTouchEnd), 
             $(canvas).bind("touchmove", _self.onTouchMove), 
@@ -141,11 +145,16 @@ define([
         },
 
         onMouseDown : function (a) {
-            // a.preventDefault(), Config.downTarget.x = Config.mouse.x, Config.downTarget.y = Config.mouse.y, browseMode && grid.down()
+            console.log("MouseDown")
+            a.preventDefault();
+            Config.downTarget.x = Config.mouse.x;
+            Config.downTarget.y = Config.mouse.y; //, browseMode && grid.down()
         },
 
         onMouseUp : function (a) {
-            // a.preventDefault(), browseMode && grid.up()
+            console.log("onmouseup");
+            a.preventDefault()
+            //, browseMode && grid.up()
         },
 
         onTouchStart : function (a) {
@@ -171,6 +180,7 @@ define([
         },
 
         onMouseMove : function (a) {
+            console.log("onmousemove");
             if (Config.mouse.x = a.clientX + document.body.scrollLeft, Config.mouse.y = a.clientY + document.body.scrollTop, holding) {
                 var b = window.innerWidth || document.documentElement.clientWidth,
                     c = window.innerHeight || document.documentElement.clientHeight;
