@@ -22,25 +22,56 @@ define([
         this.assetLoader.onLoadComplete = this.onInitialLoadComplete.bind(this);
 
         var imagelist = [], imgpath;
+        var nextpos = {x:0, y:0};
+        var checkpos, collision;
+        var tilescale;
+
         for (var i = 0; i < model.content.length; i++) {
             switch(model.content[i].tiletype) {
                 case "text":
                     imgpath = model.content[i].subimageurl;
+                    tilescale = 1;
                 break;
                 case "image":
                     imgpath = model.content[i].imageurl;
+                    tilescale = 1;
                 break;
                 case "textlink":
                     imgpath = model.content[i].subimageurl;
+                    tilescale = 1;
                 break;
                 case "video":
                     imgpath = model.content[i].imageurl;
+                    tilescale = 2;                    
             }
+
+            model.content[i].scale = tilescale;
+
+            checkpos = {x:0, y:0};
+            do {
+                collision = false;
+                if((checkpos.x + model.content[i].scale - 1)>=model.worldwidth) collision = true;
+                for(var j = 0;j < i; j++) {                    
+                    if((checkpos.x >= model.content[j].position.x) && (checkpos.x <= (model.content[j].position.x + model.content[j].scale - 1))) {
+                        if ((checkpos.y >= model.content[j].position.y) && (checkpos.y <= (model.content[j].position.y + model.content[j].scale - 1))) collision = true;                        
+                    };
+
+                };
+                if(!collision) model.content[i].position = {x:checkpos.x, y:checkpos.y};
+                
+                checkpos.x+=1;
+                if(checkpos.x >= model.worldwidth) {
+                    checkpos.x=0;
+                    checkpos.y+=1;
+                };
+
+            } while(collision);
+ 
             model.content[i].image = new Image;
             model.content[i].image.src = Config.REMOTE_PATH_2 + imgpath;
 
            imagelist.push(Config.REMOTE_PATH_2 + imgpath);
-        }
+        };
         
         this.poller = new Image, this.poller.src = IS_IE8 ? Config.REMOTE_PATH_2 + "images/IE8_polling.gif" : Config.REMOTE_PATH_2 + "images/pollingSpin.png", this.poller.style.position = "absolute", this.poller.rotation = 0;
         var m = .5;

@@ -167,7 +167,9 @@ var model = {
       backtype:"text",
       backcolour:"#ff8877",
       backtitle:"BACKSIDE 16",
-      backsubtext:"This is the back of the tile"}]
+      backsubtext:"This is the back of the tile"}],
+
+   worldwidth:5
 }
 
 return model;

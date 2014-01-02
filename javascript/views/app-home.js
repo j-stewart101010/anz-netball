@@ -36,77 +36,59 @@ define([
         },
 
         kickOff : function() {
-            loaded = !0, holding = !0;
+            loaded = !0;
+            holding = !0;
             var a = window.innerWidth || document.documentElement.clientWidth,
                 b = window.innerHeight || document.documentElement.clientHeight;
             
-            if (IS_IE8) {
-                grid = new GridDom(a, b);
-            }
-            else {
-                canvas = document.createElement("canvas"), 
-                canvas.width = a, 
-                canvas.height = b, 
-                context = canvas.getContext("2d"),
-                canvas.style.position = "absolute",
-                canvas.style.top = "0px", 
-                canvas.style.left = "0px", 
-                document.body.appendChild(canvas), 
-                canvas.style.display = "none", 
-                $(canvas).fadeIn("slow"), 
-                // $(canvas).mousedown(_self.onMouseDown), 
-                // $(canvas).mouseup(_self.onMouseUp), 
-                // $(canvas).mousemove(_self.onMouseMove), 
-                $(canvas).bind("touchstart", _self.onTouchStart), 
-                $(canvas).bind("touchend", _self.onTouchEnd), 
-                $(canvas).bind("touchmove", _self.onTouchMove), 
-                grid = new Grid(a, b)                
-            }
-            // IS_IE8 ? grid = new GridDom(a, b) : (canvas = document.createElement("canvas"), 
-            
-            // canvas.width = a, 
-            // canvas.height = b, 
-            // context = canvas.getContext("2d"),
-            // canvas.style.position = "absolute",
-            // canvas.style.top = "0px", 
-            // canvas.style.left = "0px", 
-            // document.body.appendChild(canvas), 
-            // canvas.style.display = "none", 
-            // $(canvas).fadeIn("slow"), 
-            // // $(canvas).mousedown(_self.onMouseDown), 
-            // // $(canvas).mouseup(_self.onMouseUp), 
-            // // $(canvas).mousemove(_self.onMouseMove), 
-            // $(canvas).bind("touchstart", _self.onTouchStart), 
-            // $(canvas).bind("touchend", _self.onTouchEnd), 
-            // $(canvas).bind("touchmove", _self.onTouchMove), 
-            // grid = new Grid(a, b));
-
-            grid.onTransitionFinished = function () {
-                loaderScreen.destroy(), document.body.removeChild(loaderScreen.view)
+            if(IS_IE8) {
+                grid = new GridDom(a, b)
+            } else {
+                canvas = document.createElement("canvas"); 
+                canvas.width = a; 
+                canvas.height = b; 
+                context = canvas.getContext("2d");
+                canvas.style.position = "absolute";
+                canvas.style.top = "0px";
+                canvas.style.left = "0px"; 
+                document.body.appendChild(canvas);
+                canvas.style.display = "none"; 
+                $(canvas).fadeIn("slow"); 
+                $(canvas).mousedown(_self.onMouseDown);
+                $(canvas).mouseup(_self.onMouseUp);
+                $(canvas).mousemove(_self.onMouseMove);
+                $(canvas).bind("touchstart", _self.onTouchStart);
+                $(canvas).bind("touchend", _self.onTouchEnd);
+                $(canvas).bind("touchmove", _self.onTouchMove);
+                grid = new Grid(a, b);
             };
 
-            if (IS_IE8) {
-                $(grid.domView).mousedown(_self.onMouseDown);
-                $(grid.domView).mouseup(_self.onMouseUp);
-                $(grid.domView).mousemove(_self.onMouseMove);
-            }
+            grid.onTransitionFinished = function () {
+                loaderScreen.destroy();
+                document.body.removeChild(loaderScreen.view)
+            };
 
-            // IS_IE8 && ($(grid.domView).mousedown(onMouseDown), $(grid.domView).mouseup(onMouseUp), $(grid.domView).mousemove(onMouseMove));
+            if(IS_IE8) {
+                $(grid.domView).mousedown(onMouseDown);
+                $(grid.domView).mouseup(onMouseUp);
+                $(grid.domView).mousemove(onMouseMove);
+            };
 
-            if (IS_IE8) {
-                trackpad = new Trackpad(grid.domView);
-            }
-            else {
-                trackpad =  new Trackpad(canvas);
-            }
-
-            browseMode = !1,
-            pauseGridRender = !1,
-            _self.onResize(),
-            resizeCount = 19,
+            if(IS_IE8) {
+                trackpad = new Trackpad(grid.domView)
+            } else {
+                trackpad = new Trackpad(canvas)
+            };
+            
+            browseMode = false;
+            pauseGridRender = false;
+            _self.onResize();
+            resizeCount = 9;
             trackpad.lock();
             
-            trackpad.setPosition(a / 2, b / 2), grid.onStartComplete = _self.onGridStartComplete, requestAnimFrame(_self.update)
+            trackpad.setPosition(a / 2, b / 2);
+            grid.onStartComplete = _self.onGridStartComplete;
+            requestAnimFrame(_self.update);
         },
 
         onGridStartComplete :  function () {
@@ -127,19 +109,19 @@ define([
             //     a.positionY = (f + 1.5 - .5) * grid.squareWidth + grid.height / 2 - grid.squareWidth / 2 + 1;
             // } 
             // else 
-            browseMode = !0, setTimeout(_self.unlock, 1e3)
+            browseMode = true, setTimeout(_self.unlock, 1e3)
         },
 
         unlock : function () {
-            holding = !1, trackpad.unlock()
+            holding = false, trackpad.unlock()
         },
 
         update : function () {
             //console.log(Config.isMobile);
-            Config.isMobile || (resizeCount++, 20 == resizeCount && _self.realResize()), 
-            loaded && browseMode && trackpad.update(), 
-            Config.track && (Config.track.x = trackpad.value, Config.track.y = trackpad.valueY), 
-            pauseGridRender || (IS_IE8 ? grid.render() : (grid.render(context))), 
+            Config.isMobile || (resizeCount++, resizeCount ==10 && _self.realResize()); 
+            loaded && browseMode && trackpad.update(); 
+            Config.track && (Config.track.x = trackpad.value, Config.track.y = trackpad.valueY); 
+            pauseGridRender || (IS_IE8 ? grid.render() : (grid.render(context))); 
             requestAnimFrame(_self.update);
         },
 
@@ -148,16 +130,35 @@ define([
             var a = window.innerWidth || document.documentElement.clientWidth,
                 b = window.innerHeight || document.documentElement.clientHeight;
             if (window.grid) {
-                IS_IE8 || window.canvas && (canvas.width = a, canvas.height = b), grid.resize(a, b);
+                if(IS_IE8 || window.canvas) {
+                    canvas.width = a;
+                    canvas.height = b;
+                };
+                grid.resize(a, b);
                 var c = {
                     x: 500,
                     y: 500
                 };
-                Config.isMobile && (c.x = a, c.y = b, window.usingForm ? a > 2 * b ? $(overlay).fadeIn() : $(overlay).fadeOut() : a > b ? $(overlay).fadeIn() : $(overlay).fadeOut());
-                var d = c.x / 2,
-                    e = c.y / 2;
-               pauseGridRender && (IS_IE8 ? grid.render() : (grid.render(context), viewer.render(context))), a != this.cacheW && b != this.cacheH && window.scrollTo(0, 0), this.cacheW = a, this.cacheH = b, console.log("RESIZING");
-            }
+                if(Config.isMobile) { 
+                    c.x = a;
+                    c.y = b;
+                    window.usingForm ? a > 2 * b ? $(overlay).fadeIn() : $(overlay).fadeOut() : a > b ? $(overlay).fadeIn() : $(overlay).fadeOut();
+                    var d = c.x / 2,
+                        e = c.y / 2;
+                    if(pauseGridRender) {
+                        if(IS_IE8) {
+                            grid.render()
+                        } else {
+                            grid.render(context);
+                            viewer.render(context);
+                        };
+                        if(a != this.cacheW && b != this.cacheH) window.scrollTo(0, 0);
+                        this.cacheW = a;
+                        this.cacheH = b;
+                        console.log("RESIZING");
+                    };
+                };
+            };
         },
 
         onSwapPressed : function () {
@@ -176,24 +177,30 @@ define([
             resizeCount = 0;
             var a = window.innerWidth || document.documentElement.clientWidth,
                 b = window.innerHeight || document.documentElement.clientHeight;
-            this.w = a, this.h = b, mobilecheck() && (_self.realResize(), window.tabMenu && tabMenu.resize(a, b)), loaderScreen && loaderScreen.resize(a, b), window.tickerTape && (tickerTape.view.style.left = a / 2 - 304 + "px")
+            this.w = a;
+            this.h = b;
+            mobilecheck() && (_self.realResize(),
+            window.tabMenu && tabMenu.resize(a, b)),
+            loaderScreen && loaderScreen.resize(a, b),
+            window.tickerTape && (tickerTape.view.style.left = a / 2 - 304 + "px")
         },
 
         onMouseDown : function (a) {
-            // a.preventDefault(), Config.downTarget.x = Config.mouse.x, Config.downTarget.y = Config.mouse.y, browseMode && grid.down()
+            a.preventDefault();
+            Config.downTarget.x = Config.mouse.x;
+            Config.downTarget.y = Config.mouse.y;
         },
 
         onMouseUp : function (a) {
-            // a.preventDefault(), browseMode && grid.up()
+            a.preventDefault();
         },
 
         onTouchStart : function (a) {
-            a.preventDefault(),
-            Config.mouse.x = a.originalEvent.touches[0].clientX + document.body.scrollLeft,
-            Config.mouse.y = a.originalEvent.touches[0].clientY + document.body.scrollTop,
-            downTarget.x = Config.mouse.x,
-            downTarget.y = Config.mouse.y,
-            browseMode && (grid.firstTouch || (grid.firstTouch = !0), grid.down());
+            a.preventDefault();
+            Config.mouse.x = a.originalEvent.touches[0].clientX + document.body.scrollLeft;
+            Config.mouse.y = a.originalEvent.touches[0].clientY + document.body.scrollTop;
+            downTarget.x = Config.mouse.x;
+            downTarget.y = Config.mouse.y;
         },
 
         onTouchEnd : function (a) {
@@ -222,7 +229,8 @@ define([
             var a = Config.mouse.x - Config.downTarget.x,
                 b = Config.mouse.y - Config.downTarget.y,
                 c = a * a + b * b;
-            c > 900 && (grid.didMove = !0)
+            if(c > 125) grid.didMove = true;
+
         }                  
 
     });
@@ -230,4 +238,3 @@ define([
     return AppView;
 
 });
-
