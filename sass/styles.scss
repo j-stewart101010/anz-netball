@@ -351,7 +351,6 @@
 	.grid {
 		position: relative;
 		@include make-row();
-		overflow: hidden;
 
 		.row {
 			margin-left: 0;
@@ -377,18 +376,21 @@
 
 	.col {
 		height: 100%;
-		margin-right: -1px; //Handle subpixel level rendering issues in browers e.g: http://ejohn.org/blog/sub-pixel-problems-in-css/ 
 		padding-left: 0;
 		padding-right: 0;
-
-		// &.center-tile {
-		// 	padding-bottom: 50em;
-		// 	margin-bottom: -50em;
-		// }
 	}	
 
 	@media screen and (min-width: $screen-desktop) {
 		min-height: 82%;
+
+		.col {
+			margin-right: -2px; //Handle subpixel level rendering issues in browers e.g: http://ejohn.org/blog/sub-pixel-problems-in-css/ 
+			margin-left: 1px;			
+		}
+
+		.grid {
+			overflow: hidden;
+		}
 
 		.image-wrap {
 			float: none;

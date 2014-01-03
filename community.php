@@ -109,7 +109,7 @@
 						<article class="tile shade-one">
 							<h1>Get involved</h1>
 							<a class="btn" href="/get-involved">Apply for a grant</a>
-							<a data-toggle="modal" data-cover=".video-tile" href="#video-modal">Test</a>
+							<a data-toggle="modal" data-cover=".video-tile" data-video-id="19072376" href="#video-modal">Test</a>
 						</article>
 					</div>
 				</div>			

@@ -53,8 +53,7 @@ require.config({
 
 require([
 	'views/app-generic',
-	'match_media',
-], function (AppGenericView, MatchMedia) {
+], function (AppGenericView) {
 	/*jshint nonew:false*/
 
 	// Initialize the application view

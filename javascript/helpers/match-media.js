@@ -61,8 +61,12 @@ define([
 	    };
 	}());
 
-	match_media.mobile = matchMedia('only screen and (max-width: 480px)').matches
+	// match_media.mobile = matchMedia('only screen and (max-width: 480px)').matches
+	// match_media.tablet = matchMedia('only screen and (max-width: 992px)').matches
 
-	return match_media;
+	return {
+		mobile : function () { return matchMedia('only screen and (max-width: 480px)').matches; },
+		tablet : function () { return matchMedia('only screen and (max-width: 991px)').matches; }
+	}
 
 });

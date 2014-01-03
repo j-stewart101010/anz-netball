@@ -4,10 +4,11 @@ define([
     'underscore',
     'backbone',
     'views/video-modal',
+    'match_media',
     'bootstrap_transition',    
     'bootstrap_collapse',
     'bootstrap_modal',
-], function ($, _, Backbone, VideoModalView) {
+], function ($, _, Backbone, VideoModalView, MatchMedia) {
 
     var _self;
 
@@ -21,44 +22,30 @@ define([
 
         initialize : function () {
             _self = this;
-            _self.set_grid();
+            _self.center_grid_columns();
 
-            // this.resize_evt;
-            $(window).resize(function() {            
-            //     clearTimeout(this.resize_evt);
-            //     this.resize_evt = setTimeout(function() {
-                    _self.set_grid();
-            //     }, 150);
-            });
+            $(window).on('resize' , _self.center_grid_columns );
         },
 
-        set_grid : function (e) {
-            //TODO: Update to work on resize correctly
-            // _self.$el.find('.outter-tile').css({height : ''});
-            // $.each(_self.$el.find('.grid'), function() {
-            //     var height = 0;
-            //     var $columns = $(this).find('.col');
-            //     $.each($columns, function() {
-            //         if ($(this).height() > height) { height = $(this).height(); }
-            //     });
-            //     $columns.find('.outter-tile').css({ 'height' : height });
-            // });
-
-            $.each(_self.$el.find('[data-resize-height="tile"]'), function () {
-                console.log($(this));
-                $(this).css({ top: ($(this).closest('.grid').height() - $(this).height()), marginTop: -($(this).closest('.grid').height() - $(this).height()) / 2 });
-            });
+        center_grid_columns : function (e) {
+            if (MatchMedia.tablet()) {
+                $.each(_self.$el.find('[data-resize-height="tile"]'), function () {
+                    $(this).css({ top: '', marginTop: '' });
+                });
+            }
+            else {
+                $.each(_self.$el.find('[data-resize-height="tile"]'), function () {
+                    $(this).css({ top: ($(this).closest('.grid').height() - $(this).height()), marginTop: -($(this).closest('.grid').height() - $(this).height()) / 2 });
+                });                
+            }
         },
 
         show_modal : function (e) {
             var view = new VideoModalView({ 
-                cover : $($(e.target).data('cover'))
+                cover : $(e.target).data('cover'),
+                id : $(e.target).data('video-id')
             });
             this.$el.append(view.render().el);
-            // var video_modal = new VideoModalView({ 
-                // el : $(e.target),
-                // cover : $($(e.relatedTarget).data('cover'))
-            // }).render().el;
         }
 
     });
