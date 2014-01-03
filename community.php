@@ -60,8 +60,9 @@
 		<main class="content">
 
 			<section class="grid">
-				<div class="col col-md-8 col-lg-9">
-					<div class="outter-tile">
+				<div class="col col-md-8 col-lg-9 center-tile shade-one">
+				
+					<div style="position: relative;" data-resize-height="tile" class="outter-tile">
 						<article class="tile shade-one">
 							<hgroup>
 								<h1 class="tile-heading">Community Grants</h1>
@@ -72,34 +73,24 @@
 					</div>
 				</div>
 				<div class="col col-md-4 col-lg-3">
-				<div class="row">
-					<div class="col col-xs-6 col-sm-6 col-md-6 col-lg-6">
-						<div class="image-wrap">
-							<img src="images/netball-grid-one.jpg">
+					<div class="row">
+						<div class="col col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<div class="image-wrap">
+								<img src="images/netball-grid-one.jpg">
+							</div>
+							<div class="image-wrap">
+								<img src="images/netball-grid-two.jpg">
+							</div>
 						</div>
-						<div class="image-wrap">
-							<img src="images/netball-grid-two.jpg">
-						</div>
+						<div class="col col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<div class="image-wrap">
+								<img src="images/netball-grid-three.jpg">
+							</div>
+							<div class="image-wrap">
+								<img src="images/netball-grid-four.jpg">
+							</div>
+						</div>				
 					</div>
-					<div class="col col-xs-6 col-sm-6 col-md-6 col-lg-6">
-						<div class="image-wrap">
-							<img src="images/netball-grid-three.jpg">
-						</div>
-						<div class="image-wrap">
-							<img src="images/netball-grid-four.jpg">
-						</div>
-					</div>				
-				</div>
-
-<!-- 					<div class="outter-tile">
-						<article class="tile shade-two">
-							<hgroup>
-								<h1>Community Grants</h1>
-								<h2>We’re giving back and need your help!</h2>
-								<p>Grants are non-repayable funds disbursed by one party (grant makers), often a government department tion, foundation or trust, to a recipient, often (but not always) a nonprofit entity, educational stitution, business or an individual. In order to receive a grant, some form of "Grant Writing" often referred to as either a proposal or an application is usually required.</p>
-							</hgroup>
-						</article>
-					</div> -->
 				</div>			
 			</section>
 
@@ -107,16 +98,20 @@
 				<div class="col col-md-6">
 					<div class="outter-tile">
 						<article class="tile shade-two">
-							<hgroup>
-								<h1>Get involved</h1>
-								<a class="btn" href="/get-involved">Apply for a grant</a>
-							</hgroup>
+							<h1>Get involved</h1>
+							<a class="btn" href="/get-involved">Apply for a grant</a>
 						</article>
 					</div>
-				</div>	
-				<div class="video-tile col col-md-6">
-				<!-- Button trigger modal -->
-					<a data-toggle="modal" data-cover=".video-tile" href="#video-modal">Test</a>
+				</div>
+
+				<div class="col col-md-6">
+					<div class="video-tile outter-tile">
+						<article class="tile shade-one">
+							<h1>Get involved</h1>
+							<a class="btn" href="/get-involved">Apply for a grant</a>
+							<a data-toggle="modal" data-cover=".video-tile" data-video-id="19072376" href="#video-modal">Test</a>
+						</article>
+					</div>
 				</div>			
 			</section>			
 
@@ -138,7 +133,7 @@
 		<script data-main="javascript/main-generic" src="bower_components/requirejs/require.js"></script>
 
 		<!-- Modal -->
-		<div class="modal fade" id="video-modal" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- 		<div class="modal fade" id="video-modal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -148,8 +143,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
-
+		</div> -->
 
     </body>
 </html>

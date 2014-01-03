@@ -92,7 +92,7 @@
 		 	.social-media {
 				display: block;
 				width: auto;
-				margin-top: 4px;
+				margin-top: 3px;
 
 				a {
 					padding: 0 20px;
@@ -102,7 +102,7 @@
 						border-right: 0;
 					}
 				}
-			}
+			}			
 		}
 	}
 
@@ -346,15 +346,20 @@
 //====================================================================================================================================
 
 .content  {
+	background-color: $dark-accent;
 
 	.grid {
-		@include make-row();		
-		height: 50%;
+		position: relative;
+		@include make-row();
 
 		.row {
 			margin-left: 0;
 			margin-right: 0;
-		}		
+		}
+
+		&.resizing {
+			top: -30px;
+		}
 	}
 
 	img {
@@ -371,18 +376,31 @@
 
 	.col {
 		height: 100%;
-		overflow: hidden;
 		padding-left: 0;
-		padding-right: 0;		
-	}
+		padding-right: 0;
+	}	
 
 	@media screen and (min-width: $screen-desktop) {
-		height: 82%;
+		min-height: 82%;
+
+		.col {
+			margin-right: -2px; //Handle subpixel level rendering issues in browers e.g: http://ejohn.org/blog/sub-pixel-problems-in-css/ 
+			margin-left: 1px;			
+		}
+
+		.grid {
+			overflow: hidden;
+		}
 
 		.image-wrap {
 			float: none;
 			width: auto;
 		}
+
+		.center-tile {
+			padding-bottom: 50em;
+			margin-bottom: -50em;
+		}		
 	}
 
 	@media screen and (max-width: $screen-xsmall) {
@@ -419,22 +437,26 @@
 	display: table;
 	width: 100%;
 	height: 100%;
+
+	min-height: 250px;
 }
 
 .tile  {
 	display: table-cell;
+	position: relative;
+	z-index: 99;
 	padding-left: 15px;
 	padding-right: 15px;	
 	vertical-align: middle;	
-
-	&.shade-one {
-		background-color: $highlight-one;
-	}
-
-	&.shade-two {
-		background-color: darken($highlight-one, 10%);
-	}	
 }
+
+.shade-one {
+	background-color: $highlight-one;	
+}
+
+.shade-two {
+	background-color: darken($highlight-one, 10%);	
+}	
 
 // Master Foot Module
 //====================================================================================================================================

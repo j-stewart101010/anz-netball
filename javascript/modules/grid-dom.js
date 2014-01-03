@@ -13,7 +13,17 @@ define([
 	    this.domView = document.createElement("div"), this.domView.style.position = "absolute", this.domView.style.top = "0px", this.domView.style.left = "0px", this.domView.style.display = "none", document.body.appendChild(this.domView), this.vignetteTexture = new Image, this.vignetteTexture.src = Config.REMOTE_PATH + "img/smoothVignette.png", this.padding = 1, this.button = new GridButton(["img/CTA_moment_01.png", "img/CTA_moment_02.png", "img/CTA_moment_03.png", "img/CTA_moment_04.png", "img/CTA_moment_05.png", "img/CTA_moment_06.png", "img/CTA_moment_07.png", "img/CTA_moment_08.png", "img/CTA_moment_08.png", "img/CTA_moment_07.png", "img/CTA_moment_06.png", "img/CTA_moment_05.png", "img/CTA_moment_04.png", "img/CTA_moment_03.png", "img/CTA_moment_02.png", "img/CTA_moment_01.png"]), this.tellUsButton = new GridButton(["img/xmas/doorPrompts_open_01.png", "img/xmas/doorPrompts_open_02.png", "img/xmas/doorPrompts_open_03.png", "img/xmas/doorPrompts_open_04.png", "img/xmas/doorPrompts_open_05.png", "img/xmas/doorPrompts_open_06.png", "img/xmas/doorPrompts_open_07.png", "img/xmas/doorPrompts_open_08.png", "img/xmas/doorPrompts_open_08.png", "img/xmas/doorPrompts_open_07.png", "img/xmas/doorPrompts_open_06.png", "img/xmas/doorPrompts_open_05.png", "img/xmas/doorPrompts_open_04.png", "img/xmas/doorPrompts_open_03.png", "img/xmas/doorPrompts_open_02.png", "img/xmas/doorPrompts_open_01.png"]), this.tellMeMoreButton = new GridButton(["img/CTA_tellMeMore_01.png", "img/CTA_tellMeMore_02.png", "img/CTA_tellMeMore_03.png", "img/CTA_tellMeMore_04.png", "img/CTA_tellMeMore_05.png", "img/CTA_tellMeMore_06.png", "img/CTA_tellMeMore_07.png", "img/CTA_tellMeMore_08.png", "img/CTA_tellMeMore_08.png", "img/CTA_tellMeMore_07.png", "img/CTA_tellMeMore_06.png", "img/CTA_tellMeMore_05.png", "img/CTA_tellMeMore_04.png", "img/CTA_tellMeMore_03.png", "img/CTA_tellMeMore_02.png", "img/CTA_tellMeMore_01.png"]), this.andMaybeText = new Image, this.andMaybeText.src = Config.REMOTE_PATH + "img/appearHere.png", this.camera = {
 	        x: 0,
 	        y: 0
-	    }, this.squareWidth = 250, this.nodePool = [], this.points = [], this.start = !0, this.locked = !0, this.startZoom = 5, this.resize(a, b), this.zoomRatio = 0, this.startFade = 0
+	    }, 
+	    
+	    this.squareWidth = 250, 
+	    this.nodePool = [], 
+	    this.points = [], 
+	    this.start = !0, 
+	    this.locked = !0, 
+	    this.startZoom = 5, 
+	    this.resize(a, b), 
+	    this.zoomRatio = 0, 
+	    this.startFade = 0
 	};
 
 	GridDom.constructor = GridDom;

@@ -1,10 +1,10 @@
 /*global define*/
 define([
-	'jquery',
-	'config/config',
-	'models/tile',
-	'modules/grid-button',
-	'modules/double-spring',
+        'jquery',
+        'config/config',
+        'models/tile',
+        'modules/grid-button',
+        'modules/double-spring',
 ], function ($, Config, model, GridButton, DoubleSpring) {
 	'use strict';
 
@@ -106,10 +106,10 @@ define([
 
 
 //// FLIPPING HORIZONTAL
-// 	        if(this.fliptile.angle<90 || this.fliptile.angle>=270) {
+//                 if(this.fliptile.angle<90 || this.fliptile.angle>=270) {
 // //frontside
 //                 a.drawImage(model.content[2].image,this.fliptile.x+(1-scalex)*this.squareWidth*.5,this.fliptile.y,this.squareWidth*scalex,this.squareHeight);
-// 	        } else {
+//                 } else {
 // //backside    
 //                 a.fillStyle = model.content[2].backcolour;
 //                 a.fillRect(this.fliptile.x+(1-scalex)*this.squareWidth*.5,this.fliptile.y,this.squareWidth*scalex,this.squareHeight);
@@ -123,17 +123,17 @@ define([
 //                     a.scale(1/scalex,1);
 //                 };
 
-// 	        };
+//                 };
 //             a.fillStyle="rgba(0,0,0,"+opacity+")";
 //             a.fillRect(this.fliptile.x+(1-scalex)*this.squareWidth*.5,this.fliptile.y,this.squareWidth*scalex,this.squareHeight);
 
 
 
 // //// FLIPPING VERTICAL
-// 	        if(this.fliptile.angle<90 || this.fliptile.angle>=270) {
+//                 if(this.fliptile.angle<90 || this.fliptile.angle>=270) {
 // //frontside
 //                 a.drawImage(model.content[2].image,this.fliptile.x,this.fliptile.y+(1-scaley)*this.squareHeight*.5,this.squareWidth,this.squareHeight*scaley);
-// 	        } else {
+//                 } else {
 // //backside    
 //                 a.fillStyle = model.content[2].backcolour;
 //                 a.fillRect(this.fliptile.x,this.fliptile.y+(1-scaley)*this.squareHeight*.5,this.squareWidth,this.squareHeight*scaley);
@@ -147,7 +147,7 @@ define([
 //                     a.scale(1,1/scaley);
 //                 };
 
-// 	        };
+//                 };
 //             a.fillStyle="rgba(0,0,0,"+opacity+")";
 //             a.fillRect(this.fliptile.x,this.fliptile.y+(1-scaley)*this.squareHeight*.5,this.squareWidth,this.squareHeight*scaley);
 
@@ -194,29 +194,29 @@ do{
  	a.fillStyle="white";
   	a.fillText("Config: mousexy="+Config.mouse.x+","+Config.mouse.y+"  trackxy="+Config.track.x+","+Config.track.y+"  downAtxy="+Config.downAt.x+","+Config.downAt.y+"  holding="+this.holding, 5,21);
 
-	        // a.scale(.5+Math.random()*2,.5+Math.random()*2);
-	        // a.font = "20pt Arial";
-	        // textlength = a.measureText(message).width;
-	        // a.fillStyle = "rgba(64,64,192,.75)"
-	        // a.fillRect(x,y-20,textlength,20);
+                // a.scale(.5+Math.random()*2,.5+Math.random()*2);
+                // a.font = "20pt Arial";
+                // textlength = a.measureText(message).width;
+                // a.fillStyle = "rgba(64,64,192,.75)"
+                // a.fillRect(x,y-20,textlength,20);
 
-	        // a.fillStyle = "white";
-	        // a.fillText(message, x, y);
+                // a.fillStyle = "white";
+                // a.fillText(message, x, y);
 
-	        // a.lineWidth = 2;
-	        // a.strokeStyle = "white"
-	        // a.beginPath();
-	        // a.moveTo(x,y);
-	        // a.lineTo(x+textlength,y);
-	        // a.stroke();
+                // a.lineWidth = 2;
+                // a.strokeStyle = "white"
+                // a.beginPath();
+                // a.moveTo(x,y);
+                // a.lineTo(x+textlength,y);
+                // a.stroke();
 
-	    // i = Math.floor(Math.random()*model.content.length)
-	    // if(model.content[i].image) {
-	    //     a.drawImage(model.content[i].image,Math.floor(Math.random()*canvas.width),Math.floor(Math.random()*canvas.height),50,50);
-	    // };
-	      
-	    a.restore();
-	};
+            // i = Math.floor(Math.random()*model.content.length)
+            // if(model.content[i].image) {
+            //     a.drawImage(model.content[i].image,Math.floor(Math.random()*canvas.width),Math.floor(Math.random()*canvas.height),50,50);
+            // };
+              
+            a.restore();
+        };
 
-	return Grid;
+        return Grid;
 });

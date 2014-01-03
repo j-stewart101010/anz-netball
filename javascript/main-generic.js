@@ -16,12 +16,15 @@ require.config({
 			],
 			exports: 'Backbone'
 		},
+		match_media : {
+			exports : 'matchMedia'
+		},		
         bootstrap_transition : {
 			deps: [
 				'jquery'
 			],
 			exports: '$.fn.transition'
-        }, 		
+        },        
         bootstrap_collapse : {
 			deps: [
 				'jquery'
@@ -33,20 +36,23 @@ require.config({
 				'jquery'
 			],
 			exports: '$.fn.modal'
-        }        
+        },
+
 	},
 	paths: {
 		jquery: '../bower_components/jquery/jquery',
 		underscore: '../bower_components/underscore/underscore',
 		backbone: '../bower_components/backbone/backbone',
+		text: '../bower_components/requirejs-text/text',
+		match_media: 'helpers/match-media',
 		bootstrap_transition : 'vendor/bootstrap-transition',		
         bootstrap_collapse : 'vendor/bootstrap-collapse',
-        bootstrap_modal : 'vendor/bootstrap-modal'			
+        bootstrap_modal : 'vendor/bootstrap-modal'		
 	}
 });
 
 require([
-	'views/app-generic'
+	'views/app-generic',
 ], function (AppGenericView) {
 	/*jshint nonew:false*/
 

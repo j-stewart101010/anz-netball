@@ -28,8 +28,8 @@ require.config({
 		request_anim_frame : {
 			exports : 'requestAnimFrame'
 		},
-		mobile_check : {
-			exports : 'mobilecheck'
+		match_media : {
+			exports : 'matchMedia'
 		},
         bootstrap_transition : {
 			deps: [
@@ -59,7 +59,7 @@ require.config({
 		expo: 'vendor/EasePack.min',
 		console_log: 'helpers/console-log',
 		request_anim_frame: 'helpers/request-anim-frame',
-		mobile_check: 'helpers/mobile-check',
+		match_media: 'helpers/match-media',
 		bootstrap_transition : 'vendor/bootstrap-transition',		
         bootstrap_collapse : 'vendor/bootstrap-collapse',
         bootstrap_modal : 'vendor/bootstrap-modal'			
@@ -71,7 +71,7 @@ require([
 	'views/app-home',
 	'console_log',
 	'request_anim_frame',
-	'mobile_check',
+	'match_media',
 	'tween_lite',
 	'expo'
 ], function (AppGenericView, AppHomeView) {

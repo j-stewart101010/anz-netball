@@ -3,15 +3,16 @@ define([
 	'jquery',
 	'config/config',
     'modules/asset-loader',
-    'models/tile'
-], function ($, Config, AssetLoader, model) {
+    'models/tile',
+    'match_media',
+], function ($, Config, AssetLoader, model, MatchMedia) {
 	'use strict';
 
     var isIpad = null != navigator.userAgent.match(/iPad/i),
         isRetina = 2 == window.devicePixelRatio;
 
     //2 != window.devicePixelRatio || isIpad ? mobilecheck() && $("meta[name=viewport]").attr("content", "width=device-width, user-scalable=no,initial-scale=1, maximum-scale=.5, minimum-scale=.5") : $("meta[name=viewport]").attr("content", "width=device-width, user-scalable=no,initial-scale=.5, maximum-scale=.5, minimum-scale=.5");
-    isIpad || (window.devicePixelRatio) != 2 ? mobilecheck() && $("meta[name=viewport]").attr("content", "width=device-width, user-scalable=no,initial-scale=1, maximum-scale=.5, minimum-scale=.5") : $("meta[name=viewport]").attr("content", "width=device-width, user-scalable=no,initial-scale=.5, maximum-scale=.5, minimum-scale=.5");
+    isIpad || (window.devicePixelRatio) != 2 ? MatchMedia.mobile && $("meta[name=viewport]").attr("content", "width=device-width, user-scalable=no,initial-scale=1, maximum-scale=.5, minimum-scale=.5") : $("meta[name=viewport]").attr("content", "width=device-width, user-scalable=no,initial-scale=.5, maximum-scale=.5, minimum-scale=.5");
 
     var LoaderScreen = function () {
         IS_IE8 || isIpad;
