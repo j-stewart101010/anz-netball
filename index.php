@@ -53,7 +53,7 @@
 			</nav>
 		</header>
 
-		<main>
+		<main class="content">
 			<canvas id="nbn" width="600" height="400"></canvas>
 		</main>
 

@@ -10,17 +10,24 @@ define([
 
 	var Grid = function (a, b) {
 		console.log("Grid"),
-	    this.textCanvas = document.createElement("canvas"), 
-	    this.textCanvas.width = 500, 
-	    this.textCanvas.height = 100, 
-	    this.textCanvas.context = this.textCanvas.getContext("2d"), 
-	    this.textCanvas.context.fillStyle = "yellow", 
-	    this.textCanvas.context.fillRect(0, 0, this.textCanvas.width, this.textCanvas.height), 
-	    
+	    // this.textCanvas = document.createElement("canvas"), 
+	    // this.textCanvas.width = 500, 
+	    // this.textCanvas.height = 100, 
+	    // this.textCanvas.context = this.textCanvas.getContext("2d"), 
+	    // this.textCanvas.context.fillStyle = "yellow", 
+	    // this.textCanvas.context.fillRect(0, 0, this.textCanvas.width, this.textCanvas.height), 
 	    this.camera = {
 	        x: 0,
-	        y: 0
+	        y: 0,
+	        momentumx: 0,
+	        momentumy: 0
 	    },
+
+	    this.mousefollow = {
+  			x: Config.mouse.x,
+	    	y: Config.mouse.y
+	    },
+
 
 	    this.squareWidth = 350,
 	    this.squareHeight = 350,
@@ -35,6 +42,15 @@ define([
 	    	yi: 1,
 	    	angle: 0
 	    }
+        
+        this.holding = false;
+
+	    this.colours=[];
+	    for(var i=0;i<64;i++) {
+	    	this.colours.push({r:Math.floor(Math.random()*256),
+	    	                   g:Math.floor(Math.random()*256),
+	    	                   b:Math.floor(Math.random()*256)});
+	    };
 	};
 
 	Grid.constructor = Grid;
@@ -49,26 +65,43 @@ define([
 	    //console.log("render");
 	    a.save();
 	    
-	    this.fliptile.x += this.fliptile.xi;
-	    this.fliptile.y += this.fliptile.yi;
-	    if(this.fliptile.x<=0) this.fliptile.xi=1;
-	    if(this.fliptile.y<=0) this.fliptile.yi=1;
-	    if(this.fliptile.x>=canvas.width-this.squareWidth) this.fliptile.xi=-1;
-	    if(this.fliptile.y>=canvas.height-this.squareHeight) this.fliptile.yi=-1;
+	    //use the difference to move the camera when holding
+        if(Config.mouse.button) {
+        	this.camera.momentumx = (Config.mouse.x-this.mousefollow.x)*0.4;
+        	this.camera.momentumy = (Config.mouse.y-this.mousefollow.y)*0.4;       	
+        	this.camera.x += (Config.mouse.x-this.mousefollow.x)*0.4;
+        	this.camera.y += (Config.mouse.y-this.mousefollow.y)*0.4;
+        } else {
+            this.camera.x += this.camera.momentumx;
+            this.camera.y += this.camera.momentumy;
+            this.camera.momentumy *= 0.95;
+            this.camera.momentumx *= 0.95;
+        }
 
-	    this.fliptile.angle+=1;
-	    this.fliptile.angle%=360;
+        this.mousefollow.x+=(Config.mouse.x-this.mousefollow.x)*0.4;
+        this.mousefollow.y+=(Config.mouse.y-this.mousefollow.y)*0.4;
 
-	    var textlength = 0,
-	        message = "Tile";
-	    var scalex, scaley, overcolor, opacity;
 
-	    scalex = Math.abs(Math.cos(this.fliptile.angle*.01745329252));
-	    scaley = scalex
-	    opacity = 1-scalex;
-	    opacity*=.9;
+	    // this.fliptile.x += this.fliptile.xi;
+	    // this.fliptile.y += this.fliptile.yi;
+	    // if(this.fliptile.x<=0) this.fliptile.xi=1;
+	    // if(this.fliptile.y<=0) this.fliptile.yi=1;
+	    // if(this.fliptile.x>=canvas.width-this.squareWidth) this.fliptile.xi=-1;
+	    // if(this.fliptile.y>=canvas.height-this.squareHeight) this.fliptile.yi=-1;
 
-            a.fillStyle="blue";
+	    // this.fliptile.angle+=1;
+	    // this.fliptile.angle%=360;
+
+	    // var textlength = 0,
+	    //     message = "Tile";
+	    // var scalex, scaley, overcolor, opacity;
+
+	    // scalex = Math.abs(Math.cos(this.fliptile.angle*.01745329252));
+	    // scaley = scalex
+	    // opacity = 1-scalex;
+	    //opacity*=.9;
+            //console.log(canvas.width+"x"+canvas.height);
+            a.fillStyle="navy";
             a.fillRect(0,0,canvas.width,canvas.height);
 
 
@@ -120,23 +153,46 @@ define([
 
 //         a.font="16px Arial";
 //         a.fillStyle = "white";
-//         a.fillText("Config: mousexy="+Config.mouse.x+","+Config.mouse.y+"  trackxy="+Config.track.x+","+Config.track.y+"  downtargetxy="+Config.downTarget.x+","+Config.downTarget.y, 5,21);
+//         a.fillText("Config: mousexy="+Config.mouse.x+","+Config.mouse.y+"  trackxy="+Config.track.x+","+Config.track.y+"  downAtxy="+Config.downAt.x+","+Config.downAt.y, 5,21);
 
-var x, y, sx, sy;
-a.font="20px Arial";
-  
-for(var i=0; i<model.content.length; i++) {
-  x=model.content[i].position.x*this.squareWidth/4;
-  y=model.content[i].position.y*this.squareHeight/4;
-  sx=model.content[i].scale*(this.squareWidth/4)-10;
-  sy=model.content[i].scale*(this.squareWidth/4)-10;
 
-  a.fillStyle="white";
-  a.fillRect(x,y,sx,sy);
-  a.fillStyle="black";
-  a.fillText(i,x+30,y+30);
+a.strokeStyle = "white";
+var gl=this.camera.x % 300;
+do{
+  a.beginPath();
+  a.moveTo(gl,0);
+  a.lineTo(gl,canvas.height);
+  a.stroke();
+  gl+=300;
+} while(gl<canvas.width);
 
-};
+gl=this.camera.y % 300;
+do{
+  a.beginPath();
+  a.moveTo(0,gl);
+  a.lineTo(canvas.width,gl);
+  a.stroke();
+  gl+=300;
+} while(gl<canvas.height);
+
+
+
+// var x, y, sx, sy;
+// a.font="20px Arial";
+// for(var i=0; i<model.content.length; i++) {
+//   x=model.content[i].position.x*this.squareWidth/4;
+//   y=model.content[i].position.y*this.squareHeight/4+30;
+//   sx=model.content[i].scale*(this.squareWidth/4)-10;
+//   sy=model.content[i].scale*(this.squareWidth/4)-10;
+
+//   a.fillRect(x,y,sx,sy);
+//   a.fillStyle="black";
+//   a.fillText(i,x+30,y+30);
+
+// };
+
+ 	a.fillStyle="white";
+  	a.fillText("Config: mousexy="+Config.mouse.x+","+Config.mouse.y+"  trackxy="+Config.track.x+","+Config.track.y+"  downAtxy="+Config.downAt.x+","+Config.downAt.y+"  holding="+this.holding, 5,21);
 
 	        // a.scale(.5+Math.random()*2,.5+Math.random()*2);
 	        // a.font = "20pt Arial";

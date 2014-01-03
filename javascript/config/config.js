@@ -13,13 +13,14 @@ define([
 
             mouse : {
                   x: 0,
-                  y: 0
+                  y: 0,
+                  button: false
             },
             track : {
                   x: 0,
                   y: 0
             },
-            downTarget : {
+            downAt : {
                   x: 0,
                   y: 0
             }            
