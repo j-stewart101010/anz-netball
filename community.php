@@ -60,8 +60,7 @@
 		<main class="content">
 
 			<section class="grid">
-			<!-- <div style="position: absolute;"> -->
-				<div class="col col-md-8 col-lg-9 shade-one">
+				<div class="col col-md-8 col-lg-9 center-tile shade-one">
 				
 					<div style="position: relative;" data-resize-height="tile" class="outter-tile">
 						<article class="tile shade-one">
@@ -73,7 +72,6 @@
 						</article>
 					</div>
 				</div>
-			<!-- </div> -->
 				<div class="col col-md-4 col-lg-3">
 					<div class="row">
 						<div class="col col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -93,15 +91,6 @@
 							</div>
 						</div>				
 					</div>
-<!-- 					<div class="outter-tile">
-						<article class="tile shade-two">
-							<hgroup>
-								<h1>Community Grants</h1>
-								<h2>We’re giving back and need your help!</h2>
-								<p>Grants are non-repayable funds disbursed by one party (grant makers), often a government department tion, foundation or trust, to a recipient, often (but not always) a nonprofit entity, educational stitution, business or an individual. In order to receive a grant, some form of "Grant Writing" often referred to as either a proposal or an application is usually required.</p>
-							</hgroup>
-						</article>
-					</div> -->
 				</div>			
 			</section>
 

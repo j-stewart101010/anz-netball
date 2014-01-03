@@ -9,8 +9,9 @@ define([
     'modules/double-spring',
     'modules/grid-dom',
     'modules/trackpad',
-    'modules/loader-screen'
-], function ($, _, Backbone, Config, model, Grid, DoubleSpring, GridDom, Trackpad, LoaderScreen) {
+    'modules/loader-screen',
+    'match_media',
+], function ($, _, Backbone, Config, model, Grid, DoubleSpring, GridDom, Trackpad, LoaderScreen, MatchMedia) {
 
     var _self;
 
@@ -20,7 +21,7 @@ define([
             _self = this;
 
             IS_IE8 = !Modernizr.canvas, IS_IE8;
-            if (mobilecheck(), this.load(), Config.mouse) {
+            if (MatchMedia.mobile, this.load(), Config.mouse) {
                 var d = window.innerWidth || document.documentElement.clientWidth,
                     e = window.innerHeight || document.documentElement.clientHeight;
                 Config.mouse.x = d / 2, Config.mouse.y = e / 2
@@ -179,7 +180,7 @@ define([
                 b = window.innerHeight || document.documentElement.clientHeight;
             this.w = a;
             this.h = b;
-            mobilecheck() && (_self.realResize(),
+            MatchMedia.mobile && (_self.realResize(),
             window.tabMenu && tabMenu.resize(a, b)),
             loaderScreen && loaderScreen.resize(a, b),
             window.tickerTape && (tickerTape.view.style.left = a / 2 - 304 + "px")

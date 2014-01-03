@@ -352,7 +352,6 @@
 		position: relative;
 		@include make-row();
 		overflow: hidden;
-		// min-height: 50%;
 
 		.row {
 			margin-left: 0;
@@ -382,24 +381,11 @@
 		padding-left: 0;
 		padding-right: 0;
 
-		&.shade-one {
-			padding-bottom: 50em;
-			margin-bottom: -50em;
-			background-color: $highlight-one;
-		}				
+		// &.center-tile {
+		// 	padding-bottom: 50em;
+		// 	margin-bottom: -50em;
+		// }
 	}	
-
-	// .grid:first-child {
-	// 	.col {
-	// 		padding-bottom: 20px;
-	// 	}
-	// }
-
-	// .grid + .grid {
-	// 	.col {
-	// 		margin-top: -30px;
-	// 	}
-	// }	
 
 	@media screen and (min-width: $screen-desktop) {
 		min-height: 82%;
@@ -408,6 +394,11 @@
 			float: none;
 			width: auto;
 		}
+
+		.center-tile {
+			padding-bottom: 50em;
+			margin-bottom: -50em;
+		}		
 	}
 
 	@media screen and (max-width: $screen-xsmall) {
@@ -454,40 +445,16 @@
 	z-index: 99;
 	padding-left: 15px;
 	padding-right: 15px;	
-	vertical-align: middle;
-
-	&.shade-one {
-		background-color: $highlight-one;
-
-		// &:before {
-		// 	content: "";
-		// 	position: absolute;
-		// 	z-index: -1;
-		// 	top: 0;
-		// 	bottom: -200px;
-		// 	left: 0;
-		// 	right: 0;
-		// 	// margin: -50px;
-		// 	background-color: $highlight-one;
-		// }		
-	}
-
-	&.shade-two {
-		background-color: darken($highlight-one, 10%);
-
-		// &:before {
-		// 	content: "";
-		// 	position: absolute;
-		// 	z-index: -1;
-		// 	top: 0;
-		// 	bottom: -200px;
-		// 	left: 0;
-		// 	right: 0;
-		// 	// margin: -50px;
-		// 	background-color: darken($highlight-one, 10%);
-		// }		
-	}	
+	vertical-align: middle;	
 }
+
+.shade-one {
+	background-color: $highlight-one;	
+}
+
+.shade-two {
+	background-color: darken($highlight-one, 10%);	
+}	
 
 // Master Foot Module
 //====================================================================================================================================
