@@ -60,21 +60,22 @@
 		<main class="content">
 
 			<section class="grid">
-				<div class="col col-md-8 col-lg-9 center-tile shade-one">
-				
-					<div style="position: relative;" data-resize-height="tile" class="outter-tile">
-						<article class="tile shade-one">
+
+				<div class="col col-md-8 col-lg-8 center-tile shade-one">
+					<div data-resize-height="center" class="outter-tile">
+						<article class="content-tile tile shade-one">
 							<hgroup>
-								<h1 class="tile-heading">Community Grants</h1>
-								<h2>We’re giving back and need your help!</h2>
+								<h1 class="heading-primary heading-exjumbo">Community Grants</h1>
+								<h2 class="subheading-primary heading-med">We’re giving back and need your help!</h2>
 								<p>Grants are non-repayable funds disbursed by one party (grant makers), often a government department tion, foundation or trust, to a recipient, often (but not always) a nonprofit entity, educational stitution, business or an individual. In order to receive a grant, some form of "Grant Writing" often referred to as either a proposal or an application is usually required.</p>
 							</hgroup>
 						</article>
 					</div>
 				</div>
-				<div class="col col-md-4 col-lg-3">
-					<div class="row">
-						<div class="col col-xs-6 col-sm-6 col-md-6 col-lg-6">
+
+				<!-- <div class="col col-md-4 col-lg-3"> -->
+					<!-- <div class="row"> -->
+						<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
 							<div class="image-wrap">
 								<img src="images/netball-grid-one.jpg">
 							</div>
@@ -82,7 +83,7 @@
 								<img src="images/netball-grid-two.jpg">
 							</div>
 						</div>
-						<div class="col col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
 							<div class="image-wrap">
 								<img src="images/netball-grid-three.jpg">
 							</div>
@@ -90,29 +91,151 @@
 								<img src="images/netball-grid-four.jpg">
 							</div>
 						</div>				
-					</div>
-				</div>			
+					<!-- </div> -->
+				<!-- </div> -->
+
 			</section>
 
 			<section class="grid">
-				<div class="col col-md-6">
+				
+				<div class="col col-md-4 center-tile shade-two">
+
 					<div class="outter-tile">
-						<article class="tile shade-two">
-							<h1>Get involved</h1>
-							<a class="btn" href="/get-involved">Apply for a grant</a>
+						<form id="apply-for-grant" action="/" method="POST" class="form content-tile tile shade-two">
+							<div class="form-group">
+								<input id="apply-for-grant-name" name="apply-for-grant-name" class="form-control" type="text" required="required" placeholder="Name">
+							</div>
+
+							<div class="row">
+								<div class="form-group col-md-3">
+									<input id="apply-for-grant-age" name="apply-for-grant-age" class="form-control" type="text" required="required" placeholder="Age">
+								</div>
+								<div class="form-group col-md-9">
+									<input id="apply-for-grant-contact-email" name="apply-for-grant-contact-email" class="form-control" type="text" required="required" placeholder="Contact Email">
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="select-box">
+									<select id="apply-for-grant-help" name="apply-for-grant-help" class="form-control">
+										<option>How can we help?</option>
+									</select>
+									<div class="angle-down-box">
+										<i class="fa fa-angle-down"></i>
+									</div>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<textarea id="apply-for-grant-message" name="apply-for-grant-message" class="form-control" placeholder="Tell us in under 50 words how this will benefit your community" rows="3"></textarea>
+							</div>
+
+							<div class="form-group">
+								<label class="group-label" for="apply-for-grant-image">Attach:</label>
+								<span class="add-file">
+									<button class="btn btn-default btn-xs"><i class="fa fa-picture-o"></i> Image</button>
+									<input type="file" class="file-input" id="apply-for-grant-image" name="apply-for-grant-image">
+									<!-- <input type="text" id="apply-for-grant-image-notify"> -->
+								</span>
+								File size limit 2mb
+								<span class="tooltip">
+									<i class="fa fa-question-circle"></i>
+								</span>
+							</div>
+
+							<div class="form-group">
+								<label class="group-label" for="apply-for-grant-video">Attach VIDEO:</label>
+								<input class="form-control inline-control" type="text" placeholder="Enter YouTube URL" id="apply-for-grant-video" name="apply-for-grant-video">
+								<span class="tooltip">
+									<i class="fa fa-question-circle"></i>
+								</span>
+							</div>
+
+							<div class="form-group">
+								<label for="apply-for-grant-updates">
+									<span class="check-box">
+										<input id="apply-for-grant-updates" name="apply-for-grant-updates" type="checkbox">
+										<span class="tick-box">
+											<i class="fa fa-check"></i>
+										</span>
+									</span>
+									Keep me up-to-date with all things Netball Nation.
+								</label>
+							</div>						
+							
+							<input class="btn btn-default btn-sm" type="submit" value="Apply now">
+
+						</form>
+					</div>
+				</div>
+
+				<div class="col col-md-6 video-tiles">
+					<article class="video-tile tile shade-one">
+						<div class="video-tile-content">
+							<hgroup>
+								<div>
+									<h2 class="tile-heading heading-sm">
+										<div class="brand-overlay shade-five"></div>
+										Video case study
+									</h2>
+								</div>
+								<div>
+									<h1 class="tile-heading">
+										<div class="brand-overlay shade-five"></div>
+										Boxhill bandits score big
+									</h1>
+								</div>
+							</hgroup>
+							<a class="btn btn-sm btn-primary" data-toggle="modal" data-cover=".video-tiles" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
+						</div>
+						<div class="brand-overlay shade-three"></div>
+						<img class="video-tile-image" alt="Video" src="images/video-background-one.jpg">
+					</article>
+
+					<article class="video-tile tile shade-one">
+						<div class="video-tile-content">
+							<hgroup>
+								<div>
+									<h2 class="tile-heading heading-sm">
+										<div class="brand-overlay shade-five"></div>
+										Video case study
+									</h2>
+								</div>
+								<div>
+									<h1 class="tile-heading">
+										<div class="brand-overlay shade-five"></div>
+										Game on for jims mowing
+									</h1>
+								</div>
+							</hgroup>								
+							<a class="btn btn-sm btn-primary" data-toggle="modal" data-cover=".video-tiles" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
+						</div>
+						<div class="brand-overlay shade-three"></div>
+						<img class="video-tile-image" alt="Video" src="images/video-background-one.jpg">
+					</article>
+				</div>
+
+				<div class="col col-md-2 center-tile shade-one">
+					<div data-resize-height="center" class="outter-tile">
+						<article class="article-tile tile shade-one">
+							<h3 class="heading-primary heading-default">Grants awarded</h3>
+							<ul class="article-list">
+								<li>
+									<div class="subheading-primary">City of Melton</div>
+									<div class="subheading-primary">$32K for a new court</div>
+									<div>For example, tiered funding for a freeway are very large grants negotiated.</div>
+								</li>
+								<li>
+									<div class="subheading-primary">Jane Sample and the Mary St Magpies</div>
+									<div class="subheading-primary">$50 for a new set of team bibs.</div>
+									<div>For example, tiered funding for a freeway are very.</div>
+								</li>
+							</ul>
+							<a class="btn btn-default btn-sm" href="/grants">More <i class="fa fa-angle-right"></i></a>
 						</article>
 					</div>
 				</div>
 
-				<div class="col col-md-6">
-					<div class="video-tile outter-tile">
-						<article class="tile shade-one">
-							<h1>Get involved</h1>
-							<a class="btn" href="/get-involved">Apply for a grant</a>
-							<a data-toggle="modal" data-cover=".video-tile" data-video-id="19072376" href="#video-modal">Test</a>
-						</article>
-					</div>
-				</div>			
 			</section>			
 
 		</main>
@@ -131,19 +254,6 @@
 		</footer>
 
 		<script data-main="javascript/main-generic" src="bower_components/requirejs/require.js"></script>
-
-		<!-- Modal -->
-<!-- 		<div class="modal fade" id="video-modal" tabindex="-1" role="dialog" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">
-					</div>
-				</div>
-			</div>
-		</div> -->
 
     </body>
 </html>

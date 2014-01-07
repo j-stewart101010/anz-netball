@@ -28,7 +28,6 @@ define([
 	    	y: Config.mouse.y
 	    },
 
-
 	    this.squareWidth = 350,
 	    this.squareHeight = 350,
 	    this.locked = 1, 
@@ -67,10 +66,10 @@ define([
 	    
 	    //use the difference to move the camera when holding
         if(Config.mouse.button) {
-        	this.camera.momentumx = (Config.mouse.x-this.mousefollow.x)*0.4;
-        	this.camera.momentumy = (Config.mouse.y-this.mousefollow.y)*0.4;       	
-        	this.camera.x += (Config.mouse.x-this.mousefollow.x)*0.4;
-        	this.camera.y += (Config.mouse.y-this.mousefollow.y)*0.4;
+        	this.camera.momentumx = (this.mousefollow.x-Config.mouse.x)*0.4;
+        	this.camera.momentumy = (this.mousefollow.y-Config.mouse.y)*0.4;       	
+        	this.camera.x += this.camera.momentumx;
+        	this.camera.y += this.camera.momentumy;
         } else {
             this.camera.x += this.camera.momentumx;
             this.camera.y += this.camera.momentumy;
@@ -105,110 +104,111 @@ define([
             a.fillRect(0,0,canvas.width,canvas.height);
 
 
-//// FLIPPING HORIZONTAL
-//                 if(this.fliptile.angle<90 || this.fliptile.angle>=270) {
-// //frontside
-//                 a.drawImage(model.content[2].image,this.fliptile.x+(1-scalex)*this.squareWidth*.5,this.fliptile.y,this.squareWidth*scalex,this.squareHeight);
-//                 } else {
-// //backside    
-//                 a.fillStyle = model.content[2].backcolour;
-//                 a.fillRect(this.fliptile.x+(1-scalex)*this.squareWidth*.5,this.fliptile.y,this.squareWidth*scalex,this.squareHeight);
+			//// FLIPPING HORIZONTAL
+			//                 if(this.fliptile.angle<90 || this.fliptile.angle>=270) {
+			// //frontside
+			//                 a.drawImage(model.content[2].image,this.fliptile.x+(1-scalex)*this.squareWidth*.5,this.fliptile.y,this.squareWidth*scalex,this.squareHeight);
+			//                 } else {
+			// //backside    
+			//                 a.fillStyle = model.content[2].backcolour;
+			//                 a.fillRect(this.fliptile.x+(1-scalex)*this.squareWidth*.5,this.fliptile.y,this.squareWidth*scalex,this.squareHeight);
 
-//                 a.font="60px Arial";
-//                 textlength = a.measureText(message).width;
-//                 a.fillStyle = "white";
-//                 if(scalex>.01) { 
-//                     a.scale(scalex,1);
-//                     a.fillText(message, (this.fliptile.x+this.squareWidth*.5-(textlength*.5*scalex))/scalex, this.fliptile.y+.5*this.squareHeight+30);
-//                     a.scale(1/scalex,1);
-//                 };
+			//                 a.font="60px Arial";
+			//                 textlength = a.measureText(message).width;
+			//                 a.fillStyle = "white";
+			//                 if(scalex>.01) { 
+			//                     a.scale(scalex,1);
+			//                     a.fillText(message, (this.fliptile.x+this.squareWidth*.5-(textlength*.5*scalex))/scalex, this.fliptile.y+.5*this.squareHeight+30);
+			//                     a.scale(1/scalex,1);
+			//                 };
 
-//                 };
-//             a.fillStyle="rgba(0,0,0,"+opacity+")";
-//             a.fillRect(this.fliptile.x+(1-scalex)*this.squareWidth*.5,this.fliptile.y,this.squareWidth*scalex,this.squareHeight);
-
-
-
-// //// FLIPPING VERTICAL
-//                 if(this.fliptile.angle<90 || this.fliptile.angle>=270) {
-// //frontside
-//                 a.drawImage(model.content[2].image,this.fliptile.x,this.fliptile.y+(1-scaley)*this.squareHeight*.5,this.squareWidth,this.squareHeight*scaley);
-//                 } else {
-// //backside    
-//                 a.fillStyle = model.content[2].backcolour;
-//                 a.fillRect(this.fliptile.x,this.fliptile.y+(1-scaley)*this.squareHeight*.5,this.squareWidth,this.squareHeight*scaley);
-
-//                 a.font="60px Arial";
-//                 textlength = a.measureText(message).width;
-//                 a.fillStyle = "white";
-//                 if(scaley>.01) { 
-//                     a.scale(1,scaley);
-//                     a.fillText(message, this.fliptile.x+(this.squareWidth-textlength)*.5, (this.fliptile.y+.5*this.squareHeight+30*scaley)/scaley);
-//                     a.scale(1,1/scaley);
-//                 };
-
-//                 };
-//             a.fillStyle="rgba(0,0,0,"+opacity+")";
-//             a.fillRect(this.fliptile.x,this.fliptile.y+(1-scaley)*this.squareHeight*.5,this.squareWidth,this.squareHeight*scaley);
-
-//         a.font="16px Arial";
-//         a.fillStyle = "white";
-//         a.fillText("Config: mousexy="+Config.mouse.x+","+Config.mouse.y+"  trackxy="+Config.track.x+","+Config.track.y+"  downAtxy="+Config.downAt.x+","+Config.downAt.y, 5,21);
-
-
-a.strokeStyle = "white";
-var gl=this.camera.x % 300;
-do{
-  a.beginPath();
-  a.moveTo(gl,0);
-  a.lineTo(gl,canvas.height);
-  a.stroke();
-  gl+=300;
-} while(gl<canvas.width);
-
-gl=this.camera.y % 300;
-do{
-  a.beginPath();
-  a.moveTo(0,gl);
-  a.lineTo(canvas.width,gl);
-  a.stroke();
-  gl+=300;
-} while(gl<canvas.height);
+			//                 };
+			//             a.fillStyle="rgba(0,0,0,"+opacity+")";
+			//             a.fillRect(this.fliptile.x+(1-scalex)*this.squareWidth*.5,this.fliptile.y,this.squareWidth*scalex,this.squareHeight);
 
 
 
-// var x, y, sx, sy;
-// a.font="20px Arial";
-// for(var i=0; i<model.content.length; i++) {
-//   x=model.content[i].position.x*this.squareWidth/4;
-//   y=model.content[i].position.y*this.squareHeight/4+30;
-//   sx=model.content[i].scale*(this.squareWidth/4)-10;
-//   sy=model.content[i].scale*(this.squareWidth/4)-10;
+			// //// FLIPPING VERTICAL
+			//                 if(this.fliptile.angle<90 || this.fliptile.angle>=270) {
+			// //frontside
+			//                 a.drawImage(model.content[2].image,this.fliptile.x,this.fliptile.y+(1-scaley)*this.squareHeight*.5,this.squareWidth,this.squareHeight*scaley);
+			//                 } else {
+			// //backside    
+			//                 a.fillStyle = model.content[2].backcolour;
+			//                 a.fillRect(this.fliptile.x,this.fliptile.y+(1-scaley)*this.squareHeight*.5,this.squareWidth,this.squareHeight*scaley);
 
-//   a.fillRect(x,y,sx,sy);
-//   a.fillStyle="black";
-//   a.fillText(i,x+30,y+30);
+			//                 a.font="60px Arial";
+			//                 textlength = a.measureText(message).width;
+			//                 a.fillStyle = "white";
+			//                 if(scaley>.01) { 
+			//                     a.scale(1,scaley);
+			//                     a.fillText(message, this.fliptile.x+(this.squareWidth-textlength)*.5, (this.fliptile.y+.5*this.squareHeight+30*scaley)/scaley);
+			//                     a.scale(1,1/scaley);
+			//                 };
 
-// };
+			//                 };
+			//             a.fillStyle="rgba(0,0,0,"+opacity+")";
+			//             a.fillRect(this.fliptile.x,this.fliptile.y+(1-scaley)*this.squareHeight*.5,this.squareWidth,this.squareHeight*scaley);
 
- 	a.fillStyle="white";
-  	a.fillText("Config: mousexy="+Config.mouse.x+","+Config.mouse.y+"  trackxy="+Config.track.x+","+Config.track.y+"  downAtxy="+Config.downAt.x+","+Config.downAt.y+"  holding="+this.holding, 5,21);
+			//         a.font="16px Arial";
+			//         a.fillStyle = "white";
+			//         a.fillText("Config: mousexy="+Config.mouse.x+","+Config.mouse.y+"  trackxy="+Config.track.x+","+Config.track.y+"  downAtxy="+Config.downAt.x+","+Config.downAt.y, 5,21);
 
-                // a.scale(.5+Math.random()*2,.5+Math.random()*2);
-                // a.font = "20pt Arial";
-                // textlength = a.measureText(message).width;
-                // a.fillStyle = "rgba(64,64,192,.75)"
-                // a.fillRect(x,y-20,textlength,20);
 
-                // a.fillStyle = "white";
-                // a.fillText(message, x, y);
+			a.strokeStyle = "white";
+			var gl=299-(this.camera.x % 300);
+			do{
+			  a.beginPath();
+			  a.moveTo(gl,0);
+			  a.lineTo(gl,canvas.height);
+			  a.stroke();
+			  gl+=300;
+			} while(gl<canvas.width);
 
-                // a.lineWidth = 2;
-                // a.strokeStyle = "white"
-                // a.beginPath();
-                // a.moveTo(x,y);
-                // a.lineTo(x+textlength,y);
-                // a.stroke();
+			gl=299-(this.camera.y % 300);
+			do{
+			  a.beginPath();
+			  a.moveTo(0,gl);
+			  a.lineTo(canvas.width,gl);
+			  a.stroke();
+			  gl+=300;
+			} while(gl<canvas.height);
+
+
+
+			// var x, y, sx, sy;
+			// a.font="20px Arial";
+			// for(var i=0; i<model.content.length; i++) {
+			//   x=model.content[i].position.x*this.squareWidth/4;
+			//   y=model.content[i].position.y*this.squareHeight/4+30;
+			//   sx=model.content[i].scale*(this.squareWidth/4)-10;
+			//   sy=model.content[i].scale*(this.squareWidth/4)-10;
+
+			//   a.fillRect(x,y,sx,sy);
+			//   a.fillStyle="black";
+			//   a.fillText(i,x+30,y+30);
+
+			// };
+
+		 	a.fillStyle="white";
+		  	a.fillText("Config: mousexy="+Config.mouse.x+","+Config.mouse.y+"  downAtxy="+Config.downAt.x+","+Config.downAt.y+"  holding="+Config.mouse.button, 5,21);
+			a.fillText("grid: cameraxy= "+this.camera.x+", "+this.camera.y, 5,41);
+
+            // a.scale(.5+Math.random()*2,.5+Math.random()*2);
+            // a.font = "20pt Arial";
+            // textlength = a.measureText(message).width;
+            // a.fillStyle = "rgba(64,64,192,.75)"
+            // a.fillRect(x,y-20,textlength,20);
+
+            // a.fillStyle = "white";
+            // a.fillText(message, x, y);
+
+            // a.lineWidth = 2;
+            // a.strokeStyle = "white"
+            // a.beginPath();
+            // a.moveTo(x,y);
+            // a.lineTo(x+textlength,y);
+            // a.stroke();
 
             // i = Math.floor(Math.random()*model.content.length)
             // if(model.content[i].image) {

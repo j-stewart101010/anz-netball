@@ -7,6 +7,7 @@
     "modernizr": "~2.6.1",
     "jquery": "~1.9.1",
     "requirejs": "~2.1.5",
-    "requirejs-text": "~2.0.5"
+    "requirejs-text": "~2.0.5",
+    "webshim": "~1.12.0"
   }
 }
