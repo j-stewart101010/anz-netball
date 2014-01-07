@@ -28,7 +28,7 @@ define([
 	    	y: Config.mouse.y
 	    },
 
-
+	    this.canvasOffset = 0,
 	    this.squareWidth = 350,
 	    this.squareHeight = 350,
 	    this.locked = 1, 
@@ -67,17 +67,25 @@ define([
 	    
 	    //use the difference to move the camera when holding
         if(Config.mouse.button) {
-        	this.camera.momentumx = (Config.mouse.x-this.mousefollow.x)*0.4;
-        	this.camera.momentumy = (Config.mouse.y-this.mousefollow.y)*0.4;       	
-        	this.camera.x += (Config.mouse.x-this.mousefollow.x)*0.4;
-        	this.camera.y += (Config.mouse.y-this.mousefollow.y)*0.4;
-        } else {
-            this.camera.x += this.camera.momentumx;
-            this.camera.y += this.camera.momentumy;
-            this.camera.momentumy *= 0.95;
-            this.camera.momentumx *= 0.95;
-        }
+        	this.camera.momentumx = (this.mousefollow.x-Config.mouse.x)*0.4;
+        	this.camera.momentumy = (this.mousefollow.y-Config.mouse.y)*0.4;       	
+        };
+		
+		this.camera.x += this.camera.momentumx;
+        this.camera.y += this.camera.momentumy;
 
+        this.camera.momentumx *= 0.97;
+		this.camera.momentumy *= 0.97;
+        
+        if(Math.abs(this.camera.momentumx)<0.3) {
+        	this.camera.momentumx = 0;
+        	this.camera.x = Math.round(this.camera.x);	//Don't use Math.floor here. It causes weird behaviour.	
+        };
+        if(Math.abs(this.camera.momentumy)<0.3) {
+        	this.camera.momentumy = 0;
+        	this.camera.y = Math.round(this.camera.y);        	
+        };
+		
         this.mousefollow.x+=(Config.mouse.x-this.mousefollow.x)*0.4;
         this.mousefollow.y+=(Config.mouse.y-this.mousefollow.y)*0.4;
 
@@ -101,7 +109,7 @@ define([
 	    // opacity = 1-scalex;
 	    //opacity*=.9;
             //console.log(canvas.width+"x"+canvas.height);
-            a.fillStyle="navy";
+            a.fillStyle="#004165";
             a.fillRect(0,0,canvas.width,canvas.height);
 
 
@@ -155,26 +163,71 @@ define([
 //         a.fillStyle = "white";
 //         a.fillText("Config: mousexy="+Config.mouse.x+","+Config.mouse.y+"  trackxy="+Config.track.x+","+Config.track.y+"  downAtxy="+Config.downAt.x+","+Config.downAt.y, 5,21);
 
+//Draw a grid in place of the tiles
+// a.strokeStyle = "white";
+// var gl=349-(this.camera.x % 350);
+// do{
+//   a.beginPath();
+//   a.moveTo(gl,0);
+//   a.lineTo(gl,canvas.height);
+//   a.stroke();
+//   gl+=350;
+// } while(gl<canvas.width);
 
-a.strokeStyle = "white";
-var gl=this.camera.x % 300;
-do{
-  a.beginPath();
-  a.moveTo(gl,0);
-  a.lineTo(gl,canvas.height);
-  a.stroke();
-  gl+=300;
-} while(gl<canvas.width);
+// gl=349-(this.camera.y % 350);
+// do{
+//   a.beginPath();
+//   a.moveTo(0,gl);
+//   a.lineTo(canvas.width,gl);
+//   a.stroke();
+//   gl+=350;
+// } while(gl<canvas.height);
 
-gl=this.camera.y % 300;
-do{
-  a.beginPath();
-  a.moveTo(0,gl);
-  a.lineTo(canvas.width,gl);
-  a.stroke();
-  gl+=300;
-} while(gl<canvas.height);
 
+var x,y;
+var totalWorldWidth=model.worldWidth*this.squareWidth;
+var totalWorldHeight=5*this.squareHeight; //todo: make this dynamic later
+
+for(var i=0; i<model.content.length; i++) {
+  x=Math.round(model.content[i].position.x*this.squareWidth-this.camera.x);
+  y=Math.round(model.content[i].position.y*this.squareHeight-this.camera.y);
+
+  do {
+    if(x<=(-model.content[i].scale*this.squareWidth)) x+=totalWorldWidth;
+    if(x>=(totalWorldWidth-model.content[i].scale*this.squareWidth)) x-=totalWorldWidth;
+  } while(x<(-model.content[i].scale*this.squareWidth) || x>(totalWorldWidth-model.content[i].scale*this.squareWidth));
+  
+  do {
+    if(y<=(-model.content[i].scale*this.squareHeight)) y+=totalWorldHeight;
+    if(y>=(totalWorldHeight-model.content[i].scale*this.squareHeight)) y-=totalWorldHeight;
+  } while(y<(-model.content[i].scale*this.squareHeight) || y>(totalWorldHeight-model.content[i].scale*this.squareHeight));
+
+  //collision with screen. whether it's worth drawing or not
+  if(x>(-model.content[i].scale*this.squareWidth) && x<canvas.width && y>(-model.content[i].scale*this.squareHeight) && y<canvas.height){
+    //what to draw depending on data
+    switch(model.content[i].tiletype) {
+        case "text":
+        	a.fillStyle=model.content[i].colour;
+        	a.fillRect(x,y,model.content[i].scale*this.squareWidth,model.content[i].scale*this.squareHeight);
+        break;
+        case "image":
+            a.drawImage(model.content[i].image,x,y);
+        break;
+        case "textlink":
+        	a.fillStyle=model.content[i].colour;
+        	a.fillRect(x,y,model.content[i].scale*this.squareWidth,model.content[i].scale*this.squareHeight);
+        break;
+        case "video":
+            a.drawImage(model.content[i].image,x,y);               
+    };
+  };
+  //collision with mouse
+  if(Config.mouse.x>=x && Config.mouse.x<(x+model.content[i].scale*this.squareWidth) && (Config.mouse.y-this.canvasOffset)>=y && (Config.mouse.y-this.canvasOffset)<(y+model.content[i].scale*this.squareHeight)) {
+  	//a little darker overlay
+  	a.fillStyle="rgba(0,0,0,.35)";
+  	a.fillRect(x,y,model.content[i].scale*this.squareWidth,model.content[i].scale*this.squareWidth);
+  };
+};
 
 
 // var x, y, sx, sy;
@@ -192,7 +245,8 @@ do{
 // };
 
  	a.fillStyle="white";
-  	a.fillText("Config: mousexy="+Config.mouse.x+","+Config.mouse.y+"  trackxy="+Config.track.x+","+Config.track.y+"  downAtxy="+Config.downAt.x+","+Config.downAt.y+"  holding="+this.holding, 5,21);
+  	a.fillText("Config: mousexy="+Config.mouse.x+","+Config.mouse.y+"  trackxy="+Config.track.x+","+Config.track.y+"  downAtxy="+Config.downAt.x+","+Config.downAt.y, 5,21);
+    a.fillText("Grid: cameraxy= "+this.camera.x+", "+this.camera.y, 5,41);
 
                 // a.scale(.5+Math.random()*2,.5+Math.random()*2);
                 // a.font = "20pt Arial";

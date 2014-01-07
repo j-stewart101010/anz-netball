@@ -51,7 +51,7 @@ define([
             } else {
                 canvas = document.createElement("canvas"); 
                 canvas.width = a; 
-                canvas.height = b; 
+                canvas.height = b*0.82; 
                 context = canvas.getContext("2d");
                 canvas.style.position = "absolute";
                 canvas.style.top = "10%";
@@ -66,6 +66,7 @@ define([
                 $(canvas).bind("touchend", _self.onTouchEnd);
                 $(canvas).bind("touchmove", _self.onTouchMove);
                 grid = new Grid(a, b);
+                grid.canvasOffset = b*0.1;
                 trackpad = new Trackpad(canvas);
             };
 
@@ -128,6 +129,8 @@ define([
                 if(IS_IE8 || window.canvas) {
                     canvas.width = a;
                     canvas.height = b*0.82;
+                    grid.canvasOffset = b*0.1;
+                    //todo: change camera position based on previous size and new size
                 };
                 grid.resize(a, b);
                 var c = {
