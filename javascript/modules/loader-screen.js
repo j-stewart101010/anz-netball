@@ -14,8 +14,9 @@ define([
     //2 != window.devicePixelRatio || isIpad ? mobilecheck() && $("meta[name=viewport]").attr("content", "width=device-width, user-scalable=no,initial-scale=1, maximum-scale=.5, minimum-scale=.5") : $("meta[name=viewport]").attr("content", "width=device-width, user-scalable=no,initial-scale=.5, maximum-scale=.5, minimum-scale=.5");
     isIpad || (window.devicePixelRatio) != 2 ? MatchMedia.mobile && $("meta[name=viewport]").attr("content", "width=device-width, user-scalable=no,initial-scale=1, maximum-scale=.5, minimum-scale=.5") : $("meta[name=viewport]").attr("content", "width=device-width, user-scalable=no,initial-scale=.5, maximum-scale=.5, minimum-scale=.5");
 
+
     var LoaderScreen = function () {
-        IS_IE8 || isIpad;
+        // IS_IE8 || isIpad;
         this.view = document.createElement("div"); 
         this.view.style.position = "absolute";
         this.view.style.display = "block";
@@ -29,22 +30,20 @@ define([
         var tilescale;
 
         for (var i = 0; i < model.content.length; i++) {
+            tilescale = 1;
             switch(model.content[i].tiletype) {
                 case "text":
                     imgpath = model.content[i].subimageurl;
-                    tilescale = 1;
                 break;
                 case "image":
                     imgpath = model.content[i].imageurl;
-                    tilescale = 1;
                 break;
                 case "textlink":
                     imgpath = model.content[i].subimageurl;
-                    tilescale = 1;
                 break;
                 case "video":
                     imgpath = model.content[i].imageurl;
-                    tilescale = 2;                    
+                    tilescale = 2;
             }
 
             model.content[i].scale = tilescale;
@@ -52,23 +51,30 @@ define([
             checkpos = {x:0, y:0};
             do {
                 collision = false;
-                if((checkpos.x + model.content[i].scale - 1)>=model.worldwidth) collision = true;
-                for(var j = 0;j < i; j++) {                    
-                    if((checkpos.x >= model.content[j].position.x) && (checkpos.x <= (model.content[j].position.x + model.content[j].scale - 1))) {
-                        if ((checkpos.y >= model.content[j].position.y) && (checkpos.y <= (model.content[j].position.y + model.content[j].scale - 1))) collision = true;                        
+                //make sure none is hanging over the edge of the world
+                if((checkpos.x + model.content[i].scale - 1)>=model.worldWidth) collision = true;
+                //Dont bother checking other locations if part of it is already hanging over
+                //if(!collision) {
+                    //for all the previously arranged positions
+                    for(var j = 0;j < i; j++) {
+                        //collision check x
+                        if((checkpos.x >= model.content[j].position.x) && (checkpos.x <= (model.content[j].position.x + model.content[j].scale - 1))) {
+                            //collision check y
+                            if ((checkpos.y >= model.content[j].position.y) && (checkpos.y <= (model.content[j].position.y + model.content[j].scale - 1))) collision = true;                        
+                        };
                     };
-
-                };
+                //};
                 if(!collision) model.content[i].position = {x:checkpos.x, y:checkpos.y}; // = checkpos; maybe?
                 
                 checkpos.x+=1;
-                if(checkpos.x >= model.worldwidth) {
+                if(checkpos.x >= model.worldWidth) {
                     checkpos.x=0;
                     checkpos.y+=1;
                 };
+                //console.log("checking "+checkpos.x+","+checkpos.y);
 
-            } while(collision);
- 
+            } while(collision && checkpos.y<100 && checkpos.x < 100); //end if there is a mistake and this lasts too long
+            //console.log(imgpath);
             model.content[i].image = new Image;
             model.content[i].image.src = Config.REMOTE_PATH_2 + imgpath;
 
@@ -92,24 +98,34 @@ define([
     LoaderScreen.constructor = LoaderScreen;
 
     LoaderScreen.prototype.updatePoller = function () {
-        this.poller.rotation += 5;
-        this.poller.style.transform = "rotate(" + this.poller.rotation + "deg)";
-        this.poller.style["-ms-transform"] = "rotate(" + this.poller.rotation + "deg)";
-        this.poller.style["-webkit-transform"] = "rotate(" + this.poller.rotation + "deg)";
+        // this.poller.rotation += 5;
+        // this.poller.style.transform = "rotate(" + this.poller.rotation + "deg)";
+        // this.poller.style["-ms-transform"] = "rotate(" + this.poller.rotation + "deg)";
+        // this.poller.style["-webkit-transform"] = "rotate(" + this.poller.rotation + "deg)";
         this.loaded || requestAnimFrame(this.updatePoller.bind(this));
     };
 
     LoaderScreen.prototype.onInitialLoadComplete = function () {
-        this.loaded = true;
-        $(this.poller).fadeOut();
-        //this.overlay = this.assetLoader.images[1], this.overlay = document.createElement("div"), IS_IE8 || (this.overlay.style.backgroundImage = "url('" + Config.REMOTE_PATH + "img/paperTexture_tile.png')", this.overlay.style.position = "absolute", this.overlay.style.top = "0px", this.overlay.style.left = "0px", this.overlay.style.zIndex = 300, this.overlay.style.width = "100%", this.overlay.style.height = "100%", this.overlay.style.pointerEvents = "none", document.body.appendChild(this.overlay)),
-        this.assetLoader.onLoadComplete = null;
-        this.onIntroComplete();
+       this.loaded = true;
+       $(this.poller).fadeOut();
+       //this.overlay = this.assetLoader.images[1];
+       this.overlay = document.createElement("div");
+       // IS_IE8 || (this.overlay.style.backgroundImage = "url('" + Config.REMOTE_PATH + "img/paperTexture_tile.png')";
+       // this.overlay.style.position = "absolute";
+       // this.overlay.style.top = "0px";
+       // this.overlay.style.left = "0px";
+       // this.overlay.style.zIndex = 300;
+       // this.overlay.style.width = "100%";
+       // this.overlay.style.height = "100%";
+       // this.overlay.style.pointerEvents = "none";
+       document.body.appendChild(this.overlay);
+       this.assetLoader.onLoadComplete = null;
+       this.onIntroComplete();
     };
 
     LoaderScreen.prototype.onFaded = function () {}, LoaderScreen.prototype.onZoomStart = function () {}, LoaderScreen.prototype.onIntroComplete = function () {
-        this.onComplete();
-        $(this.overlay).fadeOut();
+       this.onComplete();
+       $(this.overlay).fadeOut();
     };
 
     LoaderScreen.prototype.onInitialLoad = function () {};

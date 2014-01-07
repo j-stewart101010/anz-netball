@@ -169,7 +169,7 @@ var model = {
       backtitle:"BACKSIDE 16",
       backsubtext:"This is the back of the tile"}],
 
-   worldwidth:5
+   worldWidth:5
 }
 
 return model;
