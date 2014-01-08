@@ -57,6 +57,9 @@
 .btn-primary {
   @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
 }
+.btn-action {
+  @include button-variant(#444, #FFF, #FFF);
+}
 
 
 // Button Sizes

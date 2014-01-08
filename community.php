@@ -47,11 +47,10 @@
 						<li><a href="/getting-started">Getting started</a></li>
 						<li><a href="/all-about-netball">All about netball</a></li>
 						<li><a href="/clinics">Clinics</a></li>
-						<li><a href="/sign-up">Sign up</a></li>
 					
-						<li class="social-media"><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li class="social-media"><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li class="social-media"><a href="#"><i class="fa fa-instagram"></i></a></li>
+						<li class="social-media"><a href="#"><span class="facebook-icon"><i class="fa fa-facebook"></i></a></li>
+						<li class="social-media"><a href="#"><span class="instagram-icon"><i class="fa fa-instagram"></i></a></li>
+						<li class="social-media"><a href="#"><span class="twitter-icon"><i class="fa fa-twitter"></i></span></a></li>						
 					</ul>
 				</div>				
 			</nav>
@@ -63,7 +62,7 @@
 
 				<div class="col col-md-8 col-lg-8 center-tile shade-one">
 					<div data-resize-height="center" class="outter-tile">
-						<article class="content-tile tile shade-one">
+						<article class="content-tile tile">
 							<hgroup>
 								<h1 class="heading-primary heading-exjumbo">Community Grants</h1>
 								<h2 class="subheading-primary heading-med">We’re giving back and need your help!</h2>
@@ -73,26 +72,41 @@
 					</div>
 				</div>
 
-				<!-- <div class="col col-md-4 col-lg-3"> -->
-					<!-- <div class="row"> -->
-						<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-							<div class="image-wrap">
-								<img src="images/netball-grid-one.jpg">
-							</div>
-							<div class="image-wrap">
-								<img src="images/netball-grid-two.jpg">
-							</div>
-						</div>
-						<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-							<div class="image-wrap">
-								<img src="images/netball-grid-three.jpg">
-							</div>
-							<div class="image-wrap">
-								<img src="images/netball-grid-four.jpg">
-							</div>
-						</div>				
-					<!-- </div> -->
-				<!-- </div> -->
+<!-- 				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
+					<div class="image-wrap">
+						<img src="images/netball-grid-one.jpg">
+					</div>
+					<div class="image-wrap">
+						<img src="images/netball-grid-two.jpg">
+					</div>
+				</div>
+				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
+					<div class="image-wrap">
+						<img src="images/netball-grid-three.jpg">
+					</div>
+					<div class="image-wrap">
+						<img src="images/netball-grid-four.jpg">
+					</div>
+				</div>	 -->	
+
+				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
+					<div class="image-wrap">
+						<img src="http://lorempixel.com/g/265/292/">
+					</div>
+					<div class="image-wrap">
+						<img src="http://lorempixel.com/g/265/292/">
+					</div>
+				</div>
+				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
+					<div class="image-wrap">
+						<img src="http://lorempixel.com/g/265/292/">
+					</div>
+					<div class="image-wrap">
+						<img src="http://lorempixel.com/g/265/292/">
+					</div>
+				</div>	
+
+						
 
 			</section>
 
@@ -100,124 +114,169 @@
 				
 				<div class="col col-md-4 center-tile shade-two">
 
-					<div class="outter-tile">
-						<form id="apply-for-grant" action="/" method="POST" class="form content-tile tile shade-two">
-							<div class="form-group">
-								<input id="apply-for-grant-name" name="apply-for-grant-name" class="form-control" type="text" required="required" placeholder="Name">
-							</div>
 
-							<div class="row">
-								<div class="form-group col-md-3">
-									<input id="apply-for-grant-age" name="apply-for-grant-age" class="form-control" type="text" required="required" placeholder="Age">
+					<div id="apply-for-grant" class="flip-container">
+						<div class="flipper">
+							<div class="front">
+
+
+
+								<div class="outter-tile shade-one">
+									<article class="tile">
+										<hgroup>
+											<h1 class="heading-primary heading-jumbo">Get involved</h1>
+											<a class="btn btn-sm btn-default" data-flip="toggle" data-flip-target="#apply-for-grant" href="#">Apply for a grant <i class="fa fa-angle-right"></i></a>
+										</hgroup>
+									</article>
 								</div>
-								<div class="form-group col-md-9">
-									<input id="apply-for-grant-contact-email" name="apply-for-grant-contact-email" class="form-control" type="text" required="required" placeholder="Contact Email">
+
+
+
+							</div>
+							<div class="back">
+
+
+
+								<div class="outter-tile">
+									<form id="apply-for-grant-signup" action="/" method="POST" class="form content-tile tile shade-two">
+										<div class="form-group">
+											<input id="apply-for-grant-name" name="apply-for-grant-name" class="form-control" type="text" required="required" placeholder="Name">
+										</div>
+
+										<div class="row">
+											<div class="form-group col-md-3">
+												<input id="apply-for-grant-age" name="apply-for-grant-age" class="form-control" type="text" required="required" placeholder="Age">
+											</div>
+											<div class="form-group col-md-9">
+												<input id="apply-for-grant-contact-email" name="apply-for-grant-contact-email" class="form-control" type="text" required="required" placeholder="Contact Email">
+											</div>
+										</div>
+										
+										<div class="form-group">
+										   <select id="apply-for-grant-help" name="apply-for-grant-help" class="selectbox form-control">
+										        <option>How can we help? (please select)</option>
+										        <option>Option Two</option>
+										    </select>
+										</div>
+										
+										<div class="form-group">
+											<textarea id="apply-for-grant-message" name="apply-for-grant-message" class="form-control" placeholder="Tell us in under 50 words how this will benefit your community" rows="3"></textarea>
+										</div>
+
+										<div class="form-group">
+											<label class="group-label" for="apply-for-grant-image">Attach:</label>
+											<span class="add-file">
+												<button class="btn btn-default btn-xs"><i class="fa fa-picture-o"></i> Image</button>
+												<input type="file" class="file-input" id="apply-for-grant-image" name="apply-for-grant-image">
+											</span>
+											File size limit 2mb
+											<span class="tooltip">
+												<i class="fa fa-question-circle"></i>
+											</span>
+										</div>
+
+										<div class="form-group">
+											<label class="group-label" for="apply-for-grant-video">Attach VIDEO:</label>
+											<input class="form-control inline-control" type="text" placeholder="Enter YouTube URL" id="apply-for-grant-video" name="apply-for-grant-video">
+											<span class="tooltip">
+												<i class="fa fa-question-circle"></i>
+											</span>
+										</div>
+
+										<div class="form-group">
+											<label for="apply-for-grant-updates">
+												<span class="checkbox">
+													<input id="apply-for-grant-updates" name="apply-for-grant-updates" type="checkbox">
+													<span class="tickbox">
+														<i class="fa fa-check"></i>
+													</span>
+												</span>
+												Keep me up-to-date with all things Netball Nation.
+											</label>
+										</div>						
+										
+										<input class="btn btn-default btn-sm" type="submit" value="Apply now">
+
+									</form>
+									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#apply-for-grant" href="#"><i class="fa fa-times"></i></a>
 								</div>
-							</div>
-							
-							<div class="form-group">
-								<div class="select-box">
-									<select id="apply-for-grant-help" name="apply-for-grant-help" class="form-control">
-										<option>How can we help?</option>
-									</select>
-									<div class="angle-down-box">
-										<i class="fa fa-angle-down"></i>
-									</div>
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<textarea id="apply-for-grant-message" name="apply-for-grant-message" class="form-control" placeholder="Tell us in under 50 words how this will benefit your community" rows="3"></textarea>
-							</div>
 
-							<div class="form-group">
-								<label class="group-label" for="apply-for-grant-image">Attach:</label>
-								<span class="add-file">
-									<button class="btn btn-default btn-xs"><i class="fa fa-picture-o"></i> Image</button>
-									<input type="file" class="file-input" id="apply-for-grant-image" name="apply-for-grant-image">
-									<!-- <input type="text" id="apply-for-grant-image-notify"> -->
-								</span>
-								File size limit 2mb
-								<span class="tooltip">
-									<i class="fa fa-question-circle"></i>
-								</span>
+
+
 							</div>
-
-							<div class="form-group">
-								<label class="group-label" for="apply-for-grant-video">Attach VIDEO:</label>
-								<input class="form-control inline-control" type="text" placeholder="Enter YouTube URL" id="apply-for-grant-video" name="apply-for-grant-video">
-								<span class="tooltip">
-									<i class="fa fa-question-circle"></i>
-								</span>
-							</div>
-
-							<div class="form-group">
-								<label for="apply-for-grant-updates">
-									<span class="check-box">
-										<input id="apply-for-grant-updates" name="apply-for-grant-updates" type="checkbox">
-										<span class="tick-box">
-											<i class="fa fa-check"></i>
-										</span>
-									</span>
-									Keep me up-to-date with all things Netball Nation.
-								</label>
-							</div>						
-							
-							<input class="btn btn-default btn-sm" type="submit" value="Apply now">
-
-						</form>
+						</div>
 					</div>
+
 				</div>
 
-				<div class="col col-md-6 video-tiles">
-					<article class="video-tile tile shade-one">
-						<div class="video-tile-content">
-							<hgroup>
-								<div>
-									<h2 class="tile-heading heading-sm">
-										<div class="brand-overlay shade-five"></div>
-										Video case study
-									</h2>
-								</div>
-								<div>
-									<h1 class="tile-heading">
-										<div class="brand-overlay shade-five"></div>
-										Boxhill bandits score big
-									</h1>
-								</div>
-							</hgroup>
-							<a class="btn btn-sm btn-primary" data-toggle="modal" data-cover=".video-tiles" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
-						</div>
-						<div class="brand-overlay shade-three"></div>
-						<img class="video-tile-image" alt="Video" src="images/video-background-one.jpg">
-					</article>
+				<div class="col col-md-6">
 
-					<article class="video-tile tile shade-one">
-						<div class="video-tile-content">
-							<hgroup>
-								<div>
-									<h2 class="tile-heading heading-sm">
-										<div class="brand-overlay shade-five"></div>
-										Video case study
-									</h2>
-								</div>
-								<div>
-									<h1 class="tile-heading">
-										<div class="brand-overlay shade-five"></div>
-										Game on for jims mowing
-									</h1>
-								</div>
-							</hgroup>								
-							<a class="btn btn-sm btn-primary" data-toggle="modal" data-cover=".video-tiles" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
+					<div id="video-case-studies" class="flip-container">
+						<div class="flipper">
+							<div class="front">
+
+
+
+								<article class="video-tile tile shade-one">
+									<div class="video-tile-content">
+										<hgroup>
+											<div>
+												<h2 class="tile-heading heading-sm">
+													<div class="brand-overlay shade-five"></div>
+													Video case study
+												</h2>
+											</div>
+											<div>
+												<h1 class="tile-heading">
+													<div class="brand-overlay shade-five"></div>
+													Boxhill bandits score big
+												</h1>
+											</div>
+										</hgroup>
+
+										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-append="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
+									
+									</div>
+									<div class="brand-overlay shade-three"></div>
+									<img class="video-tile-image" alt="Video" src="images/video-background-one.jpg">
+								</article>
+
+								<article class="video-tile tile shade-one">
+									<div class="video-tile-content">
+										<hgroup>
+											<div>
+												<h2 class="tile-heading heading-sm">
+													<div class="brand-overlay shade-five"></div>
+													Video case study
+												</h2>
+											</div>
+											<div>
+												<h1 class="tile-heading">
+													<div class="brand-overlay shade-five"></div>
+													Game on for jims mowing
+												</h1>
+											</div>
+										</hgroup>	
+
+										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-append="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
+
+									</div>
+									<div class="brand-overlay shade-three"></div>
+									<img class="video-tile-image" alt="Video" src="images/video-background-one.jpg">
+								</article>
+
+							</div>
+							<div id="video-side" class="back">
+								<!-- Dynamic content injected in here -->
+							</div>
 						</div>
-						<div class="brand-overlay shade-three"></div>
-						<img class="video-tile-image" alt="Video" src="images/video-background-one.jpg">
-					</article>
+					</div>
+
 				</div>
 
 				<div class="col col-md-2 center-tile shade-one">
-					<div data-resize-height="center" class="outter-tile">
-						<article class="article-tile tile shade-one">
+					<div data-resize-height="center" class="outter-tile shade-one">
+						<article class="article-tile tile">
 							<h3 class="heading-primary heading-default">Grants awarded</h3>
 							<ul class="article-list">
 								<li>
@@ -253,7 +312,7 @@
 			</div>
 		</footer>
 
-		<script data-main="javascript/main-generic" src="bower_components/requirejs/require.js"></script>
+		<script data-main="javascript/main-content" src="bower_components/requirejs/require.js"></script>
 
     </body>
 </html>

@@ -29,7 +29,7 @@
 
 	.logos {
 		padding: 15px 0;
-	}	
+	}
 
 	.nav-items {
 		position: relative;
@@ -92,12 +92,11 @@
 			}
 
 		 	.social-media {
-				display: block;
 				width: auto;
 				margin-top: 3px;
 
 				a {
-					padding: 0 20px;
+					padding: 20px 10px;
 					border-left: 0;
 
 					&:before {		
@@ -147,8 +146,6 @@
 
 		.navigation {
 			height: auto;			
-			// display: none;
-			// @extend .collapse;
 			float: none;
 
 			li {
@@ -322,11 +319,43 @@
 	}
 }
 
+%social-media-icon {
+	@extend %icon;
+
+	padding: 0 5px;
+	@include border-radius(4px);
+	font-size: $font-size-extra-medium + 1;
+	color: white;
+}
+
+.twitter-icon {
+	@extend %icon;
+	@extend %social-media-icon;
+	
+	background: #00b1f3;
+}
+
+.instagram-icon {
+	@extend %icon;
+	@extend %social-media-icon;
+	
+	background: #385c8f;
+}
+
+.facebook-icon {
+	@extend %icon;
+	@extend %social-media-icon;
+	
+	padding: 0 10px;
+	background: #5773b2;	
+}
+
 // Main Content Module
 //====================================================================================================================================
 //====================================================================================================================================
 
 .content  {
+	position: relative;
 	background-color: $brand-secondary;
 
 	.grid {
@@ -334,6 +363,10 @@
 		@include make-row();
 		border-top: 1px solid white;
 		border-bottom: 1px solid white;
+
+	    @include transition-property(top);
+	    @include transition-duration(0.5s);
+	    @include transition-timing-function(ease-in);	
 
 		&.resizing {
 			top: -30px;
@@ -365,6 +398,10 @@
 		height: 100%;
 		padding-left: 0;
 		padding-right: 0;
+
+	    @include transition-property(left);
+	    @include transition-duration(0.5s);
+	    @include transition-timing-function(ease-in);	    
 	}
 
 	.col + .col {
@@ -467,16 +504,17 @@
 	display: table;
 	width: 100%;
 	height: 100%;
+	padding: 40px 0;
 
-	min-height: 250px;
+	// min-height: 250px;
 
-    @include transition-property(min-height);
-    @include transition-duration(0.5s);
-    @include transition-timing-function(ease-in);	
+ //    @include transition-property(min-height);
+ //    @include transition-duration(0.5s);
+ //    @include transition-timing-function(ease-in);	
 
-	@media screen and (min-height: $screen-xsmall) {
-		// min-height: 500px;				
-	}	
+	// @media screen and (min-height: $screen-xsmall) {
+	// 	// min-height: 500px;				
+	// }	
 }
 
 .tile  {
@@ -530,8 +568,6 @@
 	display: block;
 	width: 100%;
 	height: 50%;	
-	// padding-top: 15px;
-	// padding-bottom: 15px;
 	overflow: hidden;
 	border-bottom: 1px solid white;
 
@@ -539,7 +575,7 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		width: 100%;
+		height: 100%;
 	}
 
 	.video-tile-content {
@@ -563,6 +599,13 @@
 
 	& + & {
 		border-bottom: 0;
+	}
+
+	@media screen and (min-width: $screen-xsmall) {
+		.video-tile-image {
+			width: 100%;
+			height: auto;
+		}
 	}
 }
 
@@ -648,11 +691,6 @@
 		margin-bottom: 6px;
 	}
 
-	.form-group + .form-group {
-		left: -15px;
-		padding-right: 0px;
-	}
-
 	.add-file {
 	    position: relative;
 	    overflow: hidden;
@@ -677,6 +715,28 @@
 		display: inline;
 		width: auto;
 	}
+
+	@media screen and (min-width: $screen-desktop) {	
+		.form-group + .form-group {
+			left: -15px;
+			padding-right: 0px;
+		}		
+	}	
+}
+
+// Loading Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.loading {
+	background-color: $brand-primary;
+
+	&:after {
+		content: "Loading";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+	}
 }
 
 // Tooltip Module
@@ -685,4 +745,115 @@
 
 .tooltip {
 	cursor: pointer;
+}
+
+// Video Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.video-pane {
+	height: 100%;
+}
+
+.video-toggle {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 99;
+}
+
+// Flip Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.flip-container {
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -o-perspective: 1000;
+    perspective: 1000;
+}
+
+.flip-container, .front, .back, .flipper {
+    width: 100%;
+    height: 100%;
+    min-height: 370px;
+}
+
+.flipper {
+    -moz-transform: perspective(1000px);
+    -moz-transform-style: preserve-3d;
+
+    position: relative;
+}
+
+.front, .back {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    -webkit-transition: 0.6s;
+    -webkit-transform-style: preserve-3d;
+
+    -moz-transition: 0.6s;
+    -moz-transform-style: preserve-3d;
+
+    -o-transition: 0.6s;
+    -o-transform-style: preserve-3d;
+
+    -ms-transition: 0.6s;
+    -ms-transform-style: preserve-3d;
+
+    transition: 0.6s;
+    transform-style: preserve-3d;
+
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.back {
+    -webkit-transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    -o-transform: rotateY(-180deg);
+    -ms-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+
+    z-index: 0;
+}
+
+.flip-container.flip .back {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+}
+
+.flip-container.flip .front {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.no-csstransforms3d .flip-container {
+	.front {
+		display: block;
+	}
+	.back {
+		display: none;
+	}
+}
+
+.front {
+    z-index: 2;
+}
+
+.flip-toggle {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	z-index: 99;
 }
