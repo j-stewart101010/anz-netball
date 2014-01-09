@@ -550,6 +550,10 @@
 	background-color: darken($brand-primary, 10%);
 }
 
+.shade-six {
+	background-color: $brand-accent-two; //Dirty blue
+}
+
 // Content Tile Module (Subset of .tile)
 //====================================================================================================================================
 //====================================================================================================================================
@@ -565,6 +569,55 @@
 //====================================================================================================================================
 
 .video-tile {
+	display: block;
+	width: 100%;
+	height: 50%;	
+	overflow: hidden;
+	border-bottom: 1px solid white;
+
+	.video-tile-image {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+	}
+
+	.video-tile-content {
+		position: relative;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		z-index: 100;
+	}
+
+	h2 {
+		margin-bottom: 5px;
+	}
+
+	.tile-heading { 
+		display: inline-block;
+
+		.brand-overlay {
+			z-index: -1;
+		}
+	}
+
+	& + & {
+		border-bottom: 0;
+	}
+
+	@media screen and (min-width: $screen-xsmall) {
+		.video-tile-image {
+			width: 100%;
+			height: auto;
+		}
+	}
+}
+
+// Ambassador Video Tile Module (Subset of .tile)
+//====================================================================================================================================
+//====================================================================================================================================
+
+.ambassador-video-tile {
 	display: block;
 	width: 100%;
 	height: 50%;	

@@ -110,32 +110,32 @@ define([
 
         build_grid : function () {
 
-            if (MatchMedia.tablet()) {
-                _self.$grids.css({ 'position' : '', 'top' : '', 'left' : '', 'width' : '' });
-                _self.$cols.css({ 'position' : '', 'top' : '', 'left' : '' });
-            }
-            else {
-                _self.$grids.css({ 'position' : 'absolute', 'width' : '100%' });
-                _self.$cols.css({ 'position' : 'absolute' });
+            // if (MatchMedia.tablet()) {
+            //     _self.$grids.css({ 'position' : '', 'top' : '', 'left' : '', 'width' : '' });
+            //     _self.$cols.css({ 'position' : '', 'top' : '', 'left' : '' });
+            // }
+            // else {
+            //     _self.$grids.css({ 'position' : 'absolute', 'width' : '100%' });
+            //     _self.$cols.css({ 'position' : 'absolute' });
 
-                $.each(_self.$grids, function () {
+            //     $.each(_self.$grids, function () {
 
-                    if ($(this).prev()) { 
-                        $(this).css({ 'top' : $(this).prev().outerHeight()+'px' });
-                    }
+            //         if ($(this).prev()) { 
+            //             $(this).css({ 'top' : $(this).prev().outerHeight()+'px' });
+            //         }
 
-                    $.each(_self.$cols, function () {
-                        var left_position = 0;
+            //         $.each(_self.$cols, function () {
+            //             var left_position = 0;
 
-                        if ($(this).prev()) { 
-                            $.each($(this).prevAll(), function () {
-                                left_position += $(this).outerWidth();
-                            });
-                            $(this).css({ 'left' :  left_position+'px' });                        
-                        }
-                    });
-                });
-            }
+            //             if ($(this).prev()) { 
+            //                 $.each($(this).prevAll(), function () {
+            //                     left_position += $(this).outerWidth();
+            //                 });
+            //                 $(this).css({ 'left' :  left_position+'px' });                        
+            //             }
+            //         });
+            //     });
+            // }
         }
 
         // patch_file_upload : function (e) {
