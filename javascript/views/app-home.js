@@ -68,6 +68,10 @@ define([
                 grid = new Grid(a, b);
                 grid.canvasOffset = b*0.1;
                 trackpad = new Trackpad(canvas);
+
+                // for(var i=0;i<model.content.length;i++){
+                //     model.content[i].lines = grid.splitText(model.content[i].)
+                // }
             };
 
             grid.onTransitionFinished = function () {
@@ -114,9 +118,13 @@ define([
 
         update : function () {
             //console.log(Config.isMobile);
-            Config.isMobile || (resizeCount++, resizeCount ==10 && _self.realResize()); 
-            loaded && browseMode && trackpad.update(); 
-            Config.track && (Config.track.x = trackpad.value, Config.track.y = trackpad.valueY); 
+            Config.isMobile || resizeCount++;
+            resizeCount ==10 && _self.realResize(); 
+            if(loaded && browseMode) trackpad.update(); 
+            if(Config.track) {
+                Config.track.x = trackpad.value;
+                Config.track.y = trackpad.valueY;
+            };
             pauseGridRender || (IS_IE8 ? grid.render() : (grid.render(context))); 
             requestAnimFrame(_self.update);
         },

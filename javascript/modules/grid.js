@@ -45,12 +45,12 @@ define([
         
         this.holding = false;
 
-	    this.colours=[];
-	    for(var i=0;i<64;i++) {
-	    	this.colours.push({r:Math.floor(Math.random()*256),
-	    	                   g:Math.floor(Math.random()*256),
-	    	                   b:Math.floor(Math.random()*256)});
-	    };
+	    // this.colours=[];
+	    // for(var i=0;i<64;i++) {
+	    // 	this.colours.push({r:Math.floor(Math.random()*256),
+	    // 	                   g:Math.floor(Math.random()*256),
+	    // 	                   b:Math.floor(Math.random()*256)});
+	    // };
 	};
 
 	Grid.constructor = Grid;
@@ -59,6 +59,14 @@ define([
 		console.log("Grid.resize " + a + "x" + b),
 	    this.width = a,
 	    this.height = b
+	};
+
+
+	Grid.prototype.splitText = function (strText, maxLength, context) {
+		var lastPos, pos = 1, remText;
+//		do {
+
+//		}
 	};
 
 	Grid.prototype.render = function (a) {
