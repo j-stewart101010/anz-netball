@@ -6,6 +6,8 @@
 @import "fonts";
 @import "scaffolding";
 @import "normalize";
+@import "buttons";
+@import "forms";
 @import "grid";
 @import "utilities";
 @import "modals";
@@ -16,26 +18,23 @@
 
 .master-head {
 	@include make-row();
-	height: 10%;
 
 	.branding {
 		@include make-column(3);
-	}
-
-	.logos {
-		position: absolute;
-		top: 50%;
-		margin-top: -20px;
 	}
 
 	.main-nav {
 		@include make-column(9);
 	}
 
+	.logos {
+		padding: 15px 0;
+	}
+
 	.nav-items {
 		position: relative;
 		float: right;
-		max-width: 95%;
+		max-width: 85%;
 		height: 100%;	
 	}
 
@@ -61,8 +60,11 @@
 
 	.menu-icon {
 		display: none;
-		float: right;
+		position: absolute;
+		top: 0;
+		right: 5%;
 		padding: 12px 0;
+		color: white;
 	}
 
 	@media screen and (min-width: $screen-xsmall) {
@@ -90,12 +92,11 @@
 			}
 
 		 	.social-media {
-				display: block;
 				width: auto;
 				margin-top: 3px;
 
 				a {
-					padding: 0 20px;
+					padding: 20px 10px;
 					border-left: 0;
 
 					&:before {		
@@ -104,6 +105,17 @@
 				}
 			}			
 		}
+	}
+
+	@media screen and (min-width: $screen-small) {	
+		height: 8%;
+
+		.logos {
+			position: absolute;
+			top: 50%;
+			padding: 0;
+			margin-top: -20px;
+		}		
 	}
 
 	@media screen and (max-width: $screen-small) {
@@ -122,7 +134,7 @@
 	}
 
 	@media screen and (max-width: $screen-xsmall) {
-		height: auto;
+		// height: auto;
 
 		.menu-icon {
 			display: block;
@@ -134,8 +146,6 @@
 
 		.navigation {
 			height: auto;			
-			// display: none;
-			// @extend .collapse;
 			float: none;
 
 			li {
@@ -152,7 +162,7 @@
 
 .main-nav {
 	height: 100%;
-	@include gradient-vertical($start-color: lighten($light-accent, 5%), $end-color: darken($light-accent, 10%));
+	@include gradient-vertical($start-color: lighten($brand-primary, 5%), $end-color: darken($brand-primary, 10%));
 }
 
 // Navigation Module
@@ -171,7 +181,8 @@
 	a {
 		position: relative;
 		padding: 0 10px;
-		border-left: 1px solid lighten($light-accent, 40%);
+		border-left: 1px solid lighten($brand-primary, 40%);
+		font-size: $font-size-small;
 	}
 
 	li:first-child a, li:first-child a:before {
@@ -203,7 +214,7 @@
 
 				a {
 					border-left: 1px solid transparent;
-					color: lighten($light-accent, 20%);
+					color: lighten($brand-primary, 20%);
 
 					&:before {
 						border-right: 1px solid transparent;
@@ -214,7 +225,7 @@
 
 		a {
 			display: block;
-			border-left: 1px solid lighten($light-accent, 5%);
+			border-left: 1px solid lighten($brand-primary, 5%);
 
 			&:before {
 				position: absolute;
@@ -223,7 +234,7 @@
 				top: 0;
 				width: 1px;
 				height: 100%;			
-				border-right: 1px solid darken($light-accent, 5%);
+				border-right: 1px solid darken($brand-primary, 5%);
 			}			
 		}
 	}
@@ -248,7 +259,7 @@
 	margin: 0px;
 	z-index: 999;
 	@include skew(-16deg, 0deg);
-	@include gradient-vertical($start-color: lighten($light-accent, 2%), $end-color: darken($light-accent, 13%));	
+	@include gradient-vertical($start-color: lighten($brand-primary, 2%), $end-color: darken($brand-primary, 13%));	
 
 	&:before {
 		content: "";
@@ -258,7 +269,7 @@
 		bottom: 0;
 		width: 18px;
 		@include skew(-12deg, 0deg);
-		@include gradient-vertical($start-color: lighten($light-accent, 2%), $end-color: darken($light-accent, 13%));			
+		@include gradient-vertical($start-color: lighten($brand-primary, 2%), $end-color: darken($brand-primary, 13%));			
 	}
 }
 
@@ -268,7 +279,7 @@
 	padding-right: 15px;
 	margin-left: -15px;
 	margin-right: -15px;
-	@include gradient-radial($inner-color: lighten($dark-accent, 8%), $outer-color: $dark-accent);
+	@include gradient-radial($inner-color: lighten($brand-secondary, 8%), $outer-color: $brand-secondary);
 
 	.anz-logo {
 		display: inline-block;
@@ -280,39 +291,6 @@
 	.nbn-logo {
 		text-transform: uppercase;
 		color: white;
-	}
-}
-
-// Menu Module
-//====================================================================================================================================
-//====================================================================================================================================
-
-.menu {
-	// @extend %textured-item;
-	@include make-row();
-	padding-top: 1px;
-
-	&:after {
-		position: static;
-	}
-
-	.menu-media {
-		margin-top: 3px;
-		@include make-column(6);
-
-		@media (max-width: $container-desktop) {
-			margin-top: 20px;
-		}
-	}
-
-	.menu-content {
-		@include make-column(6);
-		font-size: $font-size-big;
-
-		@media (max-width: $container-desktop) {
-			margin-top: 20px;
-			text-align: left;
-		}
 	}
 }
 
@@ -341,25 +319,67 @@
 	}
 }
 
+%social-media-icon {
+	@extend %icon;
+
+	padding: 0 5px;
+	@include border-radius(4px);
+	font-size: $font-size-extra-medium + 1;
+	color: white;
+}
+
+.twitter-icon {
+	@extend %icon;
+	@extend %social-media-icon;
+	
+	background: #00b1f3;
+}
+
+.instagram-icon {
+	@extend %icon;
+	@extend %social-media-icon;
+	
+	background: #385c8f;
+}
+
+.facebook-icon {
+	@extend %icon;
+	@extend %social-media-icon;
+	
+	padding: 0 10px;
+	background: #5773b2;	
+}
+
 // Main Content Module
 //====================================================================================================================================
 //====================================================================================================================================
 
 .content  {
-	background-color: $dark-accent;
+	position: relative;
+	background-color: $brand-secondary;
 
 	.grid {
 		position: relative;
 		@include make-row();
+		border-top: 1px solid white;
+		border-bottom: 1px solid white;
 
-		.row {
-			margin-left: 0;
-			margin-right: 0;
-		}
+	    @include transition-property(top);
+	    @include transition-duration(0.5s);
+	    @include transition-timing-function(ease-in);	
 
 		&.resizing {
 			top: -30px;
 		}
+
+		& > .col {
+			border-left: 1px solid white;
+			border-right: 1px solid white;			
+		}
+	}
+
+	.grid + .grid {
+		border-top: 0;
 	}
 
 	img {
@@ -369,7 +389,7 @@
 	.image-wrap {
 		overflow: hidden;
 		max-width: 100%;
-
+		max-height: 50%;
 		width: 50%;
 		float: left;
 	}
@@ -378,18 +398,22 @@
 		height: 100%;
 		padding-left: 0;
 		padding-right: 0;
+
+	    @include transition-property(left);
+	    @include transition-duration(0.5s);
+	    @include transition-timing-function(ease-in);	    
+	}
+
+	.col + .col {
+		border-left: 0;
 	}	
 
 	@media screen and (min-width: $screen-desktop) {
-		min-height: 82%;
-
-		.col {
-			margin-right: -2px; //Handle subpixel level rendering issues in browers e.g: http://ejohn.org/blog/sub-pixel-problems-in-css/ 
-			margin-left: 1px;			
-		}
+		height: 87%;
 
 		.grid {
 			overflow: hidden;
+			height: 50%;
 		}
 
 		.image-wrap {
@@ -397,10 +421,10 @@
 			width: auto;
 		}
 
-		.center-tile {
-			padding-bottom: 50em;
-			margin-bottom: -50em;
-		}		
+		// .center-tile {
+		// 	padding-bottom: 50em;
+		// 	margin-bottom: -50em;
+		// }		
 	}
 
 	@media screen and (max-width: $screen-xsmall) {
@@ -411,25 +435,68 @@
 	}
 }
 
-// Heading Module
+// Headings Module
 //====================================================================================================================================
 //====================================================================================================================================
 
-.heading {
-	text-transform: uppercase;
+%heading {
+	&.heading-sm {
+		font-size: $font-size-small;
+	}
+	&.heading-med {
+		font-size: $font-size-medium;
+	}
+	&.heading-default {
+		font-size: $font-size-base;
+	}		
+	&.heading-exmed {
+		font-size: $font-size-extra-medium;
+	}	
+	&.heading-jumbo {
+		font-size: $font-size-jumbo;
+	}	
+	&.heading-exjumbo {
+		font-size: $font-size-extra-jumbo;
+	}
 }
 
-.subheading {
-	
+%heading-accent {
+	text-transform: uppercase;
+	font-weight: normal;	
+}
+
+%heading-spacing-default {
+	margin-top: 0;
+	margin-bottom: 20px;	
+	line-height: 1;
+}
+
+.heading-primary {
+	@extend %heading;
+	@extend %heading-accent;
+	@extend %heading-spacing-default;
+
+	color: $brand-heading-accent-one;
+}
+
+.subheading-primary {
+	@extend %heading;
+	@extend %heading-spacing-default;
+
+	color: $brand-heading-accent-one;	
 }
 
 .tile-heading {
-	@extend .heading;
+	@extend %heading;
+	@extend %heading-accent;
+	@extend %heading-spacing-default;
 
-	color: $heading-accent-one;
+	position: relative;
+	padding: 10px;
+	color: white;
 }
 
-// Tile Module
+// Default Tile Module
 //====================================================================================================================================
 //====================================================================================================================================
 
@@ -437,16 +504,17 @@
 	display: table;
 	width: 100%;
 	height: 100%;
+	padding: 40px 0;
 
-	min-height: 250px;
+	// min-height: 250px;
 
-    @include transition-property(min-height);
-    @include transition-duration(0.5s);
-    @include transition-timing-function(ease-in);	
+ //    @include transition-property(min-height);
+ //    @include transition-duration(0.5s);
+ //    @include transition-timing-function(ease-in);	
 
-	@media screen and (min-height: $screen-xsmall) {
-		min-height: 500px;				
-	}	
+	// @media screen and (min-height: $screen-xsmall) {
+	// 	// min-height: 500px;				
+	// }	
 }
 
 .tile  {
@@ -458,13 +526,179 @@
 	vertical-align: middle;	
 }
 
+// Shade Module (Allows the branding of components on a component level thus sacrificing a small semantics hit for a large reusability gain)
+//====================================================================================================================================
+//====================================================================================================================================
+
 .shade-one {
-	background-color: $highlight-one;	
+	background-color: $brand-accent-one; //Baby Blue	
 }
 
 .shade-two {
-	background-color: darken($highlight-one, 10%);	
-}	
+	background-color: darken($brand-accent-one, 10%);	
+}
+
+.shade-three {
+	background-color: $brand-primary; //Ocean Blue
+}
+
+.shade-four {
+	background-color: lighten($brand-primary, 10%);
+}
+
+.shade-five {
+	background-color: darken($brand-primary, 10%);
+}
+
+.shade-six {
+	background-color: $brand-accent-two; //Dirty blue
+}
+
+// Content Tile Module (Subset of .tile)
+//====================================================================================================================================
+//====================================================================================================================================
+
+.content-tile {
+	.heading-primary {
+		margin-bottom: 5px;
+	}
+}
+
+// Video Tile Module (Subset of .tile)
+//====================================================================================================================================
+//====================================================================================================================================
+
+.video-tile {
+	display: block;
+	width: 100%;
+	height: 50%;	
+	overflow: hidden;
+	border-bottom: 1px solid white;
+
+	.video-tile-image {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+	}
+
+	.video-tile-content {
+		position: relative;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		z-index: 100;
+	}
+
+	h2 {
+		margin-bottom: 5px;
+	}
+
+	.tile-heading { 
+		display: inline-block;
+
+		.brand-overlay {
+			z-index: -1;
+		}
+	}
+
+	& + & {
+		border-bottom: 0;
+	}
+
+	@media screen and (min-width: $screen-xsmall) {
+		.video-tile-image {
+			width: 100%;
+			height: auto;
+		}
+	}
+}
+
+// Ambassador Video Tile Module (Subset of .tile)
+//====================================================================================================================================
+//====================================================================================================================================
+
+.ambassador-video-tile {
+	display: block;
+	width: 100%;
+	height: 50%;	
+	overflow: hidden;
+	border-bottom: 1px solid white;
+
+	.video-tile-image {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+	}
+
+	.video-tile-content {
+		position: relative;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		z-index: 100;
+	}
+
+	h2 {
+		margin-bottom: 5px;
+	}
+
+	.tile-heading { 
+		display: inline-block;
+
+		.brand-overlay {
+			z-index: -1;
+		}
+	}
+
+	& + & {
+		border-bottom: 0;
+	}
+
+	@media screen and (min-width: $screen-xsmall) {
+		.video-tile-image {
+			width: 100%;
+			height: auto;
+		}
+	}
+}
+
+// Article Tile Module (Subset of .tile)
+//====================================================================================================================================
+//====================================================================================================================================
+
+.article-tile {
+	padding-top: 20px;
+	padding-bottom: 20px;
+
+	.article-list {
+		padding: 0;
+		margin: 0;
+		font-size: ceil($font-size-small - 1);
+
+		li {
+			margin-bottom: 15px;
+			list-style-type: none;
+		}
+	}
+
+	.subheading-primary {
+		margin-bottom: 7px;	
+	}
+}
+
+// Overlays Module (For rendering an overlay behind an element - should be used in conjunction with the shade module to produce colors)
+//====================================================================================================================================
+//====================================================================================================================================
+
+.brand-overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 99;
+	@include opacity(0.6);
+}
 
 // Master Foot Module
 //====================================================================================================================================
@@ -473,14 +707,9 @@
 .master-foot  {
 	@include make-row();
 	position: relative;
-	height: 8%;
-	background-color: $dark-accent;
-
-	.nav-items {
-		position: absolute;
-		top: 50%;
-		margin-top: -15px;
-	}
+	padding-top: 10px;
+	padding-bottom: 10px;	
+	background-color: $brand-secondary;
 
 	.navigation, .copyright {
 		@include make-column(12);
@@ -489,6 +718,195 @@
 	}
 
 	.navigation a, .copyright {
-		color: $highlight-one;
+		color: $brand-accent-one;
+		font-size: $font-size-extra-small;
 	}
+
+	@media screen and (min-width: $screen-small) {	
+		height: 5%;
+		padding: 0;
+
+		.nav-items {
+			position: absolute;
+			top: 50%;
+			margin-top: -15px;
+		}		
+	}	
+}
+
+// Form Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.form {
+
+	.form-group {
+		margin-bottom: 6px;
+	}
+
+	.add-file {
+	    position: relative;
+	    overflow: hidden;
+	    cursor: pointer;		
+	}
+
+	.file-input {
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    margin: 0;
+	    padding: 0;	    		
+	    z-index: 99;
+	    line-height: 0;
+	    @include opacity(0);
+	    cursor: pointer;
+	    _cursor: hand;		
+	}
+
+	.inline-control {
+		display: inline;
+		width: auto;
+	}
+
+	@media screen and (min-width: $screen-desktop) {	
+		.form-group + .form-group {
+			left: -15px;
+			padding-right: 0px;
+		}		
+	}	
+}
+
+// Loading Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.loading {
+	background-color: $brand-primary;
+
+	&:after {
+		content: "Loading";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+	}
+}
+
+// Tooltip Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.tooltip {
+	cursor: pointer;
+}
+
+// Video Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.video-pane {
+	height: 100%;
+}
+
+.video-toggle {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 99;
+}
+
+// Flip Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.flip-container {
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -o-perspective: 1000;
+    perspective: 1000;
+}
+
+.flip-container, .front, .back, .flipper {
+    width: 100%;
+    height: 100%;
+    min-height: 370px;
+}
+
+.flipper {
+    -moz-transform: perspective(1000px);
+    -moz-transform-style: preserve-3d;
+
+    position: relative;
+}
+
+.front, .back {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    -webkit-transition: 0.6s;
+    -webkit-transform-style: preserve-3d;
+
+    -moz-transition: 0.6s;
+    -moz-transform-style: preserve-3d;
+
+    -o-transition: 0.6s;
+    -o-transform-style: preserve-3d;
+
+    -ms-transition: 0.6s;
+    -ms-transform-style: preserve-3d;
+
+    transition: 0.6s;
+    transform-style: preserve-3d;
+
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.back {
+    -webkit-transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    -o-transform: rotateY(-180deg);
+    -ms-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+
+    z-index: 0;
+}
+
+.flip-container.flip .back {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+}
+
+.flip-container.flip .front {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.no-csstransforms3d .flip-container {
+	.front {
+		display: block;
+	}
+	.back {
+		display: none;
+	}
+}
+
+.front {
+    z-index: 2;
+}
+
+.flip-toggle {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	z-index: 99;
 }

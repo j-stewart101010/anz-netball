@@ -53,9 +53,11 @@ require.config({
 
 require([
 	'views/app-generic',
-], function (AppGenericView) {
+	'views/app-content'
+], function (AppGenericView, AppContentView) {
 	/*jshint nonew:false*/
 
-	// Initialize the application view
+	// Initialize the application views
 	new AppGenericView();
+	new AppContentView();
 });

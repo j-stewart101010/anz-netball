@@ -39,8 +39,8 @@
 			<nav class="main-nav">
 				<div class="nav-items">
 					<ul id="main-navigation" class="navigation block collapse">
-						<li class="active"><a href="/community-grants">Community grants</a></li>
-						<li><a href="/getting-started">Getting started</a></li>
+						<li><a href="/community-grants">Community grants</a></li>
+						<li class="active"><a href="/getting-started">Getting started</a></li>
 						<li><a href="/all-about-netball">All about netball</a></li>
 						<li><a href="/clinics">Clinics</a></li>
 					
@@ -56,35 +56,20 @@
 
 			<section class="grid">
 
-				<div class="col col-md-8 col-lg-8 center-tile shade-one">
+
+
+				<div class="col col-md-6 col-lg-6 center-tile shade-six">
 					<div data-resize-height="center" class="outter-tile">
 						<article class="content-tile tile">
 							<hgroup>
-								<h1 class="heading-primary heading-exjumbo">Community Grants</h1>
-								<h2 class="subheading-primary heading-med">We’re giving back and need your help!</h2>
-								<p>Grants are non-repayable funds disbursed by one party (grant makers), often a government department tion, foundation or trust, to a recipient, often (but not always) a nonprofit entity, educational stitution, business or an individual. In order to receive a grant, some form of "Grant Writing" often referred to as either a proposal or an application is usually required.</p>
+								<h1 class="heading-primary heading-exjumbo">Getting started</h1>
+								<h2 class="subheading-primary heading-med">Look the part.</h2>
+								<p>Grants are non-repayable funds disbursed by one party (grant makers), often a government rtment tion, foundation or trust, to a recipient, often (but not always) a nonprofit entity, educationalitution, business or an individual.</p>
 							</hgroup>
 						</article>
 					</div>
 				</div>
 
-<!-- 				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap">
-						<img src="images/netball-grid-one.jpg">
-					</div>
-					<div class="image-wrap">
-						<img src="images/netball-grid-two.jpg">
-					</div>
-				</div>
-				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap">
-						<img src="images/netball-grid-three.jpg">
-					</div>
-					<div class="image-wrap">
-						<img src="images/netball-grid-four.jpg">
-					</div>
-				</div>	 -->	
-
 				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
 					<div class="image-wrap">
 						<img src="http://lorempixel.com/g/265/292/">
@@ -93,16 +78,12 @@
 						<img src="http://lorempixel.com/g/265/292/">
 					</div>
 				</div>
-				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/265/292/">
-					</div>
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/265/292/">
-					</div>
+				<div class="col col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					<img src="http://lorempixel.com/g/511/550/">
+					<!-- <img src="images/netball-seventeen.jpg">		 -->
 				</div>	
 
-						
+
 
 			</section>
 

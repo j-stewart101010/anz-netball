@@ -55,6 +55,7 @@ require.config({
 		underscore: '../bower_components/underscore/underscore',
 		backbone: '../bower_components/backbone/backbone',
 		text: '../bower_components/requirejs-text/text',
+		polyfiller: '../bower_components/webshim/js-webshim/minified/polyfiller',
 		tween_lite: 'vendor/TweenLite.min',
 		expo: 'vendor/EasePack.min',
 		console_log: 'helpers/console-log',
