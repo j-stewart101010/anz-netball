@@ -17,6 +17,8 @@
 //====================================================================================================================================
 
 .master-head {
+	position: relative;
+	z-index: 101;
 	@include make-row();
 
 	.branding {
@@ -41,6 +43,7 @@
 	.navigation {
 		float: left;		
 		height: 100%;
+		@include gradient-vertical($start-color: lighten($brand-primary, 5%), $end-color: darken($brand-primary, 10%));
 
 		li {
 			padding-top: 20px;
@@ -257,7 +260,7 @@
 	top: 0;
 	right: -11px;
 	margin: 0px;
-	z-index: 999;
+	z-index: 99;
 	@include skew(-16deg, 0deg);
 	@include gradient-vertical($start-color: lighten($brand-primary, 2%), $end-color: darken($brand-primary, 13%));	
 
@@ -356,7 +359,9 @@
 
 .content  {
 	position: relative;
-	background-color: $brand-secondary;
+	max-width: 1100px;
+	// margin: 0 auto;
+	// background-color: $brand-secondary;
 
 	.grid {
 		position: relative;
@@ -366,7 +371,7 @@
 
 	    @include transition-property(top);
 	    @include transition-duration(0.5s);
-	    @include transition-timing-function(ease-in);	
+	    // @include transition-timing-function(ease-in);	
 
 		&.resizing {
 			top: -30px;
@@ -401,12 +406,12 @@
 
 	    @include transition-property(left);
 	    @include transition-duration(0.5s);
-	    @include transition-timing-function(ease-in);	    
+	    // @include transition-timing-function(ease-in);	    
 	}
 
 	.col + .col {
 		border-left: 0;
-	}	
+	}
 
 	@media screen and (min-width: $screen-desktop) {
 		height: 87%;
@@ -451,6 +456,12 @@
 	}		
 	&.heading-exmed {
 		font-size: $font-size-extra-medium;
+	}
+	&.heading-lg {
+		font-size: $font-size-large;
+	}
+	&.heading-exlg {
+		font-size: $font-size-extra-large;
 	}	
 	&.heading-jumbo {
 		font-size: $font-size-jumbo;
@@ -462,7 +473,7 @@
 
 %heading-accent {
 	text-transform: uppercase;
-	font-weight: normal;	
+	font-weight: normal;
 }
 
 %heading-spacing-default {
@@ -471,7 +482,7 @@
 	line-height: 1;
 }
 
-.heading-primary {
+.heading {
 	@extend %heading;
 	@extend %heading-accent;
 	@extend %heading-spacing-default;
@@ -479,7 +490,7 @@
 	color: $brand-heading-accent-one;
 }
 
-.subheading-primary {
+.subheading {
 	@extend %heading;
 	@extend %heading-spacing-default;
 
@@ -496,6 +507,17 @@
 	color: white;
 }
 
+// Typography Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.verbose {
+	color: white;
+}
+.muted {
+	color: darken($brand-accent-three, 30%);
+}
+
 // Default Tile Module
 //====================================================================================================================================
 //====================================================================================================================================
@@ -504,7 +526,10 @@
 	display: table;
 	width: 100%;
 	height: 100%;
-	padding: 40px 0;
+
+	&.group {
+		max-height: 50%;
+	}
 
 	// min-height: 250px;
 
@@ -515,6 +540,10 @@
 	// @media screen and (min-height: $screen-xsmall) {
 	// 	// min-height: 500px;				
 	// }	
+
+	@media screen and (max-width: $screen-desktop) {	
+		padding: 40px 0;		
+	}
 }
 
 .tile  {
@@ -523,10 +552,14 @@
 	z-index: 99;
 	padding-left: 15px;
 	padding-right: 15px;	
-	vertical-align: middle;	
+	vertical-align: middle;
+
+	&.center {
+		text-align: center;
+	}
 }
 
-// Shade Module (Allows the branding of components on a component level thus sacrificing a small semantics hit for a large reusability gain)
+// Shade Module (Allows the branding on a component level thus sacrificing a small semantics hit for a large reusability gain)
 //====================================================================================================================================
 //====================================================================================================================================
 
@@ -551,115 +584,136 @@
 }
 
 .shade-six {
+	background-color: $brand-accent-three; //Light gray
+}
+
+.shade-seven {
+	background-color: darken($brand-accent-three, 40%);
+}
+
+.shade-eight {
 	background-color: $brand-accent-two; //Dirty blue
 }
+
+.shade-nine {
+	background-color: darken($brand-accent-two, 10%); //Dirty blue
+}
+
+.shade-ten {
+	background-color: $brand-accent-four; //Cerulean
+}
+
 
 // Content Tile Module (Subset of .tile)
 //====================================================================================================================================
 //====================================================================================================================================
 
 .content-tile {
-	.heading-primary {
+	.heading {
 		margin-bottom: 5px;
 	}
 }
 
-// Video Tile Module (Subset of .tile)
+// Video Tile Modules (Subset of .tile)
 //====================================================================================================================================
 //====================================================================================================================================
+
+%video-block {
+	display: block;
+	width: 100%;
+	height: 50%;	
+	overflow: hidden;
+	border-bottom: 1px solid white;
+
+	.video-tile-image {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+	}
+
+	.video-tile-content {
+		position: relative;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		z-index: 100;
+	}
+
+	h2 {
+		margin-bottom: 5px;
+	}
+
+	.tile-heading { 
+		display: inline-block;
+
+		.brand-overlay {
+			z-index: -1;
+		}
+	}
+
+	& + & {
+		border-bottom: 0;
+	}
+
+	@media screen and (min-width: $screen-xsmall) {
+		.video-tile-image {
+			width: 100%;
+			height: auto;
+		}
+	}
+}
 
 .video-tile {
-	display: block;
-	width: 100%;
-	height: 50%;	
-	overflow: hidden;
-	border-bottom: 1px solid white;
-
-	.video-tile-image {
-		position: absolute;
-		top: 0;
-		left: 0;
-		height: 100%;
-	}
-
-	.video-tile-content {
-		position: relative;
-		padding-top: 10px;
-		padding-bottom: 10px;
-		z-index: 100;
-	}
-
-	h2 {
-		margin-bottom: 5px;
-	}
-
-	.tile-heading { 
-		display: inline-block;
-
-		.brand-overlay {
-			z-index: -1;
-		}
-	}
-
-	& + & {
-		border-bottom: 0;
-	}
-
-	@media screen and (min-width: $screen-xsmall) {
-		.video-tile-image {
-			width: 100%;
-			height: auto;
-		}
-	}
+	@extend %video-block;
 }
 
-// Ambassador Video Tile Module (Subset of .tile)
-//====================================================================================================================================
-//====================================================================================================================================
-
 .ambassador-video-tile {
-	display: block;
-	width: 100%;
-	height: 50%;	
-	overflow: hidden;
-	border-bottom: 1px solid white;
+	@extend %video-block;
 
-	.video-tile-image {
-		position: absolute;
-		top: 0;
-		left: 0;
-		height: 100%;
-	}
+	height: 100%;
+	// display: block;
+	// width: 100%;
+	// height: 100%;
+	// overflow: hidden;
+	// border-bottom: 1px solid white;
 
-	.video-tile-content {
-		position: relative;
-		padding-top: 10px;
-		padding-bottom: 10px;
-		z-index: 100;
-	}
+	// .video-tile-image {
+	// 	position: absolute;
+	// 	top: 0;
+	// 	left: 0;
+	// 	height: 100%;
+	// }
 
-	h2 {
-		margin-bottom: 5px;
-	}
+	// .video-tile-content {
+	// 	position: relative;
+	// 	padding-top: 10px;
+	// 	padding-bottom: 10px;
+	// 	height: 100%;
+	// 	z-index: 100;
+	// }
 
-	.tile-heading { 
-		display: inline-block;
+	// h2 {
+	// 	margin-bottom: 5px;
+	// }
 
-		.brand-overlay {
-			z-index: -1;
-		}
-	}
+	// .tile-heading { 
+	// 	display: inline-block;
 
-	& + & {
-		border-bottom: 0;
-	}
+	// 	.brand-overlay {
+	// 		z-index: -1;
+	// 	}
+	// }
 
-	@media screen and (min-width: $screen-xsmall) {
-		.video-tile-image {
-			width: 100%;
-			height: auto;
-		}
-	}
+	// & + & {
+	// 	border-bottom: 0;
+	// }
+
+	// @media screen and (min-width: $screen-xsmall) {
+	// 	.video-tile-image {
+	// 		width: 100%;
+	// 		height: auto;
+	// 	}
+	// }
 }
 
 // Article Tile Module (Subset of .tile)
@@ -681,7 +735,7 @@
 		}
 	}
 
-	.subheading-primary {
+	.subheading {
 		margin-bottom: 7px;	
 	}
 }
@@ -709,6 +763,7 @@
 	position: relative;
 	padding-top: 10px;
 	padding-bottom: 10px;	
+	z-index: 101;
 	background-color: $brand-secondary;
 
 	.navigation, .copyright {
@@ -782,6 +837,12 @@
 //====================================================================================================================================
 
 .loading {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
 	background-color: $brand-primary;
 
 	&:after {

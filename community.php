@@ -60,8 +60,8 @@
 					<div data-resize-height="center" class="outter-tile">
 						<article class="content-tile tile">
 							<hgroup>
-								<h1 class="heading-primary heading-exjumbo">Community Grants</h1>
-								<h2 class="subheading-primary heading-med">We’re giving back and need your help!</h2>
+								<h1 class="heading heading-exjumbo">Community Grants</h1>
+								<h2 class="subheading heading-med">We’re giving back and need your help!</h2>
 								<p>Grants are non-repayable funds disbursed by one party (grant makers), often a government department tion, foundation or trust, to a recipient, often (but not always) a nonprofit entity, educational stitution, business or an individual. In order to receive a grant, some form of "Grant Writing" often referred to as either a proposal or an application is usually required.</p>
 							</hgroup>
 						</article>
@@ -120,7 +120,7 @@
 								<div class="outter-tile shade-one">
 									<article class="tile">
 										<hgroup>
-											<h1 class="heading-primary heading-jumbo">Get involved</h1>
+											<h1 class="heading heading-jumbo">Get involved</h1>
 											<a class="btn btn-sm btn-default" data-flip="toggle" data-flip-target="#apply-for-grant" href="#">Apply for a grant <i class="fa fa-angle-right"></i></a>
 										</hgroup>
 									</article>
@@ -273,16 +273,16 @@
 				<div class="col col-md-2 center-tile shade-one">
 					<div data-resize-height="center" class="outter-tile shade-one">
 						<article class="article-tile tile">
-							<h3 class="heading-primary heading-default">Grants awarded</h3>
+							<h3 class="heading heading-default">Grants awarded</h3>
 							<ul class="article-list">
 								<li>
-									<div class="subheading-primary">City of Melton</div>
-									<div class="subheading-primary">$32K for a new court</div>
+									<div class="subheading">City of Melton</div>
+									<div class="subheading">$32K for a new court</div>
 									<div>For example, tiered funding for a freeway are very large grants negotiated.</div>
 								</li>
 								<li>
-									<div class="subheading-primary">Jane Sample and the Mary St Magpies</div>
-									<div class="subheading-primary">$50 for a new set of team bibs.</div>
+									<div class="subheading">Jane Sample and the Mary St Magpies</div>
+									<div class="subheading">$50 for a new set of team bibs.</div>
 									<div>For example, tiered funding for a freeway are very.</div>
 								</li>
 							</ul>

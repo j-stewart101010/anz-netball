@@ -15,10 +15,181 @@
             <link href="/stylesheets/ie.css" rel="stylesheet" type="text/css">
         <![endif]-->
 
+        <style>
+/*        .background-grid {
+        	height: 87%;
+			position: absolute;
+			top: 8%;
+			right: 0px;
+			width: 100%;
+			overflow: hidden;     	
+        }
+
+        .background-grid .row {
+        	height: 25%;
+        	overflow: hidden;
+        }
+
+		.background-grid .image-wrap {
+			overflow: hidden;
+			max-width: 100%;
+		}        
+
+		.background-grid img {
+			max-width: 100%;
+		}		
+
+        .background-grid .col {
+        	padding-left: 0;
+        	padding-right: 0;
+        }*/
+
+        .grid, .col {
+        	position: absolute;
+        	top: 25%;
+        	left: 25%;
+        	opacity: 0;
+        }
+        </style>
+
 		<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
     </head>
 
     <body>
+
+<!-- 	<div class="background-grid ">
+		<div class="row">
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>	
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>				
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>		
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>	
+		</div>	
+		<div class="row">
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>		
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>	
+		</div>
+		<div class="row">
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>		
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>	
+		</div>	
+		<div class="row">
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>		
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>
+			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+				<div class="image-wrap">
+					<img src="http://lorempixel.com/g/612/612/">
+				</div>						
+			</div>	
+		</div>									
+	</div>    
+ -->
+
+ 		<!-- <div class="loading"></div> -->
 
 		<header class="master-head">
 			<div class="branding">
@@ -58,135 +229,30 @@
 
 
 
-				<div class="col col-md-6 col-lg-6 center-tile shade-six">
-					<div data-resize-height="center" class="outter-tile">
+				<div class="col col-md-6 col-lg-6 center-tile shade-eight">
+					<div class="outter-tile">
 						<article class="content-tile tile">
 							<hgroup>
-								<h1 class="heading-primary heading-exjumbo">Getting started</h1>
-								<h2 class="subheading-primary heading-med">Look the part.</h2>
-								<p>Grants are non-repayable funds disbursed by one party (grant makers), often a government rtment tion, foundation or trust, to a recipient, often (but not always) a nonprofit entity, educationalitution, business or an individual.</p>
+								<h1 class="heading heading-exjumbo muted">Getting started</h1>
+								<h2 class="subheading heading-med muted">Look the part.</h2>
+								<p>Grants are non-repayable funds disbursed by one party (grant makers), often a government rtment tion, foundation or trust, to a recipient, often (but not always) a nonprofit entity, educationalitution, business or an individual.</p>
 							</hgroup>
 						</article>
 					</div>
 				</div>
 
-				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
+				<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
 					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/265/292/">
+						<img src="http://lorempixel.com/g/612/612/">
 					</div>
 					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/265/292/">
-					</div>
-				</div>
-				<div class="col col-xs-4 col-sm-4 col-md-4 col-lg-4">
-					<img src="http://lorempixel.com/g/511/550/">
-					<!-- <img src="images/netball-seventeen.jpg">		 -->
-				</div>	
-
-
-
-			</section>
-
-			<section class="grid">
-				
-				<div class="col col-md-4 center-tile shade-two">
-
-
-					<div id="apply-for-grant" class="flip-container">
-						<div class="flipper">
-							<div class="front">
-
-
-
-								<div class="outter-tile shade-one">
-									<article class="tile">
-										<hgroup>
-											<h1 class="heading-primary heading-jumbo">Get involved</h1>
-											<a class="btn btn-sm btn-default" data-flip="toggle" data-flip-target="#apply-for-grant" href="#">Apply for a grant <i class="fa fa-angle-right"></i></a>
-										</hgroup>
-									</article>
-								</div>
-
-
-
-							</div>
-							<div class="back">
-
-
-
-								<div class="outter-tile">
-									<form id="apply-for-grant-signup" action="/" method="POST" class="form content-tile tile shade-two">
-										<div class="form-group">
-											<input id="apply-for-grant-name" name="apply-for-grant-name" class="form-control" type="text" required="required" placeholder="Name">
-										</div>
-
-										<div class="row">
-											<div class="form-group col-md-3">
-												<input id="apply-for-grant-age" name="apply-for-grant-age" class="form-control" type="text" required="required" placeholder="Age">
-											</div>
-											<div class="form-group col-md-9">
-												<input id="apply-for-grant-contact-email" name="apply-for-grant-contact-email" class="form-control" type="text" required="required" placeholder="Contact Email">
-											</div>
-										</div>
-										
-										<div class="form-group">
-										   <select id="apply-for-grant-help" name="apply-for-grant-help" class="selectbox form-control">
-										        <option>How can we help? (please select)</option>
-										        <option>Option Two</option>
-										    </select>
-										</div>
-										
-										<div class="form-group">
-											<textarea id="apply-for-grant-message" name="apply-for-grant-message" class="form-control" placeholder="Tell us in under 50 words how this will benefit your community" rows="3"></textarea>
-										</div>
-
-										<div class="form-group">
-											<label class="group-label" for="apply-for-grant-image">Attach:</label>
-											<span class="add-file">
-												<button class="btn btn-default btn-xs"><i class="fa fa-picture-o"></i> Image</button>
-												<input type="file" class="file-input" id="apply-for-grant-image" name="apply-for-grant-image">
-											</span>
-											File size limit 2mb
-											<span class="tooltip">
-												<i class="fa fa-question-circle"></i>
-											</span>
-										</div>
-
-										<div class="form-group">
-											<label class="group-label" for="apply-for-grant-video">Attach VIDEO:</label>
-											<input class="form-control inline-control" type="text" placeholder="Enter YouTube URL" id="apply-for-grant-video" name="apply-for-grant-video">
-											<span class="tooltip">
-												<i class="fa fa-question-circle"></i>
-											</span>
-										</div>
-
-										<div class="form-group">
-											<label for="apply-for-grant-updates">
-												<span class="checkbox">
-													<input id="apply-for-grant-updates" name="apply-for-grant-updates" type="checkbox">
-													<span class="tickbox">
-														<i class="fa fa-check"></i>
-													</span>
-												</span>
-												Keep me up-to-date with all things Netball Nation.
-											</label>
-										</div>						
-										
-										<input class="btn btn-default btn-sm" type="submit" value="Apply now">
-
-									</form>
-									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#apply-for-grant" href="#"><i class="fa fa-times"></i></a>
-								</div>
-
-
-
-							</div>
-						</div>
-					</div>
-
+						<img src="http://lorempixel.com/g/612/612/">
+					</div>								
 				</div>
 
-				<div class="col col-md-6">
+
+
+				<div class="col col-sm-12 col-md-4 col-lg-4 clearfix">
 
 					<div id="video-case-studies" class="flip-container">
 						<div class="flipper">
@@ -194,19 +260,19 @@
 
 
 
-								<article class="video-tile tile shade-one">
+								<article class="ambassador-video-tile tile shade-one">
 									<div class="video-tile-content">
 										<hgroup>
 											<div>
 												<h2 class="tile-heading heading-sm">
-													<div class="brand-overlay shade-five"></div>
-													Video case study
+													<div class="brand-overlay shade-seven"></div>
+													Video Sharelle McMahon
 												</h2>
 											</div>
 											<div>
 												<h1 class="tile-heading">
-													<div class="brand-overlay shade-five"></div>
-													Boxhill bandits score big
+													<div class="brand-overlay shade-seven"></div>
+													Just do it
 												</h1>
 											</div>
 										</hgroup>
@@ -214,32 +280,8 @@
 										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-append="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
 									
 									</div>
-									<div class="brand-overlay shade-three"></div>
-									<img class="video-tile-image" alt="Video" src="images/video-background-one.jpg">
-								</article>
-
-								<article class="video-tile tile shade-one">
-									<div class="video-tile-content">
-										<hgroup>
-											<div>
-												<h2 class="tile-heading heading-sm">
-													<div class="brand-overlay shade-five"></div>
-													Video case study
-												</h2>
-											</div>
-											<div>
-												<h1 class="tile-heading">
-													<div class="brand-overlay shade-five"></div>
-													Game on for jims mowing
-												</h1>
-											</div>
-										</hgroup>	
-
-										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-append="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
-
-									</div>
-									<div class="brand-overlay shade-three"></div>
-									<img class="video-tile-image" alt="Video" src="images/video-background-one.jpg">
+									<div class="brand-overlay shade-six"></div>
+									<img class="video-tile-image" alt="Video" src="http://lorempixel.com/512/550/sports">
 								</article>
 
 							</div>
@@ -249,29 +291,68 @@
 						</div>
 					</div>
 
+
+
+					<!-- <img src="images/netball-seventeen.jpg">		 -->
+				</div>	
+
+
+
+			</section>
+
+			<section class="grid">
+				
+				<div class="col col-xs-12 col-sm-6 col-md-2 col-lg-2">
+					<div class="image-wrap">
+						<img src="http://lorempixel.com/g/612/612/">
+					</div>
+					<div class="image-wrap">
+						<img src="http://lorempixel.com/g/612/612/">
+					</div>
 				</div>
 
-				<div class="col col-md-2 center-tile shade-one">
-					<div data-resize-height="center" class="outter-tile shade-one">
-						<article class="article-tile tile">
-							<h3 class="heading-primary heading-default">Grants awarded</h3>
-							<ul class="article-list">
-								<li>
-									<div class="subheading-primary">City of Melton</div>
-									<div class="subheading-primary">$32K for a new court</div>
-									<div>For example, tiered funding for a freeway are very large grants negotiated.</div>
-								</li>
-								<li>
-									<div class="subheading-primary">Jane Sample and the Mary St Magpies</div>
-									<div class="subheading-primary">$50 for a new set of team bibs.</div>
-									<div>For example, tiered funding for a freeway are very.</div>
-								</li>
-							</ul>
-							<a class="btn btn-default btn-sm" href="/grants">More <i class="fa fa-angle-right"></i></a>
+				<div class="col col-xs-12 col-sm-6 col-md-2 col-lg-2">
+					<div class="outter-tile group shade-ten">
+						<article class="content-tile tile center">
+							<h1 class="heading heading-lg verbose">ANZ NetSetGo</h1>
+							<p class="subheading heading-sm verbose">Netball is a ball sport played by two teams of seven players.</p>
+							<a class="btn btn-default btn-sm btn-primary" href="/grants">More <i class="fa fa-angle-right"></i></a>
+						</article>
+					</div>				
+					<div class="image-wrap">
+						<img src="http://lorempixel.com/g/612/612/">
+					</div>
+				</div>
+
+				<div class="col col-md-4 center-tile shade-nine">
+					<div class="outter-tile">
+						<article class="content-tile tile">
+							<hgroup>
+								<h1 class="heading heading-exjumbo muted">Find a club</h1>
+								<h2 class="subheading heading-med  muted">Something</h2>
+								<a class="btn btn-default" href="/grants">Find out more <i class="fa fa-angle-right"></i></a>
+							</hgroup>
 						</article>
 					</div>
 				</div>
 
+				<div class="col col-xs-12 col-sm-6 col-md-2 col-lg-2">
+					<div class="image-wrap">
+						<img src="http://lorempixel.com/g/612/612/">
+					</div>
+					<div class="image-wrap">
+						<img src="http://lorempixel.com/g/612/612/">
+					</div>
+				</div>
+
+				<div class="col col-xs-12 col-sm-6 col-md-2 col-lg-2">
+					<div class="image-wrap">
+						<img src="http://lorempixel.com/g/612/612/">
+					</div>				
+					<div class="image-wrap">
+						<img src="http://lorempixel.com/g/612/612/">
+					</div>
+				</div>
 			</section>			
 
 		</main>
