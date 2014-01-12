@@ -6,7 +6,10 @@ $brand-primary:						#0098db;	//Ocean Blue
 $brand-secondary:					#004165;	//Deep Current
 
 $brand-accent-one:					#d0eef8;	//Baby blue
-$brand-accent-two:					#dfe9ea;	//Dirty blue	
+$brand-accent-two:					#dfe9ea;	//Dirty blue
+$brand-accent-three:				#9f9f9f;	//Light gray
+$brand-accent-four:					#6d9da2;	//Cerulean
+
 
 $brand-heading-accent-one:			#36778a;	//Puuissan blue
 
@@ -34,7 +37,7 @@ $font-size-small:         		ceil($font-size-base * 0.85) !default;	//12px
 $font-size-extra-small:	  		ceil($font-size-base * 0.60) !default;	//9px
 $font-size-medium: 		  		ceil($font-size-base * 1.10) !default;	//16px
 $font-size-extra-medium:  		ceil($font-size-base * 1.35) !default;	//19px
-$font-size-large:         		ceil($font-size-base * 1.85) !default;
+$font-size-large:         		ceil($font-size-base * 1.55) !default;
 $font-size-extra-large:   		ceil($font-size-base * 2) !default;
 
 $font-size-jumbo:				40px !default;
@@ -140,6 +143,10 @@ $screen-small-max:           ($screen-medium - 1) !default;
 $screen-tablet-max:          ($screen-desktop - 1) !default;
 $screen-desktop-max:         ($screen-large-desktop - 1) !default;
 
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max:              ($screen-small - 1) !default;
+$screen-sm-max:              ($screen-medium - 1) !default;
+$screen-md-max:              ($screen-large - 1) !default;
 
 
 
