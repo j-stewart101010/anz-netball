@@ -200,15 +200,24 @@ for(var i=0; i<model.content.length; i++) {
   x=Math.round(model.content[i].position.x*this.squareWidth-this.camera.x);
   y=Math.round(model.content[i].position.y*this.squareHeight-this.camera.y);
 
-  do {
-    if(x<=(-model.content[i].scale*this.squareWidth)) x+=totalWorldWidth;
-    if(x>=(totalWorldWidth-model.content[i].scale*this.squareWidth)) x-=totalWorldWidth;
-  } while(x<(-model.content[i].scale*this.squareWidth) || x>(totalWorldWidth-model.content[i].scale*this.squareWidth));
+  // do {
+  //   if(x<=(-model.content[i].scale*this.squareWidth)) x+=totalWorldWidth;
+  //   if(x>=(totalWorldWidth-model.content[i].scale*this.squareWidth)) x-=totalWorldWidth;
+  // } while(x<(-model.content[i].scale*this.squareWidth) || x>(totalWorldWidth-model.content[i].scale*this.squareWidth));
   
-  do {
-    if(y<=(-model.content[i].scale*this.squareHeight)) y+=totalWorldHeight;
-    if(y>=(totalWorldHeight-model.content[i].scale*this.squareHeight)) y-=totalWorldHeight;
-  } while(y<(-model.content[i].scale*this.squareHeight) || y>(totalWorldHeight-model.content[i].scale*this.squareHeight));
+  // do {
+  //   if(y<=(-model.content[i].scale*this.squareHeight)) y+=totalWorldHeight;
+  //   if(y>=(totalWorldHeight-model.content[i].scale*this.squareHeight)) y-=totalWorldHeight;
+  // } while(y<(-model.content[i].scale*this.squareHeight) || y>(totalWorldHeight-model.content[i].scale*this.squareHeight));
+
+  x%=totalWorldWidth;
+  if(x<0) x+=totalWorldWidth;
+  if(x>=(totalWorldWidth-model.content[i].scale*this.squareWidth)) x-=totalWorldWidth;
+
+  y%=totalWorldHeight;
+  if(y<0) y+=totalWorldHeight;
+  if(y>=(totalWorldHeight-model.content[i].scale*this.squareHeight)) y-=totalWorldHeight;
+
 
   //collision with screen. whether it's worth drawing or not
   if(x>(-model.content[i].scale*this.squareWidth) && x<canvas.width && y>(-model.content[i].scale*this.squareHeight) && y<canvas.height){
