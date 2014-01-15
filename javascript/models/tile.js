@@ -5,7 +5,6 @@ define([
 
 var model = {
 
-//
    content:[{
       tiletype:"text",
       colour:"#5397be",

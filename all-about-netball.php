@@ -5,7 +5,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
-		<title>ANZ Netball Nation - Getting Started</title>
+		<title>ANZ Netball Nation - All About Netball</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -59,36 +59,26 @@
 
 			<section class="grid">
 
-
+				<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+					<div class="image-wrap">
+						<img src="http://lorempixel.com/g/612/612/">
+					</div>
+					<div class="image-wrap">
+						<img src="http://lorempixel.com/g/612/612/">
+					</div>
+				</div>
 
 				<div class="col col-md-6 col-lg-6 center-tile shade-eight">
 					<div class="outter-tile">
 						<article class="content-tile tile">
 							<hgroup>
-								<h1 class="heading heading-exjumbo muted">Getting started</h1>
-								<h2 class="subheading heading-med muted">Look the part.</h2>
-								<p>Grants are non-repayable funds disbursed by one party (grant makers), often a government rtment tion, foundation or trust, to a recipient, often (but not always) a nonprofit entity, educationalitution, business or an individual.</p>
+								<h1 class="heading heading-exjumbo muted">All about netball</h1>
+								<h2 class="subheading heading-med muted">Everything you ever needed to know about netball right here!</h2>
+								<p>The winning team is the one that scores the most goals. Netball games are 60 minutes long. Variations have been developed to increase the game's pace.</p>
 							</hgroup>
 						</article>
 					</div>
 				</div>
-
-				<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-					<!-- <div class="row"> -->
-						<!-- <div class="col col-xs-6 col-sm-12"> -->
-							<div class="image-wrap">
-								<img src="http://lorempixel.com/g/612/612/">
-							</div>
-						<!-- </div> -->
-						<!-- <div class="col col-xs-6 col-sm-12"> -->
-							<div class="image-wrap">
-								<img src="http://lorempixel.com/g/612/612/">
-							</div>
-						<!-- </div>	 -->
-					<!-- </div>			 -->
-				</div>
-
-
 
 				<div class="col col-sm-12 col-md-4 col-lg-4 clearfix">
 
@@ -129,9 +119,6 @@
 						</div>
 					</div>
 
-
-
-					<!-- <img src="images/netball-seventeen.jpg">		 -->
 				</div>	
 
 

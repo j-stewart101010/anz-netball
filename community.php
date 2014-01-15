@@ -10,6 +10,7 @@
 		<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
 		<link href="css/styles.css" rel="stylesheet" type="text/css">
+		<link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/f8bca219-07d6-4bdf-9b18-02f0db46b33f.css"/>
 
         <!--[if lt IE 9]>
             <link href="/stylesheets/ie.css" rel="stylesheet" type="text/css">
@@ -21,7 +22,7 @@
     <body>
 
 		<header class="master-head">
-			<div class="branding">
+			<div class="branding col-md-4 col-lg-3">
 				<div class="brand clearfix">
 					<div class="logos">
 						<a href="/" class="anz-logo"></a>
@@ -36,11 +37,11 @@
 					</a>
 				</div>
 			</div>
-			<nav class="main-nav">
+			<nav class="main-nav col-md-8 col-lg-9">
 				<div class="nav-items">
 					<ul id="main-navigation" class="navigation block collapse">
-						<li class="active"><a href="/community-grants">Community grants</a></li>
-						<li><a href="/getting-started">Getting started</a></li>
+						<li><a href="/community-grants">Community grants</a></li>
+						<li class="active"><a href="/getting-started">Getting started</a></li>
 						<li><a href="/all-about-netball">All about netball</a></li>
 						<li><a href="/clinics">Clinics</a></li>
 					
@@ -66,43 +67,24 @@
 							</hgroup>
 						</article>
 					</div>
-				</div>
-
-<!-- 				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap">
-						<img src="images/netball-grid-one.jpg">
-					</div>
-					<div class="image-wrap">
-						<img src="images/netball-grid-two.jpg">
-					</div>
-				</div>
-				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap">
-						<img src="images/netball-grid-three.jpg">
-					</div>
-					<div class="image-wrap">
-						<img src="images/netball-grid-four.jpg">
-					</div>
-				</div>	 -->	
-
-				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/265/292/">
-					</div>
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/265/292/">
-					</div>
-				</div>
-				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/265/292/">
-					</div>
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/265/292/">
-					</div>
 				</div>	
 
-						
+				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
+					<div class="image-wrap">
+						<img src="http://lorempixel.com/g/265/292/">
+					</div>
+					<div class="image-wrap">
+						<img src="http://lorempixel.com/g/265/292/">
+					</div>
+				</div>
+				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
+					<div class="image-wrap">
+						<img src="http://lorempixel.com/g/265/292/">
+					</div>
+					<div class="image-wrap">
+						<img src="http://lorempixel.com/g/265/292/">
+					</div>
+				</div>		
 
 			</section>
 

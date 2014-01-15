@@ -28,8 +28,58 @@ $link-hover-color:      darken($link-color, 15%) !default;
 // Typography
 // -------------------------
 
-$font-family-sans-serif:  		"Helvetica Neue", Helvetica, Arial, sans-serif !default;
-$font-family-sans-serif-two:	"Helvetica Neue", Helvetica, Arial, sans-serif !default;
+
+// font-family:'Helvetica W01 Light';
+// font-family:'Helvetica W01 Light Obl';
+// font-family:'Helvetica W01 Roman';
+// font-family:'Helvetica W01 Italic';
+// font-family:'Helvetica W01 Bold';
+// font-family:'HelveticaW01-BoldItalic';
+// font-family:'Helvetica W01 Blk';
+// font-family:'Helvetica W01 Blk Obl';
+// font-family:'Helvetica W01 Light Cn';
+// font-family:'HelveticaW01-LightCnObl';
+// font-family:'Helvetica W01 Cn';
+// font-family:'Helvetica W01 Cn Obl';
+// font-family:'Helvetica W01 Bd Cn';
+// font-family:'Helvetica W01 Bd Cn Obl';
+// font-family:'Helvetica W01 Blk Cn';
+// font-family:'HelveticaW01-BlkCnObl';
+// font-family:'Helvetica W01 Narrow Rg';
+// font-family:'HelveticaW01-NarrowRgOb';
+// font-family:'Helvetica W01 Narrow Bd';
+// font-family:'HelveticaW01-NarrowBdOb';
+// font-family:'Helvetica W01 Cm';
+// font-family:'Helvetica W01 Extra Cm';
+// font-family:'Helvetica W01 Ultra Cm';
+// font-family:'HelveticaInseratW01-Rg';
+// font-family:'HelveticaW01-RoundedBd';
+// font-family:'HelveticaW01-RoundedBdO';
+// font-family:'HelveticaW01-RoundedBlk 709929';
+// font-family:'HelveticaW01-RoundedBlk 709932';
+// font-family:'HelveticaW01-RoundedBdC 709938';
+// font-family:'HelveticaW01-RoundedBdC 709941';
+// font-family:'HelveticaW01-TextbookRg 709917';
+// font-family:'HelveticaW01-TextbookRg 709920';
+// font-family:'HelveticaW01-TextbookBd 709911';
+// font-family:'HelveticaW01-TextbookBd 709914';
+// font-family:'Helvetica W95 Fractions';
+// font-family:'HelveticaW95-FractionsB';
+// font-family:'Andes W04 UltraLt';
+// font-family:'Andes W04 XLt';
+// font-family:'Andes W04 Lt';
+// font-family:'Andes W04 Book';
+// font-family:'Andes W04 Regular';
+// font-family:'Andes W04 Md';
+// font-family:'Andes W04 SemiBold';
+// font-family:'Andes W04 Bold';
+// font-family:'Andes W04 XBold';
+// font-family:'Andes W04 Black';
+
+
+
+$font-family-sans-serif:  		"Helvetica W01 Roman", Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif-two:	"Andes W04 Regular", Helvetica, Arial, sans-serif !default;
 $font-family-base:        		$font-family-sans-serif !default;
 
 $font-size-base:          		14px !default;
@@ -56,6 +106,7 @@ $headings-line-height:    1.1 !default;
 // -------------------------
 
 $btn-font-weight:                normal !default;
+$btn-font-family:				 $font-family-sans-serif-two;
 
 $btn-default-color:              #444 !default;
 $btn-default-bg:                 transparent !default;

@@ -12,20 +12,24 @@
 @import "utilities";
 @import "modals";
 
+// Global Layout Specific Styles
+//====================================================================================================================================
+//====================================================================================================================================
+
+body {
+
+	@media screen and (min-width: $screen-desktop) {	
+		overflow-y: hidden;
+		overflow-x: hidden;
+	}
+}
+
 // Master Head Module
 //====================================================================================================================================
 //====================================================================================================================================
 
 .master-head {
 	@include make-row();
-
-	.branding {
-		@include make-column(3);
-	}
-
-	.main-nav {
-		@include make-column(9);
-	}
 
 	.logos {
 		padding: 15px 0;
@@ -39,8 +43,10 @@
 	}
 
 	.navigation {
-		float: left;		
+		float: left;
+		width: 100%;
 		height: 100%;
+		@include gradient-vertical($start-color: lighten($brand-primary, 5%), $end-color: darken($brand-primary, 10%));
 
 		li {
 			padding-top: 20px;
@@ -76,7 +82,7 @@
 				padding-top: 0;
 				padding-bottom: 0;				
 				display: table-cell;
-			}			
+			}
 		}
 	}	
 
@@ -107,8 +113,14 @@
 		}
 	}
 
-	@media screen and (min-width: $screen-small) {	
+	@media screen and (min-width: $screen-desktop) {	
 		height: 8%;
+
+		.navigation {
+			a {
+				font-size: ($font-size-medium - 2);
+			}
+		}
 
 		.logos {
 			position: absolute;
@@ -118,14 +130,25 @@
 		}		
 	}
 
-	@media screen and (max-width: $screen-small) {
-		.main-nav {	
+	@media screen and (min-width: $screen-large-desktop) {
+		.navigation {
+			a {
+				font-size: ($font-size-medium);
+			}
+		}		
+	}
+
+	@media screen and (max-width: $screen-desktop) {
+		.main-nav {
+			float: left;
+			width: 100%;
 			padding-left: 0;
 			padding-right: 0;
 		}	
 
 		.nav-items {
-			max-width: none;	
+			max-width: none;
+			width: 100%;
 		}
 
 		.sharp-brand-angle {
@@ -290,6 +313,7 @@
 
 	.nbn-logo {
 		text-transform: uppercase;
+		font-family: $font-family-sans-serif-two;
 		color: white;
 	}
 }
@@ -350,13 +374,37 @@
 	background: #5773b2;	
 }
 
+// Image Wrap Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.image-wrap {
+	position: relative;
+	overflow: hidden;
+	max-width: 100%;
+	max-height: 50%;
+	min-height: 50%;
+	width: 50%;
+	float: left;
+	z-index: 99;
+	border-top: 1px solid white;
+	background-color: $brand-primary;
+
+	&:first-child {
+		border-top: 0;
+	}
+
+	img {
+		max-width: 100%;
+	}	
+}
+
 // Main Content Module
 //====================================================================================================================================
 //====================================================================================================================================
 
 .content  {
 	position: relative;
-	background-color: $brand-secondary;
 
 	.grid {
 		position: relative;
@@ -382,18 +430,6 @@
 		border-top: 0;
 	}
 
-	img {
-		max-width: 100%;
-	}
-
-	.image-wrap {
-		overflow: hidden;
-		max-width: 100%;
-		max-height: 50%;
-		width: 50%;
-		float: left;
-	}
-
 	.col {
 		height: 100%;
 		padding-left: 0;
@@ -409,6 +445,8 @@
 	}	
 
 	@media screen and (min-width: $screen-desktop) {
+		max-width: 1200px;
+		max-height: 700px;		
 		height: 87%;
 
 		.grid {
@@ -419,12 +457,7 @@
 		.image-wrap {
 			float: none;
 			width: auto;
-		}
-
-		// .center-tile {
-		// 	padding-bottom: 50em;
-		// 	margin-bottom: -50em;
-		// }		
+		}		
 	}
 
 	@media screen and (max-width: $screen-xsmall) {
@@ -432,6 +465,58 @@
 			float: none;
 			width: auto;
 		}				
+	}
+}
+
+// Headings Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.appended-tiles {
+	position: absolute;
+	overflow: hidden;
+	left: 0;
+
+	.grid, .col {
+		position: static;
+		top: auto;
+		left: auto;
+		opacity: 1;
+	}
+
+	&.appended-col {
+		z-index: 100;
+		border-right: 1px solid white;		
+		top: 8%;
+
+		.image-wrap {
+			width: auto;
+			float: none;
+			border-top: 1px solid white;
+		}
+	}
+
+	&.appended-row {
+		width: 100%;
+		margin-top: -1px; //Hide sub pixel rendering issue
+		z-index: 101;
+		border-top: 1px solid white;
+
+		.image-wrap {
+			max-height: none;
+
+			border-right: 1px solid white;
+		}
+
+		.grid, .col, .image-wrap {
+			height: 100%;
+		}
+
+		.col {
+			float: left;
+			padding-left: 0;
+			padding-right: 0;			
+		}		
 	}
 }
 
@@ -471,7 +556,7 @@
 	line-height: 1;
 }
 
-.heading-primary {
+.heading {
 	@extend %heading;
 	@extend %heading-accent;
 	@extend %heading-spacing-default;
@@ -479,7 +564,7 @@
 	color: $brand-heading-accent-one;
 }
 
-.subheading-primary {
+.subheading {
 	@extend %heading;
 	@extend %heading-spacing-default;
 
@@ -506,13 +591,29 @@
 	height: 100%;
 	padding: 40px 0;
 
- //    @include transition-property(min-height);
- //    @include transition-duration(0.5s);
- //    @include transition-timing-function(ease-in);	
+	&.group {
+		max-height: 50%;
+		padding: 0;
+	}	
 
-	// @media screen and (min-height: $screen-xsmall) {
-	// 	// min-height: 500px;				
-	// }	
+	@media screen and (min-width: $screen-xsmall) and (max-width: $screen-desktop) {
+		&.group {
+			float: left;			
+			max-width: 50%;
+
+			.tile {
+				padding-left: 0;
+				padding-right: 0;
+			}				
+		}	
+	}	
+
+	@media screen and (max-width: $screen-xsmall) {
+		&.group {
+			float: none;			
+			max-width: none;
+		}
+	}
 }
 
 .tile  {
@@ -521,7 +622,20 @@
 	z-index: 99;
 	padding-left: 15px;
 	padding-right: 15px;	
-	vertical-align: middle;	
+	vertical-align: middle;
+
+	&.center {
+		text-align: center;
+	}
+
+	@media screen and (max-width: $screen-xsmall) {
+		.heading-exjumbo {
+			font-size: $font-size-jumbo;
+		}
+		.heading-jumbo {
+			font-size: $font-size-extra-large;
+		}
+	}	
 }
 
 // Shade Module (Allows the branding of components on a component level thus sacrificing a small semantics hit for a large reusability gain)
@@ -552,12 +666,28 @@
 	background-color: $brand-accent-two; //Dirty blue
 }
 
+.shade-seven {
+	background-color: $brand-accent-two; //Dirty blue
+}
+
+.shade-eight {
+	background-color: $brand-accent-two; //Dirty blue
+}
+
+.shade-nine {
+	background-color: $brand-accent-two; //Dirty blue
+}
+
+.shade-ten {
+	background-color: $brand-accent-two; //Dirty blue
+}
+
 // Content Tile Module (Subset of .tile)
 //====================================================================================================================================
 //====================================================================================================================================
 
 .content-tile {
-	.heading-primary {
+	.heading {
 		margin-bottom: 5px;
 	}
 }
@@ -618,7 +748,7 @@
 .ambassador-video-tile {
 	display: block;
 	width: 100%;
-	height: 50%;	
+	height: 100%;	
 	overflow: hidden;
 	border-bottom: 1px solid white;
 
@@ -665,8 +795,8 @@
 //====================================================================================================================================
 
 .article-tile {
-	padding-top: 20px;
-	padding-bottom: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 
 	.article-list {
 		padding: 0;
@@ -679,7 +809,7 @@
 		}
 	}
 
-	.subheading-primary {
+	.subheading {
 		margin-bottom: 7px;	
 	}
 }
@@ -720,7 +850,10 @@
 		font-size: $font-size-extra-small;
 	}
 
-	@media screen and (min-width: $screen-small) {	
+	@media screen and (min-width: $screen-desktop) {
+		position: absolute;
+		bottom: 0;
+		width: 100%;	
 		height: 5%;
 		padding: 0;
 
@@ -772,22 +905,23 @@
 			left: -15px;
 			padding-right: 0px;
 		}		
-	}	
+	}
 }
 
 // Loading Module
 //====================================================================================================================================
 //====================================================================================================================================
-
-.loading {
-	background-color: $brand-primary;
-
-	&:after {
-		content: "Loading";
-		position: absolute;
-		top: 50%;
-		left: 50%;
-	}
+	
+.loader {
+	content: "";
+	background-image: image-url("loading-icon.png");
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-position: center center;
+	width: 100%;
+	height: 100%;
+	background-repeat: no-repeat;
 }
 
 // Tooltip Module
@@ -827,7 +961,11 @@
 .flip-container, .front, .back, .flipper {
     width: 100%;
     height: 100%;
-    min-height: 370px;
+	min-height: 370px;
+
+	@media screen and (min-width: $screen-desktop) {	
+		min-height: 0;		
+	}
 }
 
 .flipper {

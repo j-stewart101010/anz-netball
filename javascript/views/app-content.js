@@ -4,18 +4,19 @@ define([
     'underscore',
     'backbone',
     'views/video-embed',
+    'views/outter-tile',
     'match_media',
     'bootstrap_transition',    
     'bootstrap_collapse',
     'bootstrap_modal',
     'polyfiller'
-], function ($, _, Backbone, VideoEmbedView, MatchMedia) {
+], function ($, _, Backbone, VideoEmbedView, OutterTile, MatchMedia) {
 
     var _self;
 
     var AppView = Backbone.View.extend({
 
-        el : '.content',
+        el : 'body',
 
         events : {
             'click.video.embed [data-video="toggle"]' : 'show_video',
@@ -27,26 +28,37 @@ define([
 
         initialize : function () {
             _self = this;
-            _self.$forms = _self.$el.find('form');
-            _self.$grids = this.$el.find('.grid');
-            _self.$cols = _self.$grids.find('.col');
-            
-            // _self.$tiles = _self.$el.find('[data-resize-height="center"]');
-            // _self.center_grid_columns();
-            // $(window).on('resize' , _self.center_grid_columns );
+
+            _self.$content = _self.$el.find('.content');
+            _self.$forms = _self.$content.find('form');
+            _self.$grids = _self.$content.find('.grid');
+            _self.$cols = _self.$content.find('.col');
+
+            _self.outter_columns = [];
+            _self.outter_rows = [];
+
+            _self.defaults = {
+                max_width : parseInt(_self.$content.css('maxWidth'), 10), //CSS max-width of grid (configurable in styles)
+                max_height : parseInt(_self.$content.css('maxHeight'), 10), //CSS max-height of grid (configurable in styles)
+                image_width : 16.66667 //Width of an image that gets appended to maintain aspect radio. This number matches the CSS grid style of .col-lg-2
+            };
+
+            _self.resize_timer;
 
             _self.update_checkbox();
             _self.build_selectbox();
+            _self.preload_tiles(_self.$el.find('.image-wrap, .ambassador-video-tile'));  
+            _self.render_outter_grid();        
+            // _self.animate_grid();
 
-            _self.render_grid();
-            $(window).on('resize' , _self.render_grid );
+            $(window).on('resize' , _self.resize )
+                .on('load', _self.match_row_height );
 
             // $(window).on('load resize' , _self.match_row_height );
 
             // _self.$grids = this.$el.find('.grid');
             // _self.$cols = _self.$grids.find('.col');
             // _self.build_grid();
-            // $(window).on('resize' , _self.build_grid );
 
             $.webshims.polyfill('forms');
             _self.$forms.bind('changedvalid', function(e) {
@@ -70,6 +82,16 @@ define([
             $.each($checkbox, function() {
                 $(this).parent().find('.tickbox').toggleClass('checked', $(this).is(':checked'));
             });
+        },
+
+        resize : function () {
+            _self.resizing = true;
+            clearTimeout(_self.resize_timer);
+            _self.resize_timer = setTimeout(function() {
+                _self.render_outter_grid();   
+                // _self.animate_grid();
+            }, 100);
+            _self.match_row_height();
         },
 
         build_selectbox : function (e) {
@@ -100,9 +122,52 @@ define([
                 modal : false,
                 video_id : $(e.target).data('video-id')
             });
-            this.$el.find($(e.target).data('video-append')).append(view.render().el);
+            _self.$content.find($(e.target).data('video-append')).append(view.render().el);
             this.delegateEvents();
-            // this.$el.append(view.render().el);
+        },
+
+        preload_tiles : function ($tiles) {
+            $.each($tiles, function ($el) {
+                var $image = $(this).find('img');
+
+                $image.css({'visibility' : 'hidden', 'opacity' : 0 })
+                    .on('load', _self.stop_loader);
+                
+                _self.start_loader($(this), $image);
+            });
+        },
+
+        start_loader : function ($el, $image) {
+            var $loader;
+
+            $el.append('<span class="loader"></span>');
+            $loader = $el.find('.loader');
+
+            var animate_rotate = function (d) {
+                $({deg: 0}).animate({deg: 360}, {
+                    duration: 1000,
+                    easing: 'linear',
+                    step: function(now, fx) {
+                        $loader.css({
+                             transform: "rotate(" + now + "deg)"
+                        });
+                    },
+                    complete: function() {
+                        if (!$image[0].complete) {
+                            animate_rotate(360);
+                        }
+                    }
+                });
+            };
+
+            animate_rotate(360);
+        },
+
+        stop_loader : function (e) {
+            $(this).siblings('.loader').remove()
+                .end()
+                .css({ 'visibility' : 'visible' })
+                .animate({ 'opacity' : 1 }, 700);
         },
 
         flip_element : function (e) {
@@ -114,132 +179,179 @@ define([
             else { $flip_target.find('.front').toggle().end().find('.back').toggle(); }
         },
 
-        toggle_content : function () {
-            $('.col, .grid').animate({ opacity: 1 });
-            // $('.loading').fadeToggle(); 
-        },
+        // animate_grid : function () {
+        //     //TODO: Clean this up
 
-        render_grid : function () {
-            var effect_off = { 'position' : 'relative', 'top' : '0', 'left' : '0', 'width' : '' },
-                effect_on = { 'position' : 'absolute', 'top' : '25%', 'left' : '25%', 'width' : '' };
-            if (MatchMedia.tablet()) {
-                _self.$grids.css(effect_off);
-                _self.$cols.css(effect_off);
-            }
-            else {
-                // _self.$grids.css(effect_on);
-                _self.$cols.css(effect_on);
-
-            //     _self.$grids.css({ 'position' : 'absolute', 'width' : '100%' });
-            //     _self.$cols.css({ 'position' : 'absolute' });
-
-                $.each(_self.$grids, function () {
-                    // if ($(this).prev('.grid').length > 0) { 
-                    //     console.log('prev');
-                    //     $(this).css({ 'top' : $(this).prev().outerHeight()+'px', 'left' : '0' });
-                    // }
-                    // else {
-                        $(this).css({ 'top' : '0px', 'left' : '0' });
-                    // }
-
-                    $.each(_self.$cols, function () {
-                        var left_position = 0;
-
-                        if ($(this).prev('.col').length > 0) { 
-                            $.each($(this).prevAll(), function () {
-                                left_position += $(this).outerWidth();
-                            });
-                            $(this).css({ 'left' :  left_position+'px', 'top': 0 });                        
-                        }
-                    else {
-                        $(this).css({ 'left' : '0px', 'top': 0 });
-                    }                        
-                    });
-                });
-            }
-
-            // if (MatchMedia.tablet()) {
-            //     _self.$grids.css({ 'position' : '', 'top' : '', 'left' : '', 'width' : '' });
-            //     _self.$cols.css({ 'position' : '', 'top' : '', 'left' : '' });
-            // }
-            // else {
-            //     _self.$grids.css({ 'position' : 'absolute', 'width' : '100%' });
-            //     _self.$cols.css({ 'position' : 'absolute' });
-
-            //     $.each(_self.$grids, function () {
-
-            //         if ($(this).prev()) { 
-            //             $(this).css({ 'top' : $(this).prev().outerHeight()+'px' });
-            //         }
-
-            //         $.each(_self.$cols, function () {
-            //             var left_position = 0;
-
-            //             if ($(this).prev()) { 
-            //                 $.each($(this).prevAll(), function () {
-            //                     left_position += $(this).outerWidth();
-            //                 });
-            //                 $(this).css({ 'left' :  left_position+'px' });                        
-            //             }
-            //         });
-            //     });
-            // }
-            _self.toggle_content();
-        }
-
-        // match_row_height : function () {
-        //     $.each(_self.$el.find('[data-resize-height]'), function() {
-        //         console.log($($(this).data('resize-height')).height());
-        //         $(this).css({ 'height' : $($(this).data('resize-height')).height()+'px' });
-        //     });
-        // }
-
-        // build_grid : function () {
+        //     var effect_off = { 'position' : 'relative', 'top' : 0, 'left' : 0, 'width' : '' },
+        //         effect_on = { 'position' : 'absolute', 'top' : '25%', 'left' : '25%', 'width' : '' };
 
         //     if (MatchMedia.tablet()) {
-        //         _self.$grids.css({ 'position' : '', 'top' : '', 'left' : '', 'width' : '' });
-        //         _self.$cols.css({ 'position' : '', 'top' : '', 'left' : '' });
+        //         _self.$grids.css(effect_off);
+        //         _self.$cols.css(effect_off);
         //     }
         //     else {
-        //         _self.$grids.css({ 'position' : 'absolute', 'width' : '100%' });
-        //         _self.$cols.css({ 'position' : 'absolute' });
+        //         _self.$cols.css(effect_on);
 
         //         $.each(_self.$grids, function () {
-
-        //             if ($(this).prev()) { 
-        //                 $(this).css({ 'top' : $(this).prev().outerHeight()+'px' });
-        //             }
+        //             $(this).css({ 'top' : 0, 'left' : 0 });
 
         //             $.each(_self.$cols, function () {
         //                 var left_position = 0;
 
-        //                 if ($(this).prev()) { 
+        //                 if ($(this).prev('.col').length > 0) { 
         //                     $.each($(this).prevAll(), function () {
         //                         left_position += $(this).outerWidth();
         //                     });
-        //                     $(this).css({ 'left' :  left_position+'px' });                        
+        //                     $(this).css({ 'left' :  left_position+'px', 'top': 0 });                        
         //                 }
+        //             else {
+        //                 $(this).css({ 'left' : 0, 'top': 0 });
+        //             }
         //             });
         //         });
         //     }
-        // }
+
+        //     $('.col, .grid').animate({ opacity: 1 });
+        // },
+
+        match_row_height : function () {
+            if (MatchMedia.tablet()) {
+                $.each(_self.$content.find('[data-resize-height]'), function() {
+                    $(this).css({ 'height' : '' }).css({ 'height' : $($(this).data('resize-height')).height()+'px' });
+                });
+            }
+            else {
+                $.each(_self.$content.find('[data-resize-height]'), function() {
+                    $(this).css({ 'height' : '' });
+                });                
+            }
+        },
+
+        render_outter_grid : function () {
+            var window_width = $(window).width(),
+                window_height = $(window).height(),
+                head_height, foot_height;
+
+            //Remove all the previously rendered columns before continuing (for re-rendering)
+            _.each([_self.outter_columns, _self.outter_rows], function (child) {
+                _.each(child, function (view) {
+                    view.remove();
+                });
+            });
+
+            //Render columns
+            if (window_width > _self.defaults.max_width) {
+                _self.equalize_columns(window_width, window_width - _self.defaults.max_width); //Start appending columns to the grid to maintain aspect ratio
+            }
+            else {
+                _self.set_outter_grid_defaults('width');
+            }
+
+            //Render rows
+            if (window_height > _self.defaults.max_height) {
+                head_height = parseInt(_self.$el.find('.master-head').height(), 10);
+                foot_height = parseInt(_self.$el.find('.master-foot').height(), 10);
+
+                _self.equalize_rows(window_height, (window_height - _self.defaults.max_height) - head_height - foot_height, head_height); //Height column gap must take into account the head and foot
+            }
+            else {
+                _self.set_outter_grid_defaults('height');
+            }
+
+            //After all methods have finished the heights and widths of the rows/columns may not not be correct, fix them now. Also add tiles to rows if required
+            _.each([_self.outter_columns, _self.outter_rows], function (child) {
+                _.each(child, function (view) {
+                    // console.log(view);
+                    view.append_tiles();
+                    view.update_values();
+                    view.preload_tiles();
+                });
+            });
+        },        
+
+        equalize_columns : function (window_width, dimension_gap) {
+            _self.outter_columns = [];
+
+            _self.set_outter_grid_defaults('width');
+
+            var container_dimension = _self.$content.width(),
+                container_height = _self.$content.height(),
+                new_container_dimension = container_dimension,
+                image_width = (container_dimension / 100) * _self.defaults.image_width,
+                num_cols_to_generate = Math.ceil(dimension_gap / image_width),
+                outter_columns_render = [], outter_columns;
+
+            while ((new_container_dimension / 100) * _self.defaults.image_width >= dimension_gap / num_cols_to_generate) {
+                new_container_dimension--;
+                dimension_gap++;
+                new_container_dimension = new_container_dimension;
+            }
+
+            _self.$content.css({ 'width' : new_container_dimension+'px' });
+
+            for (var i = 0; i<num_cols_to_generate; i++) {
+                outter_columns = new OutterTile({
+                    parent : _self,
+                    type : 'column',
+                    className: 'appended-tiles appended-col',
+                    styles : {
+                        width : ((window_width-new_container_dimension)/num_cols_to_generate)+'px', 
+                        left : new_container_dimension+((new_container_dimension / 100) * _self.defaults.image_width)*(i)+'px' 
+                    }
+                });  
+                _self.outter_columns.push( outter_columns );
+                outter_columns_render.push( outter_columns.render().el );
+            }
+
+            _self.$content.after(outter_columns_render);
+        },
+
+        equalize_rows : function (window_height, dimension_gap, head_height) {
+            _self.outter_rows = [];
+
+            _self.set_outter_grid_defaults('height');
+
+            //Hold on to your butts, it's about to get mathy
+            var container_dimension = _self.$content.height(),
+                container_width = _self.$content.width(),
+                new_container_dimension = container_dimension,
+                image_height = ((container_dimension / 100) * 50) / 2,
+                num_rows_to_generate = Math.ceil(dimension_gap / image_height),
+                outter_rows_render = [], outter_rows;
+
+            while (((new_container_dimension / 100) * 50) / 2 >= dimension_gap / num_rows_to_generate) {
+                new_container_dimension--;
+                dimension_gap++;
+                new_container_dimension = new_container_dimension;
+            }
+
+            _self.$content.css({ 'height' : new_container_dimension+'px' });
+
+            for (var i = 0; i<num_rows_to_generate; i++) {
+                outter_rows = new OutterTile({
+                    parent : _self,
+                    type : 'row',
+                    className: 'appended-tiles appended-row',
+                    styles : {
+                        height : (((new_container_dimension / 100) * 50) / 2)+'px', 
+                        top : new_container_dimension+head_height*(i+1)+'px' 
+                    }                   
+                });
+                _self.outter_rows.push( outter_rows );
+                outter_rows_render.push( outter_rows.render().el );                
+            }
+
+            _self.$content.after(outter_rows_render);
+        },
+
+        set_outter_grid_defaults : function (property) {
+            var object = {};
+            object[property] = '';
+            _self.$content.css(object);
+        }
 
         // patch_file_upload : function (e) {
         //     $('#apply-for-grant-image-notify').val($(e.currentTarget).val());
-        // },
-
-        // center_grid_columns : function (e) {
-        //     if (MatchMedia.tablet()) {
-        //         $.each(_self.$tiles, function () {
-        //             $(this).css({ position: '', top: '', marginTop: '' });
-        //         });
-        //     }
-        //     else {
-        //         console.log(_self.$tiles);
-        //         $.each(_self.$tiles, function () {
-        //             $(this).css({ position: 'relative', top: ($(this).closest('.grid').height() - $(this).height()), marginTop: -($(this).closest('.grid').height() - $(this).height()) / 2 });
-        //         });                
-        //     }
         // },
 
     });
