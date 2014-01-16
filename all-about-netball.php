@@ -68,53 +68,90 @@
 					</div>
 				</div>
 
-				<div class="col col-md-6 col-lg-6 center-tile shade-eight">
+				<div class="col col-md-4 col-lg-4 shade-ten">
 					<div class="outter-tile">
 						<article class="content-tile tile">
 							<hgroup>
-								<h1 class="heading heading-exjumbo muted">All about netball</h1>
-								<h2 class="subheading heading-med muted">Everything you ever needed to know about netball right here!</h2>
+								<h1 class="heading heading-exjumbo">All about netball</h1>
+								<h2 class="subheading heading-med">Everything you ever needed to know about netball right here!</h2>
 								<p>The winning team is the one that scores the most goals. Netball games are 60 minutes long. Variations have been developed to increase the game's pace.</p>
 							</hgroup>
 						</article>
 					</div>
 				</div>
 
-				<div class="col col-sm-12 col-md-4 col-lg-4 clearfix">
+				<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
+					<div class="image-wrap">
+						<img src="http://lorempixel.com/g/612/612/">
+					</div>
+					<div class="image-wrap">
+						<img src="http://lorempixel.com/g/612/612/">
+					</div>
+				</div>				
 
-					<div id="video-case-studies" class="flip-container">
+				<div class="col col-sm-12 col-md-4 col-lg-4 clearfix shade-eleven">
+
+					<div id="fitness-info" class="flip-container">
 						<div class="flipper">
 							<div class="front">
 
-
-
-								<article class="ambassador-video-tile tile shade-one">
-									<div class="video-tile-content">
+								<div class="outter-tile shade-one">
+									<article class="tile content-tile">
 										<hgroup>
-											<div>
-												<h2 class="tile-heading heading-sm">
-													<div class="brand-overlay shade-seven"></div>
-													Video Sharelle McMahon
-												</h2>
-											</div>
-											<div>
-												<h1 class="tile-heading">
-													<div class="brand-overlay shade-seven"></div>
-													Just do it
-												</h1>
-											</div>
+											<h1 class="heading heading-jumbo">Fitness</h1>
+											<h2 class="subheading heading-med">Netball is a great way to stay fit and healthy.</h2>
+											<a class="btn btn-sm btn-default" data-flip="toggle" data-flip-target="#fitness-info" href="#">More <i class="fa fa-angle-right"></i></a>
 										</hgroup>
-
-										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-append="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
-									
-									</div>
-									<div class="brand-overlay shade-six"></div>
-									<img class="video-tile-image" alt="Video" src="http://lorempixel.com/512/550/sports">
-								</article>
+									</article>
+								</div>
 
 							</div>
-							<div id="video-side" class="back">
-								<!-- Dynamic content injected in here -->
+							<div class="back">
+
+								<div id="carousel-fitness" class="carousel slide" data-interval="" data-ride="carousel">
+
+									<!-- Wrapper for slides -->
+									<div class="carousel-inner">
+										<div class="item active">
+
+											<div class="outter-tile vertical-center">
+												<section class="info-tile content-tile tile shade-eleven">
+													<h3 class="heading">Fitness</h3>
+													<p><small>Netball is a great way to stay fit and healthy. Games are played on a rectangular court with raised goal rings at each end. Each team attempts to score goals by passing a ball down the court and shooting it through its goal ring.</small></p>
+
+													<h4><small>Core stability</small></h4> 
+													<p><small>To score goals and to work in and around the circle with the GAGames are played on a rectangular court with raised goal rings at each end. Each team attempts to score goals by passing.</small></p>
+
+													<h4><small>Explosive speed</small></h4>
+													<p><small>Games are played on a rectangular court with raised goal rings at each end. Each team attempts to score goals by passing a ball down the court and shooting it through its goal ring. Players are assigned specific positions, which define their roles within.</small></p>
+												</section>
+											</div>
+
+										</div>
+										<div class="item">
+
+											<div class="outter-tile vertical-center">
+												<section class="info-tile content-tile tile shade-eleven">
+													<h3 class="heading">Fitness</h3>
+													<p><small>Netball is a great way to stay fit and healthy. Games are played on a rectangular court with raised goal rings at each end. Each team attempts to score goals by passing a ball down the court and shooting it through its goal ring.</small></p>
+
+													<h4><small>Core stability</small></h4> 
+													<p><small>To score goals and to work in and around the circle with the GAGames are played on a rectangular court with raised goal rings at each end. Each team attempts to score goals by passing.</small></p>
+
+													<h4><small>Explosive speed</small></h4>
+													<p><small>Games are played on a rectangular court with raised goal rings at each end. Each team attempts to score goals by passing a ball down the court and shooting it through its goal ring. Players are assigned specific positions, which define their roles within.</small></p>
+												</section>				
+											</div>
+										</div>    
+									</div>
+
+									<!-- Controls -->
+									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-fitness" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-fitness" data-slide="next"><i class="fa fa-angle-right"></i></a>
+									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#fitness-info" href="#"><i class="fa fa-times"></i></a>
+								</div>
+
+
 							</div>
 						</div>
 					</div>
@@ -127,11 +164,90 @@
 
 			<section class="grid">
 				
-				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
+				<div class="col col-sm-12 col-md-4 col-lg-4 clearfix shade-eleven">
+
+					<div id="rules-info" class="flip-container">
+						<div class="flipper">
+							<div class="front">
+
+								<div class="outter-tile shade-eleven">
+									<article class="tile content-tile">
+										<hgroup>
+											<h1 class="heading heading-jumbo">Rules</h1>
+											<h2 class="subheading heading-med">8 basic rules you need to know to get started.</h2>
+											<a class="btn btn-sm btn-default" data-flip="toggle" data-flip-target="#rules-info" href="#">More <i class="fa fa-angle-right"></i></a>
+										</hgroup>
+									</article>
+								</div>
+
+							</div>
+							<div class="back">
+
+								<div id="carousel-rules" class="carousel slide" data-interval="" data-ride="carousel">
+
+									<!-- Wrapper for slides -->
+									<div class="carousel-inner">
+										<div class="item active">
+
+											<div class="outter-tile vertical-center">
+												<section class="info-tile content-tile tile shade-eleven">
+													<h3 class="heading">RULE 1/10 - The team</h3>
+													<p><small>There are seven playing positions in a team. Each has an important role to play for their team:</small></p>
+
+													<h4><small>Goal Shooter (GS)</small></h4> 
+													<p><small>To score goals and to work in and around the circle with the GA.</small></p>
+
+													<h4><small>Goal Attack (GA)</small></h4>
+													<p><small>To feed and work with GS and to score goals.</small></p>
+
+													<h4><small>Wing Attack (WA)</small></h4> 
+													<p><small>To feed the circle players giving them shooting opportunities.</small></p>
+
+													<h4><small>Centre (C)</small></h4>
+													<p><small>To take the centre pass and to link the defence and the attack.</small></p>													
+												</section>
+											</div>
+
+										</div>
+										<div class="item">
+
+											<div class="outter-tile vertical-center">
+												<section class="info-tile content-tile tile shade-eleven">
+													<h3 class="heading">Rules</h3>
+													<p><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</small></p>
+
+													<h4><small>Lorem ipsum</small></h4>
+													<p><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</small></p>
+															   
+													<h4><small>Laboris nisi</small></h4>
+													<p><small>Laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est.</small></p>
+												</section>
+											</div>
+										</div>    
+									</div>
+
+									<!-- Controls -->
+									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-rules" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-rules" data-slide="next"><i class="fa fa-angle-right"></i></a>
+									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#rules-info" href="#"><i class="fa fa-times"></i></a>
+								</div>
+
+
+							</div>
+						</div>
 					</div>
-					<div class="image-wrap">
+
+				</div>
+
+				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
+					<div class="outter-tile group shade-thirteen">
+						<article data-resize-height="#grid-image-five" class="content-tile tile center">
+							<h1 class="heading heading-exmed">Set PLays</h1>
+							<p class="sub-content"><small>Get one up on the comp with a few plays from (name).</small></p>
+							<a class="btn btn-default btn-sm" href="/grants"><i class="fa fa-file-text-o"></i> Download</a>
+						</article>
+					</div>
+					<div id="grid-image-five" class="image-wrap">
 						<img src="http://lorempixel.com/g/612/612/">
 					</div>
 				</div>
@@ -139,45 +255,108 @@
 				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
 					<div class="outter-tile group shade-ten">
 						<article data-resize-height="#grid-image-five" class="content-tile tile center">
-							<h1 class="heading heading-exmed verbose">ANZ NetSetGo</h1>
-							<p class="subheading heading-sm verbose">Netball is a ball sport played by two teams of seven players.</p>
+							<h1 class="heading heading-exmed">Training drills</h1>
+							<p class="sub-content"><small>Let (name) help you sharpen up on those skills!</small></p>
+							<a class="btn btn-default btn-sm" href="/grants"><i class="fa fa-file-text-o"></i> Download</a>
+						</article>
+					</div>
+					<div class="outter-tile group shade-twelve">
+						<article data-resize-height="#grid-image-five" class="content-tile tile center">
+							<h1 class="heading heading-exmed verbose">ANZ Championship</h1>
+							<p class="sub-content"><small class="verbose">Netball is a ball sport played by two teams of seven players.</small></p>
 							<a class="btn btn-default btn-sm btn-primary" href="/grants">More <i class="fa fa-angle-right"></i></a>
 						</article>
-					</div>				
-					<div id="grid-image-five" class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
 					</div>
 				</div>
 
-				<div class="col col-md-4 center-tile shade-nine">
-					<div class="outter-tile">
-						<article class="content-tile tile">
-							<hgroup>
-								<h1 class="heading heading-exjumbo muted">Find a club</h1>
-								<h2 class="subheading heading-med  muted">Something</h2>
-								<a class="btn btn-default" href="/grants">Find out more <i class="fa fa-angle-right"></i></a>
-							</hgroup>
-						</article>
+				<div class="col col-sm-12 col-md-4 col-lg-4 clearfix shade-thirteen">
+
+					<div id="equipment-info" class="flip-container">
+						<div class="flipper">
+							<div class="front">
+
+								<div class="outter-tile shade-thirteen">
+									<article class="tile content-tile">
+										<hgroup>
+											<h1 class="heading heading-jumbo">Equipment</h1>
+											<h2 class="subheading heading-med">What do you need to get started?</h2>
+											<a class="btn btn-sm btn-default" data-flip="toggle" data-flip-target="#equipment-info" href="#">More <i class="fa fa-angle-right"></i></a>
+										</hgroup>
+									</article>
+								</div>
+
+							</div>
+							<div class="back">
+
+								<div id="carousel-equipment" class="carousel slide" data-interval="" data-ride="carousel">
+
+									<!-- Wrapper for slides -->
+									<div class="carousel-inner">
+										<div class="item active">
+
+											<div class="outter-tile vertical-center">
+												<section class="media-tile content-tile tile shade-thirteen">
+													<h3 class="heading">Equipment</h3>
+													<p class="sub-content"><small>Netball is a great way to stay fit and healthy. Games are played on a rectangular court with raised.</small></p>
+
+													<div class="media">
+														<a class="pull-left" href="#"><img alt="Equipment" src="images/equipment-list-one.jpg"></a>
+														<div class="media-body">
+															<h4 class="media-heading sub-content"><small>Dresses</small></h4>
+															<p class="sub-content"><small>To score goals and to work in and around the circle with the GAGames are played on a rec.</small></p>
+														</div>
+													</div>
+
+													<div class="media">
+														<a class="pull-left" href="#"><img alt="Equipment" src="images/equipment-list-one.jpg"></a>
+														<div class="media-body">
+															<h4 class="media-heading sub-content"><small>Dresses</small></h4>
+															<p class="sub-content"><small>To score goals and to work in and around the circle with the GAGames are played on a rec.</small></p>
+														</div>
+													</div>
+
+													<div class="media">
+														<a class="pull-left" href="#"><img alt="Equipment" src="images/equipment-list-one.jpg"></a>
+														<div class="media-body">
+															<h4 class="media-heading sub-content"><small>Dresses</small></h4>
+															<p class="sub-content"><small>To score goals and to work in and around the circle with the GAGames are played on a rec.</small></p>
+														</div>
+													</div>																										
+
+												</section>
+											</div>
+
+										</div>
+										<div class="item">
+
+											<div class="outter-tile vertical-center">
+												<section class="info-tile content-tile tile shade-eleven">
+													<h3 class="heading">Rules</h3>
+													<p><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</small></p>
+
+													<h4><small>Lorem ipsum</small></h4>
+													<p><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</small></p>
+															   
+													<h4><small>Laboris nisi</small></h4>
+													<p><small>Laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est.</small></p>
+												</section>
+											</div>
+										</div>    
+									</div>
+
+									<!-- Controls -->
+									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-equipment" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-equipment" data-slide="next"><i class="fa fa-angle-right"></i></a>
+									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#equipment-info" href="#"><i class="fa fa-times"></i></a>
+								</div>
+
+
+							</div>
+						</div>
 					</div>
+
 				</div>
 
-				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
-					</div>
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
-					</div>
-				</div>
-
-				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
-					</div>				
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
-					</div>
-				</div>
 			</section>			
 
 		</main>

@@ -9,6 +9,7 @@ define([
     'bootstrap_transition',    
     'bootstrap_collapse',
     'bootstrap_modal',
+    'bootstrap_carousel',
     'polyfiller'
 ], function ($, _, Backbone, VideoEmbedView, OutterTile, MatchMedia) {
 

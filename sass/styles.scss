@@ -7,10 +7,12 @@
 @import "scaffolding";
 @import "normalize";
 @import "buttons";
+@import "typography";
 @import "forms";
 @import "grid";
 @import "utilities";
 @import "modals";
+@import "carousel";
 
 // Global Layout Specific Styles
 //====================================================================================================================================
@@ -57,6 +59,7 @@ body {
 		a {
 			padding: 0 5%;
 			color: white;
+			font-family: $font-family-sans-serif-two;
 		}
 
 		.social-media {
@@ -92,7 +95,6 @@ body {
 		}
 
 		.navigation {
-
 			li {
 				width: 20%;
 			}
@@ -313,8 +315,15 @@ body {
 
 	.nbn-logo {
 		text-transform: uppercase;
-		font-family: $font-family-sans-serif-two;
+		font-family: $font-family-sans-serif;
 		color: white;
+		font-size: $font-size-large;
+		vertical-align: super;
+
+		b {
+			font-family: $font-family-sans-serif-bold;
+			font-weight: normal;
+		}
 	}
 }
 
@@ -468,7 +477,7 @@ body {
 	}
 }
 
-// Headings Module
+// Appended Outter Tiles Module
 //====================================================================================================================================
 //====================================================================================================================================
 
@@ -520,67 +529,6 @@ body {
 	}
 }
 
-// Headings Module
-//====================================================================================================================================
-//====================================================================================================================================
-
-%heading {
-	&.heading-sm {
-		font-size: $font-size-small;
-	}
-	&.heading-med {
-		font-size: $font-size-medium;
-	}
-	&.heading-default {
-		font-size: $font-size-base;
-	}		
-	&.heading-exmed {
-		font-size: $font-size-extra-medium;
-	}	
-	&.heading-jumbo {
-		font-size: $font-size-jumbo;
-	}	
-	&.heading-exjumbo {
-		font-size: $font-size-extra-jumbo;
-	}
-}
-
-%heading-accent {
-	text-transform: uppercase;
-	font-weight: normal;	
-}
-
-%heading-spacing-default {
-	margin-top: 0;
-	margin-bottom: 20px;	
-	line-height: 1;
-}
-
-.heading {
-	@extend %heading;
-	@extend %heading-accent;
-	@extend %heading-spacing-default;
-
-	color: $brand-heading-accent-one;
-}
-
-.subheading {
-	@extend %heading;
-	@extend %heading-spacing-default;
-
-	color: $brand-heading-accent-one;	
-}
-
-.tile-heading {
-	@extend %heading;
-	@extend %heading-accent;
-	@extend %heading-spacing-default;
-
-	position: relative;
-	padding: 10px;
-	color: white;
-}
-
 // Default Tile Module
 //====================================================================================================================================
 //====================================================================================================================================
@@ -595,6 +543,10 @@ body {
 		max-height: 50%;
 		padding: 0;
 	}	
+
+	&.vertical-center {
+		padding: 0;
+	}
 
 	@media screen and (min-width: $screen-xsmall) and (max-width: $screen-desktop) {
 		&.group {
@@ -667,19 +619,31 @@ body {
 }
 
 .shade-seven {
-	background-color: $brand-accent-two; //Dirty blue
+	background-color: $brand-accent-four; //Cerulean
 }
 
 .shade-eight {
-	background-color: $brand-accent-two; //Dirty blue
+	background-color: lighten($brand-accent-four, 20%);	
 }
 
 .shade-nine {
-	background-color: $brand-accent-two; //Dirty blue
+	background-color: lighten($brand-accent-four, 20%);
 }
 
 .shade-ten {
-	background-color: $brand-accent-two; //Dirty blue
+	background-color: lighten($brand-accent-one, 5%); //Paper white
+}
+
+.shade-eleven {
+	background-color: $brand-accent-five; //Poppy blue
+}
+
+.shade-twelve {
+	background-color: $brand-accent-six; //Aqua
+}
+
+.shade-thirteen {
+	background-color: lighten($brand-accent-six, 22%);
 }
 
 // Content Tile Module (Subset of .tile)
@@ -689,6 +653,39 @@ body {
 .content-tile {
 	.heading {
 		margin-bottom: 5px;
+	}
+}
+
+// Info Tile Module (Subset of .tile)
+//====================================================================================================================================
+//====================================================================================================================================
+
+.info-tile {
+	p {
+		@extend .sub-content;
+
+		margin: 0;
+	}
+	h4 {
+		margin-bottom: 0;
+	}
+}
+
+// Carousel Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.carousel, .carousel-inner, .item {
+	height: 100%;
+}
+
+.carousel-control {
+	z-index: 99;
+	bottom: auto;
+
+	&.left {
+		left: auto;
+		right: 27px;
 	}
 }
 

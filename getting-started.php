@@ -61,7 +61,7 @@
 
 
 
-				<div class="col col-md-6 col-lg-6 center-tile shade-eight">
+				<div class="col col-md-6 col-lg-6 center-tile shade-six">
 					<div class="outter-tile">
 						<article class="content-tile tile">
 							<hgroup>
@@ -103,13 +103,13 @@
 										<hgroup>
 											<div>
 												<h2 class="tile-heading heading-sm">
-													<div class="brand-overlay shade-seven"></div>
+													<div class="brand-overlay shade-six"></div>
 													Video Sharelle McMahon
 												</h2>
 											</div>
 											<div>
 												<h1 class="tile-heading">
-													<div class="brand-overlay shade-seven"></div>
+													<div class="brand-overlay shade-six"></div>
 													Just do it
 												</h1>
 											</div>
@@ -131,7 +131,7 @@
 
 
 
-					<!-- <img src="images/netball-seventeen.jpg">		 -->
+					<!-- <img src="images/netball-sixteen.jpg">		 -->
 				</div>	
 
 
@@ -150,20 +150,20 @@
 				</div>
 
 				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="outter-tile group shade-ten">
+					<div class="outter-tile group shade-seven">
 						<article data-resize-height="#grid-image-five" class="content-tile tile center">
 							<h1 class="heading heading-exmed verbose">ANZ NetSetGo</h1>
-							<p class="subheading heading-sm verbose">Netball is a ball sport played by two teams of seven players.</p>
+							<p class="sub-content"><small class="verbose">Netball is a ball sport played by two teams of six players.</small></p>
 							<a class="btn btn-default btn-sm btn-primary" href="/grants">More <i class="fa fa-angle-right"></i></a>
 						</article>
-					</div>				
+					</div>
 					<div id="grid-image-five" class="image-wrap">
 						<img src="http://lorempixel.com/g/612/612/">
 					</div>
 				</div>
 
-				<div class="col col-md-4 center-tile shade-nine">
-					<div class="outter-tile">
+				<div class="col col-md-4 center-tile">
+					<div class="outter-tile shade-eight">
 						<article class="content-tile tile">
 							<hgroup>
 								<h1 class="heading heading-exjumbo muted">Find a club</h1>

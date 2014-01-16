@@ -9,6 +9,8 @@ $brand-accent-one:					#d0eef8;	//Baby blue
 $brand-accent-two:					#dfe9ea;	//Dirty blue
 $brand-accent-three:				#9f9f9f;	//Light gray
 $brand-accent-four:					#6d9da2;	//Cerulean
+$brand-accent-five:					#cdeff3;	//Poppy Blue
+$brand-accent-six:					#69d0dc;	//Aqua
 
 
 $brand-heading-accent-one:			#36778a;	//Puuissan blue
@@ -78,9 +80,11 @@ $link-hover-color:      darken($link-color, 15%) !default;
 
 
 
-$font-family-sans-serif:  		"Helvetica W01 Roman", Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif:  		"Helvetica W01 Light", Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif-bold:	"Helvetica W01 Bold", Helvetica, Arial, sans-serif !default;
 $font-family-sans-serif-two:	"Andes W04 Regular", Helvetica, Arial, sans-serif !default;
-$font-family-base:        		$font-family-sans-serif !default;
+
+$font-family-base:        		"Helvetica W01 Roman", Helvetica, Arial, sans-serif !default;
 
 $font-size-base:          		14px !default;
 $font-size-small:         		ceil($font-size-base * 0.85) !default;	//12px
@@ -90,8 +94,8 @@ $font-size-extra-medium:  		ceil($font-size-base * 1.35) !default;	//19px
 $font-size-large:         		ceil($font-size-base * 1.55) !default;
 $font-size-extra-large:   		ceil($font-size-base * 2) !default;
 
-$font-size-jumbo:				40px !default;
-$font-size-extra-jumbo:			ceil($font-size-jumbo * 1.25) !default;		//50px
+$font-size-jumbo:				32px !default;
+$font-size-extra-jumbo:			ceil($font-size-jumbo * 1.25) !default;		//40px
 
 $line-height-base:        1.428571429 !default; // 20/14
 $line-height-computed:    floor($font-size-base * $line-height-base) !default; // ~20px

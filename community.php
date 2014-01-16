@@ -253,7 +253,7 @@
 				</div>
 
 				<div class="col col-md-2 center-tile shade-one">
-					<div data-resize-height="center" class="outter-tile shade-one">
+					<div data-resize-height="center" class="outter-tile vertical-center shade-one">
 						<article class="article-tile tile">
 							<h3 class="heading heading-default">Grants awarded</h3>
 							<ul class="article-list">

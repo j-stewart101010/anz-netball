@@ -36,7 +36,13 @@ require.config({
 				'jquery'
 			],
 			exports: '$.fn.modal'
-        }
+        },
+        bootstrap_carousel : {
+			deps: [
+				'jquery'
+			],
+			exports: '$.fn.carousel'
+        }        
 	},
 	paths: {
 		jquery: '../bower_components/jquery/jquery',
@@ -47,7 +53,8 @@ require.config({
 		match_media: 'helpers/match-media',
 		bootstrap_transition : 'vendor/bootstrap-transition',		
         bootstrap_collapse : 'vendor/bootstrap-collapse',
-        bootstrap_modal : 'vendor/bootstrap-modal'
+        bootstrap_modal : 'vendor/bootstrap-modal',
+        bootstrap_carousel : 'vendor/bootstrap-carousel'
 	}
 });
 
