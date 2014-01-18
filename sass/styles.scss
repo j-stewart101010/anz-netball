@@ -13,6 +13,7 @@
 @import "utilities";
 @import "modals";
 @import "carousel";
+@import "shame";
 
 // Global Layout Specific Styles
 //====================================================================================================================================
@@ -279,7 +280,7 @@ body {
 	width: 20px;
 	height: 100%;
 	margin: 15px;
-	top: 0;
+	top: -1px;
 	right: -11px;
 	margin: 0px;
 	z-index: 999;
@@ -391,13 +392,17 @@ body {
 	position: relative;
 	overflow: hidden;
 	max-width: 100%;
-	max-height: 50%;
+	// max-height: 50%;
 	min-height: 50%;
 	width: 50%;
 	float: left;
 	z-index: 99;
 	border-top: 1px solid white;
 	background-color: $brand-primary;
+
+	&.stacked {
+		max-height: 50%;
+	}	
 
 	&:first-child {
 		border-top: 0;
@@ -413,7 +418,7 @@ body {
 //====================================================================================================================================
 
 .content  {
-	position: relative;
+	position: relative;	
 
 	.grid {
 		position: relative;
@@ -421,18 +426,30 @@ body {
 		border-top: 1px solid white;
 		border-bottom: 1px solid white;
 
-	    @include transition-property(top);
-	    @include transition-duration(0.5s);
-	    @include transition-timing-function(ease-in);	
-
 		&.resizing {
 			top: -30px;
 		}
 
 		& > .col {
 			border-left: 1px solid white;
-			border-right: 1px solid white;			
+			border-right: 1px solid white;
 		}
+
+		&.inactive {
+			overflow: visible;
+
+			.col {
+				overflow: hidden;
+			}
+
+			@media screen and (max-width: $screen-desktop) {	
+				display: none;
+			}
+		}
+	}
+
+	> .grid {
+		z-index: 99;
 	}
 
 	.grid + .grid {
@@ -442,11 +459,7 @@ body {
 	.col {
 		height: 100%;
 		padding-left: 0;
-		padding-right: 0;
-
-	    @include transition-property(left);
-	    @include transition-duration(0.5s);
-	    @include transition-timing-function(ease-in);	    
+		padding-right: 0;       
 	}
 
 	.col + .col {
@@ -461,6 +474,18 @@ body {
 		.grid {
 			overflow: hidden;
 			height: 50%;
+
+			&.full-length {
+				height: 100%;
+			}
+
+			.three-quarters-length {
+				height: 75%;
+			}
+
+			&.quarter-length {
+				height: 25%;
+			}
 		}
 
 		.image-wrap {
@@ -644,6 +669,18 @@ body {
 
 .shade-thirteen {
 	background-color: lighten($brand-accent-six, 22%);
+}
+
+.shade-fourteen {
+	background-color: $brand-accent-seven; //Light orange
+}
+
+.shade-fifteen {
+	background-color: lighten($brand-accent-seven, 10%); //Light orange
+}
+
+.shade-sixteen {
+	background-color: $brand-accent-eight; //Sand orange
 }
 
 // Content Tile Module (Subset of .tile)
@@ -942,6 +979,61 @@ body {
 	top: 0;
 	left: 0;
 	z-index: 99;
+}
+
+// Alternate Content Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.alternate-content {
+	position: absolute;
+	top: 0;	
+	width: 100%;
+	height: 100%;
+	z-index: 98;
+}
+
+// FAQ Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.qa-list {
+	list-style-type: none;
+	margin: 20px 0;
+	padding: 0;
+
+	a {
+		display: block;
+		padding: 5px 10px;
+	}
+
+	.active {
+		background-color: lighten($brand-primary, 10%);
+		color: white;
+	}
+}
+
+.panel-collapse {
+	@media screen and (min-width: $screen-desktop) {
+		top: 0;
+		position: absolute;		
+	}	
+}
+
+.panel-collapse, .panel, .panel-group {
+	height: 100%;
+}
+
+.answer-panel {
+	font-size: ceil($font-size-small - 1);	
+}
+
+.qa-answers {
+	position: absolute;
+	top: 0;	
+	width: 100%;
+	height: 100%;
+	z-index: 98;	
 }
 
 // Flip Module

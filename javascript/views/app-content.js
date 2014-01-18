@@ -23,7 +23,9 @@ define([
             'click.video.embed [data-video="toggle"]' : 'show_video',
             'change.checkbox.update input[type="checkbox"]' : 'update_checkbox',
             'change.select.update .selectbox' : 'update_selectbox',
-            'click.flip [data-flip="toggle"]' : 'flip_element',
+            'click.flip [data-flip="toggle"]' : 'flip_toggle',
+            'click.slide [data-slide="toggle"]' : 'slide_toggle',
+            'click.accordian [data-toggle="collapse"]' : 'accordian_toggle'
             // 'change.fileupload-update input[type="file"]' : 'patch_file_upload'
         },
 
@@ -171,9 +173,57 @@ define([
                 .animate({ 'opacity' : 1 }, 700);
         },
 
-        flip_element : function (e) {
+        accordian_toggle : function (e) {
+            $(e.currentTarget).closest('ul').find('a').removeClass('active');
+            $(e.currentTarget).addClass('active');
+        },
+
+        slide_toggle : function (e) {
+            var $slide_target = $($(e.currentTarget).data('slide-target')),
+                properties;
+
+            e.preventDefault();
+
+            //@TODO: Build this so it supports transitions (this can be the no transitions fallback)
+
+            if ($slide_target.hasClass('active')) { 
+                properties = { 
+                    grids : { start_left : '', position : 'static' },
+                    cols : { start_left : '-100%', end_left : '' }
+                }
+            }
+            else { 
+                properties = {
+                    grids : { start_left : '-100%', position : '' },
+                    cols : { start_left : '100%', end_left : '' }
+                }
+            }
+
+            if (MatchMedia.tablet()) {
+                _self.$grids.not($slide_target.find(_self.$grids)).fadeToggle({ 'complete' : function () {
+                    $slide_target.css({ 'position' : properties.grids.position });    
+                } });
+                
+            }
+            else {
+                _self.$grids.not($slide_target.find(_self.$grids)).toggleClass('active inactive').each(function(i) {
+                    $(this).css({ 'left' : properties.grids.start_left });
+                    $(this).find(_self.$cols).css({ 'left' : properties.cols.start_left });
+                });
+
+                _self.$cols.not($slide_target.find(_self.$cols)).each(function(i) {
+                    $(this).delay(100*i).animate({ 'left' : properties.cols.end_left },{ duration : 300 });
+                });
+
+                $slide_target.toggleClass('active inactive');                 
+            }
+
+               
+        },
+
+        flip_toggle : function (e) {
             var $flip_target = $($(e.currentTarget).data('flip-target'));
-            
+
             e.preventDefault();
 
             if (Modernizr.csstransforms) { $flip_target.toggleClass('flip'); }

@@ -1,0 +1,24 @@
+//
+// Shame (to be fixed at a later stage if there is time)
+// --------------------------------------------------
+
+.clinics {
+	.content {
+		.grid.full-length .grid .col + .col {
+			border-right: 0;
+		}
+		.grid.quarter-length {
+			.image-wrap {
+				min-height: 100%;
+				border-right: 1px solid white;
+
+				&:first-child {
+					border-left: 1px solid white;
+				}
+			}
+		}
+		.grid.three-quarters-length {
+			border-bottom: 0;
+		}
+	}
+}

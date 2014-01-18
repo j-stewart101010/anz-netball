@@ -79,8 +79,6 @@
 
     var scrollSize = $.camelCase(['scroll', dimension].join('-'))
 
-    console.log(this.$element[0][scrollSize]);
-
     this.$element
       .one($.support.transition.end, $.proxy(complete, this))
       .emulateTransitionEnd(350)
