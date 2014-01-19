@@ -139,8 +139,8 @@ define([
             if (window.grid) {
                 if(IS_IE8 || window.canvas) {
                     canvas.width = a;
-                    canvas.height = b*0.82;
-                    grid.canvasOffset = b*0.1;
+                    canvas.height = b*0.87;
+                    grid.canvasOffset = b*0.08;
                     //todo: change camera position based on previous size and new size
                 };
                 grid.resize(a, b);

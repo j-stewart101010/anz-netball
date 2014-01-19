@@ -45,8 +45,8 @@ define([
     this.offScreen.height = this.squareHeight;
     this.offScreenCtx = this.offScreen.getContext("2d");
 
-    this.titleFont = Math.round(this.squareHeight*0.10)+"px Helvetica"; //10%
-    this.subTextFont = Math.round(this.squareHeight*0.043)+"px Helvetica"; //4.3%
+    this.titleFont = Math.round(this.squareHeight*0.10)+"px Helvetica W01 Light"; //10%
+    this.subTextFont = Math.round(this.squareHeight*0.043)+"px Helvetica W01 Light"; //4.3%
 
     console.log("titleFont="+this.titleFont);
     console.log("subTextFont="+this.subTextFont);
@@ -230,7 +230,7 @@ define([
           };
           cx=drawx+sizex*0.08;
           cy=drawy+sizey*0.75;
-          ctx.drawImage(model.content[modelIndex].subimage,cx,cy,model.content[modelIndex].subimage.width*tScale,model.content[modelIndex].subimage.height*tScale);
+          ctx.drawImage(model.content[modelIndex].subimage,cx,cy,model.content[modelIndex].subimage.width*drawScale,model.content[modelIndex].subimage.height*drawScale);
       };
     };
   };
