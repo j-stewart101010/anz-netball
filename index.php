@@ -10,6 +10,7 @@
 			<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
 			<link href="css/styles.css" rel="stylesheet" type="text/css">
+			<link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/f8bca219-07d6-4bdf-9b18-02f0db46b33f.css"/>
 
 	        <!--[if lt IE 9]>
 	            <link href="/stylesheets/ie.css" rel="stylesheet" type="text/css">
@@ -21,7 +22,7 @@
 	    <body>
 
 		<header class="master-head">
-			<div class="branding">
+			<div class="branding col-md-4 col-lg-3">
 				<div class="brand clearfix">
 					<div class="logos">
 						<a href="/" class="anz-logo"></a>
@@ -36,18 +37,16 @@
 					</a>
 				</div>
 			</div>
-			<nav class="main-nav">
+			<nav class="main-nav col-md-8 col-lg-9">
 				<div class="nav-items">
 					<ul id="main-navigation" class="clearfix navigation block collapse">
 						<li class="active"><a href="/community-grants">Community grants</a></li>
 						<li><a href="/getting-started">Getting started</a></li>
 						<li><a href="/all-about-netball">All about netball</a></li>
 						<li><a href="/clinics">Clinics</a></li>
-						<li><a href="/sign-up">Sign up</a></li>
-					
-						<li class="social-media"><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li class="social-media"><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li class="social-media"><a href="#"><i class="fa fa-instagram"></i></a></li>
+						<li class="social-media"><a href="#"><span class="facebook-icon"><i class="fa fa-facebook"></i></a></li>
+						<li class="social-media"><a href="#"><span class="instagram-icon"><i class="fa fa-instagram"></i></a></li>
+						<li class="social-media"><a href="#"><span class="twitter-icon"><i class="fa fa-twitter"></i></span></a></li>						
 					</ul>
 				</div>				
 			</nav>

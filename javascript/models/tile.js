@@ -5,6 +5,7 @@ define([
 
 var model = {
 
+//
    content:[{
       tiletype:"text",
       colour:"#5397be",
@@ -52,10 +53,14 @@ var model = {
       linkurl:"http://localhost.anz-netball/Community-Grants"},
 
      {tiletype:"video",
-      imageurl:"images/video001.jpg",
-      textname:"SHARELLE MCMAHON",
       textsubject:"TALKS NETBALL NATION",
-      linkurl:"http://youtube.com/watch?anznbn-sharelletalks"},
+      //imageurl:"images/video001.jpg",
+      //textname:"SHARELLE MCMAHON",
+      //linkurl:"http://youtube.com/watch?anznbn-sharelletalks"},
+      imageurl:"images/video002.jpg",
+      textname:"LIBBY BIRCH",
+      linkurl:"http://youtube.com/watch?anznbn-libbytalks",
+      subimageurl:"images/subimage-play.png"},
 
      {tiletype:"image",
       imageurl:"images/004.jpg",

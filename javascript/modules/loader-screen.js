@@ -44,7 +44,11 @@ define([
                 case "video":
                     imgpath = model.content[i].imageurl;
                     tilescale = 2;
-            }
+                    //// small extra image for videos
+                    model.content[i].subimage = new Image;
+                    model.content[i].subimage.src = Config.REMOTE_PATH_2 + model.content[i].subimageurl;
+                    imagelist.push(Config.REMOTE_PATH_2 + model.content[i].subimageurl);
+            };
 
             model.content[i].scale = tilescale;
 
@@ -77,8 +81,11 @@ define([
             //console.log(imgpath);
             model.content[i].image = new Image;
             model.content[i].image.src = Config.REMOTE_PATH_2 + imgpath;
+            //model.content[i].image = "http://lorempixel.com/300/300/sports/";
+
 
            imagelist.push(Config.REMOTE_PATH_2 + imgpath);
+           //imagelist.push("http://lorempixel.com/300/300/sports/");
         };
         
         this.poller = new Image;
