@@ -81,7 +81,7 @@ body {
 		.navigation {
 			display: table;
 			height: 100%!important;
-			
+
 			li {
 				padding-top: 0;
 				padding-bottom: 0;				
@@ -174,12 +174,19 @@ body {
 			height: auto;			
 			float: none;
 
+			.social-media {
+	 			float: left;
+	 			width: 33.333%;				
+			}
+
 			li {
 				display: list-item;
 				width: auto;
 			}
 		}
 	}
+
+
 }
 
 // Main Navigation Module
@@ -464,17 +471,18 @@ body {
 
 	.col + .col {
 		border-left: 0;
-	}	
+	}
+
+	.col-half {
+		height: 50%;
+	}
 
 	@media screen and (min-width: $screen-desktop) {
 		max-width: 1200px;
 		max-height: 700px;		
 		height: 87%;
 
-		.grid {
-			overflow: hidden;
-			height: 50%;
-
+		.grid, .col {
 			&.full-length {
 				height: 100%;
 			}
@@ -485,7 +493,15 @@ body {
 
 			&.quarter-length {
 				height: 25%;
-			}
+			}		
+			&.half-length {
+				height: 50%;
+			}					
+		}
+
+		.grid {
+			overflow: hidden;
+			height: 50%;
 		}
 
 		.image-wrap {
@@ -527,6 +543,9 @@ body {
 			width: auto;
 			float: none;
 			border-top: 1px solid white;
+		}
+		.grid:last-child .image-wrap:last-child {
+			border-bottom: 1px solid white;
 		}
 	}
 
@@ -783,14 +802,13 @@ body {
 	display: block;
 	width: 100%;
 	height: 100%;	
-	overflow: hidden;
 	border-bottom: 1px solid white;
 
 	.video-tile-image {
 		position: absolute;
 		top: 0;
 		left: 0;
-		height: 100%;
+		// height: 100%;
 	}
 
 	.video-tile-content {
@@ -816,7 +834,12 @@ body {
 		border-bottom: 0;
 	}
 
+	@media screen and (max-width: $screen-desktop) {
+		overflow: hidden;
+	}
+
 	@media screen and (min-width: $screen-xsmall) {
+
 		.video-tile-image {
 			width: 100%;
 			height: auto;

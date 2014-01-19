@@ -38,7 +38,7 @@
 			</div>
 			<nav class="main-nav">
 				<div class="nav-items">
-					<ul id="main-navigation" class="navigation block collapse">
+					<ul id="main-navigation" class="clearfix navigation block collapse">
 						<li class="active"><a href="/community-grants">Community grants</a></li>
 						<li><a href="/getting-started">Getting started</a></li>
 						<li><a href="/all-about-netball">All about netball</a></li>
