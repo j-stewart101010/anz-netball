@@ -51,10 +51,10 @@ define([
             } else {
                 canvas = document.createElement("canvas"); 
                 canvas.width = a; 
-                canvas.height = b*0.82; 
+                canvas.height = b*0.87; //100%-8%-5% 
                 context = canvas.getContext("2d");
                 canvas.style.position = "absolute";
-                canvas.style.top = "10%";
+                canvas.style.top = "8%";
                 canvas.style.left = "0px"; 
                 document.body.appendChild(canvas);
                 canvas.style.display = "none"; 
@@ -66,7 +66,7 @@ define([
                 $(canvas).bind("touchend", _self.onTouchEnd);
                 $(canvas).bind("touchmove", _self.onTouchMove);
                 grid = new Grid(a, b);
-                grid.canvasOffset = b*0.1;
+                grid.canvasOffset = b*0.08; //8%
                 trackpad = new Trackpad(canvas);
 
                 // for(var i=0;i<model.content.length;i++){
@@ -125,6 +125,9 @@ define([
                 Config.track.x = trackpad.value;
                 Config.track.y = trackpad.valueY;
             };
+
+            ////todo:put mouse status update and stuff here which would have been in grid.render()
+
             pauseGridRender || (IS_IE8 ? grid.render() : (grid.render(context))); 
             requestAnimFrame(_self.update);
         },
