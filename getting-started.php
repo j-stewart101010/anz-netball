@@ -24,7 +24,7 @@
  		<!-- <div class="loading"></div> -->
 
 		<header class="master-head">
-			<div class="branding col-md-4 col-lg-3">
+			<div class="branding col-md-4">
 				<div class="brand clearfix">
 					<div class="logos">
 						<a href="/" class="anz-logo"></a>
@@ -39,7 +39,7 @@
 					</a>
 				</div>
 			</div>
-			<nav class="main-nav col-md-8 col-lg-9">
+			<nav class="main-nav col-md-8">
 				<div class="nav-items">
 					<ul id="main-navigation" class="clearfix navigation block collapse">
 						<li><a href="/community-grants">Community grants</a></li>

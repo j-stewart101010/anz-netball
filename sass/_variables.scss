@@ -199,8 +199,12 @@ $hr-border:                   $brand-secondary !default;
 
 
 
-// Grid system
+// Grid system 
 // --------------------------------------------------
+
+//These values represent the max values of the grid, beyond these values the grid will have rows/columns appened to it to maintain ratio of grid tiles
+$grid-max-width:			1200px!default;
+$grid-max-height:			680px!default;
 
 // Number of columns in the grid system
 $grid-columns:              12 !default;

@@ -1,6 +1,6 @@
 //
-// Shame (to be fixed at a later stage if there is time)
-// --------------------------------------------------
+// Shame (to be fixed at a later stage if there is time or in project future maintenance)
+// These are mostly to fix border issues with different grid layouts
 
 .clinics {
 	.content {
@@ -27,6 +27,20 @@
 		}
 		.grid.three-quarters-length {
 			border-bottom: 0;
+		}
+	}
+}
+
+.all-about-netball {
+
+	.group + .group .tile {
+		border-top: 1px solid white;
+	}
+
+	@media screen and (max-width: $screen-small) {
+		.equipment {
+			float: left;
+			width: 100%;
 		}
 	}
 }

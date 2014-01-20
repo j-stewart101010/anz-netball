@@ -11,6 +11,8 @@ define([
     'modules/trackpad',
     'modules/loader-screen',
     'match_media',
+    'bootstrap_transition',    
+    'bootstrap_collapse'
 ], function ($, _, Backbone, Config, model, Grid, DoubleSpring, GridDom, Trackpad, LoaderScreen, MatchMedia) {
 
     var _self;

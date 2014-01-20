@@ -54,7 +54,7 @@ body {
 		li {
 			padding-top: 20px;
 			padding-bottom: 20px;
-			width: 10%;	
+			width: 20%;	
 		}
 
 		a {
@@ -64,17 +64,26 @@ body {
 		}
 
 		.social-media {
-			width: 3%;	
+			width: 6.66667%;
+
+			a {
+				border-left: 0;
+
+				&:before {
+					border-right: 0;
+				}
+			}
 		}
 	}
 
 	.menu-icon {
 		display: none;
 		position: absolute;
-		top: 0;
+		top: 50%;
 		right: 5%;
-		padding: 12px 0;
+		margin-top: -20px;
 		color: white;
+		z-index: 1000;
 	}
 
 	@media screen and (min-width: $screen-xsmall) {
@@ -88,6 +97,9 @@ body {
 				display: table-cell;
 			}
 		}
+		.sharp-brand-angle {
+			display: none;
+		}	
 	}	
 
 	@media screen and (max-width: $screen-desktop) {
@@ -113,7 +125,7 @@ body {
 					}
 				}
 			}			
-		}
+		}		
 	}
 
 	@media screen and (min-width: $screen-desktop) {	
@@ -130,7 +142,10 @@ body {
 			top: 50%;
 			padding: 0;
 			margin-top: -20px;
-		}		
+		}
+		.sharp-brand-angle {
+			display: block;
+		}					
 	}
 
 	@media screen and (min-width: $screen-large-desktop) {
@@ -138,32 +153,44 @@ body {
 			a {
 				font-size: ($font-size-medium);
 			}
-		}		
+		}	
 	}
 
-	@media screen and (max-width: $screen-desktop) {
+	@media screen and (max-width: $screen-desktop - 1) {
 		.main-nav {
 			float: left;
 			width: 100%;
 			padding-left: 0;
 			padding-right: 0;
-		}	
+		}
 
 		.nav-items {
 			max-width: none;
 			width: 100%;
 		}
 
+		.branding {
+			overflow: hidden;
+		}
+
 		.sharp-brand-angle {
-			left: 70%;
+			width: 100%;
+			left: 82%;
+
+			&:before {
+				width: 23px;				
+			}
 		}
 	}
 
-	@media screen and (max-width: $screen-xsmall) {
-		// height: auto;
+	@media screen and (max-width: $screen-xsmall - 1) {
 
 		.menu-icon {
 			display: block;
+		}
+
+		.logos {
+			padding-right: 70px;
 		}
 
 		.nav-items {
@@ -349,14 +376,14 @@ body {
 
 	.fa-circle-o {
 		position: relative;
-		font-size: 50px;
+		font-size: 40px;
 	}
 
 	.fa-bars {
 		position: absolute;
-		top: 27%;
+		top: 29%;
 		left: 30%;
-		font-size: 21px;
+		font-size: 17px;
 	}
 }
 
@@ -399,24 +426,27 @@ body {
 	position: relative;
 	overflow: hidden;
 	max-width: 100%;
-	// max-height: 50%;
+	max-height: 50%;
 	min-height: 50%;
 	width: 50%;
 	float: left;
 	z-index: 99;
-	border-top: 1px solid white;
 	background-color: $brand-primary;
 
 	&.stacked {
 		max-height: 50%;
 	}	
 
-	&:first-child {
-		border-top: 0;
-	}
-
 	img {
 		max-width: 100%;
+	}	
+
+	@media screen and (min-width: $screen-desktop) {
+		border-top: 1px solid white;
+
+		&:first-child {
+			border-top: 0;
+		}		
 	}	
 }
 
@@ -478,8 +508,8 @@ body {
 	}
 
 	@media screen and (min-width: $screen-desktop) {
-		max-width: 1200px;
-		max-height: 700px;		
+		max-width: $grid-max-width;
+		max-height: $grid-max-height;
 		height: 87%;
 
 		.grid, .col {
@@ -592,7 +622,7 @@ body {
 		padding: 0;
 	}
 
-	@media screen and (min-width: $screen-xsmall) and (max-width: $screen-desktop) {
+	@media screen and (min-width: $screen-xsmall) and (max-width: $screen-desktop - 1) {
 		&.group {
 			float: left;			
 			max-width: 50%;
