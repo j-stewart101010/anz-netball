@@ -393,11 +393,12 @@
   &:focus,
   &:active,
   &.active {
-    color: $color;
+    color: darken($color, 20%);
+    border-color: darken($border, 20%);
 
-    @if $background != "transparent" {    
+    @if $background != "transparent" {
       background-color: darken($background, 8%);
-        border-color: darken($border, 12%);
+      border-color: darken($border, 12%);
     }
   }
   .open & { &.dropdown-toggle {
@@ -405,7 +406,7 @@
 
     @if $background != "transparent" {      
       background-color: darken($background, 8%);
-        border-color: darken($border, 12%);
+      border-color: darken($border, 12%);
     }
   } }
   &:active,

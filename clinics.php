@@ -22,7 +22,7 @@
     <body class="clinics">
 
 		<header class="master-head">
-			<div class="branding col-md-4 col-lg-3">
+			<div class="branding col-md-4">
 				<div class="brand clearfix">
 					<div class="logos">
 						<a href="/" class="anz-logo"></a>
@@ -37,9 +37,9 @@
 					</a>
 				</div>
 			</div>
-			<nav class="main-nav col-md-8 col-lg-9">
+			<nav class="main-nav col-md-8">
 				<div class="nav-items">
-					<ul id="main-navigation" class="navigation block collapse">
+					<ul id="main-navigation" class="clearfix navigation block collapse">
 						<li><a href="/community-grants">Community grants</a></li>
 						<li class="active"><a href="/getting-started">Getting started</a></li>
 						<li><a href="/all-about-netball">All about netball</a></li>
@@ -111,7 +111,7 @@
 											
 											</div>
 											<div class="brand-overlay shade-sixteen"></div>
-											<img class="video-tile-image" alt="Video" src="http://lorempixel.com/512/550/sports">
+											<img class="video-tile-image" alt="Video" src="http://lorempixel.com/612/612/sports">
 											<span class="loader"></span>
 										</article>
 									</div>
@@ -137,25 +137,29 @@
 				</div>
 
 				<div class="col col-md-6">
-					<div class="col col-xs-12 col-sm-6 col-md-4 col-lg-4 hidden-sm">
-						<div class="grid">
+					<div class="col col-xs-12 col-sm-12 col-md-4 col-lg-4">
+						<div class="half-length col col-xs-6 col-sm-6 col-md-12">
+						<!-- <div class="grid"> -->
 							<div class="image-wrap stacked">
 								<img src="http://lorempixel.com/g/265/292/">
 							</div>
 							<div class="image-wrap stacked">
 								<img src="http://lorempixel.com/g/265/292/">
 							</div>						
+						<!-- </div> -->
 						</div>
-						<div class="grid">
+						<div class="half-length col col-xs-6 col-sm-6 col-md-12">
+						<!-- <div class="grid"> -->
 							<div class="image-wrap stacked">
 								<img src="http://lorempixel.com/g/265/292/">
 							</div>
 							<div class="image-wrap stacked">
 								<img src="http://lorempixel.com/g/265/292/">
 							</div>						
+						<!-- </div> -->
 						</div>						
 					</div>
-					<div class="col col-xs-12 col-sm-8 col-md-8">
+					<div class="col col-xs-12 col-sm-12 col-md-8">
 						<div class="grid three-quarters-length">
 							<div class="col col-md-12 col-lg-12 center-tile shade-fourteen">
 								<div data-resize-height="center" class="outter-tile">
@@ -171,14 +175,14 @@
 						</div>	
 
 
-					<div class="col col-xs-6 col-sm-6 col-md-6">					
+					<div class="col col-xs-6 col-sm-6 col-md-6 hidden-xs hidden-sm">					
 						<div class="grid quarter-length">
 							<div class="image-wrap">
 								<img src="http://lorempixel.com/g/265/292/">
 							</div>					
 						</div>	
 					</div>	
-					<div class="col col-xs-6 col-sm-6 col-md-6">					
+					<div class="col col-xs-6 col-sm-6 col-md-6 hidden-xs hidden-sm">					
 						<div class="grid quarter-length">
 							<div class="image-wrap">
 								<img src="http://lorempixel.com/g/265/292/">

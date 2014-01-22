@@ -19,12 +19,12 @@
 		<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
     </head>
 
-    <body>
+    <body class="all-about-netball">
 
  		<!-- <div class="loading"></div> -->
 
 		<header class="master-head">
-			<div class="branding col-md-4 col-lg-3">
+			<div class="branding col-md-4">
 				<div class="brand clearfix">
 					<div class="logos">
 						<a href="/" class="anz-logo"></a>
@@ -39,9 +39,9 @@
 					</a>
 				</div>
 			</div>
-			<nav class="main-nav col-md-8 col-lg-9">
+			<nav class="main-nav col-md-8">
 				<div class="nav-items">
-					<ul id="main-navigation" class="navigation block collapse">
+					<ul id="main-navigation" class="clearfix navigation block collapse">
 						<li><a href="/community-grants">Community grants</a></li>
 						<li class="active"><a href="/getting-started">Getting started</a></li>
 						<li><a href="/all-about-netball">All about netball</a></li>
@@ -89,7 +89,7 @@
 					</div>
 				</div>				
 
-				<div class="col col-sm-12 col-md-4 col-lg-4 clearfix shade-eleven">
+				<div class="col col-sm-12 col-md-4 col-lg-4 clearfix shade-eleven fitness">
 
 					<div id="fitness-info" class="flip-container">
 						<div class="flipper">
@@ -164,7 +164,7 @@
 
 			<section class="grid">
 				
-				<div class="col col-sm-12 col-md-4 col-lg-4 clearfix shade-eleven">
+				<div class="col col-sm-12 col-md-4 col-lg-4 clearfix shade-eleven rules">
 
 					<div id="rules-info" class="flip-container">
 						<div class="flipper">
@@ -239,7 +239,7 @@
 
 				</div>
 
-				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
+				<div class="col col-xs-12 col-sm-12 col-md-2 col-lg-2">
 					<div class="outter-tile group shade-thirteen">
 						<article data-resize-height="#grid-image-five" class="content-tile tile center">
 							<h1 class="heading heading-exmed">Set PLays</h1>
@@ -252,7 +252,7 @@
 					</div>
 				</div>
 
-				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
+				<div class="col col-xs-12 col-sm-12 col-md-2 col-lg-2">
 					<div class="outter-tile group shade-ten">
 						<article data-resize-height="#grid-image-five" class="content-tile tile center">
 							<h1 class="heading heading-exmed">Training drills</h1>
@@ -269,7 +269,7 @@
 					</div>
 				</div>
 
-				<div class="col col-sm-12 col-md-4 col-lg-4 clearfix shade-thirteen">
+				<div class="col col-sm-12 col-md-4 col-lg-4 clearfix shade-thirteen equipment">
 
 					<div id="equipment-info" class="flip-container">
 						<div class="flipper">
