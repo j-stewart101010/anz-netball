@@ -63,7 +63,8 @@ require.config({
 		match_media: 'helpers/match-media',
 		bootstrap_transition : 'vendor/bootstrap-transition',		
         bootstrap_collapse : 'vendor/bootstrap-collapse',
-        bootstrap_modal : 'vendor/bootstrap-modal'			
+        bootstrap_modal : 'vendor/bootstrap-modal',
+        flippy : 'vendor/jquery.flippy.min'		
 	}
 });
 

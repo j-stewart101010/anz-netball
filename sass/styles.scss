@@ -311,15 +311,28 @@ body {
 .sharp-brand-angle {
 	display: inline-block;
 	position: absolute;
+	top: -1px;
 	width: 20px;
 	height: 100%;
 	margin: 15px;
-	top: -1px;
 	right: -11px;
 	margin: 0px;
 	z-index: 999;
 	@include skew(-16deg, 0deg);
 	@include gradient-vertical($start-color: lighten($brand-primary, 2%), $end-color: darken($brand-primary, 13%));	
+
+	.ie9 & {
+		width: 80px;
+		height: 100%;
+		right: -25px;
+		filter: none;
+    	-ms-transform: skew(0, 0);	
+		background: image-url("brand-angle.png") no-repeat center center;
+
+		@media screen and (max-width: $screen-xsmall) {
+			display: none;
+		}
+	}
 
 	&:before {
 		content: "";
@@ -371,6 +384,15 @@ body {
 	vertical-align: middle;
 }
 
+%social-media-icon {
+	@extend %icon;
+
+	padding: 0 5px;
+	@include border-radius(4px);
+	font-size: $font-size-extra-medium + 1;
+	color: white;
+}
+
 .menu-icon {
 	@extend %icon;
 
@@ -387,13 +409,23 @@ body {
 	}
 }
 
-%social-media-icon {
+.question-icon {
 	@extend %icon;
 
-	padding: 0 5px;
-	@include border-radius(4px);
-	font-size: $font-size-extra-medium + 1;
-	color: white;
+	width: 20px;
+	height: 20px;
+	text-align: center;	
+	border: 1px solid black;
+	@include border-radius(50%);
+	color: black;
+}
+
+.enlarge-icon {
+	@extend %icon;
+
+	.fa-chevron-left {
+		@include rotate(45deg);
+	}
 }
 
 .twitter-icon {
@@ -423,22 +455,62 @@ body {
 //====================================================================================================================================
 
 .image-wrap {
+	height: 100%;
 	position: relative;
 	overflow: hidden;
-	max-width: 100%;
-	max-height: 50%;
-	min-height: 50%;
-	width: 50%;
-	float: left;
+	// max-width: 100%;
+	// max-height: 50%;
+	// min-height: 50%;
+	// width: 50%;
+	// float: left;
 	z-index: 99;
 	background-color: $brand-primary;
 
-	&.stacked {
-		max-height: 50%;
-	}	
+	&.set {
+		float: left;
+
+		@media screen and (max-width: $screen-desktop) {
+			width: 50%;	
+		}		
+	}
+
+	&.enlarge {
+		position: absolute;
+		height: auto;
+		z-index: 100;
+
+		&.top {
+			top: 0;
+		}
+		&.left {
+			left: 0;
+		}
+		&.right {
+			right: 0;
+		}
+		&.bottom {
+			bottom: 0;
+		}
+
+	    @include transition-property(all);
+	    @include transition-duration(1s);			
+	}
 
 	img {
-		max-width: 100%;
+		max-width: 100%;	
+	}	
+
+	.enlarge-icon {
+		@include opacity(0);
+
+	    @include transition-property(all);
+	    @include transition-duration(0.6s);				
+	}
+
+	&:hover {
+		.enlarge-icon {
+			@include opacity(1);			
+		}		
 	}	
 
 	@media screen and (min-width: $screen-desktop) {
@@ -474,10 +546,6 @@ body {
 
 		&.inactive {
 			overflow: visible;
-
-			.col {
-				overflow: hidden;
-			}
 
 			@media screen and (max-width: $screen-desktop) {	
 				display: none;
@@ -540,12 +608,12 @@ body {
 		}		
 	}
 
-	@media screen and (max-width: $screen-xsmall) {
-		.image-wrap {
-			float: none;
-			width: auto;
-		}				
-	}
+	// @media screen and (max-width: $screen-xsmall) {
+	// 	.image-wrap {
+	// 		float: none;
+	// 		width: auto;
+	// 	}				
+	// }
 }
 
 // Appended Outter Tiles Module
@@ -601,6 +669,10 @@ body {
 			padding-right: 0;			
 		}		
 	}
+
+	@media screen and (max-width: $screen-desktop) {
+		display: none;
+	}
 }
 
 // Default Tile Module
@@ -610,11 +682,15 @@ body {
 .outter-tile {
 	display: table;
 	width: 100%;
-	height: 100%;
+	height: 100%!important;
 	padding: 40px 0;
 
+	&.collapse {
+		display: none; //Override specificity
+	}
+
 	&.group {
-		max-height: 50%;
+		// max-height: 50%;
 		padding: 0;
 	}	
 
@@ -624,8 +700,8 @@ body {
 
 	@media screen and (min-width: $screen-xsmall) and (max-width: $screen-desktop - 1) {
 		&.group {
-			float: left;			
-			max-width: 50%;
+			// float: left;			
+			// max-width: 50%;
 
 			.tile {
 				padding-left: 0;
@@ -635,10 +711,10 @@ body {
 	}	
 
 	@media screen and (max-width: $screen-xsmall) {
-		&.group {
-			float: none;			
-			max-width: none;
-		}
+		// &.group {
+		// 	float: left;			
+		// 	max-width: 50%;
+		// }
 	}
 }
 
@@ -757,6 +833,14 @@ body {
 	}
 }
 
+// Info Tile Module (Subset of .tile)
+//====================================================================================================================================
+//====================================================================================================================================
+
+.story-tile {
+
+}
+
 // Carousel Module
 //====================================================================================================================================
 //====================================================================================================================================
@@ -831,14 +915,16 @@ body {
 .ambassador-video-tile {
 	display: block;
 	width: 100%;
-	height: 100%;	
+	height: 100%;
+	padding-top: 30px;
+	padding-bottom: 30px;	
 	border-bottom: 1px solid white;
 
 	.video-tile-image {
 		position: absolute;
 		top: 0;
 		left: 0;
-		// height: 100%;
+		max-width: 100%;
 	}
 
 	.video-tile-content {
@@ -1016,7 +1102,36 @@ body {
 //====================================================================================================================================
 
 .tooltip {
+	position: relative;
 	cursor: pointer;
+
+	.tooltip-inner {
+		display: none;
+		position: absolute;
+		top: -85px;
+		left: -140px;
+		width: 150px;
+		padding: 8px;
+		font-size: $font-size-small;
+		background-color: $brand-secondary;
+
+		&:after {
+			content: "";
+			position: absolute;
+			width: 0;
+			height: 0;			
+			right: 0;
+			bottom: -15px;
+			border-top: 15px solid $brand-secondary;
+			border-left: 15px solid transparent;
+		}
+	}
+
+	&:hover {
+		.tooltip-inner {
+			display: block;
+		}
+	}
 }
 
 // Video Module
@@ -1089,6 +1204,39 @@ body {
 	z-index: 98;	
 }
 
+// Accordian Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.accordian {
+
+	.panel-title {
+		margin: 0;
+
+		a {
+			display: block;
+			padding: 15px;
+			font-family: $font-family-sans-serif;
+			font-weight: normal;
+			background-color: darken($brand-accent-one, 20%);
+
+			&:hover {
+				color: white;
+				background-color: darken($brand-accent-one, 30%);
+			}
+		}		
+	}	
+
+	.panel-collapse, .panel, .panel-group {
+		height: auto;
+	}
+
+	.panel-collapse {
+		padding: 5px 15px 15px;
+		background-color: darken($brand-accent-one, 10%);
+	}
+}
+
 // Flip Module
 //====================================================================================================================================
 //====================================================================================================================================
@@ -1098,12 +1246,22 @@ body {
     -moz-perspective: 1000;
     -o-perspective: 1000;
     perspective: 1000;
+
+	@media screen and (max-width: $screen-desktop) {	
+	    .tile {
+	    	padding-top: 50px;
+	    	padding-bottom: 50px;
+	    }
+	    .group .tile, .story-tile, .form {
+	    	padding-top: 0;
+	    	padding-bottom: 0;
+	    }
+	}
 }
 
 .flip-container, .front, .back, .flipper {
     width: 100%;
     height: 100%;
-	min-height: 370px;
 
 	@media screen and (min-width: $screen-desktop) {	
 		min-height: 0;		
@@ -1113,8 +1271,6 @@ body {
 .flipper {
     -moz-transform: perspective(1000px);
     -moz-transform-style: preserve-3d;
-
-    position: relative;
 }
 
 .front, .back {
@@ -1138,7 +1294,6 @@ body {
     transition: 0.6s;
     transform-style: preserve-3d;
 
-
     position: absolute;
     top: 0;
     left: 0;
@@ -1151,7 +1306,29 @@ body {
     -ms-transform: rotateY(-180deg);
     transform: rotateY(-180deg);
 
+    position: relative;
     z-index: 0;
+}
+
+//How flip tiles heights are generated. As we need to overlay elements to correcly flip either the back or frontface need to be positioned on top of one or the other. The face with the largest height should lead.
+//Defaults to back-led but generally video flip tiles are front-led because there backface is dynamically generated
+.front-led {
+	.front {
+		position: relative;
+	}
+	.back {
+		position: absolute;
+	}
+}
+
+//If the content is led in dimensions by the back
+.back-led {
+	.back {
+		position: relative;
+	}
+	.front {
+		position: absolute;
+	}
 }
 
 .flip-container.flip .back {
@@ -1171,10 +1348,19 @@ body {
  
 .no-csstransforms3d .flip-container {
 	.front {
-		display: block;
+		// @include opacity(1);
 	}
 	.back {
-		display: none;
+		visibility: hidden;
+	}
+
+	&.flip {
+		.front {
+			visibility: hidden;
+		}
+		.back {
+			visibility: visible;
+		}		
 	}
 }
 

@@ -89,7 +89,7 @@ define([
         };
         
         this.poller = new Image;
-        this.poller.src = IS_IE8 ? Config.REMOTE_PATH_2 + "images/IE8_polling.gif" : Config.REMOTE_PATH_2 + "images/pollingSpin.png";
+        this.poller.src = app_compatible ? Config.REMOTE_PATH_2 + "images/IE8_polling.gif" : Config.REMOTE_PATH_2 + "images/pollingSpin.png";
         this.poller.style.position = "absolute";
         this.poller.rotation = 0;
         this.poller.style.top = "50%";

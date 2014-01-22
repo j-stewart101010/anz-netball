@@ -12,7 +12,7 @@ define([
     'modules/loader-screen',
     'match_media',
     'bootstrap_transition',    
-    'bootstrap_collapse'
+    'bootstrap_collapse',
 ], function ($, _, Backbone, Config, model, Grid, DoubleSpring, GridDom, Trackpad, LoaderScreen, MatchMedia) {
 
     var _self;
@@ -22,12 +22,18 @@ define([
         initialize : function () {
             _self = this;
 
-            IS_IE8 = !Modernizr.canvas, IS_IE8;
-            if (MatchMedia.mobile, this.load(), Config.mouse) {
+            app_compatible = !Modernizr.canvas || !MatchMedia.mobile();
+            if (app_compatible) {
+                this.load();
+                Config.mouse;
                 var d = window.innerWidth || document.documentElement.clientWidth,
                     e = window.innerHeight || document.documentElement.clientHeight;
-                Config.mouse.x = d / 2, Config.mouse.y = e / 2
+                Config.mouse.x = d / 2, Config.mouse.y = e / 2;           
             }
+            // if (MatchMedia.mobile(), this.load(), Config.mouse) {
+            //     console.log('load');
+
+            // }
         },
 
         load : function () {
@@ -44,21 +50,15 @@ define([
             var a = window.innerWidth || document.documentElement.clientWidth,
                 b = window.innerHeight || document.documentElement.clientHeight;
             
-            if(IS_IE8) {
-                grid = new GridDom(a, b);
-                $(grid.domView).mousedown(onMouseDown);
-                $(grid.domView).mouseup(onMouseUp);
-                $(grid.domView).mousemove(onMouseMove);
-                trackpad = new Trackpad(grid.domView);
-            } else {
-                canvas = document.createElement("canvas"); 
+            if(app_compatible) {
+                canvas = document.getElementById("nbn"); 
                 canvas.width = a; 
                 canvas.height = b*0.87; //100%-8%-5% 
                 context = canvas.getContext("2d");
-                canvas.style.position = "absolute";
-                canvas.style.top = "8%";
+                // canvas.style.position = "absolute";
+                // canvas.style.top = "8%";
                 canvas.style.left = "0px"; 
-                document.body.appendChild(canvas);
+                // document.body.appendChild(canvas);
                 canvas.style.display = "none"; 
                 $(canvas).fadeIn("slow"); 
                 $(canvas).mousedown(_self.onMouseDown);
@@ -70,7 +70,12 @@ define([
                 grid = new Grid(a, b);
                 grid.canvasOffset = b*0.08; //8%
                 trackpad = new Trackpad(canvas);
-
+            } else {
+                // grid = new GridDom(a, b);
+                // $(grid.domView).mousedown(onMouseDown);
+                // $(grid.domView).mouseup(onMouseUp);
+                // $(grid.domView).mousemove(onMouseMove);
+                // trackpad = new Trackpad(grid.domView); 
                 // for(var i=0;i<model.content.length;i++){
                 //     model.content[i].lines = grid.splitText(model.content[i].)
                 // }
@@ -81,10 +86,10 @@ define([
                 document.body.removeChild(loaderScreen.view);
             };
 
-            browseMode = false;
-            pauseGridRender = false;
+            _self.browseMode = false;
+            _self.pauseGridRender = false;
             _self.onResize();
-            resizeCount = 9;
+            _self.resizeCount = 9;
             trackpad.lock();
             
             trackpad.setPosition(a / 2, b / 2);
@@ -110,7 +115,7 @@ define([
             //     a.positionY = (f + 1.5 - .5) * grid.squareWidth + grid.height / 2 - grid.squareWidth / 2 + 1;
             // } 
             // else 
-            browseMode = true, setTimeout(_self.unlock, 1000);
+            _self.browseMode = true, setTimeout(_self.unlock, 1000);
         },
 
         unlock : function () {
@@ -120,17 +125,17 @@ define([
 
         update : function () {
             //console.log(Config.isMobile);
-            Config.isMobile || resizeCount++;
-            resizeCount ==10 && _self.realResize(); 
-            if(loaded && browseMode) trackpad.update(); 
+            Config.isMobile || _self.resizeCount++;
+           _self.resizeCount ==10 && _self.realResize(); 
+            if(loaded && _self.browseMode) trackpad.update(); 
             if(Config.track) {
                 Config.track.x = trackpad.value;
                 Config.track.y = trackpad.valueY;
             };
 
             ////todo:put mouse status update and stuff here which would have been in grid.render()
-
-            pauseGridRender || (IS_IE8 ? grid.render() : (grid.render(context))); 
+            if (_self.pauseGridRender || app_compatible) { grid.render(context) }
+            // pauseGridRender || (app_compatible ? grid.render() : ()); 
             requestAnimFrame(_self.update);
         },
 
@@ -139,7 +144,7 @@ define([
             var a = window.innerWidth || document.documentElement.clientWidth,
                 b = window.innerHeight || document.documentElement.clientHeight;
             if (window.grid) {
-                if(IS_IE8 || window.canvas) {
+                if(app_compatible || window.canvas) {
                     canvas.width = a;
                     canvas.height = b*0.87;
                     grid.canvasOffset = b*0.08;
@@ -156,13 +161,11 @@ define([
                     window.usingForm ? a > 2 * b ? $(overlay).fadeIn() : $(overlay).fadeOut() : a > b ? $(overlay).fadeIn() : $(overlay).fadeOut();
                     var d = c.x / 2,
                         e = c.y / 2;
-                    if(pauseGridRender) {
-                        if(IS_IE8) {
-                            grid.render()
-                        } else {
+                    if(_self.pauseGridRender) {
+                        if(app_compatible) {
                             grid.render(context);
-                            viewer.render(context);
-                        };
+                            viewer.render(context);                            
+                        }
                         if(a != this.cacheW && b != this.cacheH) window.scrollTo(0, 0);
                         this.cacheW = a;
                         this.cacheH = b;
@@ -174,14 +177,14 @@ define([
 
         onSwapPressed : function () {
             window.location.hash = "";
-            pauseGridRender = false;
+            _self.pauseGridRender = false;
             viewer.swap();
         },
 
         onViewerHidden : function () {
             trackpad.unlock();
             grid.unlock();
-            browseMode = true;
+            _self.browseMode = true;
         },
 
         // resize : function () { 
@@ -189,13 +192,13 @@ define([
         // },
 
         onResize : function () {
-            resizeCount = 0;
+            _self.resizeCount = 0;
             var a = window.innerWidth || document.documentElement.clientWidth,
                 b = window.innerHeight || document.documentElement.clientHeight;
             this.w = a;
             this.h = b;
 
-            if(MatchMedia.mobile()) _self.realResize();
+            // if(MatchMedia.mobile()) _self.realResize();
             if(window.tabMenu) tabMenu.resize(a, b);
             if(loaderScreen) loaderScreen.resize(a, b);
             if(window.tickerTape) tickerTape.view.style.left = a / 2 - 304 + "px";

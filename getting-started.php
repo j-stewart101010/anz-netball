@@ -3,6 +3,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js lt-ie10 ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
 		<title>ANZ Netball Nation - Getting Started</title>
@@ -13,7 +14,7 @@
 		<link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/f8bca219-07d6-4bdf-9b18-02f0db46b33f.css"/>
 
 	    <!--[if lt IE 9]>
-	        <link href="/stylesheets/ie.css" rel="stylesheet" type="text/css">
+	        <link href="/css/ie.css" rel="stylesheet" type="text/css">
 	    <![endif]-->
 
 		<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
@@ -73,26 +74,20 @@
 					</div>
 				</div>
 
-				<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-					<!-- <div class="row"> -->
-						<!-- <div class="col col-xs-6 col-sm-12"> -->
-							<div class="image-wrap">
-								<img src="http://lorempixel.com/g/612/612/">
-							</div>
-						<!-- </div> -->
-						<!-- <div class="col col-xs-6 col-sm-12"> -->
-							<div class="image-wrap">
-								<img src="http://lorempixel.com/g/612/612/">
-							</div>
-						<!-- </div>	 -->
-					<!-- </div>			 -->
+				<div class="col col-xs-12 col-md-2 col-lg-2">
+					<div class="col-half col col-xs-12 col-md-12">
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
+					</div>
 				</div>
-
-
 
 				<div class="col col-sm-12 col-md-4 col-lg-4 clearfix">
 
-					<div id="video-case-studies" class="flip-container">
+					<div id="video-case-studies" class="flip-container front-led">
 						<div class="flipper">
 							<div class="front">
 
@@ -129,9 +124,6 @@
 						</div>
 					</div>
 
-
-
-					<!-- <img src="images/netball-sixteen.jpg">		 -->
 				</div>	
 
 
@@ -140,25 +132,33 @@
 
 			<section class="grid">
 				
-				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
+				<div class="col col-xs-12 col-sm-12 col-md-2 col-lg-2">
+					<div class="col-half col col-xs-6 col-md-12">
+						<div id="grid-image-five" class="image-wrap">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
 					</div>
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
+					<div class="col-half col col-xs-6 col-md-12">
+						<div id="grid-image-five" class="image-wrap">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
 					</div>
 				</div>
 
-				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="outter-tile group shade-seven">
-						<article data-resize-height="#grid-image-five" class="content-tile tile center">
-							<h1 class="heading heading-exmed verbose">ANZ NetSetGo</h1>
-							<p class="sub-content"><small class="verbose">Netball is a ball sport played by two teams of six players.</small></p>
-							<a class="btn btn-default btn-sm btn-primary" href="/grants">More <i class="fa fa-angle-right"></i></a>
-						</article>
+				<div class="col col-xs-12 col-sm-12 col-md-2 col-lg-2">
+					<div class="col-half col col-xs-6 col-md-12">
+						<div class="outter-tile group shade-seven">
+							<article data-resize-height="#grid-image-five" class="content-tile tile center">
+								<h1 class="heading heading-exmed verbose">ANZ NetSetGo</h1>
+								<p class="sub-content"><small class="verbose">Netball is a ball sport played by two teams of six players.</small></p>
+								<a class="btn btn-default btn-sm btn-primary" href="/grants">More <i class="fa fa-angle-right"></i></a>
+							</article>
+						</div>
 					</div>
-					<div id="grid-image-five" class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
+					<div class="col-half col col-xs-6 col-md-12">
+						<div id="grid-image-five" class="image-wrap">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
 					</div>
 				</div>
 
@@ -174,23 +174,28 @@
 					</div>
 				</div>
 
-				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
-					</div>
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
+				<div class="col col-xs-12 col-md-2 col-lg-2">
+					<div class="col-half col col-xs-12 col-md-12">
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
 					</div>
 				</div>
 
-				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
-					</div>				
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
+				<div class="col col-xs-12 col-md-2 col-lg-2">
+					<div class="col-half col col-xs-12 col-md-12">
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
 					</div>
-				</div>
+				</div>				
+
 			</section>			
 
 		</main>

@@ -2,6 +2,17 @@
 // Shame (to be fixed at a later stage if there is time or in project future maintenance)
 // These are mostly to fix border issues with different grid layouts
 
+.btn {
+	.fa-angle-right {
+		font-size: ($font-size-medium - 1);
+		margin-left: 5px;
+	}
+	.fa-angle-left {
+		font-size: ($font-size-medium - 1);
+		margin-right: 5px;
+	}	
+}
+
 .clinics {
 	.content {
 		.grid.full-length .grid .col + .col {
@@ -38,7 +49,7 @@
 	}
 
 	@media screen and (max-width: $screen-small) {
-		.equipment {
+		.equipment, .rules, .fitness {
 			float: left;
 			width: 100%;
 		}
