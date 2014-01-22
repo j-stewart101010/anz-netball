@@ -7,13 +7,14 @@ define([
     'models/tile',
     'modules/grid',
     'modules/double-spring',
+    'modules/box',
     'modules/grid-dom',
     'modules/trackpad',
     'modules/loader-screen',
     'match_media',
     'bootstrap_transition',    
-    'bootstrap_collapse',
-], function ($, _, Backbone, Config, model, Grid, DoubleSpring, GridDom, Trackpad, LoaderScreen, MatchMedia) {
+    'bootstrap_collapse'
+], function ($, _, Backbone, Config, model, Grid, DoubleSpring, Box, GridDom, Trackpad, LoaderScreen, MatchMedia) {
 
     var _self;
 
@@ -30,10 +31,6 @@ define([
                     e = window.innerHeight || document.documentElement.clientHeight;
                 Config.mouse.x = d / 2, Config.mouse.y = e / 2;           
             }
-            // if (MatchMedia.mobile(), this.load(), Config.mouse) {
-            //     console.log('load');
-
-            // }
         },
 
         load : function () {
@@ -246,7 +243,7 @@ define([
             var a = Config.mouse.x - Config.downAt.x,
                 b = Config.mouse.y - Config.downAt.y,
                 c = a * a + b * b;
-            if(c > 125) grid.didMove = true;
+            //if(c > 125) grid.didMove = true;
 
         }                  
 

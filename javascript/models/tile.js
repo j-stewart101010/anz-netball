@@ -54,12 +54,12 @@ var model = {
 
      {tiletype:"video",
       textsubject:"TALKS NETBALL NATION",
-      //imageurl:"images/video001.jpg",
-      //textname:"SHARELLE MCMAHON",
-      //linkurl:"http://youtube.com/watch?anznbn-sharelletalks"},
-      imageurl:"images/video002.jpg",
-      textname:"LIBBY BIRCH",
-      linkurl:"http://youtube.com/watch?anznbn-libbytalks",
+      imageurl:"images/video001.jpg",
+      textname:"SHARELLE MCMAHON",
+      linkurl:"http://youtube.com/watch?anznbn-sharelletalks",
+      // imageurl:"images/video002.jpg",
+      // textname:"LIBBY BIRCH",
+      // linkurl:"http://youtube.com/watch?anznbn-libbytalks",
       subimageurl:"images/subimage-play.png"},
 
      {tiletype:"image",
