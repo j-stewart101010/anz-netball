@@ -24,6 +24,11 @@ define([
         this.assetLoader.onProgress = function () {};
         this.assetLoader.onLoadComplete = this.onInitialLoadComplete.bind(this);
 
+        this.offScreen = document.createElement("canvas"); 
+        this.offScreen.width = 100; 
+        this.offScreen.height = 100;
+        this.offScreenCtx = this.offScreen.getContext("2d");
+
         var imagelist = [], imgpath;
         var nextpos = {x:0, y:0};
         var checkpos, collision;
@@ -33,17 +38,21 @@ define([
             tilescale = 1;
             switch(model.content[i].tiletype) {
                 case "text":
-                    imgpath = model.content[i].subimageurl;
+                case "textlink":
+                    model.content[i].image = new Image;
+                    model.content[i].image.src = Config.REMOTE_PATH_2 + model.content[i].subimageurl;
+                    imagelist.push(Config.REMOTE_PATH_2 + model.content[i].subimageurl);
                 break;
                 case "image":
-                    imgpath = model.content[i].imageurl;
-                break;
-                case "textlink":
-                    imgpath = model.content[i].subimageurl;
+                    model.content[i].image = new Image;
+                    model.content[i].image.src = Config.REMOTE_PATH_2 + model.content[i].imageurl;
+                    imagelist.push(Config.REMOTE_PATH_2 + model.content[i].imageurl);
                 break;
                 case "video":
-                    imgpath = model.content[i].imageurl;
                     tilescale = 2;
+                    model.content[i].image = new Image;
+                    model.content[i].image.src = Config.REMOTE_PATH_2 + model.content[i].imageurl;
+                    imagelist.push(Config.REMOTE_PATH_2 + model.content[i].imageurl);
                     //// small extra image for videos
                     model.content[i].subimage = new Image;
                     model.content[i].subimage.src = Config.REMOTE_PATH_2 + model.content[i].subimageurl;
@@ -79,13 +88,7 @@ define([
 
             } while(collision && checkpos.y<100 && checkpos.x < 100); //end if there is a mistake and this lasts too long
             //console.log(imgpath);
-            model.content[i].image = new Image;
-            model.content[i].image.src = Config.REMOTE_PATH_2 + imgpath;
-            //model.content[i].image = "http://lorempixel.com/300/300/sports/";
-
-
-           imagelist.push(Config.REMOTE_PATH_2 + imgpath);
-           //imagelist.push("http://lorempixel.com/300/300/sports/");
+                       //imagelist.push("http://lorempixel.com/300/300/sports/");
         };
         
         this.poller = new Image;

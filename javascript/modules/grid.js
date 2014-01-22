@@ -5,7 +5,8 @@ define([
         'models/tile',
         'modules/grid-button',
         'modules/double-spring',
-], function ($, Config, model, GridButton, DoubleSpring) {
+        'modules/box',
+], function ($, Config, model, GridButton, DoubleSpring, Box) {
   'use strict';
   var Grid = function (w, h) {
 	  console.log("Grid");
@@ -45,38 +46,40 @@ define([
     this.offScreen.height = this.squareHeight;
     this.offScreenCtx = this.offScreen.getContext("2d");
 
-    this.titleFont = Math.round(this.squareHeight*0.10)+"px Helvetica W01 Light"; //10%
-    this.subTextFont = Math.round(this.squareHeight*0.043)+"px Helvetica W01 Light"; //4.3%
-
-    console.log("titleFont="+this.titleFont);
-    console.log("subTextFont="+this.subTextFont);
-
-
     for(var i=0;i<model.content.length;i++) {
       switch(model.content[i].tiletype) {
         case "text":
+
+        break;
         case "textlink":
-          this.offScreenCtx.font = this.titleFont;
-          model.content[i].titlesplit = this.splitText(this.offScreenCtx,this.squareWidth*0.86,model.content[i].title);
-          this.offScreenCtx.font = this.subTextFont
-          model.content[i].subtextsplit = this.splitText(this.offScreenCtx,this.squareWidth*0.86,model.content[i].subtext);
+          // this.offScreenCtx.font = this.titleFont;
+          // model.content[i].titlesplit = this.splitText(this.offScreenCtx,this.squareWidth*0.86,model.content[i].title);
+          // this.offScreenCtx.font = this.subTextFont
+          // model.content[i].subtextsplit = this.splitText(this.offScreenCtx,this.squareWidth*0.86,model.content[i].subtext);
         break;
         case "image":
+        model.content[i].box = new Box(this.offScreenCtx, [], {width:350,height:350,contentType:"container"});
+        model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].image, {width:100,height:100,contentType:"image"}));
+        model.content[i].box.calculate();
         break;
         case "video":
-        this.offScreenCtx.font = Math.round(this.squareHeight*0.0625)+"px Helvetica"; //6.25%;
-
-        model.content[i].textsubjectsplit = this.splitText(this.offScreenCtx,this.squareWidth*model.content[i].scale*0.75,model.content[i].textsubject);
-        console.log(model.content[i].textsubjectsplit);
+        model.content[i].box = new Box(this.offScreenCtx, [], {width:350,height:350,contentType:"container"});
+        model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].image, {width:100,height:100,contentType:"image"}));
+        model.content[i].box.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:"rgba(70,145,185,0.5)"}));
+        model.content[i].box.addBox(new Box(this.offScreenCtx, "VIDEO: " + model.content[i].textname, {contentType:"text",left:8.5,top:10,width:80,padding:10,fontSize:9,backgroundColour:"rgba(0,0,0,0.5)"}));
+        model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].textsubject, {contentType:"text",left:8.5,top:17.5,width:80,padding:10,fontSize:22,backgroundColour:"rgba(0,0,0,0.5)"}));
+        model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].subimage, {left:8.5,top:75,contentType:"image"}));
+        console.log(model.content[i].box);
+        model.content[i].box.calculate();
       };
     
       if(model.content[i].flippable) {
         switch(model.content[i].backtype) {
           case "text":
-            this.offScreenCtx.font = this.titleFont;
-            model.content[i].backtitlesplit = this.splitText(this.offScreenCtx,this.squareWidth*0.86,model.content[i].backtitle);
-            this.offScreenCtx.font = this.subTextFont;
-            model.content[i].backsubtextsplit = this.splitText(this.offScreenCtx,this.squareWidth*0.86,model.content[i].backsubtext);
+            // this.offScreenCtx.font = this.titleFont;
+            // model.content[i].backtitlesplit = this.splitText(this.offScreenCtx,this.squareWidth*0.86,model.content[i].backtitle);
+            // this.offScreenCtx.font = this.subTextFont;
+            // model.content[i].backsubtextsplit = this.splitText(this.offScreenCtx,this.squareWidth*0.86,model.content[i].backsubtext);
           break;
           case "image":
           case "textlink":
@@ -95,41 +98,7 @@ define([
 	  this.height = h;
 	};
 
-	Grid.prototype.splitText = function (context, maxLength, theText) {
-
-    var words=theText.split(" "),
-        lines=[],
-        prevText=words[0],
-        prevLength=context.measureText(words[0]).width,
-        currLength=0;
-
-    for (var i=1;i<words.length;i++) { //last loop is never reached
-      if(words[i].length>0){
-        
-        currLength=context.measureText(prevText+words[i]).width;
-        if (currLength<maxLength) {
-            prevText+=(" "+words[i]);
-            prevLength=currLength;
-        } else {
-            lines.push({width:prevLength,
-                        text:prevText});
-            prevText=words[i];
-            prevLength=context.measureText(words[i]).width;
-        };
-        if (i==words.length-1) { //this prevents execution of the last loop
-            lines.push({width:prevLength,
-                        text:prevText});
-            break;
-        };
-      };
-    };
-    if(words.length<=1) {  //this executes if there is only one word (the for loop doesn't execute)
-      prevLength=context.measureText(words[0]).width;
-      lines.push({width:prevLength,
-                        text:words[0]});
-    };
-    return lines;
-	};
+	
 
   Grid.prototype.renderTile = function (ctx, drawx, drawy, drawScale, modelIndex) {
     var sizex=this.squareWidth*model.content[modelIndex].scale*drawScale,
@@ -158,80 +127,83 @@ define([
       switch(model.content[modelIndex].tiletype) {
         case "text":
         case "textlink":
-          ctx.fillStyle=model.content[modelIndex].colour;
-          ctx.fillRect(drawx,drawy,sizex,sizey);
-          cy=drawy+this.squareHeight*0.27*tScale;  //27% down the height of the tile
-          ctx.font=this.titleFont;
-          ctx.fillStyle = "white";
-          if(tScale>.01) { 
-            if(tScale!=1) ctx.scale(tScale,tScale);
-            for(var i=0;i<model.content[modelIndex].titlesplit.length;i++) {
-              cx=drawx+(this.squareWidth-model.content[modelIndex].titlesplit[i].width)*0.5*tScale; //centre the text
-              ctx.fillText(model.content[modelIndex].titlesplit[i].text, cx/tScale, cy/tScale);
-              cy+=this.squareHeight*0.137*tScale;
-            };
-            cy+=this.squareHeight*0.042*tScale;
+          // ctx.fillStyle=model.content[modelIndex].colour;
+          // ctx.fillRect(drawx,drawy,sizex,sizey);
+          // cy=drawy+this.squareHeight*0.27*tScale;  //27% down the height of the tile
+          // ctx.font=this.titleFont;
+          // ctx.fillStyle = "white";
+          // if(tScale>.01) { 
+          //   if(tScale!=1) ctx.scale(tScale,tScale);
+          //   for(var i=0;i<model.content[modelIndex].titlesplit.length;i++) {
+          //     cx=drawx+(this.squareWidth-model.content[modelIndex].titlesplit[i].width)*0.5*tScale; //centre the text
+          //     ctx.fillText(model.content[modelIndex].titlesplit[i].text, cx/tScale, cy/tScale);
+          //     cy+=this.squareHeight*0.137*tScale;
+          //   };
+          //   cy+=this.squareHeight*0.042*tScale;
             
-            ctx.font=this.subTextFont;
-            for(var i=0;i<model.content[modelIndex].subtextsplit.length;i++) {
-              cx=drawx+(this.squareWidth-model.content[modelIndex].subtextsplit[i].width)*0.5*tScale; //centre the text
-              ctx.fillText(model.content[modelIndex].subtextsplit[i].text, cx/tScale, cy/tScale);
-              cy+=this.squareHeight*0.085*tScale;
-            };
-            if(tScale!=1) ctx.scale(1/tScale,1/tScale);
-          };
-          cx=drawx+(this.squareWidth-model.content[modelIndex].image.width)*0.5*tScale; //centre the image
-          ctx.drawImage(model.content[modelIndex].image,cx,cy,model.content[modelIndex].image.width*tScale,model.content[modelIndex].image.height*tScale);
+          //   ctx.font=this.subTextFont;
+          //   for(var i=0;i<model.content[modelIndex].subtextsplit.length;i++) {
+          //     cx=drawx+(this.squareWidth-model.content[modelIndex].subtextsplit[i].width)*0.5*tScale; //centre the text
+          //     ctx.fillText(model.content[modelIndex].subtextsplit[i].text, cx/tScale, cy/tScale);
+          //     cy+=this.squareHeight*0.085*tScale;
+          //   };
+          //   if(tScale!=1) ctx.scale(1/tScale,1/tScale);
+          // };
+          // cx=drawx+(this.squareWidth-model.content[modelIndex].image.width)*0.5*tScale; //centre the image
+          // ctx.drawImage(model.content[modelIndex].image,cx,cy,model.content[modelIndex].image.width*tScale,model.content[modelIndex].image.height*tScale);
 
         break;
         case "image":
-          ctx.drawImage(model.content[modelIndex].image,drawx,drawy,sizex,sizey);
+          // ctx.drawImage(model.content[modelIndex].image,drawx,drawy,sizex,sizey);
+          //console.log("render object index "+modelIndex);
+          model.content[modelIndex].box.render(ctx, drawx, drawy, drawScale*model.content[modelIndex].scale);
         break;
         case "video":
-          ctx.drawImage(model.content[modelIndex].image,drawx,drawy,sizex,sizey);
-          //TODO:add text and overlays
-          ctx.fillStyle="rgba(70,145,185,0.5)"; //full overlay
-          ctx.fillRect(drawx,drawy,sizex,sizey);
-          ctx.fillStyle="rgba(0,0,0,0.5)"; //dark overlays for text
+          model.content[modelIndex].box.render(ctx, drawx, drawy, drawScale*model.content[modelIndex].scale);
+      //     ctx.drawImage(model.content[modelIndex].image,drawx,drawy,sizex,sizey);
+      //     //TODO:add text and overlays
+      //     ctx.fillStyle="rgba(70,145,185,0.5)"; //full overlay
+      //     ctx.fillRect(drawx,drawy,sizex,sizey);
+      //     ctx.fillStyle="rgba(0,0,0,0.5)"; //dark overlays for text
           
-          ctx.font = "bold "+ Math.round(this.squareHeight*0.024)+"px Helvetica"; //2.4% bold
-          cx = ctx.measureText("VIDEO "+model.content[modelIndex].textname).width;//+sizex*0.16; //16% padding for text, cx used as width in this case
-          cx*=tScale;
-          cx+=sizex*0.10;
-          ctx.fillRect(drawx+sizex*0.085,drawy+sizey*0.10,cx,sizey*0.065);
-          cx=0;
-          for(var i=0;i<model.content[modelIndex].textsubjectsplit.length;i++) { //find greatest width of the rows
-            if(model.content[modelIndex].textsubjectsplit[i].width>cx) cx=model.content[modelIndex].textsubjectsplit[i].width;
-          };
-          cx*=tScale;
-          cx+=sizex*0.10; //8% padding also
-          ctx.fillRect(drawx+sizex*0.085,drawy+sizey*0.175,cx,model.content[modelIndex].textsubjectsplit.length*0.12*sizey);
+      //     ctx.font = "bold "+ Math.round(this.squareHeight*0.024)+"px Helvetica"; //2.4% bold
+      //     cx = ctx.measureText("VIDEO "+model.content[modelIndex].textname).width;//+sizex*0.16; //16% padding for text, cx used as width in this case
+      //     cx*=tScale;
+      //     cx+=sizex*0.10;
+      //     ctx.fillRect(drawx+sizex*0.085,drawy+sizey*0.10,cx,sizey*0.065);
+      //     cx=0;
+      //     for(var i=0;i<model.content[modelIndex].textsubjectsplit.length;i++) { //find greatest width of the rows
+      //       if(model.content[modelIndex].textsubjectsplit[i].width>cx) cx=model.content[modelIndex].textsubjectsplit[i].width;
+      //     };
+      //     cx*=tScale;
+      //     cx+=sizex*0.10; //8% padding also
+      //     ctx.fillRect(drawx+sizex*0.085,drawy+sizey*0.175,cx,model.content[modelIndex].textsubjectsplit.length*0.12*sizey);
 
-          if(tScale>.01) {
-            ctx.fillStyle="white";
-            if(tScale!=1) ctx.scale(tScale,tScale);
-            cx=drawx+sizex*0.125;
-            cy=drawy+sizey*0.144;
-            ctx.fillText("VIDEO", cx/tScale, cy/tScale);
+      //     if(tScale>.01) {
+      //       ctx.fillStyle="white";
+      //       if(tScale!=1) ctx.scale(tScale,tScale);
+      //       cx=drawx+sizex*0.125;
+      //       cy=drawy+sizey*0.144;
+      //       ctx.fillText("VIDEO", cx/tScale, cy/tScale);
 
-            ctx.font = Math.round(this.squareHeight*0.024)+"px Helvetica"; //2.4% not bold
-            cx=drawx+sizex*0.23;
-            ctx.fillText(model.content[modelIndex].textname, cx/tScale, cy/tScale);
+      //       ctx.font = Math.round(this.squareHeight*0.024)+"px Helvetica"; //2.4% not bold
+      //       cx=drawx+sizex*0.23;
+      //       ctx.fillText(model.content[modelIndex].textname, cx/tScale, cy/tScale);
 
-            ctx.font = Math.round(this.squareHeight*0.0625)+"px Helvetica"; //6.25%
-            cx=drawx+sizex*0.125;
-            cy=drawy+sizey*0.26;
-            for(i=0;i<model.content[modelIndex].textsubjectsplit.length;i++) {
-              ctx.fillText(model.content[modelIndex].textsubjectsplit[i].text, cx/tScale, cy/tScale);
-              cy+=sizey*0.085;
-            };
+      //       ctx.font = Math.round(this.squareHeight*0.0625)+"px Helvetica"; //6.25%
+      //       cx=drawx+sizex*0.125;
+      //       cy=drawy+sizey*0.26;
+      //       for(i=0;i<model.content[modelIndex].textsubjectsplit.length;i++) {
+      //         ctx.fillText(model.content[modelIndex].textsubjectsplit[i].text, cx/tScale, cy/tScale);
+      //         cy+=sizey*0.085;
+      //       };
             
-            if(tScale!=1) ctx.scale(1/tScale,1/tScale);
-          };
-          cx=drawx+sizex*0.08;
-          cy=drawy+sizey*0.75;
-          ctx.drawImage(model.content[modelIndex].subimage,cx,cy,model.content[modelIndex].subimage.width*drawScale,model.content[modelIndex].subimage.height*drawScale);
-      };
+      //       if(tScale!=1) ctx.scale(1/tScale,1/tScale);
+      //     };
+      //     cx=drawx+sizex*0.08;
+      //     cy=drawy+sizey*0.75;
+      //     ctx.drawImage(model.content[modelIndex].subimage,cx,cy,model.content[modelIndex].subimage.width*drawScale,model.content[modelIndex].subimage.height*drawScale);
+       };
     };
   };
 
@@ -268,7 +240,7 @@ define([
       //   console.log(model.content[this.mouseHover].titlesplit);
       //   console.log(model.content[this.mouseHover].subtextsplit);
       // };
-      this.lastButton = Config.mouse.button
+      this.lastButton = Config.mouse.button;
 
 
 	    // this.fliptile.x += this.fliptile.xi;
