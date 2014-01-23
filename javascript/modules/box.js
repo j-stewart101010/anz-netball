@@ -10,9 +10,9 @@ define([
 		_self = this;
 
 		this.ctx;
-		this.boxes=[], this.height=200, this.width=200, this.left=0, this.top=0, this.padding=0, this.margin=0, this.right, this.bottom;
-		this.content, this.contentType="text", this.properties, this.fontStyle="normal", this.fontSize=36, this.fontName="Helvetica W01 Light", this.lineHeight=this.fontSize*1.2;
-		this.fontColour="#AADDFF", this.backgroundColour="#555555", this.id="", this.textAlign="left";
+		this.boxes=[], this.height, this.width, this.left=0, this.top=0, this.padding=0, this.margin=0, this.right, this.bottom;
+		this.content, this.contentType="text", this.properties, this.fontStyle="normal", this.fontSize=24, this.fontName="Helvetica W01 Light", this.lineHeight=this.fontSize;
+		this.fontColour="#AADDFF", this.backgroundColour="#555555", this.id="", this.align="left";
 		
 		
 		$.each(properties, function(key, value) {
@@ -20,7 +20,6 @@ define([
 		});
 		if(this.contentType=="container") this.boxes = newContent;					
 		if(this.contentType=="text" || this.contentType=="image") this.content = newContent;
-
 		this.ctx=ctx;
 	};
 
@@ -41,12 +40,13 @@ define([
 	// 	if(this.id==id) return this;
 	// };
 	Box.prototype.last = function ()  {
-		if(this.boxes.count==0) return null;
-		return this.boxes.count-1;
+		if(typeof(this.boxes)=="undefined") return {right:0,bottom:0};
+		if(this.boxes.length==0) return {right:0,bottom:0};
+		return {right:this.boxes[this.boxes.length-1].right, bottom:this.boxes[this.boxes.length-1].bottom};
 	};
 
 	Box.prototype.addBox = function (newBox)  {
-		console.log(newBox);
+	//	console.log(newBox);
 		if(typeof(this.boxes)!="undefined") this.boxes.push(newBox);
 		//this.calculate();
 	};
@@ -107,12 +107,13 @@ define([
 
 					ctx.fillStyle=this.boxes[i].fontColour;
 					ctx.font = this.boxes[i].fontStyle + " " + this.boxes[i].fontSize + "px " + this.boxes[i].fontName;
-					cy=drawy+this.boxes[i].drawTop+this.boxes[i].fontSize;
+					ctx.textBaseline = 'top';
+					cy=drawy+this.boxes[i].drawTop*drawScale;//+this.boxes[i].lineHeight;
 					if(drawScale!=1) ctx.scale(drawScale,drawScale);
 					for(j=0;j<this.boxes[i].splitLines.length;j++) {
-						cx=drawx+this.boxes[i].drawLeft; //default left justified
-						if(this.boxes[i].textAlign=="center") cx=drawx+(this.boxes[i].drawLeft+this.boxes[i].drawWidth-this.boxes[i].splitLines[j].width)*0.5;
-						if(this.boxes[i].textAlign=="right") cx=drawx+this.boxes[i].drawLeft+this.boxes[i].drawWidth-this.boxes[i].splitLines[j].width;
+						cx=drawx+(this.boxes[i].drawLeft)*drawScale; //default left justified
+						if(this.boxes[i].align=="center") cx=drawx+(this.boxes[i].drawLeft+(this.boxes[i].drawWidth-this.boxes[i].splitLines[j].width)*0.5)*drawScale;
+						if(this.boxes[i].align=="right") cx=drawx+(this.boxes[i].drawLeft+this.boxes[i].drawWidth-this.boxes[i].splitLines[j].width)*drawScale;
 						ctx.fillText(this.boxes[i].splitLines[j].text, cx/drawScale, cy/drawScale);
 
 						cy+=this.boxes[i].lineHeight*drawScale;
@@ -123,7 +124,7 @@ define([
 			if(this.boxes[i].contentType=="image") {
 				ctx.fillStyle=this.boxes[i].backgroundColour;
 				ctx.fillRect(drawx+this.boxes[i].boxLeft*drawScale,drawy+this.boxes[i].boxTop*drawScale,this.boxes[i].boxWidth*drawScale,this.boxes[i].boxHeight*drawScale);
-				ctx.drawImage(this.boxes[i].content,drawx+this.boxes[i].drawLeft*drawScale,drawy+this.boxes[i].drawTop*drawScale,this.boxes[i].drawWidth*drawScale,this.boxes[i].drawHeight*drawScale);		
+				ctx.drawImage(this.boxes[i].content,drawx+this.boxes[i].drawLeft*drawScale,drawy+this.boxes[i].drawTop*drawScale,this.boxes[i].content.width*drawScale,this.boxes[i].content.height*drawScale);		
 			};
 		};
 	};
@@ -139,6 +140,26 @@ define([
 			this.bottom=this.top+this.height;
 		    
 		    for(i=0;i<this.boxes.length;i++) {
+
+		    	if(this.contentType=="image") { //if image is not supplied a size, make it same as image
+					if(typeof(this.boxes[i].width)=="undefined") this.boxes[i].width=(this.boxes[i].content.width*100)/this.width;
+					if(typeof(this.boxes[i].height)=="undefined") this.boxes[i].height=(this.boxes[i].content.height*100)/this.height;					
+				};
+				if(this.contentType=="text") { //if image is not supplied a size, make it same as image
+					//if(typeof(this.boxes[i].width)=="undefined") this.boxes[i].width=(this.boxes[i].content.width*100)/this.width;
+					if(typeof(this.boxes[i].width)=="undefined") this.boxes[i].width=90;
+					if(typeof(this.boxes[i].height)=="undefined") this.boxes[i].height=(this.boxes[i].splitLines.length*this.boxes[i].lineHeight*100)/this.height+this.boxes[i].padding*2;
+
+					// this.boxes[i].drawWidth=(this.boxes[i].width-this.boxes[i].padding*2)*this.width*0.01;
+					
+					// this.ctx.font = this.boxes[i].fontStyle + " " + this.boxes[i].fontSize + "px " + this.boxes[i].fontName;
+			  //   	this.ctx.textBaseline = 'top';
+			  //   	this.boxes[i].splitLines = this.splitText(this.ctx,this.boxes[i].drawWidth,this.boxes[i].content);
+					
+			    	// pw=(this.boxes[i].width-this.boxes[i].padding*2)*this.width*0.01;
+			    	// if(mw>pw) 
+				};
+
 		    	this.boxes[i].boxLeft=(this.boxes[i].margin+this.boxes[i].left)*this.width*0.01;
 		    	this.boxes[i].boxTop=(this.boxes[i].margin+this.boxes[i].top)*this.height*0.01;
 		    	this.boxes[i].boxWidth=this.boxes[i].width*this.width*0.01;
@@ -155,22 +176,27 @@ define([
 				if(this.boxes[i].contentType=="text") {
 					//set actual text properties
 			    	this.ctx.font = this.boxes[i].fontStyle + " " + this.boxes[i].fontSize + "px " + this.boxes[i].fontName;
+			    	this.ctx.textBaseline = 'top';
 			    	this.boxes[i].splitLines = this.splitText(this.ctx,this.boxes[i].drawWidth,this.boxes[i].content);
-			    	mw=0;
-			    	for(j=0;j<this.boxes[i].splitLines.length;j++) {
-			    		if(this.boxes[i].splitLines[j].width>mw) mw=this.boxes[i].splitLines[j].width;
-			    	};
-			    	this.boxes[i].splitLines.maxLength=mw;
-			    	this.boxes[i].drawWidth=mw;
-			    	this.boxes[i].boxWidth=mw+this.boxes[i].padding*2;
+			    	//console.log(this.boxes[i].splitLines);
+			    	// mw=0;
+			    	// for(j=0;j<this.boxes[i].splitLines.length;j++) {
+			    	// 	if(this.boxes[i].splitLines[j].width>mw) mw=this.boxes[i].splitLines[j].width;
+			    	// };
 			    	
-			    	mh=this.boxes[i].splitLines.length*this.boxes[i].lineHeight;
-			    	this.boxes[i].drawHeight = mh;
-			    	this.boxes[i].boxHeight = mh + this.boxes[i].padding*2;
+			    	// this.boxes[i].drawWidth=mw;
+			    	// this.boxes[i].boxWidth=mw+this.boxes[i].padding*this.width*.02;
+			    	
+			    	// mh=this.boxes[i].splitLines.length*this.boxes[i].lineHeight;
+			    	// this.boxes[i].drawHeight = mh;
+			    	// this.boxes[i].boxHeight = mh + this.boxes[i].padding*this.height*.02;
 				};
 				
-				this.boxes[i].right=this.boxes[i].margin+this.boxes[i].width;
-				this.boxes[i].bottom=this.boxes[i].margin+this.boxes[i].height;				
+				this.boxes[i].right=this.boxes[i].margin+this.boxes[i].left+this.boxes[i].width;
+				this.boxes[i].bottom=this.boxes[i].margin+this.boxes[i].top+this.boxes[i].height;
+				// this.boxes[i].boxRight=this.boxes[i].boxLeft+this.boxes[i].boxWidth;
+				// this.boxes[i].boxBottom=this.boxes[i].Top+this.boxes[i].boxHeight;
+								
 		    };
 
 		};
