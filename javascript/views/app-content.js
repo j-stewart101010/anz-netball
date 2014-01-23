@@ -9,8 +9,7 @@ define([
     'bootstrap_transition',    
     'bootstrap_collapse',
     'bootstrap_modal',
-    'bootstrap_carousel',
-    'polyfiller'
+    'bootstrap_carousel'
 ], function ($, _, Backbone, VideoEmbedView, OutterTile, MatchMedia) {
 
     var _self;
@@ -70,16 +69,6 @@ define([
                     });
                 })
             }
-
-            $.webshims.polyfill('forms');
-            _self.$forms.bind('changedvalid', function(e) {
-                $(e.target).parent().addClass('valid').removeClass('invalid');
-            }).bind('changedinvalid', function(e) {
-                $(e.target).parent().addClass('invalid').removeClass('valid');
-            }).bind('firstinvalid', function(e) {
-                $.webshims.validityAlert.showFor(e.target);
-                return false;
-            });
         },
 
         update_checkbox : function (e) {

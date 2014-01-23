@@ -147,13 +147,35 @@
 
 				<div class="col col-xs-12 col-sm-12 col-md-2 col-lg-2">
 					<div class="col-half col col-xs-6 col-md-12">
-						<div class="outter-tile group shade-seven">
-							<article data-resize-height="#grid-image-five" class="content-tile tile center">
-								<h1 class="heading heading-exmed verbose">ANZ NetSetGo</h1>
-								<p class="sub-content"><small class="verbose">Netball is a ball sport played by two teams of six players.</small></p>
-								<a class="btn btn-default btn-sm btn-primary" href="/grants">More <i class="fa fa-angle-right"></i></a>
-							</article>
+
+						<div id="link-one" class="flip-container">
+							<div class="flipper">
+								<div class="front">
+
+									<div class="outter-tile group shade-twelve">
+										<article data-resize-height="#grid-image-five" class="content-tile tile center">
+											<h1 class="heading heading-exmed verbose">ANZ NetSetGo</h1>
+											<p class="sub-content"><small class="verbose">Netball is a ball sport played by two teams of six players.</small></p>
+											<a data-flip="toggle" data-flip-target="#link-one" class="btn btn-default btn-sm btn-primary" href="/grants">More <i class="fa fa-angle-right"></i></a>
+										</article>
+									</div>
+
+								</div>
+								<div class="back">
+
+									<div class="outter-tile group shade-seventeen">
+										<aside data-resize-height="#grid-image-five" class="content-tile tile center">
+											<div class="content-image">
+												<img src="images/anz-netset-icon.png" alt="ANZ Netset">
+											</div>
+											<a class="btn btn-default btn-sm" href="/more">Visit site <i class="fa fa-angle-right"></i></a>
+										</aside>
+									</div>
+
+								</div>
+							</div>
 						</div>
+
 					</div>
 					<div class="col-half col col-xs-6 col-md-12">
 						<div id="grid-image-five" class="image-wrap">

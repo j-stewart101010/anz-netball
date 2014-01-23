@@ -32,6 +32,8 @@ body {
 //====================================================================================================================================
 
 .master-head {
+	position: relative;
+	z-index: 100;
 	@include make-row();
 
 	.logos {
@@ -700,8 +702,6 @@ body {
 
 	@media screen and (min-width: $screen-xsmall) and (max-width: $screen-desktop - 1) {
 		&.group {
-			// float: left;			
-			// max-width: 50%;
 
 			.tile {
 				padding-left: 0;
@@ -709,13 +709,6 @@ body {
 			}				
 		}	
 	}	
-
-	@media screen and (max-width: $screen-xsmall) {
-		// &.group {
-		// 	float: left;			
-		// 	max-width: 50%;
-		// }
-	}
 }
 
 .tile  {
@@ -728,6 +721,21 @@ body {
 
 	&.center {
 		text-align: center;
+	}
+
+	.content-image {
+		margin-bottom: 15px;
+
+		img {
+			max-width: 100%;
+			max-height: 80%; //This can be removed when the correct ratio for the resize is achieved		
+		}
+
+		@media screen and (max-width: $screen-xsmall) {
+			img {
+				max-width: 80%;
+			}			
+		}			
 	}
 
 	@media screen and (max-width: $screen-xsmall) {
@@ -806,6 +814,10 @@ body {
 
 .shade-sixteen {
 	background-color: $brand-accent-eight; //Sand orange
+}
+
+.shade-seventeen {
+	background-color: white; //White
 }
 
 // Content Tile Module (Subset of .tile)
@@ -987,17 +999,28 @@ body {
 	}
 }
 
-// Overlays Module (For rendering an overlay behind an element - should be used in conjunction with the shade module to produce colors)
+// Overlays Module (For rendering an overlay behind an element - can be used in conjunction with the shade module to produce colors)
 //====================================================================================================================================
 //====================================================================================================================================
 
-.brand-overlay {
+%overlay {
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	z-index: 99;
+	z-index: 99;	
+}
+
+.loading-overlay {
+	@extend %overlay;
+
+	background-color: $brand-primary;
+}
+
+.brand-overlay {
+	@extend %overlay;
+
 	@include opacity(0.6);
 }
 
@@ -1011,6 +1034,7 @@ body {
 	padding-top: 10px;
 	padding-bottom: 10px;	
 	background-color: $brand-secondary;
+	z-index: 100;
 
 	.navigation, .copyright {
 		@include make-column(12);
@@ -1347,9 +1371,6 @@ body {
 }
  
 .no-csstransforms3d .flip-container {
-	.front {
-		// @include opacity(1);
-	}
 	.back {
 		visibility: hidden;
 	}

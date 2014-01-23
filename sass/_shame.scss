@@ -39,7 +39,19 @@
 		.grid.three-quarters-length {
 			border-bottom: 0;
 		}
+		.half-length .col-half + .col-half .image-wrap,
+		.half-length + .half-length .col-half .image-wrap {
+			border-top: 1px solid white;
+		}
 	}
+}
+
+.ie9 {
+	.community {
+		#apply-for-grant-signup {
+			background-color: transparent;
+		}
+	}		
 }
 
 .all-about-netball {

@@ -22,8 +22,8 @@ define([
 
         initialize : function () {
             _self = this;
-
             app_compatible = !Modernizr.canvas || !MatchMedia.mobile();
+            
             if (app_compatible) {
                 this.load();
                 Config.mouse;
@@ -36,7 +36,7 @@ define([
         load : function () {
             loaderScreen = new LoaderScreen;
             loaderScreen.onComplete = this.kickOff;
-            document.body.appendChild(loaderScreen.view);
+            // document.body.appendChild(loaderScreen.view);
             _self.onResize();
             $(window).resize(_self.onResize);
         },

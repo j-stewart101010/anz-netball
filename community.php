@@ -20,7 +20,7 @@
 		<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
     </head>
 
-    <body>
+    <body class="community">
 
 		<header class="master-head">
 			<div class="branding col-md-4">

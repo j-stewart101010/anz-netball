@@ -7,9 +7,7 @@ define([
 
             isMobile : false, //window.mobilecheck(),
 
-            REMOTE_PATH : "http://gbd.abulia.org.uk/",
-
-            REMOTE_PATH_2 : "http://localhost.anz-netball/",
+            REMOTE_PATH : "http://localhost.anz-netball/",
 
             mouse : {
                   x: 0,

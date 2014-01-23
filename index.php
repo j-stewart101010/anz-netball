@@ -159,7 +159,7 @@
 									</div>	
 								</div>
 
-<!-- 								<a id="user-story-image-one" class="collapse image-wrap enlarge top left" data-enlage="toggle" data-enlarge-target="#user-story-image-one" data-enlarge-to-target="#user-story-box-one" href="#">
+								<a id="user-story-image-one" class="collapse image-wrap enlarge top left" data-enlage="toggle" data-enlarge-target="#user-story-image-one" data-enlarge-to-target="#user-story-box-one" href="#">
 									<img src="http://lorempixel.com/g/612/612/">
 									<span class="btn btn-sm btn-action flip-toggle enlarge-icon" data-toggle="collapse" data-target="#user-story-one" data-flip="toggle" data-flip-target="#user-story-box-one">
 										<i class="fa fa-align-left"></i>
@@ -171,7 +171,7 @@
 									<span class="btn btn-sm btn-action flip-toggle enlarge-icon" data-toggle="collapse" data-target="#user-story-two" data-flip="toggle" data-flip-target="#user-story-box-one">
 										<i class="fa fa-align-left"></i>
 									</span>
-								</a> -->
+								</a>
 
 							</div>
 							<div class="back">

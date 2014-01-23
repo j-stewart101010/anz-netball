@@ -23,6 +23,9 @@
   @include button-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base);
   @include user-select(none);
 
+  @include transition-property(all);
+  @include transition-duration(0.5s);   
+
   &:focus {
     @include tab-focus();
   }
