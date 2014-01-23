@@ -20,10 +20,10 @@ define([
         el : 'body',
 
         events : {
-            'click.video.embed [data-video="toggle"]' : 'show_video',
+            // 'click.video.embed [data-video="toggle"]' : 'show_video',
             'change.checkbox.update input[type="checkbox"]' : 'update_checkbox',
             'change.select.update .selectbox' : 'update_selectbox',
-            'click.flip [data-flip="toggle"]' : 'flip_toggle',
+            // 'click.flip [data-flip="toggle"]' : 'flip_toggle',
             'click.slide [data-slide="toggle"]' : 'slide_toggle',
             'click.accordian [data-toggle="collapse"]' : 'accordian_toggle'
             // 'change.fileupload-update input[type="file"]' : 'patch_file_upload'
@@ -31,6 +31,10 @@ define([
 
         initialize : function () {
             _self = this;
+
+            // Detecting IE
+            var ie_9 = $('html').hasClass('ie9'),
+                ie_old = $('html').hasClass('lt-ie9');
 
             _self.$content = _self.$el.find('.content');
             _self.$forms = _self.$content.find('form');
@@ -51,17 +55,21 @@ define([
             _self.update_checkbox();
             _self.build_selectbox();
             _self.preload_tiles(_self.$el.find('.image-wrap, .ambassador-video-tile'));  
-            _self.render_outter_grid();        
-            // _self.animate_grid();
+            _self.render_outter_grid();
 
-            $(window).on('resize' , _self.resize )
-                .on('load', _self.match_row_height );
+            $(window).on('resize' , _self.resize );
 
-            // $(window).on('load resize' , _self.match_row_height );
-
-            // _self.$grids = this.$el.find('.grid');
-            // _self.$cols = _self.$grids.find('.col');
-            // _self.build_grid();
+            //@TODO: We are not able to correclty calculate grid dimensions until images have finished loading. IE Fires its resize event early which breaks slightly breaks the layout on initial render.
+            //Other browsers layouts break slightly if resized before the images have finished loading. Possible solution is to apply a page loader that masks content until page has finished rendering to avoid FOUCs
+            if (ie_9 || ie_old) {
+                $(window).on('load', function() {
+                    _.each([_self.outter_columns, _self.outter_rows], function (child) {
+                        _.each(child, function (view) {
+                            view.update_values();
+                        });
+                    });
+                })
+            }
 
             $.webshims.polyfill('forms');
             _self.$forms.bind('changedvalid', function(e) {
@@ -88,13 +96,14 @@ define([
         },
 
         resize : function () {
+            console.log('resizing');
             _self.resizing = true;
             clearTimeout(_self.resize_timer);
             _self.resize_timer = setTimeout(function() {
-                _self.render_outter_grid();   
+                _self.render_outter_grid();
                 // _self.animate_grid();
             }, 100);
-            _self.match_row_height();
+            // _self.match_row_height();
         },
 
         build_selectbox : function (e) {
@@ -105,7 +114,7 @@ define([
                 $(this).after('<div class="holder"></div><div class="angle-down-box"><i class="fa fa-angle-down"></i></div>');
             });
             _self.update_selectbox();
-        },
+        },     
 
         update_selectbox : function (e) {
             //@TODO: Move this into a new view with a template
@@ -120,14 +129,14 @@ define([
             });
         },
 
-        show_video : function (e) {
-            var view = new VideoEmbedView({ 
-                modal : false,
-                video_id : $(e.target).data('video-id')
-            });
-            _self.$content.find($(e.target).data('video-append')).append(view.render().el);
-            this.delegateEvents();
-        },
+        // show_video : function (e) {
+        //     var view = new VideoEmbedView({ 
+        //         modal : false,
+        //         video_id : $(e.target).data('video-id')
+        //     });
+        //     _self.$content.find($(e.target).data('video-append')).append(view.render().el);
+        //     this.delegateEvents();
+        // },
 
         preload_tiles : function ($tiles) {
             $.each($tiles, function ($el) {
@@ -188,47 +197,41 @@ define([
 
             if ($slide_target.hasClass('active')) { 
                 properties = { 
-                    grids : { start_left : '', position : 'static' },
+                    grids : { start_left : '', position : '' },
                     cols : { start_left : '-100%', end_left : '' }
                 }
             }
             else { 
                 properties = {
-                    grids : { start_left : '-100%', position : '' },
+                    grids : { start_left : '-100%', position : 'static' },
                     cols : { start_left : '100%', end_left : '' }
                 }
             }
 
             if (MatchMedia.tablet()) {
+                $slide_target.toggleClass('active inactive'); 
                 _self.$grids.not($slide_target.find(_self.$grids)).fadeToggle({ 'complete' : function () {
-                    $slide_target.css({ 'position' : properties.grids.position });    
+                    $slide_target.css({ 'position' : properties.grids.position }); 
                 } });
-                
             }
             else {
                 _self.$grids.not($slide_target.find(_self.$grids)).toggleClass('active inactive').each(function(i) {
-                    $(this).css({ 'left' : properties.grids.start_left });
-                    $(this).find(_self.$cols).css({ 'left' : properties.cols.start_left });
-                });
-
-                _self.$cols.not($slide_target.find(_self.$cols)).each(function(i) {
-                    $(this).delay(100*i).animate({ 'left' : properties.cols.end_left },{ duration : 300 });
+                    $(this).animate({ 'left' : properties.grids.start_left });
                 });
 
                 $slide_target.toggleClass('active inactive');                 
             }
-
                
         },
 
-        flip_toggle : function (e) {
-            var $flip_target = $($(e.currentTarget).data('flip-target'));
+        // flip_toggle : function (e) {
+        //     var $flip_target = $($(e.currentTarget).data('flip-target'));
 
-            e.preventDefault();
+        //     e.preventDefault();
 
-            if (Modernizr.csstransforms) { $flip_target.toggleClass('flip'); }
-            else { $flip_target.find('.front').toggle().end().find('.back').toggle(); }
-        },
+        //     if (Modernizr.csstransforms) { $flip_target.toggleClass('flip'); }
+        //     else { $flip_target.find('.front').toggle().end().find('.back').toggle(); }
+        // },
 
         // animate_grid : function () {
         //     //TODO: Clean this up
@@ -265,59 +268,64 @@ define([
         //     $('.col, .grid').animate({ opacity: 1 });
         // },
 
-        match_row_height : function () {
-            if (MatchMedia.tablet()) {
-                $.each(_self.$content.find('[data-resize-height]'), function() {
-                    $(this).css({ 'height' : '' }).css({ 'height' : $($(this).data('resize-height')).height()+'px' });
-                });
-            }
-            else {
-                $.each(_self.$content.find('[data-resize-height]'), function() {
-                    $(this).css({ 'height' : '' });
-                });                
-            }
-        },
+        // match_row_height : function () {
+        //     if (MatchMedia.tablet()) {
+        //         $.each(_self.$content.find('[data-resize-height]'), function() {
+        //             $(this).css({ 'height' : '' }).css({ 'height' : $($(this).data('resize-height')).height()+'px' });
+        //         });
+        //     }
+        //     else {
+        //         $.each(_self.$content.find('[data-resize-height]'), function() {
+        //             $(this).css({ 'height' : '' });
+        //         });                
+        //     }
+        // },
 
         render_outter_grid : function () {
             var window_width = $(window).width(),
                 window_height = $(window).height(),
                 head_height, foot_height;
 
-            //Remove all the previously rendered columns before continuing (for re-rendering)
-            _.each([_self.outter_columns, _self.outter_rows], function (child) {
-                _.each(child, function (view) {
-                    view.remove();
-                });
-            });
-
-            //Render columns
-            if (window_width > _self.defaults.max_width) {
-                _self.equalize_columns(window_width, window_width - _self.defaults.max_width); //Start appending columns to the grid to maintain aspect ratio
+            if (MatchMedia.tablet()) {
+                _self.$content.css({ 'width' : '', 'height' : '' });
             }
             else {
-                _self.set_outter_grid_defaults('width');
-            }
-
-            //Render rows
-            if (window_height > _self.defaults.max_height) {
-                head_height = parseInt(_self.$el.find('.master-head').height(), 10);
-                foot_height = parseInt(_self.$el.find('.master-foot').height(), 10);
-
-                _self.equalize_rows(window_height, (window_height - _self.defaults.max_height) - head_height - foot_height, head_height); //Height column gap must take into account the head and foot
-            }
-            else {
-                _self.set_outter_grid_defaults('height');
-            }
-
-            //After all methods have finished the heights and widths of the rows/columns may not not be correct, fix them now. Also add tiles to rows if required
-            _.each([_self.outter_columns, _self.outter_rows], function (child) {
-                _.each(child, function (view) {
-                    // console.log(view);
-                    view.append_tiles();
-                    view.update_values();
-                    view.preload_tiles();
+                //Remove all the previously rendered columns before continuing (for re-rendering)
+                _.each([_self.outter_columns, _self.outter_rows], function (child) {
+                    _.each(child, function (view) {
+                        view.remove();
+                    });
                 });
-            });
+
+                //Render columns
+                if (window_width > _self.defaults.max_width) {
+                    _self.equalize_columns(window_width, window_width - _self.defaults.max_width); //Start appending columns to the grid to maintain aspect ratio
+                }
+                else {
+                    _self.set_outter_grid_defaults('width');
+                }
+
+                //Render rows
+                if (window_height > _self.defaults.max_height) {
+                    head_height = parseInt(_self.$el.find('.master-head').height(), 10);
+                    foot_height = parseInt(_self.$el.find('.master-foot').height(), 10);
+
+                    _self.equalize_rows(window_height, (window_height - _self.defaults.max_height) - head_height - foot_height, head_height); //Start appending rows. Height column gap must take into account the head and foot
+                }
+                else {
+                    _self.set_outter_grid_defaults('height');
+                }
+
+                //After all methods have finished the heights and widths of the rows/columns may not not be correct, fix them now. Also add tiles to rows if required
+                _.each([_self.outter_columns, _self.outter_rows], function (child) {
+                    _.each(child, function (view) {
+                        // console.log(view);
+                        view.append_tiles();
+                        view.update_values();
+                        view.preload_tiles();
+                    });
+                });
+            }
         },        
 
         equalize_columns : function (window_width, dimension_gap) {
@@ -385,11 +393,12 @@ define([
                     className: 'appended-tiles appended-row',
                     styles : {
                         height : (((new_container_dimension / 100) * 50) / 2)+'px', 
-                        top : new_container_dimension+head_height*(i+1)+'px' 
+                        // top : new_container_dimension+head_height*(i+1)+'px' 
+                        top : (new_container_dimension+head_height) + ((((new_container_dimension / 100) * 50) / 2) * (i))+'px' 
                     }                   
                 });
                 _self.outter_rows.push( outter_rows );
-                outter_rows_render.push( outter_rows.render().el );                
+                outter_rows_render.push( outter_rows.render().el );
             }
 
             _self.$content.after(outter_rows_render);

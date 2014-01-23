@@ -3,7 +3,8 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if IE 9]>         <html class="no-js lt-ie10 ie9"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
 		<title>ANZ Netball Nation - Community</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,7 +14,7 @@
 		<link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/f8bca219-07d6-4bdf-9b18-02f0db46b33f.css"/>
 
         <!--[if lt IE 9]>
-            <link href="/stylesheets/ie.css" rel="stylesheet" type="text/css">
+            <link href="/css/ie.css" rel="stylesheet" type="text/css">
         <![endif]-->
 
 		<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
@@ -64,26 +65,30 @@
 								<h1 class="heading heading-exjumbo">Community Grants</h1>
 								<h2 class="subheading heading-med">We’re giving back and need your help!</h2>
 								<p>Grants are non-repayable funds disbursed by one party (grant makers), often a government department tion, foundation or trust, to a recipient, often (but not always) a nonprofit entity, educational stitution, business or an individual. In order to receive a grant, some form of "Grant Writing" often referred to as either a proposal or an application is usually required.</p>
-								<a class="btn btn-sm btn-default" data-slide="toggle" data-slide-target="#faq" href="#">Frequently asked questions <i class="fa fa-angle-right"></i></a>
+								<a data-descr="Frequently asked questions" class="btn btn-sm btn-default" data-slide="toggle" data-slide-target="#faq" href="#">Frequently asked questions <i class="fa fa-angle-right"></i></a>
 							</hgroup>
 						</article>
 					</div>
 				</div>	
 
-				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap stacked">
-						<img src="http://lorempixel.com/g/265/292/">
-					</div>
-					<div class="image-wrap stacked">
-						<img src="http://lorempixel.com/g/265/292/">
+				<div class="col col-sm-12 col-md-2 col-lg-2">
+					<div class="col-half col col-xs-12 col-md-12">				
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
 					</div>
 				</div>
-				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap stacked">
-						<img src="http://lorempixel.com/g/265/292/">
-					</div>
-					<div class="image-wrap stacked">
-						<img src="http://lorempixel.com/g/265/292/">
+				<div class="col col-sm-12 col-md-2 col-lg-2">
+					<div class="col-half col col-xs-12 col-md-12">				
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
 					</div>
 				</div>		
 
@@ -149,17 +154,31 @@
 												<input type="file" class="file-input" id="apply-for-grant-image" name="apply-for-grant-image">
 											</span>
 											File size limit 2mb
+											
 											<span class="tooltip">
-												<i class="fa fa-question-circle"></i>
+												<div class="question-icon">
+													<i class="fa fa-question"></i>
+												</div>
+												<span class="tooltip-inner verbose">
+													Lorem ipsum dolor sit amet, consecteur adipiscing elit.
+												</span>
 											</span>
+											
 										</div>
 
 										<div class="form-group">
 											<label class="group-label" for="apply-for-grant-video">Attach VIDEO:</label>
 											<input class="form-control inline-control" type="text" placeholder="Enter YouTube URL" id="apply-for-grant-video" name="apply-for-grant-video">
+											
 											<span class="tooltip">
-												<i class="fa fa-question-circle"></i>
+												<div class="question-icon">
+													<i class="fa fa-question"></i>
+												</div>
+												<span class="tooltip-inner verbose">
+													Lorem ipsum dolor sit amet, consecteur adipiscing elit.
+												</span>
 											</span>
+
 										</div>
 
 										<div class="form-group">
@@ -174,7 +193,8 @@
 											</label>
 										</div>						
 										
-										<input class="btn btn-default btn-sm" type="submit" value="Apply now">
+										<button type="submit" class="btn btn-default btn-sm">Apply now <i class="fa fa-angle-right"></i></button>
+										<!-- <input class="btn btn-default btn-sm" type="submit" value="Apply now"> -->
 
 									</form>
 									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#apply-for-grant" href="#"><i class="fa fa-times"></i></a>
@@ -190,7 +210,7 @@
 
 				<div class="col col-md-6">
 
-					<div id="video-case-studies" class="flip-container">
+					<div id="video-case-studies" class="flip-container front-led shade-one">
 						<div class="flipper">
 							<div class="front">
 
@@ -283,10 +303,11 @@
 					<div class="col col-md-6 col-lg-6 shade-one">
 						<div data-resize-height="center" class="outter-tile">
 							<article class="content-tile tile">
+
 								<hgroup>
 									<h1 class="heading heading-exjumbo">Frequently asked questions</h1>
-
-<!-- 										<li><a href="#who-can-apply" class="active" data-parent="#faq-answers" data-toggle="collapse">Who can apply for an ANZ Grant?</a></li>
+								</hgroup>
+	<!-- 										<li><a href="#who-can-apply" class="active" data-parent="#faq-answers" data-toggle="collapse">Who can apply for an ANZ Grant?</a></li>
 										<li><a href="#do-i-need-to-be-customer" data-parent="#faq-answers" data-toggle="collapse">Do I or my club or school need to be an ANZ customer to apply?</a></li>
 										<li><a href="#who-can-apply" data-toggle="collapse">>How do I know which category to apply for?</a></li>
 										<li><a href="#who-can-apply" data-toggle="collapse">Can I apply as an individual?</a></li>
@@ -300,67 +321,65 @@
 										<li><a href="#who-can-apply" data-toggle="collapse">Will I get notified if my application has not been successful?</a></li>
 										<li><a href="#who-can-apply" data-toggle="collapse">How old do you have to be to apply for a grant?</a></li>
 										<li><a href="#who-can-apply" data-toggle="collapse">What information do the judges want to know?</a></li>
- -->
-									<div class="panel-group hidden-md hidden-lg" id="faq-answers-mob">
-										<div class="panel panel-default">
-											<div class="panel-heading">
-												<h4 class="panel-title">
-													<a data-toggle="collapse" data-parent="#faq-answers-mob" href="#who-can-apply-mob">
-														Who can apply for an ANZ Grant?
-													</a>
-												</h4>
-											</div>
-											<div id="who-can-apply-mob" class="panel-collapse collapse in">
-												<article class="tile">
-													<p>The ANZ Grant Scheme has seven options for you to choose from. Select the option most relevant to you or your team, club or school, or tell us exactly what you need with the ‘custom grant’ option.</p>
-													<ul>
-														<li>Uniform grant - dresses, skirts, tops, bibs, netballs and bag</li>
-														<li>School and Club equipment grants - a full kit containing all the gear a school or Club team needs for netball training</li>
-														<li>Social team gear grant - gear for social teams including balls, bibs and gear bag</li>
-														<li>Senior team gear grant – gear for senior teams including balls, bibs and gear suitable for high level netball</li>
-														<li>Court equipment grant - such as free-standing or metal hoops with nets and post protectors.</li>
-														<li>ANZ Championship tickets – tickets to an Australian ANZ Championship match</li>
-														<li>Custom grant – a bespoke grant, select this option if you, or your club, would like to request something unique that would help your club. This could anything from a mini-bus hire to travel to and from a netball carnival to a BBQ to help support fundraising efforts.</li>								
-													</ul>	
-													<a class="btn btn-sm btn-default" data-slide="toggle" data-slide-target="#faq" href="#">Back to community grants <i class="fa fa-angle-right"></i></a>																									
-												</article>
-											</div>
+	-->
+								<div class="accordian panel-group hidden-md hidden-lg" id="faq-answers-mob">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+												<a class="verbose" data-toggle="collapse" data-parent="#faq-answers-mob" href="#who-can-apply-mob">
+													Who can apply for an ANZ Grant?
+												</a>
+											</h4>
 										</div>
-										<div class="panel panel-default">
-											<div class="panel-heading">
-												<h4 class="panel-title">
-													<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-														Collapsible Group Item #2
-													</a>
-												</h4>
-											</div>
-											<div id="collapseTwo" class="panel-collapse collapse">
-												<div class="panel-body">
-												Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-												</div>
+										<div id="who-can-apply-mob" class="panel-collapse collapse in">
+											<article>
+												<p>The ANZ Grant Scheme has seven options for you to choose from. Select the option most relevant to you or your team, club or school, or tell us exactly what you need with the ‘custom grant’ option.</p>
+												<ul>
+													<li>Uniform grant - dresses, skirts, tops, bibs, netballs and bag</li>
+													<li>School and Club equipment grants - a full kit containing all the gear a school or Club team needs for netball training</li>
+													<li>Social team gear grant - gear for social teams including balls, bibs and gear bag</li>
+													<li>Senior team gear grant – gear for senior teams including balls, bibs and gear suitable for high level netball</li>
+													<li>Court equipment grant - such as free-standing or metal hoops with nets and post protectors.</li>
+													<li>ANZ Championship tickets – tickets to an Australian ANZ Championship match</li>
+													<li>Custom grant – a bespoke grant, select this option if you, or your club, would like to request something unique that would help your club. This could anything from a mini-bus hire to travel to and from a netball carnival to a BBQ to help support fundraising efforts.</li>								
+												</ul>	
+												<a class="btn btn-sm btn-default" data-slide="toggle" data-slide-target="#faq" href="#">Back to community grants <i class="fa fa-angle-right"></i></a>																									
+											</article>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+												<a class="verbose" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+													Collapsible Group Item #2
+												</a>
+											</h4>
+										</div>
+										<div id="collapseTwo" class="panel-collapse collapse">
+											<div class="panel-body">
+											Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
 											</div>
 										</div>
 									</div>
+								</div>
 
 
-
-									<ul class="qa-list hidden-sm hidden-xs">
-										<li><a href="#who-can-apply" class="active" data-parent="#faq-answers" data-toggle="collapse">Who can apply for an ANZ Grant?</a></li>
-										<li><a href="#do-i-need-to-be-customer" data-parent="#faq-answers" data-toggle="collapse">Do I or my club or school need to be an ANZ customer to apply?</a></li>
-										<li><a href="#who-can-apply" data-toggle="collapse">>How do I know which category to apply for?</a></li>
-										<li><a href="#who-can-apply" data-toggle="collapse">Can I apply as an individual?</a></li>
-										<li><a href="#who-can-apply" data-toggle="collapse">Can I apply for more than one grant?</a></li>
-										<li><a href="#who-can-apply" data-toggle="collapse">Can I put in more than one application for my team/club?</a></li>
-										<li><a href="#who-can-apply" data-toggle="collapse">What grants can I apply for?</a></li>
-										<li><a href="#who-can-apply" data-toggle="collapse">The grant I want isn’t on the list of standard grants. Can I still apply?</a></li>
-										<li><a href="#who-can-apply" data-toggle="collapse">Can I change one of the standard gear grants?</a></li>
-										<li><a href="#who-can-apply" data-toggle="collapse">What happens if I apply without uploading a photo or video?</a></li>
-										<li><a href="#who-can-apply" data-toggle="collapse">When will successful ANZ Grant Scheme applications be announced?</a></li>
-										<li><a href="#who-can-apply" data-toggle="collapse">Will I get notified if my application has not been successful?</a></li>
-										<li><a href="#who-can-apply" data-toggle="collapse">How old do you have to be to apply for a grant?</a></li>
-										<li><a href="#who-can-apply" data-toggle="collapse">What information do the judges want to know?</a></li>
-									</ul>
-								</hgroup>
+								<ul class="qa-list hidden-sm hidden-xs">
+									<li><a href="#who-can-apply" class="active" data-parent="#faq-answers" data-toggle="collapse">Who can apply for an ANZ Grant?</a></li>
+									<li><a href="#do-i-need-to-be-customer" data-parent="#faq-answers" data-toggle="collapse">Do I or my club or school need to be an ANZ customer to apply?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">How do I know which category to apply for?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">Can I apply as an individual?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">Can I apply for more than one grant?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">Can I put in more than one application for my team/club?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">What grants can I apply for?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">The grant I want isn’t on the list of standard grants. Can I still apply?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">Can I change one of the standard gear grants?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">What happens if I apply without uploading a photo or video?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">When will successful ANZ Grant Scheme applications be announced?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">Will I get notified if my application has not been successful?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">How old do you have to be to apply for a grant?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">What information do the judges want to know?</a></li>
+								</ul>
 							</article>
 						</div>
 					</div>	

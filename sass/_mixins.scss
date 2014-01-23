@@ -130,6 +130,7 @@
 // Transformations
 @mixin rotate($degrees) {
   -webkit-transform: rotate($degrees);
+    -moz-transform: rotate($degrees);
       -ms-transform: rotate($degrees); // IE9+
           transform: rotate($degrees);
 }
@@ -285,6 +286,7 @@
   background-image: -moz-radial-gradient(circle, $inner-color, $outer-color);
   background-image: radial-gradient(circle, $inner-color, $outer-color);
   background-repeat: no-repeat;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($inner-color)}', endColorstr='#{ie-hex-str($outer-color)}', GradientType=0); // IE9 and down
 }
 @mixin gradient-striped($color: #555, $angle: 45deg) {
   background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, rgba(255,255,255,.15)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255,255,255,.15)), color-stop(.75, rgba(255,255,255,.15)), color-stop(.75, transparent), to(transparent));
@@ -389,12 +391,33 @@
   background-color: $background;
   border-color: $border;
 
+    &:after {
+      content: attr(data-descr);
+      position: absolute;
+      width: 96%;
+      height: 70%;
+      top: -101%;
+      left: 0;
+      color: darken($brand-accent-one, 15%);
+      background-color: white;
+      padding: 5px 5px;
+      text-align: left;
+
+      @include transition-property(all);
+      @include transition-duration(0.2s);       
+    }
+
   &:hover,
   &:focus,
   &:active,
   &.active {
-    color: darken($color, 20%);
-    border-color: darken($border, 20%);
+    // color: darken($brand-accent-one, 15%);
+    border-color: lighten($border, 50%);
+    // background-color: white;
+
+    &:after {
+      top: 0;   
+    }    
 
     @if $background != "transparent" {
       background-color: darken($background, 8%);

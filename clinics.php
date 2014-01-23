@@ -3,6 +3,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js lt-ie10 ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
 		<title>ANZ Netball Nation - Community</title>
@@ -13,7 +14,7 @@
 		<link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/f8bca219-07d6-4bdf-9b18-02f0db46b33f.css"/>
 
         <!--[if lt IE 9]>
-            <link href="/stylesheets/ie.css" rel="stylesheet" type="text/css">
+            <link href="/css/ie.css" rel="stylesheet" type="text/css">
         <![endif]-->
 
 		<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
@@ -60,12 +61,14 @@
 				<div class="col col-md-6">
 					<div class="grid active">
 
-						<div class="col col-xs-12 col-md-4 col-lg-4 hidden-xs hidden-sm">
-							<div class="image-wrap stacked">
-								<img src="http://lorempixel.com/g/265/292/">
-							</div>
-							<div class="image-wrap stacked">
-								<img src="http://lorempixel.com/g/265/292/">
+						<div class="col col-xs-12 col-md-4 col-lg-4">
+							<div class="col-half col col-xs-12 col-md-12">						
+								<div class="image-wrap set">
+									<img src="http://lorempixel.com/g/612/612/">
+								</div>						
+								<div class="image-wrap set">
+									<img src="http://lorempixel.com/g/612/612/">
+								</div>
 							</div>
 						</div>
 
@@ -87,7 +90,7 @@
 
 						<div class="col col-md-8 col-lg-8 center-tile shade-sixteen">
 
-							<div id="video-case-studies" class="flip-container">
+							<div id="video-case-studies" class="flip-container front-led">
 								<div class="flipper">
 									<div class="front">
 										<article class="ambassador-video-tile tile shade-sixteen">
@@ -123,12 +126,14 @@
 
 						</div>
 
-						<div class="col col-md-4 col-lg-4 hidden-xs hidden-sm">
-							<div class="image-wrap stacked">
-								<img src="http://lorempixel.com/g/265/292/">
-							</div>
-							<div class="image-wrap stacked">
-								<img src="http://lorempixel.com/g/265/292/">
+						<div class="col col-md-4 col-lg-4">
+							<div class="col-half col col-xs-12 col-md-12">						
+								<div class="image-wrap set">
+									<img src="http://lorempixel.com/g/612/612/">
+								</div>						
+								<div class="image-wrap set">
+									<img src="http://lorempixel.com/g/612/612/">
+								</div>
 							</div>
 						</div>						
 
@@ -136,26 +141,38 @@
 
 				</div>
 
+
+
+
+
 				<div class="col col-md-6">
 					<div class="col col-xs-12 col-sm-12 col-md-4 col-lg-4">
-						<div class="half-length col col-xs-6 col-sm-6 col-md-12">
+						<div class="half-length col col-sm-12 col-md-12">
 						<!-- <div class="grid"> -->
-							<div class="image-wrap stacked">
-								<img src="http://lorempixel.com/g/265/292/">
+							<div class="col-half col col-xs-6 col-md-12">		
+								<div class="image-wrap stacked">
+									<img alt="Image" src="http://lorempixel.com/612/612/sports">
+								</div>
 							</div>
-							<div class="image-wrap stacked">
-								<img src="http://lorempixel.com/g/265/292/">
-							</div>						
+							<div class="col-half col col-xs-6 col-md-12">		
+								<div class="image-wrap stacked">
+									<img alt="Image" src="http://lorempixel.com/612/612/sports">
+								</div>						
+							</div>
 						<!-- </div> -->
 						</div>
-						<div class="half-length col col-xs-6 col-sm-6 col-md-12">
+						<div class="half-length col col-sm-12 col-md-12">
 						<!-- <div class="grid"> -->
-							<div class="image-wrap stacked">
-								<img src="http://lorempixel.com/g/265/292/">
+							<div class="col-half col col-xs-6 col-md-12">		
+								<div class="image-wrap stacked">
+									<img alt="Image" src="http://lorempixel.com/612/612/sports">
+								</div>
 							</div>
-							<div class="image-wrap stacked">
-								<img src="http://lorempixel.com/g/265/292/">
-							</div>						
+							<div class="col-half col col-xs-6 col-md-12">		
+								<div class="image-wrap stacked">
+									<img alt="Image" src="http://lorempixel.com/612/612/sports">
+								</div>			
+							</div>
 						<!-- </div> -->
 						</div>						
 					</div>
@@ -175,17 +192,17 @@
 						</div>	
 
 
-					<div class="col col-xs-6 col-sm-6 col-md-6 hidden-xs hidden-sm">					
+					<div class="col col-xs-6 col-sm-6 col-md-6">					
 						<div class="grid quarter-length">
 							<div class="image-wrap">
-								<img src="http://lorempixel.com/g/265/292/">
+								<img src="http://lorempixel.com/g/612/612/">
 							</div>					
 						</div>	
 					</div>	
-					<div class="col col-xs-6 col-sm-6 col-md-6 hidden-xs hidden-sm">					
+					<div class="col col-xs-6 col-sm-6 col-md-6">					
 						<div class="grid quarter-length">
 							<div class="image-wrap">
-								<img src="http://lorempixel.com/g/265/292/">
+								<img src="http://lorempixel.com/g/612/612/">
 							</div>					
 						</div>	
 					</div>							

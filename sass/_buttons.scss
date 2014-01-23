@@ -7,6 +7,8 @@
 // --------------------------------------------------
 
 .btn {
+  position: relative;
+  overflow: hidden;
   display: inline-block;
   margin-bottom: 0; // For input.btn
   font-weight: $btn-font-weight;
@@ -72,7 +74,7 @@
 }
 .btn-sm {
   // line-height: ensure proper height of button next to small input
-  @include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small);
+  @include button-size($padding-small-vertical, $padding-small-horizontal, ($font-size-small + 2), $line-height-small);
 }
 .btn-xs {
   @include button-size($padding-extrasmall-vertical, $padding-extrasmall-horizontal, $font-size-small, $line-height-small);

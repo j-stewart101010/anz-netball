@@ -42,7 +42,13 @@ require.config({
 				'jquery'
 			],
 			exports: '$.fn.carousel'
-        }        
+        },
+        flippy : {
+        	deps: [
+        		'jquery'
+        	],
+        	exports: '$.fn.flippy'
+        }               
 	},
 	paths: {
 		jquery: '../bower_components/jquery/jquery',
@@ -54,7 +60,8 @@ require.config({
 		bootstrap_transition : 'vendor/bootstrap-transition',		
         bootstrap_collapse : 'vendor/bootstrap-collapse',
         bootstrap_modal : 'vendor/bootstrap-modal',
-        bootstrap_carousel : 'vendor/bootstrap-carousel'
+        bootstrap_carousel : 'vendor/bootstrap-carousel',
+        flippy : 'vendor/jquery.flippy.min'
 	}
 });
 

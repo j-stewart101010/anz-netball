@@ -3,6 +3,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js lt-ie10 ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
 		<title>ANZ Netball Nation - All About Netball</title>
@@ -13,7 +14,7 @@
 		<link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/f8bca219-07d6-4bdf-9b18-02f0db46b33f.css"/>
 
 	    <!--[if lt IE 9]>
-	        <link href="/stylesheets/ie.css" rel="stylesheet" type="text/css">
+	        <link href="/css/ie.css" rel="stylesheet" type="text/css">
 	    <![endif]-->
 
 		<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
@@ -59,12 +60,14 @@
 
 			<section class="grid">
 
-				<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
-					</div>
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
+				<div class="col col-xs-12 col-md-2 col-lg-2">
+					<div class="col-half col col-xs-12 col-md-12">
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
 					</div>
 				</div>
 
@@ -80,12 +83,14 @@
 					</div>
 				</div>
 
-				<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
-					</div>
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
+				<div class="col col-xs-12 col-md-2 col-lg-2">
+					<div class="col-half col col-xs-12 col-md-12">
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
 					</div>
 				</div>				
 
@@ -95,7 +100,7 @@
 						<div class="flipper">
 							<div class="front">
 
-								<div class="outter-tile shade-one">
+								<div class="outter-tile shade-one shade-one">
 									<article class="tile content-tile">
 										<hgroup>
 											<h1 class="heading heading-jumbo">Fitness</h1>
@@ -121,9 +126,6 @@
 
 													<h4><small>Core stability</small></h4> 
 													<p><small>To score goals and to work in and around the circle with the GAGames are played on a rectangular court with raised goal rings at each end. Each team attempts to score goals by passing.</small></p>
-
-													<h4><small>Explosive speed</small></h4>
-													<p><small>Games are played on a rectangular court with raised goal rings at each end. Each team attempts to score goals by passing a ball down the court and shooting it through its goal ring. Players are assigned specific positions, which define their roles within.</small></p>
 												</section>
 											</div>
 
@@ -240,32 +242,40 @@
 				</div>
 
 				<div class="col col-xs-12 col-sm-12 col-md-2 col-lg-2">
-					<div class="outter-tile group shade-thirteen">
-						<article data-resize-height="#grid-image-five" class="content-tile tile center">
-							<h1 class="heading heading-exmed">Set PLays</h1>
-							<p class="sub-content"><small>Get one up on the comp with a few plays from (name).</small></p>
-							<a class="btn btn-default btn-sm" href="/grants"><i class="fa fa-file-text-o"></i> Download</a>
-						</article>
+					<div class="col-half col col-xs-6 col-md-12">
+						<div class="outter-tile group shade-thirteen">
+							<article data-resize-height="#grid-image-five" class="content-tile tile center">
+								<h1 class="heading heading-exmed">Set PLays</h1>
+								<p class="sub-content"><small>Get one up on the comp with a few plays from (name).</small></p>
+								<a class="btn btn-default btn-sm" href="/grants"><i class="fa fa-file-text-o"></i> Download</a>
+							</article>
+						</div>
 					</div>
-					<div id="grid-image-five" class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
+					<div class="col-half col col-xs-6 col-md-12">
+						<div id="grid-image-five" class="image-wrap">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
 					</div>
 				</div>
 
 				<div class="col col-xs-12 col-sm-12 col-md-2 col-lg-2">
-					<div class="outter-tile group shade-ten">
-						<article data-resize-height="#grid-image-five" class="content-tile tile center">
-							<h1 class="heading heading-exmed">Training drills</h1>
-							<p class="sub-content"><small>Let (name) help you sharpen up on those skills!</small></p>
-							<a class="btn btn-default btn-sm" href="/grants"><i class="fa fa-file-text-o"></i> Download</a>
-						</article>
+					<div class="col-half col col-xs-6 col-md-12">
+						<div class="outter-tile group shade-ten">
+							<article data-resize-height="#grid-image-five" class="content-tile tile center">
+								<h1 class="heading heading-exmed">Training drills</h1>
+								<p class="sub-content"><small>Let (name) help you sharpen up on those skills!</small></p>
+								<a class="btn btn-default btn-sm" href="/grants"><i class="fa fa-file-text-o"></i> Download</a>
+							</article>
+						</div>
 					</div>
-					<div class="outter-tile group shade-twelve">
-						<article data-resize-height="#grid-image-five" class="content-tile tile center">
-							<h1 class="heading heading-exmed verbose">ANZ Championship</h1>
-							<p class="sub-content"><small class="verbose">Netball is a ball sport played by two teams of seven players.</small></p>
-							<a class="btn btn-default btn-sm btn-primary" href="/grants">More <i class="fa fa-angle-right"></i></a>
-						</article>
+					<div class="col-half col col-xs-6 col-md-12">				
+						<div class="outter-tile group shade-twelve">
+							<article data-resize-height="#grid-image-five" class="content-tile tile center">
+								<h1 class="heading heading-exmed verbose">ANZ Championship</h1>
+								<p class="sub-content"><small class="verbose">Netball is a ball sport played by two teams of seven players.</small></p>
+								<a class="btn btn-default btn-sm btn-primary" href="/grants">More <i class="fa fa-angle-right"></i></a>
+							</article>
+						</div>
 					</div>
 				</div>
 
