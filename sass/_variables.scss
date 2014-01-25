@@ -10,9 +10,9 @@ $brand-accent-two:					#dfe9ea;	//Dirty blue
 $brand-accent-three:				#9f9f9f;	//Light gray
 $brand-accent-four:					#6d9da2;	//Cerulean
 $brand-accent-five:					#cdeff3;	//Poppy blue
-$brand-accent-six:					#69d0dc;	//Aqua
+$brand-accent-six:					#37c0d0;	//Aqua
 $brand-accent-seven:				#facea8;	//Light orange
-$brand-accent-eight:				#e06f09;	//Sand orange
+$brand-accent-eight:				#f3933e;	//Sand orange
 
 
 
@@ -204,7 +204,7 @@ $hr-border:                   $brand-secondary !default;
 
 //These values represent the max values of the grid, beyond these values the grid will have rows/columns appened to it to maintain ratio of grid tiles
 $grid-max-width:			1200px!default;
-$grid-max-height:			680px!default;
+$grid-max-height:			720px!default;
 
 // Number of columns in the grid system
 $grid-columns:              12 !default;

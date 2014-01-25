@@ -20,7 +20,7 @@
 		<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
     </head>
 
-    <body>
+    <body class="getting-started">
 
  		<!-- <div class="loading"></div> -->
 
@@ -152,7 +152,7 @@
 							<div class="flipper">
 								<div class="front">
 
-									<div class="outter-tile group shade-twelve">
+									<div class="outter-tile group shade-seven">
 										<article data-resize-height="#grid-image-five" class="content-tile tile center">
 											<h1 class="heading heading-exmed verbose">ANZ NetSetGo</h1>
 											<p class="sub-content"><small class="verbose">Netball is a ball sport played by two teams of six players.</small></p>

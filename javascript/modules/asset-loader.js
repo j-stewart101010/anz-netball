@@ -7,7 +7,7 @@ define([
 
     var AssetLoader = function () {
         this.images = [], this.total = 0, this.position = 0, this.onLoadComplete, this.onProgress
-    }; 
+    };
 
     AssetLoader.constructor = AssetLoader;
 

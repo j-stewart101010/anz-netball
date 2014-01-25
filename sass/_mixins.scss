@@ -391,33 +391,13 @@
   background-color: $background;
   border-color: $border;
 
-    // &:after {
-    //   content: attr(data-descr);
-    //   position: absolute;
-    //   width: 96%;
-    //   height: 70%;
-    //   top: -101%;
-    //   left: 0;
-    //   color: darken($brand-accent-one, 15%);
-    //   background-color: white;
-    //   padding: 5px 5px;
-    //   text-align: left;
-
-    //   @include transition-property(all);
-    //   @include transition-duration(0.2s);       
-    // }
-
   &:hover,
   &:focus,
   &:active,
   &.active {
     color: darken($brand-accent-one, 15%);
-    border-color: lighten($border, 50%);
+    border-color: white;
     background-color: white;
-
-    // &:after {
-    //   top: 0;   
-    // }    
 
     @if $background != "transparent" {
       background-color: darken($background, 8%);
@@ -650,4 +630,3 @@
 //
 // Example usage: change the default blue border and shadow to white for better
 // contrast against a dark gray background.
-
