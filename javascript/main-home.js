@@ -48,6 +48,12 @@ require.config({
 				'jquery'
 			],
 			exports: '$.fn.modal'
+        },
+        flippy : {
+        	deps: [
+        		'jquery'
+        	],
+        	exports: '$.fn.flippy'
         }          
 	},
 	paths: {

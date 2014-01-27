@@ -150,7 +150,7 @@
 									</div>
 									<div class="col col-xs-6 col-md-12">
 										<div class="outter-tile group shade-seven">
-											<article data-resize-height="#image-container-two" class="content-tile tile center" style="height: 478px;">
+											<article data-resize-height="#image-container-two" class="content-tile mini tile center" style="height: 478px;">
 												<h1 class="heading heading-exmed verbose">ANZ NetSetGo</h1>
 												<p class="sub-content"><small class="verbose">Netball is a ball sport played by two teams of six players.</small></p>
 												<a class="btn btn-default btn-sm btn-primary" href="/grants">More <i class="fa fa-angle-right"></i></a>
@@ -159,19 +159,23 @@
 									</div>	
 								</div>
 
-<!-- 								<a id="user-story-image-one" class="collapse image-wrap enlarge top left" data-enlage="toggle" data-enlarge-target="#user-story-image-one" data-enlarge-to-target="#user-story-box-one" href="#">
-									<img src="http://lorempixel.com/g/612/612/">
-									<span class="btn btn-sm btn-action flip-toggle enlarge-icon" data-toggle="collapse" data-target="#user-story-one" data-flip="toggle" data-flip-target="#user-story-box-one">
-										<i class="fa fa-align-left"></i>
+								<div id="user-story-image-one" class="collapse image-wrap enlarge top left">
+									<a id="user-story-image-one" data-toggle="collapse" data-target="#user-story-one" data-flip="toggle" data-flip-target="#user-story-box-one" href="#">
+										<img src="http://lorempixel.com/g/612/612/">
+									</a>
+									<span class="btn btn-sm btn-action flip-toggle enlarge-icon"  data-enlage="toggle" data-enlarge-target="#user-story-image-one" data-enlarge-to-target="#user-story-box-one">
+										<i class="fa fa-chevron-left"></i>
 									</span>
-								</a>
+								</div>
 
-								<a id="user-story-image-two" class="collapse image-wrap enlarge bottom left" data-enlage="toggle" data-enlarge-target="#user-story-image-two" data-enlarge-to-target="#user-story-box-one" href="#">
-									<img src="http://lorempixel.com/g/612/612/">
-									<span class="btn btn-sm btn-action flip-toggle enlarge-icon" data-toggle="collapse" data-target="#user-story-two" data-flip="toggle" data-flip-target="#user-story-box-one">
-										<i class="fa fa-align-left"></i>
+								<div id="user-story-image-two" class="collapse image-wrap enlarge bottom left">
+									<a id="user-story-image-two" data-toggle="collapse" data-target="#user-story-two" data-flip="toggle" data-flip-target="#user-story-box-one" href="#">
+										<img src="http://lorempixel.com/g/612/612/">
+									</a>
+									<span class="btn btn-sm btn-action flip-toggle enlarge-icon"  data-enlage="toggle" data-enlarge-target="#user-story-image-two" data-enlarge-to-target="#user-story-box-one">
+										<i class="fa fa-chevron-left"></i>
 									</span>
-								</a> -->
+								</div>
 
 							</div>
 							<div class="back">

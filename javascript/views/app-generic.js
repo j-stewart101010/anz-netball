@@ -5,7 +5,8 @@ define([
     'backbone',
     'views/video-embed',
     'match_media',
-    'flippy'
+    'flippy',
+    'polyfiller'
 ], function ($, _, Backbone, VideoEmbedView, MatchMedia) {
 
     var _self;
@@ -23,39 +24,43 @@ define([
         initialize : function () {
             _self = this;
 
-            _self.$content = _self.$el.find('.content');      
+            _self.$content = _self.$el.find('.content');  
+            _self.$forms = _self.$content.find('form');    
 
             $(window).on('resize' , _self.resize )
                 .on('load', _self.match_row_height );
+
+            _self.shim_forms();                
+        },
+
+        shim_forms : function () {
+            $.webshims.polyfill('forms');
+            _self.$forms.bind('changedvalid', function(e) {
+                $(e.target).parent().addClass('valid').removeClass('invalid');
+            }).bind('changedinvalid', function(e) {
+                $(e.target).parent().addClass('invalid').removeClass('valid');
+            }).bind('firstinvalid', function(e) {
+                $.webshims.validityAlert.showFor(e.target);
+                return false;
+            });
         },
 
         flip_toggle : function (e) {
-            var $target = $($(e.currentTarget)),
+            var $target = $(e.currentTarget),
                 $flip_target = $($target.data('flip-target')),
-                $front, $back, state = {};
+                $front, $back;          
 
             e.preventDefault();
 
-            if (Modernizr.csstransforms3d) { 
-                $flip_target.toggleClass('flip');
+            if (Modernizr.csstransforms3d) {
+                $flip_target.toggleClass('flip')
             }
             else {
                 $front = $flip_target.find('.front');
                 $back = $flip_target.find('.back');
 
                 if (MatchMedia.tablet()) {
-                    console.log($flip_target);
                     $flip_target.toggleClass('flip');
-                    // if ( $front.css('visibility') == 'hidden' ) { state = { active : 'visible', inactive : 'hidden' }; }
-                    // else { state = { active : 'hidden', inactive : 'visible' }; }
-
-                    // $back.css('visibility', state.active);
-                    // $front.css('visibility', state.inactive);
-
-                    // $back.fadeToggle().css({ 'visibility' : 'visible' });
-
-                    // $flip_target.find('.front').fadeToggle().end().find('.back').fadeToggle(); 
-
                 }
                 else {
 
@@ -68,19 +73,19 @@ define([
                             verso: $back.html(),
                             direction: "LEFT",
                             duration: "750",
-                            onReverseFinish: function () {
-                                $flip_target.toggleClass('flip')
+                            onFinish: function () {
+                                _self.$el.updatePolyfill();
                             }
-                        });                    
+                        });  
                     }                    
                 }
             }
         },
 
         enlarge_image_toggle : function (e) {
-            var $enlarge_target = $($(e.currentTarget).data('enlarge-target')),
-                $enlarge_to_target = $($(e.currentTarget).data('enlarge-to-target')),
-                $current_target = $($(e.currentTarget));
+            var $target = $(e.currentTarget),
+                $enlarge_target = $($target.data('enlarge-target')),
+                $enlarge_to_target = $($target.data('enlarge-to-target'));
 
             e.preventDefault();
 
@@ -93,16 +98,16 @@ define([
                 else {
                     $enlarge_target
                         .toggle()
-                        .css({ width : $current_target.width() })
+                        .css({ width : $target.width() })
                     $enlarge_target.css({ width : $enlarge_to_target.width(), height : 'auto' });
                 }
+                $enlarge_target.toggleClass('enlarged');
             }
             else {
                 if ($enlarge_target.hasClass('enlarged')) { $enlarge_target.animate({ width : '' }); }
                 else { $enlarge_target.animate({ width : $enlarge_to_target.width(), height : 'auto' }); }
-            } 
-
-            $enlarge_target.toggleClass('enlarged');
+                $enlarge_target.toggleClass('enlarged');
+            }
         },
 
         scale_enlarged_images : function () {

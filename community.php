@@ -20,7 +20,7 @@
 		<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
     </head>
 
-    <body>
+    <body class="community">
 
 		<header class="master-head">
 			<div class="branding col-md-4">
@@ -121,7 +121,7 @@
 
 
 
-								<div class="outter-tile">
+								<div class="outter-tile vertical-center">
 									<form id="apply-for-grant-signup" action="/" method="POST" class="form content-tile tile shade-two">
 										<div class="form-group">
 											<input id="apply-for-grant-name" name="apply-for-grant-name" class="form-control" type="text" required="required" placeholder="Name">
@@ -153,7 +153,7 @@
 												<button class="btn btn-default btn-xs"><i class="fa fa-picture-o"></i> Image</button>
 												<input type="file" class="file-input" id="apply-for-grant-image" name="apply-for-grant-image">
 											</span>
-											File size limit 2mb
+											<span class="field-helper">File size limit 2mb</span>
 											
 											<span class="tooltip">
 												<div class="question-icon">
@@ -197,7 +197,13 @@
 										<!-- <input class="btn btn-default btn-sm" type="submit" value="Apply now"> -->
 
 									</form>
-									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#apply-for-grant" href="#"><i class="fa fa-times"></i></a>
+									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#apply-for-grant" href="#">
+										<!-- <i class="fa fa-times"></i> -->
+										<div class="cross-icon">
+											<i class="fa fa-angle-left"></i>
+											<i class="fa fa-angle-right"></i>
+										</div>
+									</a>
 								</div>
 
 
@@ -409,7 +415,7 @@
 
 								<div class="panel panel-default">
 									<div id="who-can-apply" class="panel-collapse collapse in">
-										<div class="outter-tile">
+										<div class="outter-tile vertical-center">
 											<article class="tile">
 												<p>The ANZ Grant Scheme has seven options for you to choose from. Select the option most relevant to you or your team, club or school, or tell us exactly what you need with the ‘custom grant’ option.</p>
 												<ul>
@@ -423,7 +429,7 @@
 
 								<div class="panel panel-default">
 									<div id="do-i-need-to-be-customer" class="panel-collapse collapse">
-										<div class="outter-tile">
+										<div class="outter-tile vertical-center">
 											<article class="tile">
 												<p>The ANZ Grant Scheme has seven options for you to choose from. Select the option most relevant to you or your team, club or school, or tell us exactly what you need with the ‘custom grant’ option.</p>
 												<ul>

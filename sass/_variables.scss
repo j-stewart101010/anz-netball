@@ -5,18 +5,19 @@
 $brand-primary:						#0098db;	//Ocean Blue
 $brand-secondary:					#004165;	//Deep Current
 
-$brand-accent-one:					#d0eef8;	//Baby blue
-$brand-accent-two:					#dfe9ea;	//Dirty blue
-$brand-accent-three:				#9f9f9f;	//Light gray
+$brand-accent-one:					#d0eef8;	//Baby Blue
+$brand-accent-two:					#dfe9ea;	//Dirty Blue
+$brand-accent-three:				#9f9f9f;	//Light Gray
 $brand-accent-four:					#6d9da2;	//Cerulean
-$brand-accent-five:					#cdeff3;	//Poppy blue
-$brand-accent-six:					#69d0dc;	//Aqua
-$brand-accent-seven:				#facea8;	//Light orange
-$brand-accent-eight:				#e06f09;	//Sand orange
+$brand-accent-five:					#cdeff3;	//Poppy Blue
+$brand-accent-six:					#37c0d0;	//Aqua
+$brand-accent-seven:				#facea8;	//Light Orange
+$brand-accent-eight:				#f3933e;	//Sand Orange
+$brand-accent-nine:					#51bbe1;	//Deep Sky Blue
 
 
 
-$brand-heading-accent-one:			#36778a;	//Puuissan blue
+$brand-heading-accent-one:			#36778a;	//Puuissan Blue
 
 
 
@@ -204,7 +205,7 @@ $hr-border:                   $brand-secondary !default;
 
 //These values represent the max values of the grid, beyond these values the grid will have rows/columns appened to it to maintain ratio of grid tiles
 $grid-max-width:			1200px!default;
-$grid-max-height:			680px!default;
+$grid-max-height:			720px!default;
 
 // Number of columns in the grid system
 $grid-columns:              12 !default;

@@ -20,11 +20,17 @@
 //====================================================================================================================================
 
 body {
+	position: relative;
 
 	@media screen and (min-width: $screen-desktop) {	
-		overflow-y: hidden;
+		// overflow-y: hidden;
 		overflow-x: hidden;
 	}
+
+	@media screen and (max-height: $grid-max-height) {
+		min-height: $grid-max-height;
+		overflow-y: scroll;
+	}	
 }
 
 // Master Head Module
@@ -32,6 +38,8 @@ body {
 //====================================================================================================================================
 
 .master-head {
+	position: relative;
+	z-index: 100;
 	@include make-row();
 
 	.logos {
@@ -58,7 +66,7 @@ body {
 		}
 
 		a {
-			padding: 0 5%;
+			padding: 0 8%;
 			color: white;
 			font-family: $font-family-sans-serif-two;
 		}
@@ -67,9 +75,7 @@ body {
 			width: 6.66667%;
 
 			a {
-				border-left: 0;
-
-				&:before {
+				&:before, &:after {
 					border-right: 0;
 				}
 			}
@@ -89,12 +95,12 @@ body {
 	@media screen and (min-width: $screen-xsmall) {
 		.navigation {
 			display: table;
-			height: 100%!important;
+			height: 100%!important; //Important to get around javascript applied inline styles
 
 			li {
+				display: table-cell;				
 				padding-top: 0;
-				padding-bottom: 0;				
-				display: table-cell;
+				padding-bottom: 0;
 			}
 		}
 		.sharp-brand-angle {
@@ -103,9 +109,9 @@ body {
 	}	
 
 	@media screen and (max-width: $screen-desktop) {
-		.nav-items {
-			max-width: 98.5%;
-		}
+		// .nav-items {
+		// 	max-width: 98.5%;
+		// }
 
 		.navigation {
 			li {
@@ -149,6 +155,9 @@ body {
 	}
 
 	@media screen and (min-width: $screen-large-desktop) {
+		.nav-items {
+			max-width: $screen-small;
+		}
 		.navigation {
 			a {
 				font-size: ($font-size-medium);
@@ -239,7 +248,7 @@ body {
 	}
 
 	a {
-		position: relative;
+		// position: relative;
 		padding: 0 10px;
 		border-left: 1px solid lighten($brand-primary, 40%);
 		font-size: $font-size-small;
@@ -266,6 +275,7 @@ body {
 
 	&.block {
 		li {
+			position: relative;
 			text-align: center;
 			text-transform: uppercase;
 		
@@ -276,8 +286,14 @@ body {
 					border-left: 1px solid transparent;
 					color: lighten($brand-primary, 20%);
 
-					&:before {
-						border-right: 1px solid transparent;
+					&:before, &:after {
+						border-right: 0;
+					}
+				}
+
+				& + li {
+					a:before, a:after {
+						border-right: 0;
 					}
 				}
 			}
@@ -285,17 +301,26 @@ body {
 
 		a {
 			display: block;
-			border-left: 1px solid lighten($brand-primary, 5%);
+			// border-left: 1px solid lighten($brand-primary, 5%);
+			border-left: 0;
 
-			&:before {
+			&:before, &:after {
 				position: absolute;
 				content: "";
-				left: -1px;
-				top: 0;
+				top: 25%;
 				width: 1px;
-				height: 100%;			
-				border-right: 1px solid darken($brand-primary, 5%);
-			}			
+				height: 50%;			
+			}
+
+			&:before {
+				left: -1px;
+				border-right: 1px solid darken($brand-primary, 5%);				
+			}
+
+			&:after {
+				left: -2px;			
+				border-right: 1px solid lighten($brand-primary, 5%);
+			}				
 		}
 	}
 }
@@ -387,7 +412,7 @@ body {
 %social-media-icon {
 	@extend %icon;
 
-	padding: 0 5px;
+	padding: 2px 7px 0;
 	@include border-radius(4px);
 	font-size: $font-size-extra-medium + 1;
 	color: white;
@@ -428,6 +453,26 @@ body {
 	}
 }
 
+//Font awesome icon is to thick
+.cross-icon {
+	@extend %icon;
+	position: relative;
+	line-height: 1.2;
+	margin-left: -2px;
+	padding: 0 3px;
+	
+	.fa-angle-left, .fa-angle-right {
+		margin-left: 0;
+		font-size: $font-size-extra-medium;
+	}
+
+	.fa-angle-left {
+		position: absolute;
+		top: 0;
+		left: 55%;
+	}
+}
+
 .twitter-icon {
 	@extend %icon;
 	@extend %social-media-icon;
@@ -446,7 +491,7 @@ body {
 	@extend %icon;
 	@extend %social-media-icon;
 	
-	padding: 0 10px;
+	padding: 3px 10px 0;
 	background: #5773b2;	
 }
 
@@ -493,7 +538,7 @@ body {
 		}
 
 	    @include transition-property(all);
-	    @include transition-duration(1s);			
+	    @include transition-duration(1s);		
 	}
 
 	img {
@@ -682,7 +727,7 @@ body {
 .outter-tile {
 	display: table;
 	width: 100%;
-	height: 100%!important;
+	height: 100%!important; //Important to get around javascript applied inline styles
 	padding: 40px 0;
 
 	&.collapse {
@@ -690,7 +735,6 @@ body {
 	}
 
 	&.group {
-		// max-height: 50%;
 		padding: 0;
 	}	
 
@@ -700,8 +744,6 @@ body {
 
 	@media screen and (min-width: $screen-xsmall) and (max-width: $screen-desktop - 1) {
 		&.group {
-			// float: left;			
-			// max-width: 50%;
 
 			.tile {
 				padding-left: 0;
@@ -709,13 +751,6 @@ body {
 			}				
 		}	
 	}	
-
-	@media screen and (max-width: $screen-xsmall) {
-		// &.group {
-		// 	float: left;			
-		// 	max-width: 50%;
-		// }
-	}
 }
 
 .tile  {
@@ -728,6 +763,21 @@ body {
 
 	&.center {
 		text-align: center;
+	}
+
+	.content-image {
+		margin-bottom: 15px;
+
+		img {
+			max-width: 100%;
+			max-height: 80%; //This can be removed when the correct ratio for the resize is achieved		
+		}
+
+		@media screen and (max-width: $screen-xsmall) {
+			img {
+				max-width: 80%;
+			}			
+		}			
 	}
 
 	@media screen and (max-width: $screen-xsmall) {
@@ -777,7 +827,7 @@ body {
 }
 
 .shade-nine {
-	background-color: lighten($brand-accent-four, 20%);
+	background-color: darken($brand-accent-four, 40%);
 }
 
 .shade-ten {
@@ -808,6 +858,10 @@ body {
 	background-color: $brand-accent-eight; //Sand orange
 }
 
+.shade-seventeen {
+	background-color: white; //White
+}
+
 // Content Tile Module (Subset of .tile)
 //====================================================================================================================================
 //====================================================================================================================================
@@ -815,6 +869,14 @@ body {
 .content-tile {
 	.heading {
 		margin-bottom: 5px;
+	}
+	p {
+		margin-bottom: 25px;
+	}
+	&.mini {
+		p {
+			margin-bottom: 15px;
+		}
 	}
 }
 
@@ -833,13 +895,16 @@ body {
 	}
 }
 
-// Info Tile Module (Subset of .tile)
+// Media Tile Module (Subset of .tile)
 //====================================================================================================================================
 //====================================================================================================================================
 
-.story-tile {
-
+.media-tile {
+	.media {
+		margin-top: 0;
+	}
 }
+
 
 // Carousel Module
 //====================================================================================================================================
@@ -855,7 +920,7 @@ body {
 
 	&.left {
 		left: auto;
-		right: 27px;
+		right: 33px;
 	}
 }
 
@@ -987,17 +1052,28 @@ body {
 	}
 }
 
-// Overlays Module (For rendering an overlay behind an element - should be used in conjunction with the shade module to produce colors)
+// Overlays Module (For rendering an overlay behind an element - can be used in conjunction with the shade module to produce colors)
 //====================================================================================================================================
 //====================================================================================================================================
 
-.brand-overlay {
+%overlay {
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	z-index: 99;
+	z-index: 99;	
+}
+
+.loading-overlay {
+	@extend %overlay;
+
+	background-color: $brand-primary;
+}
+
+.brand-overlay {
+	@extend %overlay;
+
 	@include opacity(0.6);
 }
 
@@ -1011,6 +1087,7 @@ body {
 	padding-top: 10px;
 	padding-bottom: 10px;	
 	background-color: $brand-secondary;
+	z-index: 100;
 
 	.navigation, .copyright {
 		@include make-column(12);
@@ -1021,6 +1098,10 @@ body {
 	.navigation a, .copyright {
 		color: $brand-accent-one;
 		font-size: $font-size-extra-small;
+	}
+
+	.navigation li:first-child a {
+		padding-left: 0;
 	}
 
 	@media screen and (min-width: $screen-desktop) {
@@ -1176,24 +1257,34 @@ body {
 	}
 
 	.active {
-		background-color: lighten($brand-primary, 10%);
+		background-color: $brand-accent-nine;
 		color: white;
 	}
 }
 
-.panel-collapse {
-	@media screen and (min-width: $screen-desktop) {
-		top: 0;
-		position: absolute;		
-	}	
-}
-
-.panel-collapse, .panel, .panel-group {
-	height: 100%;
-}
-
 .answer-panel {
+	height: 100%!important; //Important to get around javascript applied inline styles
 	font-size: ceil($font-size-small - 1);	
+
+	.panel-collapse {
+		@include opacity(1);
+
+		@media screen and (min-width: $screen-desktop) {
+			top: 0;
+			position: absolute;		
+		}
+
+	    @include transition-property(opacity);
+	    @include transition-duration(1s);		
+	}
+
+	.panel-collapse, .panel {
+		height: 100%!important; //Important to get around javascript applied inline styles
+	}
+
+	.panel-collapse.collapsing {
+		@include opacity(0);
+	}
 }
 
 .qa-answers {
@@ -1347,9 +1438,6 @@ body {
 }
  
 .no-csstransforms3d .flip-container {
-	.front {
-		// @include opacity(1);
-	}
 	.back {
 		visibility: hidden;
 	}
@@ -1373,4 +1461,38 @@ body {
 	bottom: 0;
 	right: 0;
 	z-index: 99;
+}
+
+// Brand Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+@mixin branding-theme($color) {
+	.navigation.block li.active a,
+	.navigation.block li:hover a {
+		color: $color; //Cerulean
+	}
+
+	.btn {
+		&:hover,
+		&:focus,
+		&:active,
+		&.active {
+			color: white;
+			border-color: darken($color, 10%);
+			background-color: $color;
+		}
+	}
+}
+
+.all-about-netball {
+	@include branding-theme($brand-accent-six);
+}
+
+.clinics {
+	@include branding-theme($brand-accent-eight);
+}
+
+.getting-started {
+	@include branding-theme($brand-accent-four);
 }
