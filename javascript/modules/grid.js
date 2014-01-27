@@ -13,8 +13,10 @@ define([
   'use strict';
 
   var _self;
+
   var Grid = function (w, h) {
 	  _self=this;
+
     console.log("Grid");
 
     this.camera = {
@@ -46,7 +48,8 @@ define([
     this.offScreenCtx = this.offScreen.getContext("2d");
 
     this.zoom = 0.2;
-    this.defaultZoom = 0.5;
+    this.defaultZoom = 0.6 + (canvas.width / 10000);
+
     this.minZoom=0.3;
     this.dampZoom=0.01;
     this.zoomPos={x:canvas.width/2,y:canvas.height/2};
@@ -107,7 +110,7 @@ define([
 	Grid.constructor = Grid;
 
 	Grid.prototype.resize = function (w, h) {
-	  console.log("Grid.resize " + w + "x" + h);
+    this.defaultZoom = 0.6 + (canvas.width / 10000);
 	  this.width = w;
 	  this.height = h;
     this.zoomPos={x:w/2,y:h/2};
@@ -213,7 +216,6 @@ define([
     if(model.content[modelIndex].tiletype=="video") {
 
       _self.flippedVideoTile=modelIndex;
-      console.log("flipped"+_self.flippedVideoTile);
       $('body').append(new VideoEmbedView({ 
         modal : true,
         video_id : model.content[modelIndex].videoid
@@ -301,7 +303,7 @@ define([
     //   console.log(model.content[this.mouseHover].subtextsplit);
     // };
 
-    var desiredZoom=1-Math.pow(this.camera.momentumx*this.camera.momentumx+this.camera.momentumy*this.camera.momentumy,0.4)/70;
+    var desiredZoom=this.defaultZoom-Math.pow(this.camera.momentumx*this.camera.momentumx+this.camera.momentumy*this.camera.momentumy,0.4)/70;
     if(desiredZoom<0.2) desiredZoom=0.2;
     this.zoom+=(desiredZoom-this.zoom)*this.dampZoom;
     this.dampZoom+=0.005;
@@ -340,6 +342,10 @@ define([
       if(model.content[i].flipProgress>1) {
         model.content[i].flipProgress=1;
         model.content[i].flipDirection=0;
+        // console.log(this.camera.x, this.camera.y);
+        // sqwidth * scale * zoom
+        // console.log(model.content[i]);
+        console.log(model.content[i].scale * this.squareWidth * this.zoom);
         this.onFlip(i);
       };
       if(model.content[i].flipProgress<0) {

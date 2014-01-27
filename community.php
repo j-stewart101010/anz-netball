@@ -94,7 +94,7 @@
 
 			</section>
 
-			<section class="grid  active">
+			<section class="grid active">
 				
 				<div class="col col-md-4 center-tile shade-two">
 
