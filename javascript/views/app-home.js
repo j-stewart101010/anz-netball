@@ -61,6 +61,7 @@ define([
                 $(canvas).mousedown(_self.onMouseDown);
                 $(canvas).mouseup(_self.onMouseUp);
                 $(canvas).mousemove(_self.onMouseMove);
+                $(canvas).mouseout(_self.onMouseOut);
                 $(canvas).bind("touchstart", _self.onTouchStart);
                 $(canvas).bind("touchend", _self.onTouchEnd);
                 $(canvas).bind("touchmove", _self.onTouchMove);
@@ -214,6 +215,11 @@ define([
             a.preventDefault();
             Config.mouse.button = false;
             if(Config.mouse.dragDistance<15) grid.sentClick();
+        },
+
+        onMouseOut : function (a) {
+            a.preventDefault();
+            Config.mouse.button = false;
         },
 
         onTouchStart : function (a) {

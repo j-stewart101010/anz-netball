@@ -36,6 +36,9 @@ define([
                     model.content[i].image = new Image;
                     model.content[i].image.src = Config.REMOTE_PATH + model.content[i].imageurl;
                     imagelist.push(Config.REMOTE_PATH + model.content[i].imageurl);
+                    model.content[i].storyimage = new Image;
+                    model.content[i].storyimage.src = Config.REMOTE_PATH + model.content[i].storyimageurl;
+                    imagelist.push(Config.REMOTE_PATH + model.content[i].storyimageurl);
                 break;
                 case "video":
                     tilescale = 2;

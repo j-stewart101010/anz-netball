@@ -10,9 +10,9 @@ define([
 		_self = this;
 
 		this.ctx;
-		this.boxes=[], this.height, this.width, this.left=0, this.top=0, this.padding=0, this.margin=0, this.right, this.bottom;
+		this.boxes=[], this.height, this.width=90, this.left=0, this.top=0, this.padding=0, this.margin=0, this.right, this.bottom;
 		this.content, this.contentType="text", this.properties, this.fontStyle="normal", this.fontSize=24, this.fontName="Helvetica W01 Light", this.lineHeight=this.fontSize;
-		this.fontColour="#AADDFF", this.backgroundColour="#555555", this.id="", this.align="left";
+		this.fontColour="#AADDFF", this.backgroundColour="rgba(0,0,0,.1)", this.id="", this.align="left";
 		
 		
 		$.each(properties, function(key, value) {
@@ -48,7 +48,6 @@ define([
 	Box.prototype.addBox = function (newBox)  {
 	//	console.log(newBox);
 		if(typeof(this.boxes)!="undefined") this.boxes.push(newBox);
-		//this.calculate();
 	};
 
 	// Box.prototype.destroyById = function (id) {
@@ -108,7 +107,7 @@ define([
 					ctx.fillStyle=this.boxes[i].fontColour;
 					ctx.font = this.boxes[i].fontStyle + " " + this.boxes[i].fontSize + "px " + this.boxes[i].fontName;
 					ctx.textBaseline = 'top';
-					cy=drawy+this.boxes[i].drawTop*drawScale;//+this.boxes[i].lineHeight;
+					cy=drawy+(this.boxes[i].drawTop+(this.boxes[i].drawHeight-this.boxes[i].lineHeight*this.boxes[i].splitLines.length)*0.5)*drawScale;//+this.boxes[i].lineHeight;
 					if(drawScale!=1) ctx.scale(drawScale,drawScale);
 					for(j=0;j<this.boxes[i].splitLines.length;j++) {
 						cx=drawx+(this.boxes[i].drawLeft)*drawScale; //default left justified
@@ -124,7 +123,7 @@ define([
 			if(this.boxes[i].contentType=="image") {
 				ctx.fillStyle=this.boxes[i].backgroundColour;
 				ctx.fillRect(drawx+this.boxes[i].boxLeft*drawScale,drawy+this.boxes[i].boxTop*drawScale,this.boxes[i].boxWidth*drawScale,this.boxes[i].boxHeight*drawScale);
-				ctx.drawImage(this.boxes[i].content,drawx+this.boxes[i].drawLeft*drawScale,drawy+this.boxes[i].drawTop*drawScale,this.boxes[i].content.width*drawScale,this.boxes[i].content.height*drawScale);		
+				ctx.drawImage(this.boxes[i].content,drawx+this.boxes[i].drawLeft*drawScale,drawy+this.boxes[i].drawTop*drawScale,this.boxes[i].drawWidth*drawScale,this.boxes[i].drawHeight*drawScale);		
 			};
 		};
 	};
@@ -132,6 +131,7 @@ define([
 
 	Box.prototype.calculate = function () {
 		var apx,apy,pw,ph,mw,mh,i,j;
+		var dwidth, dheight;
 		if(this.contentType=="container") {
 			//this. is the container
 			//this.boxes[i]. is the box
@@ -139,17 +139,43 @@ define([
 			this.right=this.left+this.width;
 			this.bottom=this.top+this.height;
 		    
+
 		    for(i=0;i<this.boxes.length;i++) {
 
-		    	if(this.contentType=="image") { //if image is not supplied a size, make it same as image
+		    	if(this.boxes[i].contentType=="image") { //if image is not supplied a size, make it same as image
 					if(typeof(this.boxes[i].width)=="undefined") this.boxes[i].width=(this.boxes[i].content.width*100)/this.width;
-					if(typeof(this.boxes[i].height)=="undefined") this.boxes[i].height=(this.boxes[i].content.height*100)/this.height;					
-				};
-				if(this.contentType=="text") { //if image is not supplied a size, make it same as image
-					//if(typeof(this.boxes[i].width)=="undefined") this.boxes[i].width=(this.boxes[i].content.width*100)/this.width;
-					if(typeof(this.boxes[i].width)=="undefined") this.boxes[i].width=90;
-					if(typeof(this.boxes[i].height)=="undefined") this.boxes[i].height=(this.boxes[i].splitLines.length*this.boxes[i].lineHeight*100)/this.height+this.boxes[i].padding*2;
+					if(typeof(this.boxes[i].height)=="undefined") this.boxes[i].height=(this.boxes[i].content.height*100)/this.height;
+					if(this.boxes[i].width=="original") this.boxes[i].width=(this.boxes[i].content.width*100)/this.width;					
+					if(this.boxes[i].height=="original") this.boxes[i].height=(this.boxes[i].content.height*100)/this.height;					
 
+					this.boxes[i].boxLeft=(this.boxes[i].margin+this.boxes[i].left)*this.width*0.01;
+			    	this.boxes[i].boxTop=(this.boxes[i].margin+this.boxes[i].top)*this.height*0.01;
+			    	this.boxes[i].boxWidth=(this.boxes[i].width-this.boxes[i].padding*2)*this.width*0.01;
+			    	this.boxes[i].boxHeight=(this.boxes[i].height-this.boxes[i].padding*2)*this.height*0.01;
+
+			    	var maxWidth=this.boxes[i].boxWidth;
+					var maxHeight=this.boxes[i].boxHeight;
+					var imageAspect = this.boxes[i].content.width / this.boxes[i].content.height;
+    				var boundaryAspect = maxWidth / maxHeight;
+    				var newWidth,newHeight;
+    				if(imageAspect > boundaryAspect) {
+				        // Width maxed
+				        newWidth = maxWidth;
+				        newHeight = newWidth / imageAspect;
+				    } else {
+				        // Height maxed
+				        newHeight = maxHeight;
+				        newWidth = imageAspect * newHeight;
+ 					};
+ 					this.boxes[i].drawHeight=newHeight;
+					this.boxes[i].drawWidth=newWidth;
+					this.boxes[i].drawLeft=(this.boxes[i].margin+this.boxes[i].left+this.boxes[i].padding)*this.width*0.01+(this.boxes[i].boxWidth-newWidth)/2;
+					this.boxes[i].drawTop=(this.boxes[i].margin+this.boxes[i].top+this.boxes[i].padding)*this.height*0.01;
+
+    			};
+				if(this.boxes[i].contentType=="text") { //if image is not supplied a size, make it same as image
+					//if(typeof(this.boxes[i].width)=="undefined") this.boxes[i].width=(this.boxes[i].content.width*100)/this.width;
+					
 					// this.boxes[i].drawWidth=(this.boxes[i].width-this.boxes[i].padding*2)*this.width*0.01;
 					
 					// this.ctx.font = this.boxes[i].fontStyle + " " + this.boxes[i].fontSize + "px " + this.boxes[i].fontName;
@@ -158,26 +184,27 @@ define([
 					
 			    	// pw=(this.boxes[i].width-this.boxes[i].padding*2)*this.width*0.01;
 			    	// if(mw>pw) 
-				};
-
-		    	this.boxes[i].boxLeft=(this.boxes[i].margin+this.boxes[i].left)*this.width*0.01;
-		    	this.boxes[i].boxTop=(this.boxes[i].margin+this.boxes[i].top)*this.height*0.01;
-		    	this.boxes[i].boxWidth=this.boxes[i].width*this.width*0.01;
-		    	this.boxes[i].boxHeight=this.boxes[i].height*this.height*0.01;
-
-		    	this.boxes[i].drawLeft=(this.boxes[i].margin+this.boxes[i].left+this.boxes[i].padding)*this.width*0.01;
-				this.boxes[i].drawTop=(this.boxes[i].margin+this.boxes[i].top+this.boxes[i].padding)*this.height*0.01;
-				this.boxes[i].drawWidth=(this.boxes[i].width-this.boxes[i].padding*2)*this.width*0.01;
-				this.boxes[i].drawHeight=(this.boxes[i].height-this.boxes[i].padding*2)*this.height*0.01;
-								
-		    	if(this.boxes[i].contentType=="image") {
-			    	//set actual image propeties
-				};
-				if(this.boxes[i].contentType=="text") {
-					//set actual text properties
+			    	//set actual text properties
 			    	this.ctx.font = this.boxes[i].fontStyle + " " + this.boxes[i].fontSize + "px " + this.boxes[i].fontName;
 			    	this.ctx.textBaseline = 'top';
+			    	this.boxes[i].drawWidth=(this.boxes[i].width-this.boxes[i].padding*2)*this.width*0.01;
 			    	this.boxes[i].splitLines = this.splitText(this.ctx,this.boxes[i].drawWidth,this.boxes[i].content);
+					
+					if(typeof(this.boxes[i].height)=="undefined") {
+						if (this.boxes[i].splitLines.length<=1) {
+							this.boxes[i].height=(this.boxes[i].fontSize*100)/this.height+this.boxes[i].padding*2;
+						} else {	
+							this.boxes[i].height=((this.boxes[i].splitLines.length-1)*this.boxes[i].lineHeight*100)/this.height+this.boxes[i].padding*2;
+						}; 
+					};
+					this.boxes[i].boxLeft=(this.boxes[i].margin+this.boxes[i].left)*this.width*0.01;
+			    	this.boxes[i].boxTop=(this.boxes[i].margin+this.boxes[i].top)*this.height*0.01;
+			    	this.boxes[i].boxWidth=(this.boxes[i].width-this.boxes[i].padding*2)*this.width*0.01;
+			    	this.boxes[i].boxHeight=(this.boxes[i].height-this.boxes[i].padding*2)*this.height*0.01;
+			    	
+			    	this.boxes[i].drawLeft=(this.boxes[i].margin+this.boxes[i].left+this.boxes[i].padding)*this.width*0.01;
+					this.boxes[i].drawTop=(this.boxes[i].margin+this.boxes[i].top+this.boxes[i].padding)*this.height*0.01;
+					this.boxes[i].drawHeight=this.boxes[i].splitLines.length*this.boxes[i].lineHeight
 			    	//console.log(this.boxes[i].splitLines);
 			    	// mw=0;
 			    	// for(j=0;j<this.boxes[i].splitLines.length;j++) {
@@ -192,6 +219,13 @@ define([
 			    	// this.boxes[i].boxHeight = mh + this.boxes[i].padding*this.height*.02;
 				};
 				
+				// this.boxes[i].boxLeft=(this.boxes[i].margin+this.boxes[i].left)*this.width*0.01;
+		  //   	this.boxes[i].boxTop=(this.boxes[i].margin+this.boxes[i].top)*this.height*0.01;
+		  //   	this.boxes[i].boxWidth=this.boxes[i].width*this.width*0.01;
+		  //   	this.boxes[i].boxHeight=this.boxes[i].height*this.height*0.01;
+
+
+
 				this.boxes[i].right=this.boxes[i].margin+this.boxes[i].left+this.boxes[i].width;
 				this.boxes[i].bottom=this.boxes[i].margin+this.boxes[i].top+this.boxes[i].height;
 				// this.boxes[i].boxRight=this.boxes[i].boxLeft+this.boxes[i].boxWidth;
