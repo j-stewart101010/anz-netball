@@ -207,11 +207,13 @@ define([
             Config.downAt.x = Config.mouse.x;
             Config.downAt.y = Config.mouse.y;
             Config.mouse.button = true;
+            Config.mouse.dragDistance = 0;
         },
 
         onMouseUp : function (a) {
             a.preventDefault();
             Config.mouse.button = false;
+            if(Config.mouse.dragDistance<15) grid.sentClick();
         },
 
         onTouchStart : function (a) {
@@ -220,32 +222,36 @@ define([
             Config.mouse.y = a.originalEvent.touches[0].clientY + document.body.scrollTop;
             downAt.x = Config.mouse.x;
             downAt.y = Config.mouse.y;
+            Config.mouse.button = true;
+            Config.mouse.dragDistance = 0;
         },
 
         onTouchEnd : function (a) {
-            a.preventDefault();
+            //this.onMouseUp(a);
         },
 
         onTouchMove : function(a) {
             a.preventDefault();
             Config.mouse.x = a.originalEvent.touches[0].clientX + document.body.scrollLeft;
             Config.mouse.y = a.originalEvent.touches[0].clientY + document.body.scrollTop;
-            _self.testDidMove()
         },
 
         onMouseMove : function (a) {
-            Config.mouse.x = a.clientX + document.body.scrollLeft;
-            Config.mouse.y = a.clientY + document.body.scrollTop
-            _self.testDidMove();
-        },
 
-        testDidMove : function () {
-            var a = Config.mouse.x - Config.downAt.x,
-                b = Config.mouse.y - Config.downAt.y,
-                c = a * a + b * b;
-            //if(c > 125) grid.didMove = true;
+    //             var rect = this.target.getBoundingClientRect();
+    // if (this.dragging) {
+    //     this.endPoint.x = event.pageX - rect.left;
+    //     this.endPoint.y = event.pageY - rect.top
 
-        }                  
+            //var newX = a.pageX + document.body.scrollLeft, newY = a.pageY + document.body.scrollTop;
+            var newX = a.clientX + document.body.scrollLeft, newY = a.clientY + document.body.scrollTop;
+            var dx = Config.mouse.x - newX, dy = Config.mouse.y - newY;
+            Config.mouse.dragDistance += Math.sqrt(dx*dx+dy*dy);
+            //console.log(Config.mouse)
+            if(Config.mouse.dragDistance>1e4) Config.mouse.dragDistance=1e4;
+            Config.mouse.x = newX;
+            Config.mouse.y = newY;
+        }
 
     });
 

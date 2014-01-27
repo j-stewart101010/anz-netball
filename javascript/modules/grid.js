@@ -6,10 +6,16 @@ define([
         'modules/grid-button',
         'modules/double-spring',
         'modules/box',
-], function ($, Config, model, GridButton, DoubleSpring, Box) {
+        'views/video-embed',
+        'bootstrap_transition',    
+        'bootstrap_modal',        
+], function ($, Config, model, GridButton, DoubleSpring, Box, VideoEmbedView) {
   'use strict';
+
+  var _self;
   var Grid = function (w, h) {
-	  console.log("Grid");
+	  _self=this;
+    console.log("Grid");
 
     this.camera = {
       x: 0,
@@ -24,29 +30,36 @@ define([
 	  };
 
     this.recalculateinterval=0;
-
+    
 	  this.canvasOffset = 0;
 	  this.squareWidth = 350;
 	  this.squareHeight = 350;
 
  	  this.resize(w, h);
 
-	  this.fliptile = {
-	   	x: 0,
-	   	y: 0,
-	   	xi: 1,
-	   	yi: 1,
-	   	angle: 0
-	  };
+    $(document).on('hidden.bs.modal', this.closedModal );
 
-    this.zoom = 0.05;
-    this.lastButton = 0;
-    this.mouseHover = -1;
-
+   
     this.offScreen = document.createElement("canvas"); 
-    this.offScreen.width = 500;// this.squareWidth; 
-    this.offScreen.height = 500;//this.squareHeight;
-    this.offScreenCtx = canvas.getContext("2d");//this.offScreen.getContext("2d");
+    this.offScreen.width = this.squareWidth*2;// this.squareWidth; 
+    this.offScreen.height = this.squareHeight*2;//this.squareHeight;
+    this.offScreenCtx = this.offScreen.getContext("2d");
+
+    this.zoom = 0.2;
+    this.defaultZoom = 0.5;
+    this.minZoom=0.3;
+    this.dampZoom=0.01;
+    this.zoomPos={x:canvas.width/2,y:canvas.height/2};
+
+    _self.flippedVideoTile=0;
+
+    this.lastButton = 0;
+    this.mouseHoverIndex = -1;
+    this.mouseHoverWorldX = 0;
+    this.mouseHoverWorldY = 0;
+    this.mouseHoverTileX = 0;
+    this.mouseHoverTileY = 0;
+
 
     for(var i=0;i<model.content.length;i++) {
       switch(model.content[i].tiletype) {
@@ -58,14 +71,8 @@ define([
           model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].title, {left:10,width:80,top:10,padding:5,fontSize:35,lineHeight:40,contentType:"text",align:"center"}));
           model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].subtext, {left:10,width:80,top:35,padding:5,fontSize:15,lineHeight:17,contentType:"text",align:"center"}));
           model.content[i].box.calculate();
-          console.log(model.content[i].box.last().bottom);
-          model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].image, {width:100,top:60,left:30,align:"center",contentType:"image"}));
+          model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].image, {width:100,top:60,left:30,align:"center",contentType:"image",id:"button"}));
           model.content[i].box.calculate();
-          console.log(model.content[i].box);
-          // this.offScreenCtx.font = this.titleFont;
-          // model.content[i].titlesplit = this.splitText(this.offScreenCtx,this.squareWidth*0.86,model.content[i].title);
-          // this.offScreenCtx.font = this.subTextFont
-          // model.content[i].subtextsplit = this.splitText(this.offScreenCtx,this.squareWidth*0.86,model.content[i].subtext);
         break;
         case "image":
         model.content[i].box = new Box(this.offScreenCtx, [], {width:350,height:350,contentType:"container"});
@@ -79,24 +86,21 @@ define([
         model.content[i].box.addBox(new Box(this.offScreenCtx, "VIDEO: " + model.content[i].textname, {contentType:"text",left:8.5,top:10,width:80,padding:5,fontSize:9,backgroundColour:"rgba(60,0,0,0.35)"}));
         model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].textsubject, {contentType:"text",left:8.5,top:17.5,width:80,padding:5,fontSize:22,backgroundColour:"rgba(0,60,0,0.35)"}));
         model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].subimage, {left:8.5,top:75,contentType:"image"}));
-        console.log(model.content[i].box);
         model.content[i].box.calculate();
+
+        model.content[i].backbox = new Box(this.offScreenCtx, [], {width:350,height:350,contentType:"container"});
+        model.content[i].backbox.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:"rgb(0,0,0)"}));
+        model.content[i].backbox.calculate();
       };
     
-      if(model.content[i].flippable) {
-        switch(model.content[i].backtype) {
-          case "text":
-            // this.offScreenCtx.font = this.titleFont;
-            // model.content[i].backtitlesplit = this.splitText(this.offScreenCtx,this.squareWidth*0.86,model.content[i].backtitle);
-            // this.offScreenCtx.font = this.subTextFont;
-            // model.content[i].backsubtextsplit = this.splitText(this.offScreenCtx,this.squareWidth*0.86,model.content[i].backsubtext);
-          break;
-          case "image":
-          case "textlink":
-          case "video":
-            //no tiles of this type yet
-        };
-      };
+      
+        model.content[i].flipProgress=0;
+        model.content[i].flipDirection=0;
+        model.content[i].scaleProgress=0;
+        model.content[i].scaleDirection=0;
+        model.content[i].actionX=0;
+        model.content[i].actionY=0;
+    
     };
 	};
 
@@ -106,66 +110,159 @@ define([
 	  console.log("Grid.resize " + w + "x" + h);
 	  this.width = w;
 	  this.height = h;
+    this.zoomPos={x:w/2,y:h/2};
 	};
 
-	
+  Grid.prototype.closedModal = function() {
+    console.log('unflipped ' + _self.flippedVideoTile);
+    model.content[_self.flippedVideoTile].flipDirection = -0.027;
+  };
 
-  Grid.prototype.renderTile = function (ctx, drawx, drawy, drawScale, modelIndex) {
-    var sizex=this.squareWidth*model.content[modelIndex].scale*drawScale,
-        sizey=this.squareHeight*model.content[modelIndex].scale*drawScale,
-        tScale=model.content[modelIndex].scale*drawScale;
-
-    var cx,cy;
-
-    if(model.content[modelIndex].flippable && model.content[modelIndex].flipped) {
-    //// tile is flipped
-      switch(model.content[i].backtype) {
-        case "text": //
-
-        break;
-        case "image":
-          //no tiles of this type yet
-        break;
-        case "textlink":
-          //no tiles of this type yet
-        break;
-        case "video":
-          //no tiles of this type yet
+  Grid.prototype.sentClick = function() {
+    var i=this.mouseHoverIndex;
+    if(i<0) return;
+    console.log("Clicked "+i);
+    
+    if(model.content[i].flippable) {
+      //scan through model data and flip&scale back any others that were flipped
+      for(var j=0;j<model.content.length;j++){
+        if(j!=i) {
+          if(model.content[i].scaleProgress>0) model.content[j].scaleDirection = -0.016;
+          if(model.content[i].flipProgress>0) model.content[j].flipDirection = -0.027;
+        };
       };
-    } else {
-    //// tile is unflipped
-      switch(model.content[modelIndex].tiletype) {
-        case "text":
-        case "textlink":
-         model.content[modelIndex].box.render(ctx, drawx, drawy, drawScale*model.content[modelIndex].scale);
 
-          // cx=drawx+(this.squareWidth-model.content[modelIndex].image.width)*0.5*tScale; //centre the image
-          // ctx.drawImage(model.content[modelIndex].image,cx,cy,model.content[modelIndex].image.width*tScale,model.content[modelIndex].image.height*tScale);
 
-        break;
-        case "image":
-          // ctx.drawImage(model.content[modelIndex].image,drawx,drawy,sizex,sizey);
-          //console.log("render object index "+modelIndex);
-          model.content[modelIndex].box.render(ctx, drawx, drawy, drawScale*model.content[modelIndex].scale);
-        break;
-        case "video":
-          model.content[modelIndex].box.render(ctx, drawx, drawy, drawScale*model.content[modelIndex].scale);
-       };
+      if(model.content[i].tiletype=="image") {
+        // if(model.content[i].scaleProgress==1 || model.content[i].scaleDirection>0) {
+        //   if(model.content[i].flipProgress==1 || model.content[i].flipDirection>0) {
+        //     //flipped or flipping to and scaled or scaling up
+        //     model.content[i].flipDirection = -0.027;
+        //     model.content[i].scaleDirection = -0.016;
+        //   };
+        //   if(model.content[i].flipProgress==0 || model.content[i].flipDirection<0) {
+        //     //unflipped or flipping from and scaled or scaling up
+        //     model.content[i].flipDirection = 0.027;         
+        //   };
+        // };
+        // if(model.content[i].scaleProgress==0 || model.content[i].scaleDirection<0) {
+        //   if(model.content[i].flipProgress==1 || model.content[i].flipDirection>0) {
+        //     //flipped or flipping to and unscaled or scaling down
+        //     //ok to be flipped and unscaled but this situation is usually triggered automatically somewhere else
+        //     //default is flip back
+        //     model.content[i].flipDirection = -0.027;
+        //   };
+        //   if(model.content[i].flipProgress==0 || model.content[i].flipDirection<0) {
+        //     //unflipped or flipping from and unscaled or scaling down
+        //     model.content[i].scaleDirection = 0.016;
+        //   };       
+        // };
+        if(model.content[i].scaleProgress==1 || model.content[i].scaleDirection>0) {
+          if(model.content[i].flipProgress==1 && model.content[i].scaleProgress==1) {
+            //flipped and scaled
+            model.content[i].flipDirection = -0.027;
+            model.content[i].scaleDirection = -0.016;
+            model.content[i].actionX=this.mouseHoverWorldX;
+            model.content[i].actionY=this.mouseHoverWorldY;
+          };
+          if(model.content[i].flipProgress==0 || model.content[i].flipDirection<0) {
+            //unflipped or flipping from and scaled or scaling up
+            model.content[i].flipDirection = 0.027;         
+            model.content[i].actionX=this.mouseHoverWorldX;
+            model.content[i].actionY=this.mouseHoverWorldY;
+          };
+        };
+        if(model.content[i].scaleProgress==0 || model.content[i].scaleDirection<0) {
+          // if(model.content[i].flipProgress==1 || model.content[i].flipDirection>0) {
+          //   //flipped or flipping to and unscaled or scaling down
+          //   //ok to be flipped and unscaled but this situation is usually triggered automatically somewhere else
+          //   //default is flip back
+          //   model.content[i].flipDirection = -0.027;
+          // };
+          if(model.content[i].flipProgress==0 || model.content[i].flipDirection<0) {
+            //unflipped or flipping from and unscaled or scaling down
+            model.content[i].scaleDirection = 0.016;
+            model.content[i].actionX=this.mouseHoverWorldX;
+            model.content[i].actionY=this.mouseHoverWorldY;
+          };       
+        };
+      };
+
+      if(model.content[i].tiletype=="video") {
+        if(model.content[i].flipProgress==1 || model.content[i].flipDirection>0) {
+          //flipped or flipping to and scaled or scaling up
+          model.content[i].flipDirection = -0.027;
+          model.content[i].actionX=this.mouseHoverWorldX;
+          model.content[i].actionY=this.mouseHoverWorldY;
+        };
+        if(model.content[i].flipProgress==0 || model.content[i].flipDirection<0) {
+          //unflipped or flipping from and scaled or scaling up
+          model.content[i].flipDirection = 0.027;         
+          model.content[i].actionX=this.mouseHoverWorldX;
+          model.content[i].actionY=this.mouseHoverWorldY;
+
+        };
+        
+        // _self.$content.find($(e.target).data('video-append')).append(view.render().el);
+        // this.delegateEvents();
+      };
+    };
+  };
+
+  Grid.prototype.onFlip = function(modelIndex) {
+    if(model.content[modelIndex].tiletype=="video") {
+
+      _self.flippedVideoTile=modelIndex;
+      console.log("flipped"+_self.flippedVideoTile);
+      $('body').append(new VideoEmbedView({ 
+        modal : true,
+        video_id : model.content[modelIndex].videoid
+      }).render().el);
+    };
+  };
+
+  Grid.prototype.onUnFlip = function(modelIndex) {
+  };
+
+  Grid.prototype.onScale = function(modelIndex) {
+  };
+
+  Grid.prototype.onUnScale = function(modelIndex) {
+  };
+
+  Grid.prototype.drawImagePerspective = function(srcCtx,srcWidth,srcHeight,dstCtx,dstDrawX,dstDrawY,drawScale,drawAngle) {
+    //dimensions to skew to by circular angle
+    var xskew = -srcWidth*0.5*Math.cos(drawAngle*Math.PI/180);
+    var yskew = -srcHeight*0.13*Math.sin(drawAngle*Math.PI/180);
+    
+    //set up intervals
+    var xint=-2*xskew*drawScale/srcWidth;
+    var yint=-2*drawScale*yskew/srcWidth;
+    var hint=-2*yint;
+
+    //set up starting coordinates and height
+    var x=dstDrawX+(srcWidth*0.5+xskew)*drawScale;
+    var y=dstDrawY+(yskew*drawScale);
+    var h=(srcHeight-2*yskew)*drawScale;
+    //loop through each source column
+    for(var i=0;i<srcWidth;i++) {
+      //take a pixel-wide strip from the source, scale and position it on the destination buffer
+      //shorthand if reverses source to prevent image being drawn backwards
+      //Math.ceil(drawScale) draws wider bands if greater scaling is necessary
+      dstCtx.drawImage(srcCtx.canvas, xint>0 ? i : srcWidth-i-1, 0, 1, srcHeight-1, x, y, Math.ceil(drawScale), h);
+      //update coordinates and height
+      x+=xint;
+      y+=yint;
+      h+=hint;
     };
   };
 
 	Grid.prototype.render = function (ctx) {
-    //console.log("render");
+    console.log("render");
     ctx.save();
-    
-  //use the difference to move the camera when holding
-    if(Config.mouse.button) {
-    	this.camera.momentumx = (this.mousefollow.x-Config.mouse.x)*0.4;
-    	this.camera.momentumy = (this.mousefollow.y-Config.mouse.y)*0.4;       	
-    };
 
     this.recalculateinterval++;
-    this.recalculateinterval%=120;
+    this.recalculateinterval%=360;
     if(this.recalculateinterval==0) {
       console.log("recalculate");
       for(var i=0;i<model.content.length;i++) {
@@ -173,6 +270,14 @@ define([
       };
     };
 
+    this.mousefollow.x+=(Config.mouse.x-this.mousefollow.x)*0.4;
+    this.mousefollow.y+=(Config.mouse.y-this.mousefollow.y)*0.4;
+    
+  //use the difference to move the camera when holding
+    if(Config.mouse.button) {
+    	this.camera.momentumx = (this.mousefollow.x-Config.mouse.x)*0.4;
+    	this.camera.momentumy = (this.mousefollow.y-Config.mouse.y)*0.4;       	
+    };
 
 	  this.camera.x += this.camera.momentumx/this.zoom;
     this.camera.y += this.camera.momentumy/this.zoom;
@@ -189,8 +294,6 @@ define([
     	this.camera.y = Math.round(this.camera.y);        	
     };
 
-    this.mousefollow.x+=(Config.mouse.x-this.mousefollow.x)*0.4;
-    this.mousefollow.y+=(Config.mouse.y-this.mousefollow.y)*0.4;
 
     // if(this.lastButton!=Config.mouse.button && Config.mouse.button!=0){
     //   console.log("Index: "+this.mouseHover);
@@ -199,16 +302,22 @@ define([
     // };
 
     var desiredZoom=1-Math.pow(this.camera.momentumx*this.camera.momentumx+this.camera.momentumy*this.camera.momentumy,0.4)/70;
-    if(desiredZoom<.3) desiredZoom=.3;
-    this.zoom+=(desiredZoom-this.zoom)*0.2;
+    if(desiredZoom<0.2) desiredZoom=0.2;
+    this.zoom+=(desiredZoom-this.zoom)*this.dampZoom;
+    this.dampZoom+=0.005;
+    if(this.dampZoom>0.2) this.dampZoom=0.2;
+
+    // if(!Config.mouse.button) {
+    //   this.zoomPos.x+=((canvas.width/2)-this.zoomPos.x)*0.3;
+    //   this.zoomPos.y+=((canvas.height/2)-this.zoomPos.y)*0.3;
+    // } else {
+    //   this.zoomPos.x+=(Config.mouse.x-this.zoomPos.x)*0.3;
+    //   this.zoomPos.y+=(Config.mouse.y-this.zoomPos.y)*0.3;
+    // };
 
     this.lastButton = Config.mouse.button;
 
-
-    this.fliptile.angle++;
-    this.fliptile.angle%=360;
-
-    var x,y;
+    var x,y,wtx,wty;
     var totalWorldWidth=model.worldWidth*this.squareWidth;
     var totalWorldHeight=5*this.squareHeight; //todo: make this dynamic later
 
@@ -216,8 +325,33 @@ define([
     ctx.fillRect(0,0,canvas.width, canvas.height);
 
     for(i=0; i<model.content.length; i++) {
+      model.content[i].scaleProgress+=model.content[i].scaleDirection;
+      if(model.content[i].scaleProgress>1) {
+        model.content[i].scaleProgress=1;
+        model.content[i].scaleDirection=0;
+        this.onScale(i);
+      };
+      if(model.content[i].scaleProgress<0) {
+        model.content[i].scaleProgress=0;
+        model.content[i].scaleDirection=0;
+        this.onUnScale(i);
+      };
+      model.content[i].flipProgress+=model.content[i].flipDirection;
+      if(model.content[i].flipProgress>1) {
+        model.content[i].flipProgress=1;
+        model.content[i].flipDirection=0;
+        this.onFlip(i);
+      };
+      if(model.content[i].flipProgress<0) {
+        model.content[i].flipProgress=0;
+        model.content[i].flipDirection=0;
+        this.onUnFlip(i)
+      };
+
       x=Math.round(model.content[i].position.x*this.squareWidth-this.camera.x);
       y=Math.round(model.content[i].position.y*this.squareHeight-this.camera.y);
+      wtx=x;
+      wty=y;
 
       x%=totalWorldWidth;
       if(x<0) x+=totalWorldWidth;
@@ -229,25 +363,159 @@ define([
       if(y>=(totalWorldHeight-model.content[i].scale*this.squareHeight)) y-=totalWorldHeight;
       y-=totalWorldHeight*Math.ceil(canvas.height/(totalWorldHeight*this.zoom*2));
 
-      var repeatx,repeaty=(y-(canvas.height*0.5))*this.zoom+canvas.height*0.5;
+      var repeatx,repeaty=(y-(this.zoomPos.y))*this.zoom+this.zoomPos.y, drawAngle;
       do {
-        repeatx=(x-(canvas.width*0.5))*this.zoom+canvas.width*0.5;
+        repeatx=(x-(this.zoomPos.x))*this.zoom+this.zoomPos.x;
         do {
       //collision with screen. whether it's worth drawing or not
-          if(repeatx>(-model.content[i].scale*this.squareWidth*this.zoom) && repeatx<canvas.width && repeaty>(-model.content[i].scale*this.squareHeight*this.zoom) && repeaty<canvas.height){
-        //what to draw depending on data
-          //this.renderTile(ctx,x,y,.8+0.2*Math.sin(this.fliptile.angle*0.01745329252),i);// = function (ctx, drawx, drawy, drawScale, modelIndex)
-            this.renderTile(ctx,repeatx,repeaty,this.zoom,i);// = function (ctx, drawx, drawy, drawScale, modelIndex)
+          //if(repeatx>(-model.content[i].scale*this.squareWidth*this.zoom) && repeatx<canvas.width && repeaty>(-model.content[i].scale*this.squareHeight*this.zoom) && repeaty<canvas.height){
+            //what to draw depending on data
+            // if(model.content[i].flipProgress>0 && model.content[i].flipProgress<1){
+            //     if(model.content[i].flipProgress<0.5) {
+            //       //render the front side to offscreen buffer
+            //       drawAngle=model.content[i].flipProgress*180; //0-90 degrees
+            //       model.content[i].box.render(this.offScreenCtx, 0, 0, model.content[i].scale);
+            //     } else {
+            //       //render the back side to offscreen buffer
+            //       drawAngle=model.content[i].flipProgress*180+180; //90 to 180 degrees
+            //       if(typeof(model.content[i].backbox)!="undefined") model.content[i].backbox.render(this.offScreenCtx, 0, 0, model.content[i].scale);
+            //     };
+            //     //perspective draw from offscreen buffer to canvas
+            //     this.drawImagePerspective(this.offScreenCtx,this.squareWidth*model.content[i].scale,this.squareHeight*model.content[i].scale,ctx,repeatx,repeaty,this.zoom*(1+model.content[i].scaleProgress),drawAngle);
+            // };
+
+            //FIRST PASS: UNSCALED WHILE UNFLIPPED/FULLY-FLIPPED) TILES ONLY
+            //if scale=0 and flipped=0 or flipped=1 or location not matching
+              
+          if(model.content[i].scaleProgress==0 || model.content[i].actionX!=wtx || model.content[i].actionY!=wty) {
+            if(model.content[i].flipProgress==0) model.content[i].box.render(ctx, repeatx, repeaty, this.zoom*model.content[i].scale);
+            if(model.content[i].flipProgress==1) model.content[i].backbox.render(ctx, repeatx, repeaty, this.zoom*model.content[i].scale);
           };
+          //};
       
           //collision with mouse
           if(Config.mouse.x>=repeatx && Config.mouse.x<(repeatx+model.content[i].scale*this.squareWidth*this.zoom) && (Config.mouse.y-this.canvasOffset)>=repeaty && (Config.mouse.y-this.canvasOffset)<(repeaty+model.content[i].scale*this.squareHeight*this.zoom)) {
             //a little darker overlay
             ctx.fillStyle="rgba(0,0,0,.35)";
             ctx.fillRect(repeatx,repeaty,model.content[i].scale*this.squareWidth*this.zoom,model.content[i].scale*this.squareWidth*this.zoom);
-            this.mouseHover = i;
+            this.mouseHoverIndex = i;
+            this.mouseHoverWorldX=wtx;
+            this.mouseHoverWorldY=wty;
+            this.mouseHoverTileX=(Config.mouse.x-repeatx)/this.zoom;
+            this.mouseHoverTileY=(Config.mouse.y-this.canvasOffset-repeaty)/this.zoom;
+            ctx.fillStyle="green";
+            ctx.beginPath();
+            ctx.arc(repeatx+this.mouseHoverTileX*this.zoom, repeaty+this.mouseHoverTileY*this.zoom, 10, 0, Math.PI*2, true); 
+            ctx.closePath();
+            ctx.fill();
           };
 
+          repeatx+=totalWorldWidth*this.zoom; //and scale
+        } while(repeatx<=canvas.width);
+        repeaty+=totalWorldHeight*this.zoom; //and scale
+      } while(repeaty<=canvas.height);
+
+    };
+
+////  SECOND PASS: SCALED/SCALING WHILE UNFLIPPED/FULLY-FLIPPED TILES ONLY
+    for(i=0; i<model.content.length; i++) {
+      x=Math.round(model.content[i].position.x*this.squareWidth-this.camera.x);
+      y=Math.round(model.content[i].position.y*this.squareHeight-this.camera.y);
+      wtx=x;
+      wty=y;
+
+      x%=totalWorldWidth;
+      if(x<0) x+=totalWorldWidth;
+      if(x>=(totalWorldWidth-model.content[i].scale*this.squareWidth)) x-=totalWorldWidth;
+      x-=totalWorldWidth*Math.ceil(canvas.width/(totalWorldWidth*this.zoom*2));
+
+      y%=totalWorldHeight;
+      if(y<0) y+=totalWorldHeight;
+      if(y>=(totalWorldHeight-model.content[i].scale*this.squareHeight)) y-=totalWorldHeight;
+      y-=totalWorldHeight*Math.ceil(canvas.height/(totalWorldHeight*this.zoom*2));
+
+      var repeatx,repeaty=(y-(this.zoomPos.y))*this.zoom+this.zoomPos.y, drawAngle;
+      do {
+        repeatx=(x-(this.zoomPos.x))*this.zoom+this.zoomPos.x;
+        do {
+      //collision with screen. whether it's worth drawing or not
+      //    if(repeatx>(-model.content[i].scale*this.squareWidth*this.zoom) && repeatx<canvas.width && repeaty>(-model.content[i].scale*this.squareHeight*this.zoom) && repeaty<canvas.height){
+            
+          if(model.content[i].scaleProgress>0 && model.content[i].actionX==wtx && model.content[i].actionY==wty) {
+            if(model.content[i].flipProgress==0) model.content[i].box.render(ctx, repeatx, repeaty, this.zoom*(model.content[i].scale+model.content[i].scaleProgress));
+            if(model.content[i].flipProgress==1) model.content[i].backbox.render(ctx, repeatx, repeaty, this.zoom*(model.content[i].scale+model.content[i].scaleProgress));
+          };
+            // //what to draw depending on data
+            // if(model.content[i].flipProgress>0 && model.content[i].flipProgress<1){
+            //     if(model.content[i].flipProgress<0.5) {
+            //       //render the front side to offscreen buffer
+            //       drawAngle=model.content[i].flipProgress*180; //0-90 degrees
+            //       model.content[i].box.render(this.offScreenCtx, 0, 0, model.content[i].scale);
+            //     } else {
+            //       //render the back side to offscreen buffer
+            //       drawAngle=model.content[i].flipProgress*180+180; //90 to 180 degrees
+            //       if(typeof(model.content[i].backbox)!="undefined") model.content[i].backbox.render(this.offScreenCtx, 0, 0, model.content[i].scale);
+            //     };
+            //     //perspective draw from offscreen buffer to canvas
+            //     this.drawImagePerspective(this.offScreenCtx,this.squareWidth*model.content[i].scale,this.squareHeight*model.content[i].scale,ctx,repeatx,repeaty,this.zoom*(1+model.content[i].scaleProgress),drawAngle);
+            // };
+            // if(model.content[i].flipProgress<=0) model.content[i].box.render(ctx, repeatx, repeaty, this.zoom*(model.content[i].scale+model.content[i].scaleProgress));
+            // if(model.content[i].flipProgress>=1) model.content[i].backbox.render(ctx, repeatx, repeaty, this.zoom*(model.content[i].scale+model.content[i].scaleProgress));
+          //  };
+
+          repeatx+=totalWorldWidth*this.zoom; //and scale
+        } while(repeatx<=canvas.width);
+        repeaty+=totalWorldHeight*this.zoom; //and scale
+      } while(repeaty<=canvas.height);
+
+    };
+    var blid;
+    ////  LAST PASS: ANY SCALE WHILE FLIPPING TILES ONLY
+    for(i=0; i<model.content.length; i++) {
+      x=Math.round(model.content[i].position.x*this.squareWidth-this.camera.x);
+      y=Math.round(model.content[i].position.y*this.squareHeight-this.camera.y);
+      wtx=x;
+      wty=y;
+
+      x%=totalWorldWidth;
+      if(x<0) x+=totalWorldWidth;
+      if(x>=(totalWorldWidth-model.content[i].scale*this.squareWidth)) x-=totalWorldWidth;
+      x-=totalWorldWidth*Math.ceil(canvas.width/(totalWorldWidth*this.zoom*2));
+
+      y%=totalWorldHeight;
+      if(y<0) y+=totalWorldHeight;
+      if(y>=(totalWorldHeight-model.content[i].scale*this.squareHeight)) y-=totalWorldHeight;
+      y-=totalWorldHeight*Math.ceil(canvas.height/(totalWorldHeight*this.zoom*2));
+
+      var repeatx,repeaty=(y-(this.zoomPos.y))*this.zoom+this.zoomPos.y, drawAngle;
+      do {
+        repeatx=(x-(this.zoomPos.x))*this.zoom+this.zoomPos.x;
+        do {
+      //collision with screen. whether it's worth drawing or not
+      //    if(repeatx>(-model.content[i].scale*this.squareWidth*this.zoom) && repeatx<canvas.width && repeaty>(-model.content[i].scale*this.squareHeight*this.zoom) && repeaty<canvas.height){
+            //what to draw depending on data
+            if(model.content[i].flipProgress>0 && model.content[i].flipProgress<1){
+                if(model.content[i].flipProgress<0.5) {
+                  //render the front side to offscreen buffer
+                  drawAngle=model.content[i].flipProgress*180; //0-90 degrees
+                  model.content[i].box.render(this.offScreenCtx, 0, 0, model.content[i].scale);
+                } else {
+                  //render the back side to offscreen buffer
+                  drawAngle=model.content[i].flipProgress*180+0; //90 to 180 degrees
+                  model.content[i].backbox.render(this.offScreenCtx, 0, 0, model.content[i].scale);
+                };
+                //perspective draw from offscreen buffer to canvas
+                this.drawImagePerspective(this.offScreenCtx,this.squareWidth*model.content[i].scale,this.squareHeight*model.content[i].scale,ctx,repeatx,repeaty,this.zoom*(1+model.content[i].scaleProgress),drawAngle);
+            };
+            // if(model.content[i].flipProgress<=0) model.content[i].box.render(ctx, repeatx, repeaty, this.zoom*(model.content[i].scale+model.content[i].scaleProgress));
+            // if(model.content[i].flipProgress>=1) model.content[i].backbox.render(ctx, repeatx, repeaty, this.zoom*(model.content[i].scale+model.content[i].scaleProgress));
+          //  };
+
+          blid=Math.floor(wtx / this.squareWidth);// + model.content[i].position.x;
+
+          ctx.font="bold 40px";
+          ctx.fillStyle="black";
+          ctx.fillText(blid,repeatx,repeaty);
           repeatx+=totalWorldWidth*this.zoom; //and scale
         } while(repeatx<=canvas.width);
         repeaty+=totalWorldHeight*this.zoom; //and scale

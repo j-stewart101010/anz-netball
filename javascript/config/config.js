@@ -14,7 +14,8 @@ define([
             mouse : {
                   x: 0,
                   y: 0,
-                  button: false
+                  button: false,
+                  dragDistance: 0
             },
             track : {
                   x: 0,

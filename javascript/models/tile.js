@@ -56,11 +56,10 @@ var model = {
       textsubject:"TALKS NETBALL NATION",
       imageurl:"images/video001.jpg",
       textname:"SHARELLE MCMAHON",
-      linkurl:"http://youtube.com/watch?anznbn-sharelletalks",
-      // imageurl:"images/video002.jpg",
-      // textname:"LIBBY BIRCH",
-      // linkurl:"http://youtube.com/watch?anznbn-libbytalks",
-      subimageurl:"images/subimage-play.png"},
+      videoid: "19072376",
+      subimageurl:"images/subimage-play.png",
+      flippable: true
+    },
 
      {tiletype:"image",
       imageurl:"images/004.jpg",

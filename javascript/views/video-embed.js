@@ -18,8 +18,8 @@ define([
             left: '50%',
             width: 500,
             height: 500,
-            marginTop: -250,
-            marginLeft: -250
+            // marginTop: -250,
+            // marginLeft: -250
         },
 
         className : 'loading',
@@ -75,16 +75,20 @@ define([
         },
 
         resize : function () {
-            _self.set_options();
-            _self.$el.css(_self.view_style_options);
+            console.log(_self.view_style_options);
+            _self.$el.css({
+                marginTop : '-'+_self.view_style_options.height / 2+'px',
+                marginLeft : '-'+_self.view_style_options.width / 2+'px'
+            });
         },
 
         close : function (e) {
-            setTimeout(function() { _self.$el.remove() }, 400);
+            setTimeout(function() { _self.$el.remove(); }, 400);
         },
 
         render : function () {
             this.$el.html(this._template_result);
+            _self.resize();
             return this;
         }
     });
