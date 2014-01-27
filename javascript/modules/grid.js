@@ -34,8 +34,8 @@ define([
     this.recalculateinterval=0;
     
 	  this.canvasOffset = 0;
-	  this.squareWidth = 350;
-	  this.squareHeight = 350;
+	  this.squareWidth = 306;
+	  this.squareHeight = 306;
 
  	  this.resize(w, h);
 
@@ -69,32 +69,46 @@ define([
         case "text":
         //break;
         case "textlink":
-          model.content[i].box = new Box(this.offScreenCtx, [], {width:350,height:350,contentType:"container"});
+          model.content[i].box = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
           model.content[i].box.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:model.content[i].colour}));
           model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].title, {left:10,width:80,top:10,padding:5,fontSize:35,lineHeight:40,contentType:"text",align:"center"}));
           model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].subtext, {left:10,width:80,top:35,padding:5,fontSize:15,lineHeight:17,contentType:"text",align:"center"}));
           model.content[i].box.calculate();
-          model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].image, {width:100,top:60,left:30,align:"center",contentType:"image",id:"button"}));
+          model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].image, {width:100,top:60,left:0,align:"center",contentType:"image",id:"button"}));
           model.content[i].box.calculate();
         break;
         case "image":
-        model.content[i].box = new Box(this.offScreenCtx, [], {width:350,height:350,contentType:"container"});
-        model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].image, {width:100,height:100,contentType:"image"}));
-        model.content[i].box.calculate();
+          model.content[i].box = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
+          model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].image, {width:100,height:100,contentType:"image"}));
+          model.content[i].box.calculate();
+
+          model.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
+          model.content[i].backbox.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:model.content[i].backcolour}));
+          model.content[i].backbox.addBox(new Box(this.offScreenCtx, model.content[i].storyimage, {top:25,left:5,width:13,height:13,contentType:"image"}));
+          model.content[i].backbox.addBox(new Box(this.offScreenCtx, model.content[i].storyusername, {top:25,left:21,width:60,padding:0,fontSize:10,fontstyle:"bold",contentType:"text",align:"left"}));
+          model.content[i].backbox.calculate();
+          model.content[i].backbox.addBox(new Box(this.offScreenCtx, model.content[i].storyfullname, {top:model.content[i].backbox.last().bottom,left:21,width:60,padding:5,fontSize:7,lineHeight:40,contentType:"text",align:"left"}));
+          model.content[i].backbox.calculate();
+          model.content[i].backbox.addBox(new Box(this.offScreenCtx, model.content[i].storyuserinfo, {top:model.content[i].backbox.last().bottom,left:21,width:60,padding:5,fontSize:7,contentType:"text",align:"left"}));
+          model.content[i].backbox.calculate();
+          model.content[i].backbox.addBox(new Box(this.offScreenCtx, model.content[i].storydescription, {top:model.content[i].backbox.last().bottom,left:21,width:60,padding:5,fontSize:13,contentType:"text",align:"left"}));
+          model.content[i].backbox.calculate();
+          model.content[i].backbox.addBox(new Box(this.offScreenCtx, model.content[i].storytags, {top:model.content[i].backbox.last().bottom,left:21,width:80,padding:5,fontSize:10,contentType:"text",align:"left"}));
+          model.content[i].backbox.calculate();
         break;
         case "video":
-        model.content[i].box = new Box(this.offScreenCtx, [], {width:350,height:350,contentType:"container"});
-        model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].image, {width:100,height:100,contentType:"image"}));
-        model.content[i].box.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:"rgba(70,145,185,0.11)"}));
-        model.content[i].box.addBox(new Box(this.offScreenCtx, "VIDEO: " + model.content[i].textname, {contentType:"text",left:8.5,top:10,width:80,padding:5,fontSize:9,backgroundColour:"rgba(60,0,0,0.35)"}));
-        model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].textsubject, {contentType:"text",left:8.5,top:17.5,width:80,padding:5,fontSize:22,backgroundColour:"rgba(0,60,0,0.35)"}));
-        model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].subimage, {left:8.5,top:75,contentType:"image"}));
-        model.content[i].box.calculate();
-
-        model.content[i].backbox = new Box(this.offScreenCtx, [], {width:350,height:350,contentType:"container"});
-        model.content[i].backbox.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:"rgb(0,0,0)"}));
-        model.content[i].backbox.calculate();
-      };
+          model.content[i].box = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
+          model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].image, {width:100,height:100,contentType:"image"}));
+          model.content[i].box.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:"rgba(70,145,185,0.11)"}));
+          model.content[i].box.addBox(new Box(this.offScreenCtx, "VIDEO: " + model.content[i].textname, {contentType:"text",left:8.5,top:10,width:80,padding:5,fontSize:9,backgroundColour:"rgba(60,0,0,0.35)"}));
+          model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].textsubject, {contentType:"text",left:8.5,top:17.5,width:80,height:20,padding:5,fontSize:22,backgroundColour:"rgba(0,60,0,0.35)"}));
+          model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].subimage, {left:8.5,top:75,contentType:"image"}));
+          model.content[i].box.calculate();
+    
+          model.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
+          model.content[i].backbox.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:"rgb(0,0,0)"}));
+          model.content[i].backbox.calculate();
+        };
     
       
         model.content[i].flipProgress=0;
@@ -128,12 +142,7 @@ define([
     
     if(model.content[i].flippable) {
       //scan through model data and flip&scale back any others that were flipped
-      for(var j=0;j<model.content.length;j++){
-        if(j!=i) {
-          if(model.content[i].scaleProgress>0) model.content[j].scaleDirection = -0.016;
-          if(model.content[i].flipProgress>0) model.content[j].flipDirection = -0.027;
-        };
-      };
+      
 
 
       if(model.content[i].tiletype=="image") {
@@ -141,7 +150,7 @@ define([
         //   if(model.content[i].flipProgress==1 || model.content[i].flipDirection>0) {
         //     //flipped or flipping to and scaled or scaling up
         //     model.content[i].flipDirection = -0.027;
-        //     model.content[i].scaleDirection = -0.016;
+        //     model.content[i].scaleDirection = -0.027;
         //   };
         //   if(model.content[i].flipProgress==0 || model.content[i].flipDirection<0) {
         //     //unflipped or flipping from and scaled or scaling up
@@ -157,25 +166,28 @@ define([
         //   };
         //   if(model.content[i].flipProgress==0 || model.content[i].flipDirection<0) {
         //     //unflipped or flipping from and unscaled or scaling down
-        //     model.content[i].scaleDirection = 0.016;
+        //     model.content[i].scaleDirection = 0.027;
         //   };       
         // };
+        console.log("i:"+i+": "+"ScaleDirecshn:"+model.content[i].scaleDirection+" FlipDirecshn:"+model.content[i].flipDirection);
+        console.log("ScaleProgress:"+model.content[i].scaleProgress+" FlipProgress:"+model.content[i].scaleProgress);
+
         if(model.content[i].scaleProgress==1 || model.content[i].scaleDirection>0) {
           if(model.content[i].flipProgress==1 && model.content[i].scaleProgress==1) {
-            //flipped and scaled
+            //scaled and flipped
             model.content[i].flipDirection = -0.027;
-            model.content[i].scaleDirection = -0.016;
+            model.content[i].scaleDirection = -0.027;
+            console.log("scale downward and flip back");
             model.content[i].actionX=this.mouseHoverWorldX;
             model.content[i].actionY=this.mouseHoverWorldY;
-          };
-          if(model.content[i].flipProgress==0 || model.content[i].flipDirection<0) {
-            //unflipped or flipping from and scaled or scaling up
+          } else if(model.content[i].flipProgress==0 || model.content[i].flipDirection<0) {
+            //scaled or scaling & flipping back/unflipped
+            console.log("flip forward");
             model.content[i].flipDirection = 0.027;         
             model.content[i].actionX=this.mouseHoverWorldX;
             model.content[i].actionY=this.mouseHoverWorldY;
           };
-        };
-        if(model.content[i].scaleProgress==0 || model.content[i].scaleDirection<0) {
+        } else if (model.content[i].scaleProgress==0 || model.content[i].scaleDirection<0) {
           // if(model.content[i].flipProgress==1 || model.content[i].flipDirection>0) {
           //   //flipped or flipping to and unscaled or scaling down
           //   //ok to be flipped and unscaled but this situation is usually triggered automatically somewhere else
@@ -184,7 +196,9 @@ define([
           // };
           if(model.content[i].flipProgress==0 || model.content[i].flipDirection<0) {
             //unflipped or flipping from and unscaled or scaling down
-            model.content[i].scaleDirection = 0.016;
+            console.log("scale upward");
+            
+            model.content[i].scaleDirection = 0.027;
             model.content[i].actionX=this.mouseHoverWorldX;
             model.content[i].actionY=this.mouseHoverWorldY;
           };       
@@ -208,6 +222,13 @@ define([
         
         // _self.$content.find($(e.target).data('video-append')).append(view.render().el);
         // this.delegateEvents();
+
+      };
+      for(var j=0;j<model.content.length;j++){
+        if(j!=i) {
+          if(model.content[j].scaleProgress>0) model.content[j].scaleDirection = -0.027;
+          if(model.content[j].flipProgress>0) model.content[j].flipDirection = -0.027;
+        };
       };
     };
   };
@@ -260,7 +281,7 @@ define([
   };
 
 	Grid.prototype.render = function (ctx) {
-    console.log("render");
+    //console.log("render");
     ctx.save();
 
     this.recalculateinterval++;
@@ -356,22 +377,24 @@ define([
 
       x=Math.round(model.content[i].position.x*this.squareWidth-this.camera.x);
       y=Math.round(model.content[i].position.y*this.squareHeight-this.camera.y);
-      wtx=x;
-      wty=y;
+      wtx=Math.round(model.content[i].position.x*this.squareWidth+this.camera.x);
+      wty=Math.round(model.content[i].position.y*this.squareHeight+this.camera.y);
 
       x%=totalWorldWidth;
       if(x<0) x+=totalWorldWidth;
       if(x>=(totalWorldWidth-model.content[i].scale*this.squareWidth)) x-=totalWorldWidth;
       x-=totalWorldWidth*Math.ceil(canvas.width/(totalWorldWidth*this.zoom*2));
-
+      wtx-=totalWorldWidth*Math.ceil(canvas.width/(totalWorldWidth*2));
       y%=totalWorldHeight;
       if(y<0) y+=totalWorldHeight;
       if(y>=(totalWorldHeight-model.content[i].scale*this.squareHeight)) y-=totalWorldHeight;
       y-=totalWorldHeight*Math.ceil(canvas.height/(totalWorldHeight*this.zoom*2));
-
+      wty-=totalWorldHeight*Math.ceil(canvas.height/(totalWorldHeight*2));
       var repeatx,repeaty=(y-(this.zoomPos.y))*this.zoom+this.zoomPos.y, drawAngle;
+      var repeatwtx,repeatwty=wty
       do {
         repeatx=(x-(this.zoomPos.x))*this.zoom+this.zoomPos.x;
+        repeatwtx=wtx
         do {
       //collision with screen. whether it's worth drawing or not
           //if(repeatx>(-model.content[i].scale*this.squareWidth*this.zoom) && repeatx<canvas.width && repeaty>(-model.content[i].scale*this.squareHeight*this.zoom) && repeaty<canvas.height){
@@ -393,7 +416,8 @@ define([
             //FIRST PASS: UNSCALED WHILE UNFLIPPED/FULLY-FLIPPED) TILES ONLY
             //if scale=0 and flipped=0 or flipped=1 or location not matching
               
-          if(model.content[i].scaleProgress==0 || model.content[i].actionX!=wtx || model.content[i].actionY!=wty) {
+          //if(model.content[i].scaleProgress==0 || model.content[i].actionX!=wtx || model.content[i].actionY!=wty) {
+          if(model.content[i].scaleProgress==0) {
             if(model.content[i].flipProgress==0) model.content[i].box.render(ctx, repeatx, repeaty, this.zoom*model.content[i].scale);
             if(model.content[i].flipProgress==1) model.content[i].backbox.render(ctx, repeatx, repeaty, this.zoom*model.content[i].scale);
           };
@@ -405,8 +429,8 @@ define([
             ctx.fillStyle="rgba(0,0,0,.35)";
             ctx.fillRect(repeatx,repeaty,model.content[i].scale*this.squareWidth*this.zoom,model.content[i].scale*this.squareWidth*this.zoom);
             this.mouseHoverIndex = i;
-            this.mouseHoverWorldX=wtx;
-            this.mouseHoverWorldY=wty;
+            this.mouseHoverWorldX=repeatwtx;
+            this.mouseHoverWorldY=repeatwty;
             this.mouseHoverTileX=(Config.mouse.x-repeatx)/this.zoom;
             this.mouseHoverTileY=(Config.mouse.y-this.canvasOffset-repeaty)/this.zoom;
             ctx.fillStyle="green";
@@ -416,9 +440,18 @@ define([
             ctx.fill();
           };
 
+          blid=Math.floor(repeatwtx / this.squareWidth);// + model.content[i].position.x;
+
+          ctx.font="bold 40px";
+          ctx.fillStyle="black";
+          ctx.fillText(blid,repeatx,repeaty);
+
+
           repeatx+=totalWorldWidth*this.zoom; //and scale
+          repeatwtx+=totalWorldWidth;
         } while(repeatx<=canvas.width);
         repeaty+=totalWorldHeight*this.zoom; //and scale
+        repeatwty+=totalWorldHeight;
       } while(repeaty<=canvas.height);
 
     };
@@ -447,7 +480,8 @@ define([
       //collision with screen. whether it's worth drawing or not
       //    if(repeatx>(-model.content[i].scale*this.squareWidth*this.zoom) && repeatx<canvas.width && repeaty>(-model.content[i].scale*this.squareHeight*this.zoom) && repeaty<canvas.height){
             
-          if(model.content[i].scaleProgress>0 && model.content[i].actionX==wtx && model.content[i].actionY==wty) {
+          //if(model.content[i].scaleProgress>0 && model.content[i].actionX==wtx && model.content[i].actionY==wty) {
+          if(model.content[i].scaleProgress>0) {
             if(model.content[i].flipProgress==0) model.content[i].box.render(ctx, repeatx, repeaty, this.zoom*(model.content[i].scale+model.content[i].scaleProgress));
             if(model.content[i].flipProgress==1) model.content[i].backbox.render(ctx, repeatx, repeaty, this.zoom*(model.content[i].scale+model.content[i].scaleProgress));
           };
@@ -516,12 +550,6 @@ define([
             // if(model.content[i].flipProgress<=0) model.content[i].box.render(ctx, repeatx, repeaty, this.zoom*(model.content[i].scale+model.content[i].scaleProgress));
             // if(model.content[i].flipProgress>=1) model.content[i].backbox.render(ctx, repeatx, repeaty, this.zoom*(model.content[i].scale+model.content[i].scaleProgress));
           //  };
-
-          blid=Math.floor(wtx / this.squareWidth);// + model.content[i].position.x;
-
-          ctx.font="bold 40px";
-          ctx.fillStyle="black";
-          ctx.fillText(blid,repeatx,repeaty);
           repeatx+=totalWorldWidth*this.zoom; //and scale
         } while(repeatx<=canvas.width);
         repeaty+=totalWorldHeight*this.zoom; //and scale
