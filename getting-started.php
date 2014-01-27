@@ -93,18 +93,18 @@
 
 
 
-								<article class="ambassador-video-tile tile shade-one">
+								<article class="ambassador-video-tile tile shade-seven">
 									<div class="video-tile-content">
 										<hgroup>
 											<div>
 												<h2 class="tile-heading heading-sm">
-													<div class="brand-overlay shade-six"></div>
+													<div class="brand-overlay shade-nine"></div>
 													Video Sharelle McMahon
 												</h2>
 											</div>
 											<div>
 												<h1 class="tile-heading">
-													<div class="brand-overlay shade-six"></div>
+													<div class="brand-overlay shade-nine"></div>
 													Just do it
 												</h1>
 											</div>
@@ -113,7 +113,7 @@
 										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-append="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
 									
 									</div>
-									<div class="brand-overlay shade-six"></div>
+									<div class="brand-overlay shade-seven"></div>
 									<img class="video-tile-image" alt="Video" src="http://lorempixel.com/612/612/sports">
 								</article>
 
@@ -153,8 +153,8 @@
 								<div class="front">
 
 									<div class="outter-tile group shade-seven">
-										<article data-resize-height="#grid-image-five" class="content-tile tile center">
-											<h1 class="heading heading-exmed verbose">ANZ NetSetGo</h1>
+										<article data-resize-height="#grid-image-five" class="content-tile mini tile center">
+											<h1 class="heading deaccented heading-exmed verbose">ANZ NetSetGo</h1>
 											<p class="sub-content"><small class="verbose">Netball is a ball sport played by two teams of six players.</small></p>
 											<a data-flip="toggle" data-flip-target="#link-one" class="btn btn-default btn-sm btn-primary" href="/grants">More <i class="fa fa-angle-right"></i></a>
 										</article>

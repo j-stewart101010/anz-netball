@@ -153,7 +153,7 @@
 												<button class="btn btn-default btn-xs"><i class="fa fa-picture-o"></i> Image</button>
 												<input type="file" class="file-input" id="apply-for-grant-image" name="apply-for-grant-image">
 											</span>
-											File size limit 2mb
+											<span class="field-helper">File size limit 2mb</span>
 											
 											<span class="tooltip">
 												<div class="question-icon">
@@ -197,7 +197,13 @@
 										<!-- <input class="btn btn-default btn-sm" type="submit" value="Apply now"> -->
 
 									</form>
-									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#apply-for-grant" href="#"><i class="fa fa-times"></i></a>
+									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#apply-for-grant" href="#">
+										<!-- <i class="fa fa-times"></i> -->
+										<div class="cross-icon">
+											<i class="fa fa-angle-left"></i>
+											<i class="fa fa-angle-right"></i>
+										</div>
+									</a>
 								</div>
 
 

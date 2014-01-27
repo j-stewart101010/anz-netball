@@ -19,10 +19,8 @@ define([
         el : 'body',
 
         events : {
-            // 'click.video.embed [data-video="toggle"]' : 'show_video',
             'change.checkbox.update input[type="checkbox"]' : 'update_checkbox',
             'change.select.update .selectbox' : 'update_selectbox',
-            // 'click.flip [data-flip="toggle"]' : 'flip_toggle',
             'click.slide [data-slide="toggle"]' : 'slide_toggle',
             'click.accordian [data-toggle="collapse"]' : 'accordian_toggle'
             // 'change.fileupload-update input[type="file"]' : 'patch_file_upload'
@@ -114,18 +112,14 @@ define([
             else { $selectbox = _self.$forms.find('.selectbox'); }
 
             $.each($selectbox, function () {
-                $(this).next('.holder').text($(this).find(':selected').text());    
+                var $holder = $(this).next('.holder');
+
+                if (this.selectedIndex === 0) { $holder.addClass('first-option'); }
+                else { $holder.removeClass('first-option'); }
+                
+                $holder.text($(this).find(':selected').text());    
             });
         },
-
-        // show_video : function (e) {
-        //     var view = new VideoEmbedView({ 
-        //         modal : false,
-        //         video_id : $(e.target).data('video-id')
-        //     });
-        //     _self.$content.find($(e.target).data('video-append')).append(view.render().el);
-        //     this.delegateEvents();
-        // },
 
         preload_tiles : function ($tiles) {
             $.each($tiles, function ($el) {
@@ -213,15 +207,6 @@ define([
                
         },
 
-        // flip_toggle : function (e) {
-        //     var $flip_target = $($(e.currentTarget).data('flip-target'));
-
-        //     e.preventDefault();
-
-        //     if (Modernizr.csstransforms) { $flip_target.toggleClass('flip'); }
-        //     else { $flip_target.find('.front').toggle().end().find('.back').toggle(); }
-        // },
-
         // animate_grid : function () {
         //     //TODO: Clean this up
 
@@ -255,19 +240,6 @@ define([
         //     }
 
         //     $('.col, .grid').animate({ opacity: 1 });
-        // },
-
-        // match_row_height : function () {
-        //     if (MatchMedia.tablet()) {
-        //         $.each(_self.$content.find('[data-resize-height]'), function() {
-        //             $(this).css({ 'height' : '' }).css({ 'height' : $($(this).data('resize-height')).height()+'px' });
-        //         });
-        //     }
-        //     else {
-        //         $.each(_self.$content.find('[data-resize-height]'), function() {
-        //             $(this).css({ 'height' : '' });
-        //         });                
-        //     }
         // },
 
         render_outter_grid : function () {

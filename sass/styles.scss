@@ -453,6 +453,26 @@ body {
 	}
 }
 
+//Font awesome icon is to thick
+.cross-icon {
+	@extend %icon;
+	position: relative;
+	line-height: 1.2;
+	margin-left: -2px;
+	padding: 0 3px;
+	
+	.fa-angle-left, .fa-angle-right {
+		margin-left: 0;
+		font-size: $font-size-extra-medium;
+	}
+
+	.fa-angle-left {
+		position: absolute;
+		top: 0;
+		left: 55%;
+	}
+}
+
 .twitter-icon {
 	@extend %icon;
 	@extend %social-media-icon;
@@ -715,7 +735,6 @@ body {
 	}
 
 	&.group {
-		// max-height: 50%;
 		padding: 0;
 	}	
 
@@ -808,7 +827,7 @@ body {
 }
 
 .shade-nine {
-	background-color: lighten($brand-accent-four, 30%);
+	background-color: darken($brand-accent-four, 40%);
 }
 
 .shade-ten {
@@ -851,6 +870,14 @@ body {
 	.heading {
 		margin-bottom: 5px;
 	}
+	p {
+		margin-bottom: 25px;
+	}
+	&.mini {
+		p {
+			margin-bottom: 15px;
+		}
+	}
 }
 
 // Info Tile Module (Subset of .tile)
@@ -868,13 +895,16 @@ body {
 	}
 }
 
-// Info Tile Module (Subset of .tile)
+// Media Tile Module (Subset of .tile)
 //====================================================================================================================================
 //====================================================================================================================================
 
-.story-tile {
-
+.media-tile {
+	.media {
+		margin-top: 0;
+	}
 }
+
 
 // Carousel Module
 //====================================================================================================================================
@@ -890,7 +920,7 @@ body {
 
 	&.left {
 		left: auto;
-		right: 27px;
+		right: 33px;
 	}
 }
 
@@ -1227,7 +1257,7 @@ body {
 	}
 
 	.active {
-		background-color: lighten($brand-primary, 10%);
+		background-color: $brand-accent-nine;
 		color: white;
 	}
 }

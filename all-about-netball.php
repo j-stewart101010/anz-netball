@@ -150,7 +150,10 @@
 									<!-- Controls -->
 									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-fitness" data-slide="prev"><i class="fa fa-angle-left"></i></a>
 									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-fitness" data-slide="next"><i class="fa fa-angle-right"></i></a>
-									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#fitness-info" href="#"><i class="fa fa-times"></i></a>
+									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#fitness-info" href="#">		<div class="cross-icon">
+			<i class="fa fa-angle-left"></i>
+			<i class="fa fa-angle-right"></i>
+		</div></a>
 								</div>
 
 
@@ -192,8 +195,8 @@
 										<div class="item active">
 
 											<div class="outter-tile vertical-center">
-												<section class="info-tile content-tile tile shade-eleven">
-													<h3 class="heading">RULE 1/10 - The team</h3>
+												<section class="info-tile content-tile tile shade-thirteen">
+													<h3 class="heading">RULE 1/10 - <b>The team</b></h3>
 													<p><small>There are seven playing positions in a team. Each has an important role to play for their team:</small></p>
 
 													<h4><small>Goal Shooter (GS)</small></h4> 
@@ -214,7 +217,7 @@
 										<div class="item">
 
 											<div class="outter-tile vertical-center">
-												<section class="info-tile content-tile tile shade-eleven">
+												<section class="info-tile content-tile tile shade-thirteen">
 													<h3 class="heading">Rules</h3>
 													<p><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</small></p>
 
@@ -231,7 +234,10 @@
 									<!-- Controls -->
 									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-rules" data-slide="prev"><i class="fa fa-angle-left"></i></a>
 									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-rules" data-slide="next"><i class="fa fa-angle-right"></i></a>
-									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#rules-info" href="#"><i class="fa fa-times"></i></a>
+									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#rules-info" href="#">		<div class="cross-icon">
+			<i class="fa fa-angle-left"></i>
+			<i class="fa fa-angle-right"></i>
+		</div></a>
 								</div>
 
 
@@ -244,7 +250,7 @@
 				<div class="col col-xs-12 col-sm-12 col-md-2 col-lg-2">
 					<div class="col-half col col-xs-6 col-md-12">
 						<div class="outter-tile group shade-thirteen">
-							<article data-resize-height="#grid-image-five" class="content-tile tile center">
+							<article data-resize-height="#grid-image-five" class="content-tile mini tile center">
 								<h1 class="heading heading-exmed">Set PLays</h1>
 								<p class="sub-content"><small>Get one up on the comp with a few plays from (name).</small></p>
 								<a class="btn btn-default btn-sm" href="/grants"><i class="fa fa-file-text-o"></i> Download</a>
@@ -261,7 +267,7 @@
 				<div class="col col-xs-12 col-sm-12 col-md-2 col-lg-2">
 					<div class="col-half col col-xs-6 col-md-12">
 						<div class="outter-tile group shade-ten">
-							<article data-resize-height="#grid-image-five" class="content-tile tile center">
+							<article data-resize-height="#grid-image-five" class="content-tile mini tile center">
 								<h1 class="heading heading-exmed">Training drills</h1>
 								<p class="sub-content"><small>Let (name) help you sharpen up on those skills!</small></p>
 								<a class="btn btn-default btn-sm" href="/grants"><i class="fa fa-file-text-o"></i> Download</a>
@@ -275,8 +281,8 @@
 								<div class="front">
 
 									<div class="outter-tile group shade-twelve">
-										<article data-resize-height="#grid-image-five" class="content-tile tile center">
-											<h1 class="heading heading-exmed verbose">ANZ Championship</h1>
+										<article data-resize-height="#grid-image-five" class="content-tile mini tile center">
+											<h1 class="heading deaccented heading-exmed verbose">ANZ Championship</h1>
 											<p class="sub-content"><small class="verbose">Netball is a ball sport played by two teams of seven players.</small></p>
 											<a data-flip="toggle" data-flip-target="#link-one" class="btn btn-default btn-sm btn-primary" href="/grants">More <i class="fa fa-angle-right"></i></a>
 										</article>
@@ -327,7 +333,7 @@
 										<div class="item active">
 
 											<div class="outter-tile vertical-center">
-												<section class="media-tile content-tile tile shade-thirteen">
+												<section class="media-tile content-tile tile shade-eleven">
 													<h3 class="heading">Equipment</h3>
 													<p class="sub-content"><small>Netball is a great way to stay fit and healthy. Games are played on a rectangular court with raised.</small></p>
 
@@ -379,7 +385,10 @@
 									<!-- Controls -->
 									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-equipment" data-slide="prev"><i class="fa fa-angle-left"></i></a>
 									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-equipment" data-slide="next"><i class="fa fa-angle-right"></i></a>
-									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#equipment-info" href="#"><i class="fa fa-times"></i></a>
+									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#equipment-info" href="#">		<div class="cross-icon">
+			<i class="fa fa-angle-left"></i>
+			<i class="fa fa-angle-right"></i>
+		</div></a>
 								</div>
 
 

@@ -73,7 +73,7 @@
 						</div>
 
 						<div class="col col-md-8 col-lg-8 center-tile shade-fifteen">
-							<div data-resize-height="center" class="outter-tile">
+							<div data-resize-height="center" class="outter-tile vertical-center">
 								<article class="content-tile tile">
 									<hgroup>
 										<h1 class="heading heading-exjumbo tanned">Clinics</h1>

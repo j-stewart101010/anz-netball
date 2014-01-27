@@ -48,22 +48,12 @@ define([
         flip_toggle : function (e) {
             var $target = $(e.currentTarget),
                 $flip_target = $($target.data('flip-target')),
-                $front, $back, state = {},
-                complete = function () {
-                    _self.flipping = false;
-                    console.log(_self.flipping);
-                };
+                $front, $back;          
 
             e.preventDefault();
 
             if (Modernizr.csstransforms3d) {
-                _self.flipping = true;
-                console.log(_self.flipping);
-
-                $flip_target
-                    .toggleClass('flip')
-                    .one($.support.transition.end, $.proxy(complete, this))
-                    .emulateTransitionEnd(350);
+                $flip_target.toggleClass('flip')
             }
             else {
                 $front = $flip_target.find('.front');
@@ -96,33 +86,22 @@ define([
             var $target = $(e.currentTarget),
                 $enlarge_target = $($target.data('enlarge-target')),
                 $enlarge_to_target = $($target.data('enlarge-to-target'));
-                toggle = function () {
-                    if ($enlarge_target.hasClass('enlarged')) {
-                        $enlarge_target
-                            .css({ width : '' })
-                            .toggle();
-                    }
-                    else {
-                        $enlarge_target
-                            .toggle()
-                            .css({ width : $target.width() })
-                        $enlarge_target.css({ width : $enlarge_to_target.width(), height : 'auto' });
-                    }
-                    $enlarge_target.toggleClass('enlarged');
-                };
 
             e.preventDefault();
 
             if (Modernizr.csstransforms) {
-                if (_self.flipping) {
-                    setTimeout(function () { 
-                        toggle();
-                    }, 1000);
+                if ($enlarge_target.hasClass('enlarged')) {
+                    $enlarge_target
+                        .css({ width : '' })
+                        .toggle();
                 }
                 else {
-                    toggle();
+                    $enlarge_target
+                        .toggle()
+                        .css({ width : $target.width() })
+                    $enlarge_target.css({ width : $enlarge_to_target.width(), height : 'auto' });
                 }
-
+                $enlarge_target.toggleClass('enlarged');
             }
             else {
                 if ($enlarge_target.hasClass('enlarged')) { $enlarge_target.animate({ width : '' }); }

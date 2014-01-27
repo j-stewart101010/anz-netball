@@ -13,6 +13,10 @@
 	}	
 }
 
+.form .row .form-group:first-child {
+	padding-right: 8px;
+}
+
 .clinics {
 	.content {
 		.grid.full-length .grid .col + .col {
@@ -46,14 +50,6 @@
 	}
 }
 
-.ie9 {
-	.community {
-		#apply-for-grant-signup {
-			background-color: transparent;
-		}
-	}		
-}
-
 .all-about-netball {
 
 	.group + .group .tile {
@@ -66,4 +62,12 @@
 			width: 100%;
 		}
 	}
+}
+
+.ie9 {
+	.community {
+		#apply-for-grant-signup {
+			background-color: transparent;
+		}
+	}		
 }
