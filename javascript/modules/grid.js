@@ -48,7 +48,7 @@ define([
     this.offScreenCtx = this.offScreen.getContext("2d");
 
     this.zoom = 0.2;
-    this.defaultZoom = 0.6 + (canvas.width / 10000);
+    this.defaultZoom = 1;//0.6 + (canvas.width / 10000);
 
     this.minZoom=0.3;
     this.dampZoom=0.01;
@@ -124,7 +124,7 @@ define([
 	Grid.constructor = Grid;
 
 	Grid.prototype.resize = function (w, h) {
-    this.defaultZoom = 0.6 + (canvas.width / 10000);
+    this.defaultZoom = 1;//0.6 + (canvas.width / 10000);
 	  this.width = w;
 	  this.height = h;
     this.zoomPos={x:w/2,y:h/2};
