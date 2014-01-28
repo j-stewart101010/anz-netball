@@ -168,9 +168,9 @@
 									</div>
 
 								</div>
-								<div class="back shade-eighteen">
+								<div class="back shade-nineteen">
 
-									<div class="outter-tile group shade-eighteen">
+									<div class="outter-tile group shade-nineteen">
 										<aside data-resize-height="#grid-image-five" class="content-tile tile center">
 											<div class="content-image">
 												<img src="images/anz-netset-icon.png" alt="ANZ Netset">

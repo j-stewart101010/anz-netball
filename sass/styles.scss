@@ -604,6 +604,11 @@ body {
 				display: none;
 			}
 		}
+
+		&.stacked {
+			position: relative;
+			z-index: 99;
+		}		
 	}
 
 	> .grid {
@@ -618,7 +623,7 @@ body {
 	.col {
 		height: 100%;
 		padding-left: 0;
-		padding-right: 0;       
+		padding-right: 0;
 	}
 
 	.col + .col {
@@ -626,7 +631,7 @@ body {
 	}
 
 	.col-half {
-		height: 50%;
+		height: 50%; //@TODO: Remove this as its been replaced with more reusable classes - cannot remove it now due to specificity
 	}
 
 	@media screen and (min-width: $screen-desktop) {
@@ -876,6 +881,10 @@ body {
 }
 
 .shade-eighteen {
+	background-color: darken($brand-accent-ten, 20%); //Sunset Orange
+}
+
+.shade-nineteen {
 	background-color: white; //White
 }
 
@@ -1132,6 +1141,11 @@ body {
 	@include opacity(0.6);
 }
 
+.overlay-content {
+	position: relative;
+	z-index: 100;
+}
+
 // Master Foot Module
 //====================================================================================================================================
 //====================================================================================================================================
@@ -1361,8 +1375,17 @@ body {
 //====================================================================================================================================
 //====================================================================================================================================
 
-.gallery-slide {
-	
+.gallery-meta {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	.tile-heading {
+		display: inline-block;
+		margin: 20px;
+	}
 }
 
 // Accordian Module
