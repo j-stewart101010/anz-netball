@@ -148,6 +148,7 @@ define([
                     grid.canvasOffset = b*0.08;
                     //todo: change camera position based on previous size and new size
                 };
+                console.log(canvas.width+"x"+canvas.height+" offset="+grid.canvasOffset);
                 grid.resize(a, b);
                 var c = {
                     x: 500,

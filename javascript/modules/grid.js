@@ -48,7 +48,7 @@ define([
     this.offScreenCtx = this.offScreen.getContext("2d");
 
     this.zoom = 0.2;
-    this.defaultZoom = 0.6 + (canvas.width / 10000);
+    this.defaultZoom = 1;//0.6 + (canvas.width / 10000);
 
     this.minZoom=0.3;
     this.dampZoom=0.01;
@@ -71,40 +71,46 @@ define([
         case "textlink":
           model.content[i].box = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
           model.content[i].box.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:model.content[i].colour}));
-          model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].title, {left:10,width:80,top:10,padding:5,fontSize:35,lineHeight:40,contentType:"text",align:"center"}));
-          model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].subtext, {left:10,width:80,top:35,padding:5,fontSize:15,lineHeight:17,contentType:"text",align:"center"}));
+          model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].title, {left:10,width:80,height:25,top:10,padding:0,fontSize:35,lineHeight:40,contentType:"text",align:"center"}));
+          model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].subtext, {left:10,width:80,height:25,top:35,padding:0,fontSize:15,lineHeight:17,contentType:"text",align:"center"}));
           model.content[i].box.calculate();
           model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].image, {width:100,top:60,left:0,align:"center",contentType:"image",id:"button"}));
           model.content[i].box.calculate();
+          console.log("text/textlink");
+          console.log(model.content[i].box);
         break;
         case "image":
           model.content[i].box = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
           model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].image, {width:100,height:100,contentType:"image"}));
           model.content[i].box.calculate();
-
+          console.log("image");
+          console.log(model.content[i].box);
           model.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
           model.content[i].backbox.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:model.content[i].backcolour}));
           model.content[i].backbox.addBox(new Box(this.offScreenCtx, model.content[i].storyimage, {top:25,left:5,width:13,height:13,contentType:"image"}));
-          model.content[i].backbox.addBox(new Box(this.offScreenCtx, model.content[i].storyusername, {top:25,left:21,width:60,padding:0,fontSize:10,fontstyle:"bold",contentType:"text",align:"left"}));
+          model.content[i].backbox.addBox(new Box(this.offScreenCtx, model.content[i].storyusername, {top:25,left:21,width:60,height:20,textunderlay:"fit",padding:0.9,fontSize:10,fontstyle:"bold",contentType:"text",align:"left"}));
           model.content[i].backbox.calculate();
-          model.content[i].backbox.addBox(new Box(this.offScreenCtx, model.content[i].storyfullname, {top:model.content[i].backbox.last().bottom,left:21,width:60,padding:5,fontSize:7,lineHeight:40,contentType:"text",align:"left"}));
+          model.content[i].backbox.addBox(new Box(this.offScreenCtx, model.content[i].storyfullname, {top:model.content[i].backbox.last().bottom,left:21,width:60,height:20,textunderlay:"fit",padding:0.9,fontSize:7,contentType:"text",align:"left"}));
           model.content[i].backbox.calculate();
-          model.content[i].backbox.addBox(new Box(this.offScreenCtx, model.content[i].storyuserinfo, {top:model.content[i].backbox.last().bottom,left:21,width:60,padding:5,fontSize:7,contentType:"text",align:"left"}));
+          model.content[i].backbox.addBox(new Box(this.offScreenCtx, model.content[i].storyuserinfo, {top:model.content[i].backbox.last().bottom,left:21,width:60,height:20,textunderlay:"fit",padding:0.9,fontSize:7,contentType:"text",align:"left"}));
           model.content[i].backbox.calculate();
-          model.content[i].backbox.addBox(new Box(this.offScreenCtx, model.content[i].storydescription, {top:model.content[i].backbox.last().bottom,left:21,width:60,padding:5,fontSize:13,contentType:"text",align:"left"}));
+          model.content[i].backbox.addBox(new Box(this.offScreenCtx, model.content[i].storydescription, {top:model.content[i].backbox.last().bottom,left:21,width:60,height:20,textunderlay:"fit",padding:1.2,fontSize:12,contentType:"text",align:"left"}));
           model.content[i].backbox.calculate();
-          model.content[i].backbox.addBox(new Box(this.offScreenCtx, model.content[i].storytags, {top:model.content[i].backbox.last().bottom,left:21,width:80,padding:5,fontSize:10,contentType:"text",align:"left"}));
+          model.content[i].backbox.addBox(new Box(this.offScreenCtx, model.content[i].storytags, {top:model.content[i].backbox.last().bottom,left:21,width:60,height:20,textunderlay:"fit",padding:1.2,fontSize:9,contentType:"text",align:"left"}));
           model.content[i].backbox.calculate();
+          console.log("image backbox");
+          console.log(model.content[i].backbox);
         break;
         case "video":
           model.content[i].box = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
           model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].image, {width:100,height:100,contentType:"image"}));
           model.content[i].box.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:"rgba(70,145,185,0.11)"}));
-          model.content[i].box.addBox(new Box(this.offScreenCtx, "VIDEO: " + model.content[i].textname, {contentType:"text",left:8.5,top:10,width:80,padding:5,fontSize:9,backgroundColour:"rgba(60,0,0,0.35)"}));
-          model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].textsubject, {contentType:"text",left:8.5,top:17.5,width:80,height:20,padding:5,fontSize:22,backgroundColour:"rgba(0,60,0,0.35)"}));
-          model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].subimage, {left:8.5,top:75,contentType:"image"}));
+          model.content[i].box.addBox(new Box(this.offScreenCtx, "VIDEO | " + model.content[i].textname, {contentType:"text",left:8.5,top:10,width:80,height:25,padding:2,fontSize:9,backgroundColour:"rgba(0,0,0,0.35)",textunderlay:"fit"}));
+          model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].textsubject, {contentType:"text",left:8.5,top:17.5,width:80,height:20,padding:2,fontSize:22,backgroundColour:"rgba(0,0,0,0.35)",textunderlay:"fit"}));
+          model.content[i].box.addBox(new Box(this.offScreenCtx, model.content[i].subimage, {left:7,top:85,contentType:"image",width:20,height:8}));
           model.content[i].box.calculate();
-    
+          console.log("video");
+          console.log(model.content[i].box);    
           model.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
           model.content[i].backbox.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:"rgb(0,0,0)"}));
           model.content[i].backbox.calculate();
@@ -124,7 +130,7 @@ define([
 	Grid.constructor = Grid;
 
 	Grid.prototype.resize = function (w, h) {
-    this.defaultZoom = 0.6 + (canvas.width / 10000);
+    this.defaultZoom = 1;//0.6 + (canvas.width / 10000);
 	  this.width = w;
 	  this.height = h;
     this.zoomPos={x:w/2,y:h/2};
@@ -380,22 +386,22 @@ define([
       wtx=Math.floor(this.camera.x/totalWorldWidth);
       wty=Math.floor(this.camera.y/totalWorldHeight);
       
-      //if(this.camera.x<0) { 
-      //  wtx--;
-      //};
-
       x%=totalWorldWidth;
       if(x<0) { 
         x+=totalWorldWidth;
+        wtx++;;
       };
-      if(x>=(totalWorldWidth-model.content[i].scale*this.squareWidth)) x-=totalWorldWidth;
+      if(x>=(totalWorldWidth-model.content[i].scale*this.squareWidth)) {
+        x-=totalWorldWidth;
+        wtx--;
+      }
       x-=totalWorldWidth*Math.ceil(canvas.width/(totalWorldWidth*this.zoom*2));
       //wtx-=Math.ceil(canvas.width/(totalWorldWidth*this.zoom*2));
 
       y%=totalWorldHeight;
       if(y<0) {
         y+=totalWorldHeight;
-        wty--;
+        wty++;
       };
       if(y>=(totalWorldHeight-model.content[i].scale*this.squareHeight)) y-=totalWorldHeight;
       y-=totalWorldHeight*Math.ceil(canvas.height/(totalWorldHeight*this.zoom*2));
@@ -443,19 +449,19 @@ define([
             this.mouseHoverWorldY=repeatwty;
             this.mouseHoverTileX=(Config.mouse.x-repeatx)/this.zoom;
             this.mouseHoverTileY=(Config.mouse.y-this.canvasOffset-repeaty)/this.zoom;
-            ctx.fillStyle="green";
-            ctx.beginPath();
-            ctx.arc(repeatx+this.mouseHoverTileX*this.zoom, repeaty+this.mouseHoverTileY*this.zoom, 10, 0, Math.PI*2, true); 
-            ctx.closePath();
-            ctx.fill();
+            // ctx.fillStyle="green";
+            // ctx.beginPath();
+            // ctx.arc(repeatx+this.mouseHoverTileX*this.zoom, repeaty+this.mouseHoverTileY*this.zoom, 10, 0, Math.PI*2, true); 
+            // ctx.closePath();
+            // ctx.fill();
           };
 
-          blid=wtx;// + model.content[i].position.x);
+          blid=repeatwtx;// + model.content[i].position.x);
           //blid=model.content[i].position.x;
 
-          ctx.font="bold 30px Arial";
-          ctx.fillStyle="black";
-          ctx.fillText(blid,repeatx,repeaty);
+          // ctx.font="bold 30px Arial";
+          // ctx.fillStyle="black";
+          // ctx.fillText(blid,repeatx,repeaty);
 
 
           repeatx+=totalWorldWidth*this.zoom; //and scale
@@ -567,9 +573,9 @@ define([
       } while(repeaty<=canvas.height);
 
     };
-    ctx.font="bold 30px Arial";
-    ctx.fillStyle="white";
-    ctx.fillText(this.camera.x/totalWorldWidth,5,5);
+    // ctx.font="bold 30px Arial";
+    // ctx.fillStyle="white";
+    // ctx.fillText(this.camera.x/totalWorldWidth,5,5);
               
     ctx.restore();
   };
