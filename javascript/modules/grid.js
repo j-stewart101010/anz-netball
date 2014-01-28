@@ -226,8 +226,8 @@ define([
       };
       for(var j=0;j<model.content.length;j++){
         if(j!=i) {
-          if(model.content[j].scaleProgress>0) model.content[j].scaleDirection = -0.027;
-          if(model.content[j].flipProgress>0) model.content[j].flipDirection = -0.027;
+          if(model.content[j].scaleProgress>0) model.content[j].scaleDirection = -0.027*4;
+          if(model.content[j].flipProgress>0) model.content[j].flipDirection = -0.027*4;
         };
       };
     };
@@ -377,24 +377,34 @@ define([
 
       x=Math.round(model.content[i].position.x*this.squareWidth-this.camera.x);
       y=Math.round(model.content[i].position.y*this.squareHeight-this.camera.y);
-      wtx=Math.round(model.content[i].position.x*this.squareWidth+this.camera.x);
-      wty=Math.round(model.content[i].position.y*this.squareHeight+this.camera.y);
+      wtx=Math.floor(this.camera.x/totalWorldWidth);
+      wty=Math.floor(this.camera.y/totalWorldHeight);
+      
+      //if(this.camera.x<0) { 
+      //  wtx--;
+      //};
 
       x%=totalWorldWidth;
-      if(x<0) x+=totalWorldWidth;
+      if(x<0) { 
+        x+=totalWorldWidth;
+      };
       if(x>=(totalWorldWidth-model.content[i].scale*this.squareWidth)) x-=totalWorldWidth;
       x-=totalWorldWidth*Math.ceil(canvas.width/(totalWorldWidth*this.zoom*2));
-      wtx-=totalWorldWidth*Math.ceil(canvas.width/(totalWorldWidth*2));
+      //wtx-=Math.ceil(canvas.width/(totalWorldWidth*this.zoom*2));
+
       y%=totalWorldHeight;
-      if(y<0) y+=totalWorldHeight;
+      if(y<0) {
+        y+=totalWorldHeight;
+        wty--;
+      };
       if(y>=(totalWorldHeight-model.content[i].scale*this.squareHeight)) y-=totalWorldHeight;
       y-=totalWorldHeight*Math.ceil(canvas.height/(totalWorldHeight*this.zoom*2));
-      wty-=totalWorldHeight*Math.ceil(canvas.height/(totalWorldHeight*2));
+      wty-=Math.ceil(canvas.height/(totalWorldHeight*this.zoom*2));
       var repeatx,repeaty=(y-(this.zoomPos.y))*this.zoom+this.zoomPos.y, drawAngle;
-      var repeatwtx,repeatwty=wty
+      var repeatwtx,repeatwty=wty;
       do {
         repeatx=(x-(this.zoomPos.x))*this.zoom+this.zoomPos.x;
-        repeatwtx=wtx
+        repeatwtx=wtx;
         do {
       //collision with screen. whether it's worth drawing or not
           //if(repeatx>(-model.content[i].scale*this.squareWidth*this.zoom) && repeatx<canvas.width && repeaty>(-model.content[i].scale*this.squareHeight*this.zoom) && repeaty<canvas.height){
@@ -440,18 +450,19 @@ define([
             ctx.fill();
           };
 
-          blid=Math.floor(repeatwtx / this.squareWidth);// + model.content[i].position.x;
+          blid=wtx;// + model.content[i].position.x);
+          //blid=model.content[i].position.x;
 
-          ctx.font="bold 40px";
+          ctx.font="bold 30px Arial";
           ctx.fillStyle="black";
           ctx.fillText(blid,repeatx,repeaty);
 
 
           repeatx+=totalWorldWidth*this.zoom; //and scale
-          repeatwtx+=totalWorldWidth;
+          repeatwtx++;
         } while(repeatx<=canvas.width);
         repeaty+=totalWorldHeight*this.zoom; //and scale
-        repeatwty+=totalWorldHeight;
+        repeatwty++;
       } while(repeaty<=canvas.height);
 
     };
@@ -556,7 +567,9 @@ define([
       } while(repeaty<=canvas.height);
 
     };
-
+    ctx.font="bold 30px Arial";
+    ctx.fillStyle="white";
+    ctx.fillText(this.camera.x/totalWorldWidth,5,5);
               
     ctx.restore();
   };
