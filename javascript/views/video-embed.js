@@ -66,6 +66,7 @@ define([
 
                 this.$el.on('hidden.bs.modal', _self.close);
                 $(window).on('resize scroll', _self.resize);
+                _self.resize();
             }
             //Else we are just returning a result that contains the embedded video iframe
             else {
@@ -75,7 +76,6 @@ define([
         },
 
         resize : function () {
-            console.log(_self.view_style_options);
             _self.$el.css({
                 marginTop : '-'+_self.view_style_options.height / 2+'px',
                 marginLeft : '-'+_self.view_style_options.width / 2+'px'
@@ -88,7 +88,6 @@ define([
 
         render : function () {
             this.$el.html(this._template_result);
-            _self.resize();
             return this;
         }
     });

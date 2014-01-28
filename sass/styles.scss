@@ -28,8 +28,8 @@ body {
 	}
 
 	@media screen and (max-height: $grid-max-height) {
-		min-height: $grid-max-height;
-		overflow-y: scroll;
+		// min-height: $grid-max-height;
+		// overflow-y: scroll;
 	}	
 }
 
@@ -276,6 +276,7 @@ body {
 	&.block {
 		li {
 			position: relative;
+
 			text-align: center;
 			text-transform: uppercase;
 		
@@ -600,6 +601,7 @@ body {
 
 	> .grid {
 		z-index: 99;
+		overflow: visible;
 	}
 
 	.grid + .grid {
@@ -624,6 +626,7 @@ body {
 		max-width: $grid-max-width;
 		max-height: $grid-max-height;
 		height: 87%;
+		overflow: hidden;
 
 		.grid, .col {
 			&.full-length {
@@ -643,7 +646,7 @@ body {
 		}
 
 		.grid {
-			overflow: hidden;
+			// overflow: hidden;
 			height: 50%;
 		}
 
@@ -891,7 +894,11 @@ body {
 		margin: 0;
 	}
 	h4 {
+		margin-top: 10px;
 		margin-bottom: 0;
+	}
+	p:last-of-type {
+		padding-right: 10px;
 	}
 }
 
@@ -903,6 +910,12 @@ body {
 	.media {
 		margin-top: 0;
 	}
+	p {
+		margin-bottom: 15px;
+	}
+	p:last-of-type {
+		padding-right: 10px;
+	}	
 }
 
 
@@ -932,8 +945,17 @@ body {
 	display: block;
 	width: 100%;
 	height: 50%;	
-	overflow: hidden;
-	border-bottom: 1px solid white;
+	// overflow: hidden;
+	// border-bottom: 1px solid white;
+	border-top: 1px solid white;
+
+	&:first-child {
+		border-top: 0;
+	}
+
+	.brand-overlay {
+		bottom: -2px; //Ipad has difficulties with the .grid borders give it some spacing as it doesnt affect other browsers
+	}
 
 	.video-tile-image {
 		position: absolute;
@@ -949,17 +971,19 @@ body {
 		z-index: 100;
 	}
 
-	h2 {
-		margin-bottom: 5px;
-	}
-
 	.tile-heading { 
 		display: inline-block;
+		margin-bottom: 10px;
 
 		.brand-overlay {
 			z-index: -1;
+			bottom: 0;
 		}
 	}
+
+	.tile-heading.heading-sm {
+		margin-bottom: 5px;
+	}	
 
 	& + & {
 		border-bottom: 0;
@@ -1047,8 +1071,12 @@ body {
 		}
 	}
 
+	.heading {
+		margin-bottom: 15px;
+	}
+
 	.subheading {
-		margin-bottom: 7px;	
+		margin-bottom: 6px;	
 	}
 }
 
@@ -1107,7 +1135,7 @@ body {
 	@media screen and (min-width: $screen-desktop) {
 		position: absolute;
 		bottom: 0;
-		width: 100%;	
+		width: 100%;
 		height: 5%;
 		padding: 0;
 
