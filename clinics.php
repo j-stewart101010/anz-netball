@@ -6,7 +6,7 @@
 <!--[if IE 9]>         <html class="no-js lt-ie10 ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
-		<title>ANZ Netball Nation - Community</title>
+		<title>ANZ Netball Nation - Clinics</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -98,19 +98,19 @@
 												<hgroup>
 													<div>
 														<h2 class="tile-heading heading-sm">
-															<div class="brand-overlay shade-sixteen"></div>
+															<div class="brand-overlay shade-seventeen"></div>
 															Video Sharelle McMahon
 														</h2>
 													</div>
 													<div>
 														<h1 class="tile-heading">
-															<div class="brand-overlay shade-sixteen"></div>
+															<div class="brand-overlay shade-seventeen"></div>
 															Little legends
 														</h1>
 													</div>
 												</hgroup>
 
-												<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-append="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
+												<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-target="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
 											
 											</div>
 											<div class="brand-overlay shade-sixteen"></div>
@@ -120,6 +120,13 @@
 									</div>
 									<div id="video-side" class="back">
 										<!-- Dynamic content injected in here -->
+
+										<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#video-case-studies" data-video-id="19072376" data-video="close">
+											<div class="cross-icon">
+												<i class="fa fa-angle-left"></i>
+												<i class="fa fa-angle-right"></i>
+											</div>
+										</a>										
 									</div>
 								</div>
 							</div>

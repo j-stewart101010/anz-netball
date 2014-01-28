@@ -239,7 +239,7 @@
 											</div>
 										</hgroup>
 
-										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-append="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
+										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-target="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
 									
 									</div>
 									<div class="brand-overlay shade-three"></div>
@@ -263,7 +263,7 @@
 											</div>
 										</hgroup>	
 
-										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-append="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
+										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-target="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
 
 									</div>
 									<div class="brand-overlay shade-three"></div>
@@ -273,6 +273,13 @@
 							</div>
 							<div id="video-side" class="back">
 								<!-- Dynamic content injected in here -->
+
+								<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#video-case-studies" data-video-id="19072376" data-video="close">
+									<div class="cross-icon">
+										<i class="fa fa-angle-left"></i>
+										<i class="fa fa-angle-right"></i>
+									</div>
+								</a>								
 							</div>
 						</div>
 					</div>
@@ -411,7 +418,7 @@
 
 						<section class="grid">
 
-							<div class="panel-group answer-panel shade-two" id="faq-answers">
+							<div class="panel-group answer-panel accorian-toggle shade-two" id="faq-answers">
 
 								<div class="panel panel-default">
 									<div id="who-can-apply" class="panel-collapse collapse in">

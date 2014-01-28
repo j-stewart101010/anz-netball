@@ -110,7 +110,7 @@
 											</div>
 										</hgroup>
 
-										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-append="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
+										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-target="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
 									
 									</div>
 									<div class="brand-overlay shade-seven"></div>
@@ -120,6 +120,13 @@
 							</div>
 							<div id="video-side" class="back">
 								<!-- Dynamic content injected in here -->
+
+								<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#video-case-studies" data-video-id="19072376" data-video="close">
+									<div class="cross-icon">
+										<i class="fa fa-angle-left"></i>
+										<i class="fa fa-angle-right"></i>
+									</div>
+								</a>								
 							</div>
 						</div>
 					</div>
@@ -150,7 +157,7 @@
 
 						<div id="link-one" class="flip-container">
 							<div class="flipper">
-								<div class="front">
+								<div class="front shade-seven">
 
 									<div class="outter-tile group shade-seven">
 										<article data-resize-height="#grid-image-five" class="content-tile mini tile center">
@@ -161,9 +168,9 @@
 									</div>
 
 								</div>
-								<div class="back">
+								<div class="back shade-eighteen">
 
-									<div class="outter-tile group shade-seventeen">
+									<div class="outter-tile group shade-eighteen">
 										<aside data-resize-height="#grid-image-five" class="content-tile tile center">
 											<div class="content-image">
 												<img src="images/anz-netset-icon.png" alt="ANZ Netset">

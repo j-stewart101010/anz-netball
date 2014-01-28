@@ -366,7 +366,7 @@ define([
         // console.log(this.camera.x, this.camera.y);
         // sqwidth * scale * zoom
         // console.log(model.content[i]);
-        console.log(model.content[i].scale * this.squareWidth * this.zoom);
+        // console.log(model.content[i].scale * this.squareWidth * this.zoom);
         this.onFlip(i);
       };
       if(model.content[i].flipProgress<0) {

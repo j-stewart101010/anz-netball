@@ -18,7 +18,8 @@ define([
         events : {
             'click.video.embed [data-video="toggle"]' : 'show_video',            
             'click.flip [data-flip="toggle"]' : 'flip_toggle',
-            'click.enlarge-image [data-enlage="toggle"]' : 'enlarge_image_toggle'
+            'click.enlarge-image [data-enlage="toggle"]' : 'enlarge_image_toggle',
+            'click.video-close [data-video="close"]' : 'close_video'
         },
 
         initialize : function () {
@@ -45,10 +46,14 @@ define([
             });
         },
 
+        close_video : function (e) {
+            $('#video-id-'+$(e.currentTarget).data('video-id')).trigger('click.video.close');
+        },
+
         flip_toggle : function (e) {
             var $target = $(e.currentTarget),
                 $flip_target = $($target.data('flip-target')),
-                $front, $back;          
+                $front, $back;
 
             e.preventDefault();
 
@@ -56,8 +61,8 @@ define([
                 $flip_target.toggleClass('flip')
             }
             else {
-                $front = $flip_target.find('.front');
-                $back = $flip_target.find('.back');
+                $front = $flip_target.find('.front').filter(':first');
+                $back = $flip_target.find('.back').filter(':first');
 
                 if (MatchMedia.tablet()) {
                     $flip_target.toggleClass('flip');
@@ -115,11 +120,13 @@ define([
         },
 
         show_video : function (e) {
-            var view = new VideoEmbedView({ 
+            var video_id = $(e.target).data('video-id'),
+                view = new VideoEmbedView({
+                id : 'video-id-'+video_id,
                 modal : false,
-                video_id : $(e.target).data('video-id')
+                video_id : video_id
             });
-            _self.$content.find($(e.target).data('video-append')).append(view.render().el);
+            _self.$content.find($(e.target).data('video-target')).append(view.render().el);
             this.delegateEvents();
         },             
 

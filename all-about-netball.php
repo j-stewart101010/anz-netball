@@ -385,10 +385,9 @@
 									<!-- Controls -->
 									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-equipment" data-slide="prev"><i class="fa fa-angle-left"></i></a>
 									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-equipment" data-slide="next"><i class="fa fa-angle-right"></i></a>
-									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#equipment-info" href="#">		<div class="cross-icon">
-			<i class="fa fa-angle-left"></i>
-			<i class="fa fa-angle-right"></i>
-		</div></a>
+									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#equipment-info" href="#">
+										<div class="cross-icon"><i class="fa fa-angle-left"></i><i class="fa fa-angle-right"></i></div>
+									</a>
 								</div>
 
 
