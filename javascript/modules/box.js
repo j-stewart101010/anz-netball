@@ -11,8 +11,8 @@ define([
 
 		this.ctx;
 		this.boxes=[], this.height, this.width=90, this.left=0, this.top=0, this.padding=0, this.margin=0, this.right, this.bottom;
-		this.content, this.contentType="text", this.properties, this.fontStyle="normal", this.fontSize=24, this.fontName="Helvetica W01 Light", this.lineHeight=this.fontSize;
-		this.fontColour="#AADDFF", this.backgroundColour="rgba(0,0,0,.1)", this.id="", this.align="left";
+		this.content, this.contentType="text", this.properties, this.fontStyle="normal", this.fontSize=24, this.fontName="Helvetica W01 Light";
+		this.fontColour="#AADDFF", this.backgroundColour="rgba(0,0,0,0)", this.id="", this.align="left", this.textunderlay="fill";
 		
 		
 		$.each(properties, function(key, value) {
@@ -21,6 +21,7 @@ define([
 		if(this.contentType=="container") this.boxes = newContent;					
 		if(this.contentType=="text" || this.contentType=="image") this.content = newContent;
 		this.ctx=ctx;
+		if(typeof(this.lineHeight)=="undefined") this.lineHeight=this.fontSize*1.1;
 	};
 
 	Box.constructor = Box;
@@ -107,7 +108,7 @@ define([
 					ctx.fillStyle=this.boxes[i].fontColour;
 					ctx.font = this.boxes[i].fontStyle + " " + this.boxes[i].fontSize + "px " + this.boxes[i].fontName;
 					ctx.textBaseline = 'top';
-					cy=drawy+(this.boxes[i].drawTop+(this.boxes[i].drawHeight-this.boxes[i].lineHeight*this.boxes[i].splitLines.length)*0.5)*drawScale;//+this.boxes[i].lineHeight;
+					cy=drawy+this.boxes[i].drawTop*drawScale;//+this.boxes[i].lineHeight;
 					if(drawScale!=1) ctx.scale(drawScale,drawScale);
 					for(j=0;j<this.boxes[i].splitLines.length;j++) {
 						cx=drawx+(this.boxes[i].drawLeft)*drawScale; //default left justified
@@ -150,11 +151,11 @@ define([
 
 					this.boxes[i].boxLeft=(this.boxes[i].margin+this.boxes[i].left)*this.width*0.01;
 			    	this.boxes[i].boxTop=(this.boxes[i].margin+this.boxes[i].top)*this.height*0.01;
-			    	this.boxes[i].boxWidth=(this.boxes[i].width-this.boxes[i].padding*2)*this.width*0.01;
-			    	this.boxes[i].boxHeight=(this.boxes[i].height-this.boxes[i].padding*2)*this.height*0.01;
+			    	this.boxes[i].boxWidth=(this.boxes[i].width-this.boxes[i].margin*2)*this.width*0.01;
+			    	this.boxes[i].boxHeight=(this.boxes[i].height-this.boxes[i].margin*2)*this.height*0.01;
 
-			    	var maxWidth=this.boxes[i].boxWidth;
-					var maxHeight=this.boxes[i].boxHeight;
+			    	var maxWidth=this.boxes[i].boxWidth-this.boxes[i].padding*this.height*0.02;
+					var maxHeight=this.boxes[i].boxHeight-this.boxes[i].padding*this.height*0.02;
 					var imageAspect = this.boxes[i].content.width / this.boxes[i].content.height;
     				var boundaryAspect = maxWidth / maxHeight;
     				var newWidth,newHeight;
@@ -187,47 +188,33 @@ define([
 			    	//set actual text properties
 			    	this.ctx.font = this.boxes[i].fontStyle + " " + this.boxes[i].fontSize + "px " + this.boxes[i].fontName;
 			    	this.ctx.textBaseline = 'top';
-			    	this.boxes[i].drawWidth=(this.boxes[i].width-this.boxes[i].padding*2)*this.width*0.01;
-			    	this.boxes[i].splitLines = this.splitText(this.ctx,this.boxes[i].drawWidth,this.boxes[i].content);
-					
-					if(typeof(this.boxes[i].height)=="undefined") {
-						if (this.boxes[i].splitLines.length<=1) {
-							this.boxes[i].height=(this.boxes[i].fontSize*100)/this.height+this.boxes[i].padding*2;
-						} else {	
-							this.boxes[i].height=((this.boxes[i].splitLines.length-1)*this.boxes[i].lineHeight*100)/this.height+this.boxes[i].padding*2;
-						}; 
-					};
+			    	var maxWidth=(this.boxes[i].width-this.boxes[i].padding*2)*this.width*0.01;
+			    	this.boxes[i].splitLines = this.splitText(this.ctx,maxWidth,this.boxes[i].content);
+
 					this.boxes[i].boxLeft=(this.boxes[i].margin+this.boxes[i].left)*this.width*0.01;
-			    	this.boxes[i].boxTop=(this.boxes[i].margin+this.boxes[i].top)*this.height*0.01;
-			    	this.boxes[i].boxWidth=(this.boxes[i].width-this.boxes[i].padding*2)*this.width*0.01;
-			    	this.boxes[i].boxHeight=(this.boxes[i].height-this.boxes[i].padding*2)*this.height*0.01;
-			    	
 			    	this.boxes[i].drawLeft=(this.boxes[i].margin+this.boxes[i].left+this.boxes[i].padding)*this.width*0.01;
+					this.boxes[i].boxTop=(this.boxes[i].margin+this.boxes[i].top)*this.height*0.01;
 					this.boxes[i].drawTop=(this.boxes[i].margin+this.boxes[i].top+this.boxes[i].padding)*this.height*0.01;
-					this.boxes[i].drawHeight=this.boxes[i].splitLines.length*this.boxes[i].lineHeight
-			    	//console.log(this.boxes[i].splitLines);
-			    	// mw=0;
-			    	// for(j=0;j<this.boxes[i].splitLines.length;j++) {
-			    	// 	if(this.boxes[i].splitLines[j].width>mw) mw=this.boxes[i].splitLines[j].width;
-			    	// };
-			    	
-			    	// this.boxes[i].drawWidth=mw;
-			    	// this.boxes[i].boxWidth=mw+this.boxes[i].padding*this.width*.02;
-			    	
-			    	// mh=this.boxes[i].splitLines.length*this.boxes[i].lineHeight;
-			    	// this.boxes[i].drawHeight = mh;
-			    	// this.boxes[i].boxHeight = mh + this.boxes[i].padding*this.height*.02;
+					if(this.boxes[i].textunderlay=="fill") {
+						this.boxes[i].boxWidth=(this.boxes[i].width-this.boxes[i].margin*2)*this.width*0.01;
+			    		this.boxes[i].boxHeight=(this.boxes[i].height-this.boxes[i].margin*2)*this.height*0.01;
+						this.boxes[i].drawWidth=(this.boxes[i].width-this.boxes[i].margin*2-this.boxes[i].padding*2)*this.height*0.01;
+//						this.boxes[i].drawHeight=(this.boxes[i].height-this.boxes[i].padding*2)*this.height*0.01;
+					};
+					if(this.boxes[i].textunderlay=="fit") {
+						maxWidth=0;
+						for(var j=0;j<this.boxes[i].splitLines.length;j++) {
+							if(this.boxes[i].splitLines[j].width>maxWidth) maxWidth = this.boxes[i].splitLines[j].width;
+						};
+						this.boxes[i].boxWidth=maxWidth+this.boxes[i].padding*2*this.width*0.01+this.boxes[i].fontSize*0.3;
+						this.boxes[i].drawWidth=maxWidth;
+						this.boxes[i].boxHeight=this.boxes[i].padding*this.height*0.02+this.boxes[i].fontSize+this.boxes[i].lineHeight*(this.boxes[i].splitLines.length-1)+this.boxes[i].fontSize*0.1;
+						
+					};
 				};
 				
-				// this.boxes[i].boxLeft=(this.boxes[i].margin+this.boxes[i].left)*this.width*0.01;
-		  //   	this.boxes[i].boxTop=(this.boxes[i].margin+this.boxes[i].top)*this.height*0.01;
-		  //   	this.boxes[i].boxWidth=this.boxes[i].width*this.width*0.01;
-		  //   	this.boxes[i].boxHeight=this.boxes[i].height*this.height*0.01;
-
-
-
-				this.boxes[i].right=this.boxes[i].margin+this.boxes[i].left+this.boxes[i].width;
-				this.boxes[i].bottom=this.boxes[i].margin+this.boxes[i].top+this.boxes[i].height;
+				this.boxes[i].right=(this.boxes[i].boxLeft+this.boxes[i].boxWidth)*100/this.width;
+				this.boxes[i].bottom=(this.boxes[i].boxTop+this.boxes[i].boxHeight)*100/this.height;
 				// this.boxes[i].boxRight=this.boxes[i].boxLeft+this.boxes[i].boxWidth;
 				// this.boxes[i].boxBottom=this.boxes[i].Top+this.boxes[i].boxHeight;
 								
