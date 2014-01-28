@@ -7,7 +7,7 @@ define([
 
             isMobile : false, //window.mobilecheck(),
 
-            REMOTE_PATH : "http://localhost.anz-netball/",
+            REMOTE_PATH : "/",
 
             mouse : {
                   x: 0,

@@ -17,21 +17,21 @@ define([
             top: '50%',
             left: '50%',
             width: 500,
-            height: 500,
-            // marginTop: -250,
-            // marginLeft: -250
+            height: 500
         },
 
         className : 'loading',
 
-        events : {
-            'click.video.close [data-video="close"]' : 'close'
-        },
+        // events : {
+        //     'click.video.close [data-video="close"]' : 'close'
+        // },
 
         initialize : function () {
             _self = this;
 
             _self.set_options();
+
+            this.$el.on('click.video.close', this.close);
 
             // Listen for messages from the player
             if (window.addEventListener){ window.addEventListener('message', _self.on_message_received, false); }

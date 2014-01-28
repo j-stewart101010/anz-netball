@@ -1,24 +1,26 @@
 /**
  * Provides bind in a cross browser way.
  */
-if (typeof Function.prototype.bind != 'function') {
-  Function.prototype.bind = (function () {
-    var slice = Array.prototype.slice;
-    return function (thisArg) {
-      var target = this, boundArgs = slice.call(arguments, 1);
- 
-      if (typeof target != 'function') throw new TypeError();
- 
-      function bound() {
-	var args = boundArgs.concat(slice.call(arguments));
-	target.apply(this instanceof bound ? this : thisArg, args);
-      }
- 
-      bound.prototype = (function F(proto) {
-          proto && (F.prototype = proto);
-          if (!(this instanceof F)) return new F;          
-	})(target.prototype);
- 
-      return bound;
-    };
-  })();
+if (!Function.prototype.bind) {
+  Function.prototype.bind = function (oThis) {
+    if (typeof this !== "function") {
+      // closest thing possible to the ECMAScript 5 internal IsCallable function
+      throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+    }
+
+    var aArgs = Array.prototype.slice.call(arguments, 1), 
+        fToBind = this, 
+        fNOP = function () {},
+        fBound = function () {
+          return fToBind.apply(this instanceof fNOP && oThis
+                                 ? this
+                                 : oThis,
+                               aArgs.concat(Array.prototype.slice.call(arguments)));
+        };
+
+    fNOP.prototype = this.prototype;
+    fBound.prototype = new fNOP();
+
+    return fBound;
+  };
+}

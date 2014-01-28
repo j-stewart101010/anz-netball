@@ -19,7 +19,7 @@
 			<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
 	    </head>
 
-	    <body>
+	    <body class="home">
 
 		<header class="master-head">
 			<div class="branding col-md-4">
@@ -82,7 +82,7 @@
 											</div>
 										</hgroup>
 
-										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-append="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
+										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-target="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
 									
 									</div>
 									<div class="brand-overlay shade-three"></div>

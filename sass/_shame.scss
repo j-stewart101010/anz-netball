@@ -17,8 +17,15 @@
 	padding-right: 8px;
 }
 
-.clinics {
+.clinics, .clinics-post {
 	.content {
+		> .grid:first-child {
+			border-top: 0;
+			.col:first-child > .grid {
+				border-bottom: 0;
+			}
+		} 
+
 		.grid.full-length .grid .col + .col {
 			border-right: 0;
 		}
@@ -45,6 +52,10 @@
 		}
 		.half-length .col-half + .col-half .image-wrap,
 		.half-length + .half-length .col-half .image-wrap {
+			border-top: 1px solid white;
+		}
+
+		.video-tile:first-child {
 			border-top: 1px solid white;
 		}
 	}

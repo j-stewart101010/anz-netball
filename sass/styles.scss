@@ -30,7 +30,14 @@ body {
 	@media screen and (max-height: $grid-max-height) {
 		// min-height: $grid-max-height;
 		// overflow-y: scroll;
-	}	
+	}
+
+	&.home .content {
+		max-width: none;
+		max-height: none;
+		height: auto;
+		overflow: hidden;		
+	}
 }
 
 // Master Head Module
@@ -703,8 +710,11 @@ body {
 
 		.image-wrap {
 			max-height: none;
-
 			border-right: 1px solid white;
+
+			&:first-child {
+				border-left: 1px solid white;
+			}
 		}
 
 		.grid, .col, .image-wrap {
@@ -781,7 +791,7 @@ body {
 				max-width: 80%;
 			}			
 		}			
-	}
+	}	
 
 	@media screen and (max-width: $screen-xsmall) {
 		.heading-exjumbo {
@@ -862,6 +872,10 @@ body {
 }
 
 .shade-seventeen {
+	background-color: $brand-accent-ten; //Sunset Orange
+}
+
+.shade-eighteen {
 	background-color: white; //White
 }
 
@@ -880,6 +894,19 @@ body {
 		p {
 			margin-bottom: 15px;
 		}
+	}
+}
+
+// Mini Content Tile Module (Subset of .tile)
+//====================================================================================================================================
+//====================================================================================================================================
+
+.mini-tile {
+	.heading {
+		margin-bottom: 15px;
+	}
+	p {
+		margin: 0;
 	}
 }
 
@@ -1291,8 +1318,23 @@ body {
 }
 
 .answer-panel {
+	font-size: ceil($font-size-small - 1);
+}
+
+.qa-answers {
+	position: absolute;
+	top: 0;	
+	width: 100%;
+	height: 100%;
+	z-index: 98;	
+}
+
+// Accordian Toggle Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.accorian-toggle {
 	height: 100%!important; //Important to get around javascript applied inline styles
-	font-size: ceil($font-size-small - 1);	
 
 	.panel-collapse {
 		@include opacity(1);
@@ -1315,12 +1357,12 @@ body {
 	}
 }
 
-.qa-answers {
-	position: absolute;
-	top: 0;	
-	width: 100%;
-	height: 100%;
-	z-index: 98;	
+// Gallery Slide Module
+//====================================================================================================================================
+//====================================================================================================================================
+
+.gallery-slide {
+	
 }
 
 // Accordian Module
@@ -1450,7 +1492,7 @@ body {
 	}
 }
 
-.flip-container.flip .back {
+.flip-container.flip > .flipper > .back {
     -webkit-transform: rotateY(0deg);
     -moz-transform: rotateY(0deg);
     -o-transform: rotateY(0deg);
@@ -1458,7 +1500,7 @@ body {
     transform: rotateY(0deg);
 }
 
-.flip-container.flip .front {
+.flip-container.flip > .flipper > .front {
     -webkit-transform: rotateY(180deg);
     -moz-transform: rotateY(180deg);
     -o-transform: rotateY(180deg);
@@ -1517,7 +1559,7 @@ body {
 	@include branding-theme($brand-accent-six);
 }
 
-.clinics {
+.clinics, .clinics-post {
 	@include branding-theme($brand-accent-eight);
 }
 
