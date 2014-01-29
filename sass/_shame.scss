@@ -19,12 +19,14 @@
 
 .clinics, .clinics-post {
 	.content {
-		> .grid:first-child {
-			border-top: 0;
-			.col:first-child > .grid {
-				border-bottom: 0;
-			}
-		} 
+
+		.grid:first-child .col:first-child {
+			border-right: 0;
+
+			.grid:first-child {
+				border-top: 0;
+			}	
+		}
 
 		.grid.full-length .grid .col + .col {
 			border-right: 0;

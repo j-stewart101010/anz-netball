@@ -881,10 +881,14 @@ body {
 }
 
 .shade-eighteen {
-	background-color: darken($brand-accent-ten, 20%); //Sunset Orange
+	background-color: darken($brand-accent-ten, 20%);
 }
 
 .shade-nineteen {
+	background-color: lighten($brand-accent-eight, 15%);	
+}
+
+.shade-twenty {
 	background-color: white; //White
 }
 
@@ -993,11 +997,14 @@ body {
 		bottom: -2px; //Ipad has difficulties with the .grid borders give it some spacing as it doesnt affect other browsers
 	}
 
-	.video-tile-image {
+	.video-tile-image  {
 		position: absolute;
 		top: 0;
 		left: 0;
-		height: 100%;
+		width: 100%;
+		height: 100%;			
+		border-top: 0;
+		z-index: 97;
 	}
 
 	.video-tile-content {
@@ -1027,10 +1034,20 @@ body {
 
 	@media screen and (min-width: $screen-xsmall) {
 		.video-tile-image {
+			
+		} 
+		.video-tile-image img {
 			width: 100%;
 			height: auto;
 		}
 	}
+
+	@media screen and (max-width: $screen-xsmall) {
+		.video-tile-image img {
+			max-width: none;
+			height: 100%;
+		}
+	}	
 }
 
 // Ambassador Video Tile Module (Subset of .tile)

@@ -60,128 +60,68 @@
 
 				<div class="col col-md-6">
 
-					<div id="carousel-vic-gallery" class="carousel slide shade-sixteen" data-interval="" data-ride="carousel">
+					<div class="grid half-length shade-fifteen">
+						<div class="col col-sm-4 col-md-4">
+							<div id="grid-image-one" class="image-wrap">
+								<img src="http://lorempixel.com/g/612/612/">
+							</div>
+						</div>
+						<div class="col col-sm-8 col-md-8 center-tile">
 
-						<div class="carousel-inner">
-							<div class="item active shade-fifteen">
+							<div id="clinics-wrap-up" class="flip-container front-led">
+								<div class="flipper">
+									<div class="front">
 
-								<div id="clinics-vic" class="flip-container front-led">
-									<div class="flipper">
-										<div class="front">
-
-											<div class="grid half-length">
-												<div class="col col-sm-4 col-md-4">
-													<div class="image-wrap">
-														<img src="http://lorempixel.com/g/612/612/">
-													</div>
-												</div>
-												<div class="col col-sm-8 col-md-8 center-tile">
-
-													<div class="panel-group accorian-toggle shade-fifteen" id="clinic-wrapup">
-
-														<div class="panel panel-default">
-															<div id="clinic-into" class="panel-collapse collapse in">
-																<div class="outter-tile vertical-center">
-																	<article class="content-tile tile">
-																		<hgroup>
-																			<h1 class="heading heading-exjumbo tanned">Clinics</h1>
-																			<h2 class="subheading heading-med  tanned">Our 2014 clinics were a massive hit!</h2>
-																			<a class="btn btn-default btn-sm" href="#clinic-wrap-up" class="active" data-parent="#clinic-wrapup" data-toggle="collapse">Find out more  <i class="fa fa-angle-right"></i></a>
-																		</hgroup>
-																	</article>
-																</div>
-															</div>
-														</div>
-
-														<div class="panel panel-default">
-															<div id="clinic-wrap-up" class="panel-collapse collapse">
-																<div class="outter-tile vertical-center">
-																	<article class="tile mini-tile">
-																		<hgroup>
-																			<h2 class="heading heading-exmed  tanned">Clinic wrap up</h2>
-																			<p class="sub-content"><small>Netball is a ball sport played by two teams of seven players. Its development, derived from early versions of basketball, began in England in the 1890s. By 1960, international playing rules had been standardised for the game, and the International Federation of Netball and Women's Basketball (later renamed the International Netball Federation (INF)) was formed. As of 2011, the INF comprises more than 60.</small></p>
-																			<a class="btn btn-sm btn-action flip-toggle" href="#clinic-into" data-parent="#clinic-wrapup" data-toggle="collapse">
-																				<div class="cross-icon">
-																					<i class="fa fa-angle-left"></i>
-																					<i class="fa fa-angle-right"></i>
-																				</div>
-																			</a>
-																		</hgroup>
-																	</article>
-																</div>
-															</div>
-														</div>								
-													</div>
-
-												</div>
-
-											</div>
-
-											<article class="video-tile tile shade-sixteen">
-												<div class="video-tile-content">
-													<hgroup>
-														<div>
-															<h2 class="tile-heading heading-sm">
-																<div class="brand-overlay shade-seventeen"></div>
-																<b>Video & image</b> case study
-															</h2>
-														</div>
-														<div>
-															<h1 class="tile-heading">
-																<div class="brand-overlay shade-seventeen"></div>
-																Vic
-															</h1>
-														</div>
-													</hgroup>
-
-													<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-vic" data-video="toggle" data-video-target="#video-side-one" data-video-id="19072376" href="#"><i class="fa fa-film fa-6"></i> Play</a>
-													<a class="btn btn-sm btn-primary" href="#carousel-vic-gallery" data-slide="next"><i class="fa fa-picture-o"></i> View Gallery</a>
-												
-												</div>
-												<div class="brand-overlay shade-sixteen"></div>
-												<img class="video-tile-image" alt="Video" src="images/video-background-one.jpg">
+										<div class="outter-tile vertical-center">
+											<article data-resize-height="#grid-image-one" class="content-tile tile">
+												<hgroup>
+													<h1 class="heading heading-exjumbo tanned">Clinics</h1>
+													<h2 class="subheading heading-med  tanned">Our 2014 clinics were a massive hit!</h2>
+													<a class="btn btn-default btn-sm" data-flip="toggle" data-flip-target="#clinics-wrap-up" href="#">Find out more <i class="fa fa-angle-right"></i></a>
+												</hgroup>
 											</article>
-
-										</div>	
-
-										<div id="video-side-one" class="back">
-											<!-- Dynamic content injected in here -->
-											<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#clinics-vic"data-video-id="19072376" data-video="close">
-												<div class="cross-icon">
-													<i class="fa fa-angle-left"></i>
-													<i class="fa fa-angle-right"></i>
-												</div>
-											</a>							
 										</div>
 
 									</div>
+									<div id="video-side-one" class="back">
+										<div class="outter-tile vertical-center">
+											<article class="tile mini-tile">
+												<hgroup>
+													<h2 class="heading heading-exmed  tanned">Clinic wrap up</h2>
+													<p class="sub-content"><small>Netball is a ball sport played by two teams of seven players. Its development, derived from early versions of basketball, began in England in the 1890s. By 1960, international playing rules had been standardised for the game, and the International Federation of Netball and Women's Basketball (later renamed the International Netball Federation (INF)) was formed. As of 2011, the INF comprises more than 60.</small></p>
+													<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#clinics-wrap-up" href="#">
+														<div class="cross-icon">
+															<i class="fa fa-angle-left"></i>
+															<i class="fa fa-angle-right"></i>
+														</div>
+													</a>
+												</hgroup>
+											</article>
+										</div>							
+									</div>	
 								</div>
+							</div>								
 
+						</div>
+
+					</div>
+
+					<div class="grid half-length shade-fifteen">
+						<div class="col col-sm-4 col-md-4">
+							<div id="grid-image-two" class="image-wrap">
+								<img src="http://lorempixel.com/g/612/612/">
 							</div>
-							<div class="item shade-fourteen gallery-slide">
-								<img src="http://lorempixel.com/700/500/sports/">
-
-								<div class="gallery-meta">
-									<h2 class="tile-heading heading-sm verbose">
-										<span class="overlay-content">Nsw 2014 ANZ Netball Nation clinic image gallery</span>
-										<div class="brand-overlay shade-eighteen"></div>
-									</h2>
-									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-vic-gallery" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-vic-gallery" data-slide="next"><i class="fa fa-angle-right"></i></a>								
-								</div>							
-							</div>   
-							<div class="item shade-fourteen gallery-slide">
-								<img src="http://lorempixel.com/700/500/sports/">
-
-								<div class="gallery-meta">
-									<h2 class="tile-heading heading-sm verbose">
-										<span class="overlay-content">Nsw 2014 ANZ Netball Nation clinic image gallery</span>
-										<div class="brand-overlay shade-eighteen"></div>
-									</h2>
-									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-vic-gallery" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-vic-gallery" data-slide="next"><i class="fa fa-angle-right"></i></a>								
-								</div>															
-							</div> 							 
+						</div>
+						<div class="col col-sm-8 col-md-8 center-tile">
+							<div class="outter-tile vertical-center">
+								<article data-resize-height="#grid-image-two" class="content-tile tile">
+									<hgroup>
+										<h1 class="heading heading-exjumbo tanned">Missed out?</h1>
+										<h2 class="subheading heading-med  tanned">There’s always next year...</h2>
+										<a class="btn btn-default btn-sm" href="/link">Register for 2015 via facebook  <i class="fa fa-angle-right"></i></a>
+									</hgroup>
+								</article>
+							</div>								
 						</div>
 
 					</div>
@@ -213,8 +153,10 @@
 										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-qld-sa" data-video="toggle" data-video-target="#video-side-two" data-video-id="19072376" href=""><i class="fa fa-film fa-6"></i> Play</a>
 									
 									</div>
-									<div class="brand-overlay shade-sixteen"></div>
-									<img class="video-tile-image" alt="Video" src="images/video-background-one.jpg">
+									<div class="brand-overlay shade-nineteen"></div>
+									<div class="image-wrap video-tile-image">
+										<img class="" alt="Video" src="http://lorempixel.com/g/767/352/">
+									</div>
 								</article>
 
 								<article class="video-tile tile shade-sixteen">
@@ -236,8 +178,10 @@
 										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-qld-sa" data-video="toggle" data-video-target="#video-side-two" data-video-id="19072376" href="#"><i class="fa fa-film fa-6"></i> Play</a>
 									
 									</div>
-									<div class="brand-overlay shade-sixteen"></div>
-									<img class="video-tile-image" alt="Video" src="images/video-background-one.jpg">
+									<div class="brand-overlay shade-seventeen"></div>
+									<div class="image-wrap video-tile-image">
+										<img class="" alt="Video" src="http://lorempixel.com/g/767/352/">
+									</div>
 								</article>
 
 							</div>	
@@ -292,8 +236,10 @@
 													<a class="btn btn-sm btn-primary" href="#carousel-nsw-gallery" data-slide="next"><i class="fa fa-picture-o"></i> View Gallery</a>
 												
 												</div>
-												<div class="brand-overlay shade-sixteen"></div>
-												<img class="video-tile-image" alt="Video" src="images/video-background-one.jpg">
+												<div class="brand-overlay shade-seventeen"></div>
+												<div class="image-wrap video-tile-image">
+													<img class="" alt="Video" src="http://lorempixel.com/g/767/352/">
+												</div>												
 											</article>
 
 											<article class="video-tile tile shade-sixteen">
@@ -316,8 +262,10 @@
 													<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-nsw-act" data-video="toggle" data-video-target="#video-side-three" data-video-id="19072376" href="#"><i class="fa fa-film fa-6"></i> Play</a>
 												
 												</div>
-												<div class="brand-overlay shade-sixteen"></div>
-												<img class="video-tile-image" alt="Video" src="images/video-background-one.jpg">
+												<div class="brand-overlay shade-nineteen"></div>
+												<div class="image-wrap video-tile-image">
+													<img class="" alt="Video" src="http://lorempixel.com/g/767/352/">
+												</div>
 											</article>
 
 										</div>	
@@ -368,85 +316,110 @@
 
 				<div class="col col-md-6">
 
-					<div id="clinics-qld-sa" class="flip-container front-led shade-seventeen">
-						<div class="flipper">
-							<div class="front">
+					<div id="carousel-vic-wa-gallery" class="carousel slide shade-sixteen" data-interval="" data-ride="carousel">
 
-								<article class="video-tile tile shade-sixteen">
-									<div class="video-tile-content">
-										<hgroup>
-											<div>
-												<h2 class="tile-heading heading-sm">
-													<div class="brand-overlay shade-seventeen"></div>
-													<b>Video</b> case study
-											</div>
-											<div>
-												<h1 class="tile-heading">
-													<div class="brand-overlay shade-seventeen"></div>
-													QLD
-												</h1>
-											</div>
-										</hgroup>
+						<div class="carousel-inner">
+							<div class="item active shade-fifteen">
 
-										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-qld-sa" data-video="toggle" data-video-target="#video-side-two" data-video-id="19072376" href=""><i class="fa fa-film fa-6"></i> Play</a>
-									
-									</div>
-									<div class="brand-overlay shade-sixteen"></div>
-									<img class="video-tile-image" alt="Video" src="images/video-background-one.jpg">
-								</article>
+								<div id="clinics-wa-vic" class="flip-container front-led shade-seventeen">
+									<div class="flipper">
+										<div class="front">
 
+											<article class="video-tile tile shade-sixteen">
+												<div class="video-tile-content">
+													<hgroup>
+														<div>
+															<h2 class="tile-heading heading-sm">
+																<div class="brand-overlay shade-seventeen"></div>
+																<b>Video</b> case study
+														</div>
+														<div>
+															<h1 class="tile-heading">
+																<div class="brand-overlay shade-seventeen"></div>
+																Wa
+															</h1>
+														</div>
+													</hgroup>
 
-
-
-								<div class="grid stacked half-length shade-fifteen">
-									<div class="col col-sm-4 col-md-4">
-										<div class="image-wrap">
-											<img src="http://lorempixel.com/g/612/612/" style="visibility: visible; opacity: 1;">
-										</div>
-									</div>
-									<div class="col col-sm-8 col-md-8 center-tile">
-										<div class="outter-tile vertical-center">
-											<article class="content-tile tile">
-												<hgroup>
-													<h1 class="heading heading-exjumbo tanned">Missed out?</h1>
-													<h2 class="subheading heading-med  tanned">There’s always next year...</h2>
-													<a class="btn btn-default btn-sm" href="/link">Register for 2015 via facebook  <i class="fa fa-angle-right"></i></a>
-												</hgroup>
+													<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-wa-vic" data-video="toggle" data-video-target="#video-side-four" data-video-id="19072376" href=""><i class="fa fa-film fa-6"></i> Play</a>
+												
+												</div>
+												<div class="brand-overlay shade-sixteen"></div>
+												<div class="image-wrap video-tile-image">
+													<img class="" alt="Video" src="http://lorempixel.com/g/767/352/">
+												</div>
 											</article>
-										</div>								
-									</div>
 
+											<article class="video-tile tile shade-sixteen">
+												<div class="video-tile-content">
+													<hgroup>
+														<div>
+															<h2 class="tile-heading heading-sm">
+																<div class="brand-overlay shade-seventeen"></div>
+																<b>Video & image</b> case study
+															</h2>
+														</div>
+														<div>
+															<h1 class="tile-heading">
+																<div class="brand-overlay shade-seventeen"></div>
+																Vic
+															</h1>
+														</div>
+													</hgroup>
+
+													<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-wa-vic" data-video="toggle" data-video-target="#video-side-four" data-video-id="19072376" href="#"><i class="fa fa-film fa-6"></i> Play</a>
+													<a class="btn btn-sm btn-primary" href="#carousel-vic-wa-gallery" data-slide="next"><i class="fa fa-picture-o"></i> View Gallery</a>
+												
+												</div>
+												<div class="brand-overlay shade-sixteen"></div>
+												<div class="image-wrap video-tile-image">
+													<img class="" alt="Video" src="http://lorempixel.com/g/767/352/">
+												</div>
+											</article>								
+
+										</div>	
+
+										<div id="video-side-four" class="back">
+											<!-- Dynamic content injected in here -->
+											<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#clinics-wa-vic"data-video-id="19072376" data-video="close">
+												<div class="cross-icon">
+													<i class="fa fa-angle-left"></i>
+													<i class="fa fa-angle-right"></i>
+												</div>
+											</a>							
+										</div>
+
+									</div>
 								</div>
 
-
-
-
-<!-- 								<div class="col stacked half-length shade-fifteen">
-									<div class="outter-tile vertical-center">
-										<article class="content-tile tile">
-											<hgroup>
-												<h1 class="heading heading-exjumbo tanned">Missed out?</h1>
-												<h2 class="subheading heading-med  tanned">There’s always next year...</h2>
-												<a class="btn btn-default btn-sm" href="/link">Register for 2015 via facebook  <i class="fa fa-angle-right"></i></a>
-											</hgroup>
-										</article>
-									</div>
-								</div> -->
-
-							</div>	
-
-							<div id="video-side-two" class="back">
-								<!-- Dynamic content injected in here -->
-								<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#clinics-qld-sa"data-video-id="19072376" data-video="close">
-									<div class="cross-icon">
-										<i class="fa fa-angle-left"></i>
-										<i class="fa fa-angle-right"></i>
-									</div>
-								</a>							
 							</div>
+							<div class="item shade-fourteen gallery-slide">
+								<img src="http://lorempixel.com/700/500/sports/">
 
+								<div class="gallery-meta">
+									<h2 class="tile-heading heading-sm verbose">
+										<span class="overlay-content">Nsw 2014 ANZ Netball Nation clinic image gallery</span>
+										<div class="brand-overlay shade-eighteen"></div>
+									</h2>
+									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-vic-wa-gallery" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-vic-wa-gallery" data-slide="next"><i class="fa fa-angle-right"></i></a>								
+								</div>							
+ 							</div>   
+							<div class="item shade-fourteen gallery-slide">
+								<img src="http://lorempixel.com/700/500/sports/">
+
+								<div class="gallery-meta">
+									<h2 class="tile-heading heading-sm verbose">
+										<span class="overlay-content">Nsw 2014 ANZ Netball Nation clinic image gallery</span>
+										<div class="brand-overlay shade-eighteen"></div>
+									</h2>
+									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-vic-wa-gallery" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-vic-wa-gallery" data-slide="next"><i class="fa fa-angle-right"></i></a>								
+								</div>															
+							</div> 							 
 						</div>
-					</div>
+
+					</div>							
 
 				</div>					
 			</section>			
@@ -469,7 +442,7 @@
 		<script data-main="javascript/main-content" src="bower_components/requirejs/require.js"></script>
 
 		<!-- <script src="bower_components/requirejs/require.js"></script>
-		<script src="build/main-content.js"></script> -->
+		<script src="build/main-content.js"></script>
 
     </body>
 </html>
