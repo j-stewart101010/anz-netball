@@ -130,74 +130,86 @@
 
 				<div class="col col-md-6">
 
-					<div id="clinics-qld-sa" class="flip-container front-led shade-seventeen">
-						<div class="flipper">
-							<div class="front">
+					<div id="carousel-qld-sa-gallery" class="carousel slide shade-sixteen" data-interval="" data-ride="carousel">
 
-								<article class="video-tile tile shade-sixteen">
-									<div class="video-tile-content">
-										<hgroup>
-											<div>
-												<h2 class="tile-heading heading-sm">
-													<div class="brand-overlay shade-seventeen"></div>
-													<b>Video</b> case study
-											</div>
-											<div>
-												<h1 class="tile-heading">
-													<div class="brand-overlay shade-seventeen"></div>
-													QLD
-												</h1>
-											</div>
-										</hgroup>
+						<div class="carousel-inner">
+							<div class="item active shade-fifteen">				
 
-										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-qld-sa" data-video="toggle" data-video-target="#video-side-two" data-video-id="19072376" href=""><i class="fa fa-film fa-6"></i> Play</a>
-									
+								<div id="clinics-qld-sa" class="flip-container front-led shade-seventeen">
+									<div class="flipper">
+										<div class="front">
+
+											<article class="video-tile tile shade-sixteen">
+												<div class="video-tile-content">
+													<hgroup>
+														<div>
+															<h2 class="tile-heading heading-sm">
+																<div class="brand-overlay shade-seventeen"></div>
+																<b>Video</b> case study
+															</h2>
+
+														</div>
+														<div>
+															<h1 class="tile-heading">
+																<div class="brand-overlay shade-seventeen"></div>
+																QLD
+															</h1>
+														</div>
+													</hgroup>
+
+													<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-qld-sa" data-video="toggle" data-video-target="#video-side-two" data-video-id="19072376" href=""><i class="fa fa-film fa-6"></i> Play</a>
+												
+												</div>
+												<div class="brand-overlay shade-nineteen"></div>
+												<div class="image-wrap video-tile-image">
+													<img class="" alt="Video" src="http://lorempixel.com/g/767/352/">
+												</div>
+											</article>
+
+											<article class="video-tile tile shade-sixteen">
+												<div class="video-tile-content">
+													<hgroup>
+														<div>
+															<h2 class="tile-heading heading-sm">
+																<div class="brand-overlay shade-seventeen"></div>
+																<b>Video</b> case study
+															</h2>
+														</div>
+														<div>
+															<h1 class="tile-heading">
+																<div class="brand-overlay shade-seventeen"></div>
+																SA
+															</h1>
+														</div>
+													</hgroup>
+
+													<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-qld-sa" data-video="toggle" data-video-target="#video-side-two" data-video-id="19072376" href="#"><i class="fa fa-film fa-6"></i> Play</a>
+												
+												</div>
+												<div class="brand-overlay shade-seventeen"></div>
+												<div class="image-wrap video-tile-image">
+													<img class="" alt="Video" src="http://lorempixel.com/g/767/352/">
+												</div>
+											</article>
+
+										</div>	
+
+										<div id="video-side-two" class="back">
+											<!-- Dynamic content injected in here -->
+											<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#clinics-qld-sa"data-video-id="19072376" data-video="close">
+												<div class="cross-icon">
+													<i class="fa fa-angle-left"></i>
+													<i class="fa fa-angle-right"></i>
+												</div>
+											</a>							
+										</div>
+
 									</div>
-									<div class="brand-overlay shade-nineteen"></div>
-									<div class="image-wrap video-tile-image">
-										<img class="" alt="Video" src="http://lorempixel.com/g/767/352/">
-									</div>
-								</article>
-
-								<article class="video-tile tile shade-sixteen">
-									<div class="video-tile-content">
-										<hgroup>
-											<div>
-												<h2 class="tile-heading heading-sm">
-													<div class="brand-overlay shade-seventeen"></div>
-													<b>Video</b> case study
-											</div>
-											<div>
-												<h1 class="tile-heading">
-													<div class="brand-overlay shade-seventeen"></div>
-													SA
-												</h1>
-											</div>
-										</hgroup>
-
-										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-qld-sa" data-video="toggle" data-video-target="#video-side-two" data-video-id="19072376" href="#"><i class="fa fa-film fa-6"></i> Play</a>
-									
-									</div>
-									<div class="brand-overlay shade-seventeen"></div>
-									<div class="image-wrap video-tile-image">
-										<img class="" alt="Video" src="http://lorempixel.com/g/767/352/">
-									</div>
-								</article>
-
-							</div>	
-
-							<div id="video-side-two" class="back">
-								<!-- Dynamic content injected in here -->
-								<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#clinics-qld-sa"data-video-id="19072376" data-video="close">
-									<div class="cross-icon">
-										<i class="fa fa-angle-left"></i>
-										<i class="fa fa-angle-right"></i>
-									</div>
-								</a>							
+								</div>
 							</div>
-
 						</div>
 					</div>
+
 
 				</div>					
 
@@ -207,7 +219,7 @@
 
 				<div class="col col-md-6">
 
-					<div id="carousel-nsw-gallery" class="carousel slide shade-sixteen" data-interval="" data-ride="carousel">
+					<div id="carousel-nsw-act-gallery" class="carousel slide shade-sixteen" data-interval="" data-ride="carousel">
 
 						<div class="carousel-inner">
 							<div class="item active shade-fifteen">
@@ -233,7 +245,7 @@
 														</div>
 													</hgroup>
 
-													<a class="btn btn-sm btn-primary" href="#carousel-nsw-gallery" data-slide="next"><i class="fa fa-picture-o"></i> View Gallery</a>
+													<a class="btn btn-sm btn-primary" href="#carousel-nsw-act-gallery" data-gallery="toggle" data-gallery-id="123456785" data-gallery-target="#carousel-nsw-act-gallery" data-slide="next"><i class="fa fa-picture-o"></i> View Gallery</a>
 												
 												</div>
 												<div class="brand-overlay shade-seventeen"></div>
@@ -284,7 +296,7 @@
 								</div>
 
 							</div>
-							<div class="item shade-fourteen gallery-slide">
+<!-- 							<div class="item shade-fourteen gallery-slide">
 								<img src="http://lorempixel.com/700/500/sports/">
 
 								<div class="gallery-meta">
@@ -292,8 +304,8 @@
 										<span class="overlay-content">Nsw 2014 ANZ Netball Nation clinic image gallery</span>
 										<div class="brand-overlay shade-eighteen"></div>
 									</h2>
-									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-nsw-gallery" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-nsw-gallery" data-slide="next"><i class="fa fa-angle-right"></i></a>								
+									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-nsw-act-gallery" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-nsw-act-gallery" data-slide="next"><i class="fa fa-angle-right"></i></a>								
 								</div>
 							</div>   
 							<div class="item shade-fourteen gallery-slide">
@@ -304,10 +316,10 @@
 										<span class="overlay-content">Nsw 2014 ANZ Netball Nation clinic image gallery</span>
 										<div class="brand-overlay shade-eighteen"></div>
 									</h2>
-									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-nsw-gallery" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-nsw-gallery" data-slide="next"><i class="fa fa-angle-right"></i></a>								
+									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-nsw-act-gallery" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-nsw-act-gallery" data-slide="next"><i class="fa fa-angle-right"></i></a>								
 								</div>
-							</div> 							 
+							</div> 	 -->						 
 						</div>
 
 					</div>
@@ -332,6 +344,7 @@
 															<h2 class="tile-heading heading-sm">
 																<div class="brand-overlay shade-seventeen"></div>
 																<b>Video</b> case study
+															</h2>
 														</div>
 														<div>
 															<h1 class="tile-heading">
@@ -393,7 +406,7 @@
 								</div>
 
 							</div>
-							<div class="item shade-fourteen gallery-slide">
+<!-- 							<div class="item shade-fourteen gallery-slide">
 								<img src="http://lorempixel.com/700/500/sports/">
 
 								<div class="gallery-meta">
@@ -416,7 +429,7 @@
 									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-vic-wa-gallery" data-slide="prev"><i class="fa fa-angle-left"></i></a>
 									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-vic-wa-gallery" data-slide="next"><i class="fa fa-angle-right"></i></a>								
 								</div>															
-							</div> 							 
+							</div>  -->							 
 						</div>
 
 					</div>							

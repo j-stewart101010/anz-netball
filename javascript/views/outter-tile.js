@@ -3,11 +3,10 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'models/tile',
     'text!templates/outter-column.html',
     'text!templates/outter-row.html',
     'text!templates/outter-tile.html'
-], function ($, _, Backbone, TileModel, OutterColumnTemplate, OutterRowTemplate, OutterTileTemplate) {
+], function ($, _, Backbone, OutterColumnTemplate, OutterRowTemplate, OutterTileTemplate) {
 
     var _self;
 
@@ -27,23 +26,23 @@ define([
 
             this.options = _.extend({}, this.defaults, this.options);
 
-            _self.image_tiles = _.filter(TileModel.content, function(model){ return _.has(model, 'imageurl'); });
+            // _self.image_tiles = _.filter(TileModel.content, function(model){ return _.has(model, 'imageurl'); });
 
-            //@TODO: Update model to use a backbone model. A flat JSON file has been used as it eased development on the home page but is unnecessary now.
             //@TODO: Update these templates to output individual OutterTileTemplate views.
 
             switch (this.options.type) {
                 case "column":
-                    this._template_result = _.template(OutterColumnTemplate, _self.image_tiles, {variable : 'data'});
+                    this._template_result = _.template(OutterColumnTemplate, this.collection.toJSON(), {variable : 'data'});
                     break;
                 case "row":
-                    this._template_result = _.template(OutterRowTemplate, _self.image_tiles, {variable : 'data'});
+                    this._template_result = _.template(OutterRowTemplate, this.collection.toJSON(), {variable : 'data'});
                     break;
                 default:
-                    this._template_result = _.template(OutterColumnTemplate, _self.image_tiles, {variable : 'data'});
+                    this._template_result = _.template(OutterColumnTemplate, this.collection.toJSON(), {variable : 'data'});
             }
 
            _self.$el.css(this.options.styles);
+         
         },
 
         //Render the content with the correct template when finished
@@ -56,7 +55,7 @@ define([
         append_tiles : function () {
             if (this.options.type === 'row') {
                 for (var i = 0; i < this.options.parent.outter_columns.length; i++) {
-                    this.$el.find('.grid').append(_.template(OutterTileTemplate, _self.image_tiles, {variable : 'data'}));
+                    this.$el.find('.grid').append(_.template(OutterTileTemplate, this.collection.toJSON(), {variable : 'data'}));
                 }
             }
         },
