@@ -53,7 +53,7 @@ define([
                 canvas.height = b*0.87; //100%-8%-5% 
                 context = canvas.getContext("2d");
                 // canvas.style.position = "absolute";
-                // canvas.style.top = "8%";
+                //canvas.style.top = "20%";
                 canvas.style.left = "0px"; 
                 // document.body.appendChild(canvas);
                 canvas.style.display = "none"; 
@@ -84,14 +84,12 @@ define([
                 document.body.removeChild(loaderScreen.view);
             };
 
-            _self.browseMode = false;
-            _self.pauseGridRender = false;
             _self.onResize();
             _self.resizeCount = 9;
-            trackpad.lock();
+            //trackpad.lock();
             
-            trackpad.setPosition(a / 2, b / 2);
-            grid.onStartComplete = _self.onGridStartComplete;
+            //trackpad.setPosition(a / 2, b / 2);
+            //grid.onStartComplete = _self.onGridStartComplete;
             requestAnimFrame(_self.update);
         },
 
@@ -123,17 +121,10 @@ define([
 
         update : function () {
             //console.log(Config.isMobile);
-            Config.isMobile || _self.resizeCount++;
+            _self.resizeCount++;
            _self.resizeCount ==10 && _self.realResize(); 
-            if(loaded && _self.browseMode) trackpad.update(); 
-            if(Config.track) {
-                Config.track.x = trackpad.value;
-                Config.track.y = trackpad.valueY;
-            };
-
-            ////todo:put mouse status update and stuff here which would have been in grid.render()
-            if (_self.pauseGridRender || app_compatible) { grid.render(context) }
-            // pauseGridRender || (app_compatible ? grid.render() : ()); 
+            
+            if(!grid.renderDisabled) grid.render(context);
             requestAnimFrame(_self.update);
         },
 
@@ -142,7 +133,7 @@ define([
             var a = window.innerWidth || document.documentElement.clientWidth,
                 b = window.innerHeight || document.documentElement.clientHeight;
             if (window.grid) {
-                if(app_compatible || window.canvas) {
+                if(window.canvas) {
                     canvas.width = a;
                     canvas.height = b*0.87;
                     grid.canvasOffset = b*0.08;
@@ -150,27 +141,27 @@ define([
                 };
                 console.log(canvas.width+"x"+canvas.height+" offset="+grid.canvasOffset);
                 grid.resize(a, b);
-                var c = {
-                    x: 500,
-                    y: 500
-                };
-                if(Config.isMobile) { 
-                    c.x = a;
-                    c.y = b;
-                    window.usingForm ? a > 2 * b ? $(overlay).fadeIn() : $(overlay).fadeOut() : a > b ? $(overlay).fadeIn() : $(overlay).fadeOut();
-                    var d = c.x / 2,
-                        e = c.y / 2;
-                    if(_self.pauseGridRender) {
-                        if(app_compatible) {
-                            grid.render(context);
-                            viewer.render(context);                            
-                        }
-                        if(a != this.cacheW && b != this.cacheH) window.scrollTo(0, 0);
-                        this.cacheW = a;
-                        this.cacheH = b;
-                        console.log("RESIZING");
-                    };
-                };
+                // var c = {
+                //     x: 500,
+                //     y: 500
+                // };
+                // if(Config.isMobile) { 
+                //     c.x = a;
+                //     c.y = b;
+                //     //    window.usingForm ? a > 2 * b ? $(overlay).fadeIn() : $(overlay).fadeOut() : a > b ? $(overlay).fadeIn() : $(overlay).fadeOut();
+                //     // var d = c.x / 2,
+                //     //     e = c.y / 2;
+                //     // if(_self.pauseGridRender) {
+                //     //     if(app_compatible) {
+                //     //         grid.render(context);
+                //     //         viewer.render(context);                            
+                //     //     }
+                //     //     if(a != this.cacheW && b != this.cacheH) window.scrollTo(0, 0);
+                //         this.cacheW = a;
+                //         this.cacheH = b;
+                //         console.log("RESIZING");
+                //     };
+                // };
             };
         },
 
@@ -198,9 +189,9 @@ define([
             this.h = b;
 
             // if(MatchMedia.mobile()) _self.realResize();
-            if(window.tabMenu) tabMenu.resize(a, b);
-            if(loaderScreen) loaderScreen.resize(a, b);
-            if(window.tickerTape) tickerTape.view.style.left = a / 2 - 304 + "px";
+            // if(window.tabMenu) tabMenu.resize(a, b);
+            // if(loaderScreen) loaderScreen.resize(a, b);
+            // if(window.tickerTape) tickerTape.view.style.left = a / 2 - 304 + "px";
 
         },
 
