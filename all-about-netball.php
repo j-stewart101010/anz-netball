@@ -13,14 +13,14 @@
 		<link href="css/styles.css" rel="stylesheet" type="text/css">
 		<link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/f8bca219-07d6-4bdf-9b18-02f0db46b33f.css"/>
 
-	    <!--[if lt IE 9]>
-	        <link href="/css/ie.css" rel="stylesheet" type="text/css">
+	    <!--[if IE 9]>
+	        <link href="css/ie.css" rel="stylesheet" type="text/css">
 	    <![endif]-->
 
 		<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
     </head>
 
-    <body class="all-about-netball">
+    <body>
 
  		<!-- <div class="loading"></div> -->
 
@@ -56,7 +56,7 @@
 			</nav>
 		</header>
 
-		<main class="content">
+		<main class="content all-about-netball">
 
 			<section class="grid">
 
@@ -235,9 +235,9 @@
 									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-rules" data-slide="prev"><i class="fa fa-angle-left"></i></a>
 									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-rules" data-slide="next"><i class="fa fa-angle-right"></i></a>
 									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#rules-info" href="#">		<div class="cross-icon">
-			<i class="fa fa-angle-left"></i>
-			<i class="fa fa-angle-right"></i>
-		</div></a>
+										<i class="fa fa-angle-left"></i>
+										<i class="fa fa-angle-right"></i>
+									</div></a>
 								</div>
 
 
@@ -251,7 +251,7 @@
 					<div class="col-half col col-xs-6 col-md-12">
 						<div class="outter-tile group shade-thirteen">
 							<article data-resize-height="#grid-image-five" class="content-tile mini tile center">
-								<h1 class="heading heading-exmed">Set PLays</h1>
+								<h1 class="heading heading-exmed">Set<br> PLays</h1>
 								<p class="sub-content"><small>Get one up on the comp with a few plays from (name).</small></p>
 								<a class="btn btn-default btn-sm" href="/grants"><i class="fa fa-file-text-o"></i> Download</a>
 							</article>

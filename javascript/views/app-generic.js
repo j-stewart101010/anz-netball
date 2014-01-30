@@ -74,7 +74,7 @@ define([
                     }
                     else {
                         $front.flippy({
-                            color_target : '#c4edf1',
+                            color_target : $back.css('backgroundColor'),
                             verso: $back.html(),
                             direction: "LEFT",
                             duration: "750",

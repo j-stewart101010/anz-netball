@@ -26,10 +26,6 @@ define([
 
             this.options = _.extend({}, this.defaults, this.options);
 
-            // _self.image_tiles = _.filter(TileModel.content, function(model){ return _.has(model, 'imageurl'); });
-
-            //@TODO: Update these templates to output individual OutterTileTemplate views.
-
             switch (this.options.type) {
                 case "column":
                     this._template_result = _.template(OutterColumnTemplate, this.collection.toJSON(), {variable : 'data'});

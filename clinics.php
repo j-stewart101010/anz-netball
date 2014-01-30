@@ -13,14 +13,14 @@
 		<link href="css/styles.css" rel="stylesheet" type="text/css">
 		<link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/f8bca219-07d6-4bdf-9b18-02f0db46b33f.css"/>
 
-        <!--[if lt IE 9]>
-            <link href="/css/ie.css" rel="stylesheet" type="text/css">
-        <![endif]-->
+    	<!--[if IE 9]>
+	        <link href="css/ie.css" rel="stylesheet" type="text/css">
+	    <![endif]-->
 
 		<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
     </head>
 
-    <body class="clinics">
+    <body>
 
 		<header class="master-head">
 			<div class="branding col-md-4">
@@ -54,7 +54,7 @@
 			</nav>
 		</header>
 
-		<main class="content">
+		<main class="content clinics">
 
 			<section class="grid full-length active">
 
@@ -73,16 +73,50 @@
 						</div>
 
 						<div class="col col-md-8 col-lg-8 center-tile shade-fifteen">
-							<div data-resize-height="center" class="outter-tile vertical-center">
-								<article class="content-tile tile">
-									<hgroup>
-										<h1 class="heading heading-exjumbo tanned">Clinics</h1>
-										<h2 class="subheading heading-med tanned">Get involved in Netball Nation’s 2013 clinics.</h2>
-										<p>Grants are non-repayable funds disbursed by one party (grant makers), often a government rtment tion, foundation or trust, to a recipient, often (but not always) a nonprofit.</p>
-										<a class="btn btn-sm btn-default" href="#">Find out more <i class="fa fa-angle-right"></i></a>
-									</hgroup>
-								</article>
+
+
+
+							<div id="clinics-get-involved" class="flip-container">
+								<div class="flipper">
+									<div class="front shade-fifteen">
+
+										<div data-resize-height="center" class="outter-tile vertical-center">
+											<article class="content-tile tile">
+												<hgroup>
+													<h1 class="heading heading-exjumbo tanned">Clinics</h1>
+													<h2 class="subheading heading-med tanned">Get involved in Netball Nation’s 2013 clinics.</h2>
+												</hgroup>
+												<p>Grants are non-repayable funds disbursed by one party (grant makers), often a government rtment tion, foundation or trust, to a recipient, often (but not always) a nonprofit.</p>
+												<a class="btn btn-sm btn-default" data-flip="toggle" data-flip-target="#clinics-get-involved" href="#">Find out more <i class="fa fa-angle-right"></i></a>
+											</article>
+										</div>
+
+									</div>
+									<div class="back shade-fifteen">
+
+										<div data-resize-height="center" class="outter-tile vertical-center">
+											<article class="tile mini-tile">
+												<h2 class="heading heading-lg tanned">2014 clinics</h2>
+												<p class="sub-content">
+													As of 2011, the INF comprises more than 60 national teams organized into five global regions.
+													
+													<br><small><br>Games are played on a rectangular court with raised goal rings at each end. Each team attempts to score goals by passing a ball down the court and shooting it through its goal ring. 
+													<br>Players are assigned specific positions, which define their roles within the team and restrict their movement to certain areas of the court. During general play, a player with the ball crict their movement to certain areas of the court. During general play, a player with tcan hold onto it for only three seconds before shooting for a goal or passing to another player. 
+													<br>The winning team is the one that scores the most goals. Netball games are 60 minutes long. Variations have been developed to.</small>
+												</p>
+												<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#clinics-get-involved" href="#" href="#">
+													<div class="cross-icon">
+														<i class="fa fa-angle-left"></i>
+														<i class="fa fa-angle-right"></i>
+													</div>
+												</a>
+											</article>
+										</div>
+
+									</div>
+								</div>
 							</div>
+
 						</div>
 					</div>
 

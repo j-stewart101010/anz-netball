@@ -13,14 +13,14 @@
 		<link href="css/styles.css" rel="stylesheet" type="text/css">
 		<link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/f8bca219-07d6-4bdf-9b18-02f0db46b33f.css"/>
 
-	    <!--[if lt IE 9]>
-	        <link href="/css/ie.css" rel="stylesheet" type="text/css">
+    	<!--[if IE 9]>
+	        <link href="css/ie.css" rel="stylesheet" type="text/css">
 	    <![endif]-->
 
 		<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
     </head>
 
-    <body class="getting-started">
+    <body>
 
  		<!-- <div class="loading"></div> -->
 
@@ -56,7 +56,7 @@
 			</nav>
 		</header>
 
-		<main class="content">
+		<main class="content getting-started">
 
 			<section class="grid">
 

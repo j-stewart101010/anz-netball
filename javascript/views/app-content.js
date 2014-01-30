@@ -70,12 +70,8 @@ define([
             //Other browsers layouts break slightly if resized before the images have finished loading. Possible solution is to apply a page loader that masks content until page has finished rendering to avoid FOUCs
             if (ie_9 || ie_old) {
                 $(window).on('load', function() {
-                    _.each([_self.outter_columns, _self.outter_rows], function (child) {
-                        _.each(child, function (view) {
-                            view.update_values();
-                        });
-                    });
-                })
+                    $(this).trigger('resize');
+                });
             }
         },
 
@@ -124,6 +120,7 @@ define([
                         var model = GallerySlidesCollection.find(function(model) { return model.get('id') == gallery_id; });
                         _.each(model.toJSON().slides, function (slide) {
                             gallery_slides = new GalleryView({
+                                parent : _self,
                                 slide : slide,
                                 target : $gallery_target
                             });
@@ -136,6 +133,10 @@ define([
                             .end()
                             .carousel('next')
                             .data('rendered', true);
+                        
+                        _.each(_self.gallery_slides, function (view) {
+                            view.preload_tiles();
+                        });
                     }
                 );
             }

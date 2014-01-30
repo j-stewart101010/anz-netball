@@ -31,13 +31,6 @@ body {
 		// min-height: $grid-max-height;
 		// overflow-y: scroll;
 	}
-
-	&.home .content {
-		max-width: none;
-		max-height: none;
-		height: auto;
-		overflow: hidden;		
-	}
 }
 
 // Master Head Module
@@ -260,11 +253,6 @@ body {
 		border-left: 1px solid lighten($brand-primary, 40%);
 		font-size: $font-size-small;
 	}
-
-	li:first-child a, li:first-child a:before {
-		border-left: 0;
-		border-right: 0;
-	}
 }
 
 .navigation {
@@ -309,15 +297,17 @@ body {
 
 		a {
 			display: block;
+			position: relative;
 			// border-left: 1px solid lighten($brand-primary, 5%);
 			border-left: 0;
 
 			&:before, &:after {
 				position: absolute;
 				content: "";
-				top: 25%;
+				top: 50%;
 				width: 1px;
-				height: 50%;			
+				min-height: 30px;
+				margin-top: -15px;		
 			}
 
 			&:before {
@@ -580,7 +570,7 @@ body {
 //====================================================================================================================================
 
 .content  {
-	position: relative;	
+	position: relative;
 
 	.grid {
 		position: relative;
@@ -716,10 +706,6 @@ body {
 		.image-wrap {
 			max-height: none;
 			border-right: 1px solid white;
-
-			&:first-child {
-				border-left: 1px solid white;
-			}
 		}
 
 		.grid, .col, .image-wrap {
@@ -729,7 +715,11 @@ body {
 		.col {
 			float: left;
 			padding-left: 0;
-			padding-right: 0;			
+			padding-right: 0;
+
+			&:first-child .image-wrap {
+				border-left: 1px solid white;
+			}
 		}		
 	}
 
@@ -787,8 +777,8 @@ body {
 		margin-bottom: 15px;
 
 		img {
-			max-width: 100%;
-			max-height: 80%; //This can be removed when the correct ratio for the resize is achieved		
+			max-width: 60%;
+			// max-height: 80%; //This can be removed when the correct ratio for the resize is achieved		
 		}
 
 		@media screen and (max-width: $screen-xsmall) {
@@ -1188,6 +1178,7 @@ body {
 
 	.navigation li:first-child a {
 		padding-left: 0;
+		border-left: 0;
 	}
 
 	@media screen and (min-width: $screen-desktop) {

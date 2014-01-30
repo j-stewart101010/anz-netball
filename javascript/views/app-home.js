@@ -104,23 +104,6 @@ define([
         },
 
         onGridStartComplete :  function () {
-            // var a, b = window.location.hash,
-            //     c = b.split("=")[1];
-            // if (c) {
-            //     for (var d = 0; d < model.content.length; d++) {
-            //         if (c == model.content[d].rfid) {
-            //             a = model.content[d];
-            //             break
-            //         }
-            //     }
-            // }
-            // if (a) {
-            //     var e = -2,
-            //         f = -2;
-            //     a.positionX = (e + 2 - .5) * grid.squareWidth + grid.width / 2 - grid.squareWidth / 2 + 1;
-            //     a.positionY = (f + 1.5 - .5) * grid.squareWidth + grid.height / 2 - grid.squareWidth / 2 + 1;
-            // } 
-            // else 
             _self.browseMode = true, setTimeout(_self.unlock, 1000);
         },
 
@@ -162,23 +145,23 @@ define([
                     x: 500,
                     y: 500
                 };
-                if(Config.isMobile) { 
-                    c.x = a;
-                    c.y = b;
-                    window.usingForm ? a > 2 * b ? $(overlay).fadeIn() : $(overlay).fadeOut() : a > b ? $(overlay).fadeIn() : $(overlay).fadeOut();
-                    var d = c.x / 2,
-                        e = c.y / 2;
-                    if(_self.pauseGridRender) {
-                        if(app_compatible) {
-                            grid.render(context);
-                            viewer.render(context);                            
-                        }
-                        if(a != this.cacheW && b != this.cacheH) window.scrollTo(0, 0);
-                        this.cacheW = a;
-                        this.cacheH = b;
-                        console.log("RESIZING");
-                    };
-                };
+                // if(Config.isMobile) {
+                //     c.x = a;
+                //     c.y = b;
+                //     window.usingForm ? a > 2 * b ? $(overlay).fadeIn() : $(overlay).fadeOut() : a > b ? $(overlay).fadeIn() : $(overlay).fadeOut();
+                //     var d = c.x / 2,
+                //         e = c.y / 2;
+                //     if(_self.pauseGridRender) {
+                //         if(app_compatible) {
+                //             grid.render(context);
+                //             viewer.render(context);                            
+                //         }
+                //         if(a != this.cacheW && b != this.cacheH) window.scrollTo(0, 0);
+                //         this.cacheW = a;
+                //         this.cacheH = b;
+                //         console.log("RESIZING");
+                //     };
+                // };
             };
         },
 
@@ -214,8 +197,8 @@ define([
 
         onMouseDown : function (a) {
             a.preventDefault();
-            Config.downAt.x = Config.mouse.x;
-            Config.downAt.y = Config.mouse.y;
+            // Config.downAt.x = Config.mouse.x;
+            // Config.downAt.y = Config.mouse.y;
             Config.mouse.button = true;
             Config.mouse.dragDistance = 0;
         },
@@ -231,35 +214,53 @@ define([
             Config.mouse.button = false;
         },
 
-        onTouchStart : function (a) {
-            a.preventDefault();
-            Config.mouse.x = a.originalEvent.touches[0].clientX + document.body.scrollLeft;
-            Config.mouse.y = a.originalEvent.touches[0].clientY + document.body.scrollTop;
-            downAt.x = Config.mouse.x;
-            downAt.y = Config.mouse.y;
+        onTouchStart : function (e) {
+            e.preventDefault();
+            // Config.downAt.x = e.originalEvent.touches[0].clientX + document.body.scrollLeft;
+            // Config.downAt.y = e.originalEvent.touches[0].clientY + document.body.scrollTop;
+            grid.mousefollow.x = e.originalEvent.touches[0].clientX;
+            grid.mousefollow.y = e.originalEvent.touches[0].clientY;  
+            Config.mouse.x = e.originalEvent.touches[0].clientX;
+            Config.mouse.y = e.originalEvent.touches[0].clientY;           
             Config.mouse.button = true;
             Config.mouse.dragDistance = 0;
+
+            // e.preventDefault();
+            // Config.mouse.x = e.originalEvent.touches[0].clientX + document.body.scrollLeft;
+            // Config.mouse.y = e.originalEvent.touches[0].clientY + document.body.scrollTop;
+            // Config.mouse.button = true;
+            // Config.mouse.dragDistance = 0;
         },
 
-        onTouchEnd : function (a) {
-            //this.onMouseUp(a);
+        onTouchEnd : function (e) {
+            e.preventDefault();
+            Config.mouse.button = false;
+            // alert(Config.mouse.button);
+            if(Config.mouse.dragDistance<15) grid.sentClick();
         },
 
-        onTouchMove : function(a) {
-            a.preventDefault();
-            Config.mouse.x = a.originalEvent.touches[0].clientX + document.body.scrollLeft;
-            Config.mouse.y = a.originalEvent.touches[0].clientY + document.body.scrollTop;
+        onTouchMove : function(e) {
+            e.preventDefault();
+            // //var newX = a.pageX + document.body.scrollLeft, newY = a.pageY + document.body.scrollTop;
+            var newX = e.originalEvent.touches[0].clientX + document.body.scrollLeft,
+                newY = e.originalEvent.touches[0].clientY + document.body.scrollTop;
+                // alert(Config.mouse.dragDistance);
+            Config.newX = newX;
+            var dx = Config.mouse.x - newX, dy = Config.mouse.y - newY;
+            Config.mouse.dragDistance += Math.sqrt(dx*dx+dy*dy);
+            //console.log(Config.mouse)
+            if(Config.mouse.dragDistance>1e4) {
+               Config.mouse.dragDistance=1e4; 
+            } 
+            Config.mouse.x = newX;
+            Config.mouse.y = newY;
         },
 
         onMouseMove : function (a) {
-
-    //             var rect = this.target.getBoundingClientRect();
-    // if (this.dragging) {
-    //     this.endPoint.x = event.pageX - rect.left;
-    //     this.endPoint.y = event.pageY - rect.top
-
             //var newX = a.pageX + document.body.scrollLeft, newY = a.pageY + document.body.scrollTop;
-            var newX = a.clientX + document.body.scrollLeft, newY = a.clientY + document.body.scrollTop;
+            var newX = a.clientX + document.body.scrollLeft, 
+                newY = a.clientY + document.body.scrollTop;
+            Config.newX = newX;
             var dx = Config.mouse.x - newX, dy = Config.mouse.y - newY;
             Config.mouse.dragDistance += Math.sqrt(dx*dx+dy*dy);
             //console.log(Config.mouse)

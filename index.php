@@ -12,14 +12,14 @@
 			<link href="css/styles.css" rel="stylesheet" type="text/css">
 			<link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/f8bca219-07d6-4bdf-9b18-02f0db46b33f.css"/>
 
-	        <!--[if lt IE 10]>
-	            <link href="/css/ie.css" rel="stylesheet" type="text/css">
+	        <!--[if IE 9]>
+	            <link href="css/ie.css" rel="stylesheet" type="text/css">
 	        <![endif]-->
 
 			<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
 	    </head>
 
-	    <body class="home">
+	    <body>
 
 		<header class="master-head">
 			<div class="branding col-md-4">
@@ -53,7 +53,9 @@
 			</nav>
 		</header>
 
-		<main class="content">
+		<main class="content home">
+
+		<div class="debugger" style="position: absolute; top: 0; left: 0; z-index: 10000; width: 400px; height: 400px; background: white;"></div>
 
 			<canvas class="hidden-xs" id="nbn" width="600" height="400"></canvas>
 

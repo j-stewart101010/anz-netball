@@ -17,51 +17,68 @@
 	padding-right: 8px;
 }
 
-.clinics, .clinics-post {
-	.content {
-
-		.grid:first-child .col:first-child {
-			border-right: 0;
-
-			.grid:first-child {
-				border-top: 0;
-			}	
+.content.community {
+	@media screen and (max-width: $screen-desktop) {
+		#apply-for-grant-signup {
+			padding-top: 30px;
+			padding-bottom: 30px;
 		}
-
-		.grid.full-length .grid .col + .col {
-			border-right: 0;
-		}
-		.grid + .grid {
-			border-bottom: 0;
-		}
-		.grid.quarter-length {
-			border-bottom: 0;
-
-			.image-wrap {
-				min-height: 100%;
-				// border-right: 1px solid white;
-
-				&:first-child {
-					border-left: 1px solid white;
-				}
-			}
-		}
-		.col.half-length:first-child .image-wrap + .image-wrap {
-			border-bottom: 1px solid white;
-		}
-		.grid.three-quarters-length {
-			border-bottom: 0;
-		}
-		.half-length .col-half + .col-half .image-wrap,
-		.half-length + .half-length .col-half .image-wrap {
-			border-top: 1px solid white;
-		}
-
-		.video-tile:first-child {
-			border-top: 1px solid white;
-		}
+		.form .row .form-group:first-child {
+			margin-right: 8px;
+		}		
 	}
 }
+
+.content.clinics, .content.clinics-post {
+
+	.grid:first-child .col:first-child {
+		border-right: 0;
+
+		.grid:first-child {
+			border-top: 0;
+		}	
+	}
+
+	.grid.full-length .grid .col + .col {
+		border-right: 0;
+	}
+	.grid + .grid {
+		border-bottom: 0;
+	}
+	.grid.quarter-length {
+		border-bottom: 0;
+
+		.image-wrap {
+			min-height: 100%;
+			// border-right: 1px solid white;
+
+			&:first-child {
+				border-left: 1px solid white;
+			}
+		}
+	}
+	.col.half-length:first-child .image-wrap + .image-wrap {
+		border-bottom: 1px solid white;
+	}
+	.grid.three-quarters-length {
+		border-bottom: 0;
+	}
+	.half-length .col-half + .col-half .image-wrap,
+	.half-length + .half-length .col-half .image-wrap {
+		border-top: 1px solid white;
+	}
+
+	.video-tile:first-child {
+		border-top: 1px solid white;
+	}
+}
+
+.content.home {
+	max-width: none;
+	max-height: none;
+	height: auto;
+	overflow: hidden;		
+}	
 
 .all-about-netball {
 

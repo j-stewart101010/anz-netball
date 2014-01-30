@@ -13,14 +13,14 @@
 		<link href="css/styles.css" rel="stylesheet" type="text/css">
 		<link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/f8bca219-07d6-4bdf-9b18-02f0db46b33f.css"/>
 
-        <!--[if lt IE 9]>
-            <link href="/css/ie.css" rel="stylesheet" type="text/css">
-        <![endif]-->
+    	<!--[if IE 9]>
+	        <link href="css/ie.css" rel="stylesheet" type="text/css">
+	    <![endif]-->
 
 		<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
     </head>
 
-    <body class="clinics-post">
+    <body>
 
 		<header class="master-head">
 			<div class="branding col-md-4">
@@ -54,7 +54,7 @@
 			</nav>
 		</header>
 
-		<main class="content">
+		<main class="content clinics-post">
 
 			<section class="grid active">
 
@@ -70,7 +70,7 @@
 
 							<div id="clinics-wrap-up" class="flip-container front-led">
 								<div class="flipper">
-									<div class="front">
+									<div class="front shade-fifteen">
 
 										<div class="outter-tile vertical-center">
 											<article data-resize-height="#grid-image-one" class="content-tile tile">
@@ -83,19 +83,17 @@
 										</div>
 
 									</div>
-									<div id="video-side-one" class="back">
+									<div id="video-side-one" class="back shade-fourteen">
 										<div class="outter-tile vertical-center">
 											<article class="tile mini-tile">
-												<hgroup>
-													<h2 class="heading heading-exmed  tanned">Clinic wrap up</h2>
-													<p class="sub-content"><small>Netball is a ball sport played by two teams of seven players. Its development, derived from early versions of basketball, began in England in the 1890s. By 1960, international playing rules had been standardised for the game, and the International Federation of Netball and Women's Basketball (later renamed the International Netball Federation (INF)) was formed. As of 2011, the INF comprises more than 60.</small></p>
-													<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#clinics-wrap-up" href="#">
-														<div class="cross-icon">
-															<i class="fa fa-angle-left"></i>
-															<i class="fa fa-angle-right"></i>
-														</div>
-													</a>
-												</hgroup>
+												<h2 class="heading heading-exmed  tanned">Clinic wrap up</h2>
+												<p class="sub-content"><small>Netball is a ball sport played by two teams of seven players. Its development, derived from early versions of basketball, began in England in the 1890s. By 1960, international playing rules had been standardised for the game, and the International Federation of Netball and Women's Basketball (later renamed the International Netball Federation (INF)) was formed. As of 2011, the INF comprises more than 60.</small></p>
+												<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#clinics-wrap-up" href="#">
+													<div class="cross-icon">
+														<i class="fa fa-angle-left"></i>
+														<i class="fa fa-angle-right"></i>
+													</div>
+												</a>
 											</article>
 										</div>							
 									</div>	
@@ -295,31 +293,7 @@
 									</div>
 								</div>
 
-							</div>
-<!-- 							<div class="item shade-fourteen gallery-slide">
-								<img src="http://lorempixel.com/700/500/sports/">
-
-								<div class="gallery-meta">
-									<h2 class="tile-heading heading-sm verbose">
-										<span class="overlay-content">Nsw 2014 ANZ Netball Nation clinic image gallery</span>
-										<div class="brand-overlay shade-eighteen"></div>
-									</h2>
-									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-nsw-act-gallery" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-nsw-act-gallery" data-slide="next"><i class="fa fa-angle-right"></i></a>								
-								</div>
-							</div>   
-							<div class="item shade-fourteen gallery-slide">
-								<img src="http://lorempixel.com/700/500/sports/">
-
-								<div class="gallery-meta">
-									<h2 class="tile-heading heading-sm verbose">
-										<span class="overlay-content">Nsw 2014 ANZ Netball Nation clinic image gallery</span>
-										<div class="brand-overlay shade-eighteen"></div>
-									</h2>
-									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-nsw-act-gallery" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-nsw-act-gallery" data-slide="next"><i class="fa fa-angle-right"></i></a>								
-								</div>
-							</div> 	 -->						 
+							</div>					 
 						</div>
 
 					</div>
@@ -381,7 +355,7 @@
 													</hgroup>
 
 													<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-wa-vic" data-video="toggle" data-video-target="#video-side-four" data-video-id="19072376" href="#"><i class="fa fa-film fa-6"></i> Play</a>
-													<a class="btn btn-sm btn-primary" href="#carousel-vic-wa-gallery" data-slide="next"><i class="fa fa-picture-o"></i> View Gallery</a>
+													<a class="btn btn-sm btn-primary" data-gallery="toggle" data-gallery-id="123456789" data-gallery-target="#carousel-vic-wa-gallery" href="#carousel-vic-wa-gallery" data-slide="next"><i class="fa fa-picture-o"></i> View Gallery</a>
 												
 												</div>
 												<div class="brand-overlay shade-sixteen"></div>
@@ -405,31 +379,7 @@
 									</div>
 								</div>
 
-							</div>
-<!-- 							<div class="item shade-fourteen gallery-slide">
-								<img src="http://lorempixel.com/700/500/sports/">
-
-								<div class="gallery-meta">
-									<h2 class="tile-heading heading-sm verbose">
-										<span class="overlay-content">Nsw 2014 ANZ Netball Nation clinic image gallery</span>
-										<div class="brand-overlay shade-eighteen"></div>
-									</h2>
-									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-vic-wa-gallery" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-vic-wa-gallery" data-slide="next"><i class="fa fa-angle-right"></i></a>								
-								</div>							
- 							</div>   
-							<div class="item shade-fourteen gallery-slide">
-								<img src="http://lorempixel.com/700/500/sports/">
-
-								<div class="gallery-meta">
-									<h2 class="tile-heading heading-sm verbose">
-										<span class="overlay-content">Nsw 2014 ANZ Netball Nation clinic image gallery</span>
-										<div class="brand-overlay shade-eighteen"></div>
-									</h2>
-									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-vic-wa-gallery" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-vic-wa-gallery" data-slide="next"><i class="fa fa-angle-right"></i></a>								
-								</div>															
-							</div>  -->							 
+							</div>						 
 						</div>
 
 					</div>							
