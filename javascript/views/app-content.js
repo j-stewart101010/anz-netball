@@ -3,14 +3,17 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    'collections/images',
+    'collections/gallery-slides',
     'views/video-embed',
     'views/outter-tile',
+    'views/gallery',
     'match_media',
     'bootstrap_transition',    
     'bootstrap_collapse',
     'bootstrap_modal',
     'bootstrap_carousel'
-], function ($, _, Backbone, VideoEmbedView, OutterTile, MatchMedia) {
+], function ($, _, Backbone, ImageCollection, GallerySlidesCollection, VideoEmbedView, OutterTile, GalleryView, MatchMedia) {
 
     var _self;
 
@@ -22,7 +25,8 @@ define([
             'change.checkbox.update input[type="checkbox"]' : 'update_checkbox',
             'change.select.update .selectbox' : 'update_selectbox',
             'click.slide [data-slide="toggle"]' : 'slide_toggle',
-            'click.accordian [data-toggle="collapse"]' : 'accordian_toggle'
+            'click.accordian [data-toggle="collapse"]' : 'accordian_toggle',
+            'click.display.gallery [data-gallery="toggle"]' : 'display_gallery'
             // 'change.fileupload-update input[type="file"]' : 'patch_file_upload'
         },
 
@@ -51,12 +55,18 @@ define([
 
             _self.update_checkbox();
             _self.build_selectbox();
-            _self.preload_tiles(_self.$el.find('.image-wrap, .ambassador-video-tile'));  
-            _self.render_outter_grid();
+            _self.preload_tiles(_self.$el.find('.image-wrap, .ambassador-video-tile'));
+
+            //Don't start rendering the outter grid until a promise is returned from the server letting us know the model data has loaded.
+            $.when(ImageCollection.fetch())
+                .done(function () {
+                    _self.render_outter_grid();
+                }
+            );                       
 
             $(window).on('resize' , _self.resize );
 
-            //@TODO: We are not able to correclty calculate grid dimensions until images have finished loading. IE Fires its resize event early which breaks slightly breaks the layout on initial render.
+            //@TODO: We are not able to correclty calculate grid dimensions until images have finished loading. IE Fires its resize event early which breaks the layout on initial render.
             //Other browsers layouts break slightly if resized before the images have finished loading. Possible solution is to apply a page loader that masks content until page has finished rendering to avoid FOUCs
             if (ie_9 || ie_old) {
                 $(window).on('load', function() {
@@ -88,9 +98,7 @@ define([
             clearTimeout(_self.resize_timer);
             _self.resize_timer = setTimeout(function() {
                 _self.render_outter_grid();
-                // _self.animate_grid();
             }, 100);
-            // _self.match_row_height();
         },
 
         build_selectbox : function (e) {
@@ -101,7 +109,37 @@ define([
                 $(this).after('<div class="holder"></div><div class="angle-down-box"><i class="fa fa-angle-down"></i></div>');
             });
             _self.update_selectbox();
-        },     
+        },
+
+        display_gallery : function (e) {
+            var gallery_id = $(e.target).data('gallery-id'), 
+                $gallery_target = $($(e.target).data('gallery-target')),
+                view, model, gallery_slides_render = [], gallery_slides;
+
+            _self.gallery_slides = [];
+
+            if (!$gallery_target.data('rendered')) {
+                $.when(GallerySlidesCollection.fetch())
+                    .done(function () {
+                        var model = GallerySlidesCollection.find(function(model) { return model.get('id') == gallery_id; });
+                        _.each(model.toJSON().slides, function (slide) {
+                            gallery_slides = new GalleryView({
+                                slide : slide,
+                                target : $gallery_target
+                            });
+                            _self.gallery_slides.push(gallery_slides);
+                            gallery_slides_render.push(gallery_slides.render().el);                        
+                        });
+
+                        $gallery_target.find('.item')
+                            .after(gallery_slides_render)
+                            .end()
+                            .carousel('next')
+                            .data('rendered', true);
+                    }
+                );
+            }
+        },
 
         update_selectbox : function (e) {
             //@TODO: Move this into a new view with a template
@@ -312,6 +350,7 @@ define([
             for (var i = 0; i<num_cols_to_generate; i++) {
                 outter_columns = new OutterTile({
                     parent : _self,
+                    collection : ImageCollection,
                     type : 'column',
                     className: 'appended-tiles appended-col',
                     styles : {
@@ -350,6 +389,7 @@ define([
             for (var i = 0; i<num_rows_to_generate; i++) {
                 outter_rows = new OutterTile({
                     parent : _self,
+                    collection : ImageCollection,
                     type : 'row',
                     className: 'appended-tiles appended-row',
                     styles : {

@@ -5,8 +5,6 @@ define([
 
       var Config = {
 
-            isMobile : false, //window.mobilecheck(),
-
             REMOTE_PATH : "/",
 
             mouse : {
@@ -22,7 +20,7 @@ define([
             downAt : {
                   x: 0,
                   y: 0
-            }            
+            }
       };
 
       return Config;

@@ -4,8 +4,9 @@ define([
     'underscore',
     'backbone',
     'config/config',
-    'models/tile',
     'modules/grid',
+    'collections/tiles',
+    'collections/tiles-data',
     'modules/double-spring',
     'modules/box',
     'modules/grid-dom',
@@ -14,7 +15,7 @@ define([
     'match_media',
     'bootstrap_transition',    
     'bootstrap_collapse'
-], function ($, _, Backbone, Config, model, Grid, DoubleSpring, Box, GridDom, Trackpad, LoaderScreen, MatchMedia) {
+], function ($, _, Backbone, Config, Grid, TileCollection, TileData, DoubleSpring, Box, GridDom, Trackpad, LoaderScreen, MatchMedia) {
 
     var _self;
 
@@ -25,7 +26,14 @@ define([
             app_compatible = !Modernizr.canvas || !MatchMedia.mobile();
             
             if (app_compatible) {
-                this.load();
+
+                $.when(TileCollection.fetch())
+                    .done(function () {
+                        TileData.content = TileCollection.toJSON();
+                        _self.load();
+                    }
+                );
+
                 Config.mouse;
                 var d = window.innerWidth || document.documentElement.clientWidth,
                     e = window.innerHeight || document.documentElement.clientHeight;

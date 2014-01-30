@@ -1,27 +1,26 @@
 /*global define*/
 define([
+	'jquery',
 	'underscore',
 	'backbone',
-	'models/tile',
-], function (_, Backbone, TileModel) {
+	'models/image',
+], function ($, _, Backbone, ImageModel) {
 	'use strict';
 
-	var TilesCollection = Backbone.Collection.extend({
+	var ImageCollection = Backbone.Collection.extend({
 
-		model: TileModel,
+		model: ImageModel,
 
         //Change this to alter the endpoint of the model data
-        url: '/javascript/data/tile-data.json',
+        url: '/javascript/data/image-data.json',
         
 		// url: "https://graph.facebook.com/btaylor",
         // url: "http://anznetballnation.elrancho.com.au/tile/getTiles",        
 
-		initialize: function() {
+		initialize: function() {}
 
-		}
+	});                
 
-	});
-
-	return new TilesCollection();
+	return new ImageCollection();
 
 });

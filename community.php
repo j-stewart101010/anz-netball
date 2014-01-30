@@ -243,7 +243,9 @@
 									
 									</div>
 									<div class="brand-overlay shade-three"></div>
-									<img class="video-tile-image" alt="Video" src="images/video-background-one.jpg">
+									<div class="image-wrap video-tile-image">
+										<img class="" alt="Video" src="http://lorempixel.com/g/767/352/">
+									</div>
 								</article>
 
 								<article class="video-tile tile shade-one">
@@ -267,7 +269,9 @@
 
 									</div>
 									<div class="brand-overlay shade-three"></div>
-									<img class="video-tile-image" alt="Video" src="images/video-background-one.jpg">
+									<div class="image-wrap video-tile-image">
+										<img class="" alt="Video" src="http://lorempixel.com/g/767/352/">
+									</div>
 								</article>
 
 							</div>
