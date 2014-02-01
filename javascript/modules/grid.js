@@ -241,11 +241,13 @@ define([
           TileData.content[i].actionX=this.mouseHoverWorldX;
           TileData.content[i].actionY=this.mouseHoverWorldY;
           this.dragDisabled=36;
-          this.centering=36*20;
-          this.centerX=this.mouseHoverWorldX;
-          this.centerY=this.mouseHoverWorldY;
+          this.centering=36*10;
           this.centerSize=500;
-          this.centerZoom=this.centerSize/(model.content[i].scale*this.squareWidth);
+          this.centerZoom=1;//this.centerSize/(TileData.content[i].scale*this.squareWidth);
+
+          this.centerX=0;//this.mouseHoverWorldX+(TileData.content[i].scale*this.squareWidth*0.5)/this.centerZoom;
+          this.centerY=0;//this.mouseHoverWorldY-this.canvasOffset+(TileData.content[i].scale*this.squareHeight*0.5)/this.centerZoom;
+          
         };
         
       };
@@ -283,26 +285,41 @@ define([
     //dimensions to skew to by circular angle
     var xskew = -srcWidth*0.5*Math.cos(drawAngle*Math.PI/180);
     var yskew = -srcHeight*0.13*Math.sin(drawAngle*Math.PI/180);
+    // var blklen=Math.floor(xskew/yskew);
+    // if(blklen<1) blklen=1;
     
     //set up intervals
     var xint=-2*xskew*drawScale/srcWidth;
     var yint=-2*drawScale*yskew/srcWidth;
     var hint=-2*yint;
 
-    //set up starting coordinates and height
-    var x=dstDrawX+(srcWidth*0.5+xskew)*drawScale;
-    var y=dstDrawY+(yskew*drawScale);
-    var h=(srcHeight-2*yskew)*drawScale;
+    // if(xint<0) {
+    //   xint=-xint;
+    //   yint=-yint;
+    //   hint=-hint;
+    //   var x=dstDrawX+(srcWidth*0.5-xskew)*drawScale;
+    //   var y=dstDrawY-(yskew*drawScale);
+    //   var h=(srcHeight+2*yskew)*drawScale;
+    // } else {
+    //       //set up starting coordinates and height
+      var x=dstDrawX+(srcWidth*0.5+xskew)*drawScale;
+      var y=dstDrawY+(yskew*drawScale);
+      var h=(srcHeight-2*yskew)*drawScale;
+    // };
+
+
     //loop through each source column
     for(var i=0;i<srcWidth;i++) {
       //take a pixel-wide strip from the source, scale and position it on the destination buffer
       //shorthand if reverses source to prevent image being drawn backwards
       //Math.ceil(drawScale) draws wider bands if greater scaling is necessary
-      dstCtx.drawImage(srcCtx.canvas, xint>0 ? i : srcWidth-i-1, 0, 1, srcHeight-1, Math.floor(x), Math.floor(y), Math.ceil(drawScale), h);
-      //update coordinates and height
+      // dstCtx.drawImage(srcCtx.canvas, xint>0 ? i : srcWidth-i-blklen, 0, blklen, srcHeight-1, Math.floor(x), Math.floor(y), Math.ceil(drawScale)*blklen, h);
+
+      dstCtx.drawImage(srcCtx.canvas, xint>0 ? i : srcWidth-i, 0, 1, srcHeight-1, Math.floor(x), Math.floor(y), Math.ceil(drawScale), h);
       x+=xint;
       y+=yint;
       h+=hint;
+
     };
   };
 
@@ -332,30 +349,31 @@ define([
     this.camera.x += this.camera.momentumx/this.zoom;
     this.camera.y += this.camera.momentumy/this.zoom;
       
-    if(Math.abs(this.camera.momentumx)<0.3) {
-      this.camera.momentumx = 0;
-      this.camera.x = Math.round(this.camera.x);  //Don't use Math.floor here. It causes weird behaviour. 
-    };
-    if(Math.abs(this.camera.momentumy)<0.3) {
-      this.camera.momentumy = 0;
-      this.camera.y = Math.round(this.camera.y);          
-    };
+    // if(Math.abs(this.camera.momentumx)<0.3) {
+    //   this.camera.momentumx = 0;
+    //   this.camera.x = Math.round(this.camera.x);  //Don't use Math.floor here. It causes weird behaviour. 
+    // };
+    // if(Math.abs(this.camera.momentumy)<0.3) {
+    //   this.camera.momentumy = 0;
+    //   this.camera.y = Math.round(this.camera.y);          
+    // };
 
     var desiredZoom;
     if(this.centering>0) {
       this.centering--;
       //var blah math to do zooming and centering 
       desiredZoom=this.centerZoom;
-      var cameraPropX=this.centerX+(this.centerSize*0.5-canvas.width*0.5)/this.centerZoom,
-          cameraPropY=this.centerY+(this.centerSize*0.5-canvas.height*0.5)/this.centerZoom;
-      this.camera.x+=(cameraPropX-this.camera.x)*0.1;
-      this.camera.y+=(cameraPropY-this.camera.y)*0.1;
+      var cameraPropX=this.centerX-((window.innerWidth || document.documentElement.clientWidth)*0.5)/this.centerZoom;
+      var cameraPropY=this.centerY-((window.innerHeight || document.documentElement.clientHeight)*0.37)/this.centerZoom;
+        console.log(cameraPropX + "->"+this.camera.x+"   "+cameraPropY+"->"+this.camera.y);
+      this.camera.x+=(cameraPropX-this.camera.x)*0.08;
+      this.camera.y+=(cameraPropY-this.camera.y)*0.08;
     } else {
       desiredZoom=this.defaultZoom-Math.pow(this.camera.momentumx*this.camera.momentumx+this.camera.momentumy*this.camera.momentumy,0.4)/70;
+
+    };
       this.camera.momentumx *= 0.97;
       this.camera.momentumy *= 0.97;
-    };
-
 
 
     // if(this.lastButton!=Config.mouse.button && Config.mouse.button!=0){
@@ -458,13 +476,16 @@ define([
 
             //FIRST PASS: UNSCALED WHILE UNFLIPPED/FULLY-FLIPPED) TILES ONLY
             //if scale=0 and flipped=0 or flipped=1 or location not matching
-              
-          if(TileData.content[i].scaleProgress==0 || TileData.content[i].actionX!=wtx || TileData.content[i].actionY!=wty) {
-            //if(TileData.content[i].scaleProgress==0) {
+          if(TileData.content[i].scaleProgress==0) {
+            if(TileData.content[i].actionX==wtx && TileData.content[i].actionY==wty) {
               if(TileData.content[i].flipProgress==0) TileData.content[i].box.render(ctx, repeatx, repeaty, this.zoom*TileData.content[i].scale);
               if(TileData.content[i].flipProgress==1) TileData.content[i].backbox.render(ctx, repeatx, repeaty, this.zoom*TileData.content[i].scale);
-            //};
+            } else {
+              if(TileData.content[i].flipProgress==0 || TileData.content[i].flipProgress==1) TileData.content[i].box.render(ctx, repeatx, repeaty, this.zoom*TileData.content[i].scale);
+          
+            };
           };
+
       
           //collision with mouse
           if(Config.mouse.x>=repeatx && Config.mouse.x<(repeatx+TileData.content[i].scale*this.squareWidth*this.zoom) && (Config.mouse.y-this.canvasOffset)>=repeaty && (Config.mouse.y-this.canvasOffset)<(repeaty+TileData.content[i].scale*this.squareHeight*this.zoom)) {
@@ -518,15 +539,24 @@ define([
       wty+=TileData.content[i].position.y*this.squareHeight;
 
       var repeatx,repeaty=(y-(this.zoomPos.y))*this.zoom+this.zoomPos.y, drawAngle;
+      var repeatwtx,repeatwty=wty;
       do {
         repeatx=(x-(this.zoomPos.x))*this.zoom+this.zoomPos.x;
+        repeatwtx=wtx;
         do {
       //collision with screen. whether it's worth drawing or not
       //    if(repeatx>(-TileData.content[i].scale*this.squareWidth*this.zoom) && repeatx<canvas.width && repeaty>(-TileData.content[i].scale*this.squareHeight*this.zoom) && repeaty<canvas.height){
-            
-          if(TileData.content[i].scaleProgress>0 && TileData.content[i].actionX==repeatwtx && TileData.content[i].actionY==repeatwty) {
-            if(TileData.content[i].flipProgress==0) TileData.content[i].box.render(ctx, repeatx, repeaty, this.zoom*(TileData.content[i].scale+TileData.content[i].scaleProgress));
-            if(TileData.content[i].flipProgress==1) TileData.content[i].backbox.render(ctx, repeatx, repeaty, this.zoom*(TileData.content[i].scale+TileData.content[i].scaleProgress));
+          
+
+          
+          if(TileData.content[i].scaleProgress>0) {
+            if(TileData.content[i].actionX==repeatwtx && TileData.content[i].actionY==repeatwty) {
+              if(TileData.content[i].flipProgress==0) TileData.content[i].box.render(ctx, repeatx, repeaty, this.zoom*(TileData.content[i].scale+TileData.content[i].scaleProgress));
+              if(TileData.content[i].flipProgress==1) TileData.content[i].backbox.render(ctx, repeatx, repeaty, this.zoom*(TileData.content[i].scale+TileData.content[i].scaleProgress));
+            } else {
+              if(TileData.content[i].flipProgress==0 || TileData.content[i].flipProgress==1) TileData.content[i].box.render(ctx, repeatx, repeaty, this.zoom*TileData.content[i].scale);
+        
+            };
           };
             // //what to draw depending on data
             // if(TileData.content[i].flipProgress>0 && TileData.content[i].flipProgress<1){
@@ -547,8 +577,10 @@ define([
           //  };
 
           repeatx+=totalWorldWidth*this.zoom; //and scale
+          repeatwtx+=totalWorldWidth;
         } while(repeatx<=canvas.width);
         repeaty+=totalWorldHeight*this.zoom; //and scale
+        repeatwty+=totalWorldHeight;
       } while(repeaty<=canvas.height);
 
     };
@@ -575,14 +607,17 @@ define([
       wty+=TileData.content[i].position.y*this.squareHeight;
 
       var repeatx,repeaty=(y-(this.zoomPos.y))*this.zoom+this.zoomPos.y, drawAngle;
+      var repeatwtx,repeatwty=wty;
       do {
         repeatx=(x-(this.zoomPos.x))*this.zoom+this.zoomPos.x;
+        repeatwtx=wtx;
         do {
       //collision with screen. whether it's worth drawing or not
       //    if(repeatx>(-TileData.content[i].scale*this.squareWidth*this.zoom) && repeatx<canvas.width && repeaty>(-TileData.content[i].scale*this.squareHeight*this.zoom) && repeaty<canvas.height){
             //what to draw depending on data
 
-            if(TileData.content[i].flipProgress>0 && TileData.content[i].flipProgress<1){
+            if(TileData.content[i].flipProgress>0 && TileData.content[i].flipProgress<1) {
+              if(TileData.content[i].actionX==repeatwtx && TileData.content[i].actionY==repeatwty) {
                 if(TileData.content[i].flipProgress<0.5) {
                   //render the front side to offscreen buffer
                   drawAngle=TileData.content[i].flipProgress*180; //0-90 degrees
@@ -594,14 +629,19 @@ define([
                 };
                 //perspective draw from offscreen buffer to canvas
                 this.drawImagePerspective(this.offScreenCtx,this.squareWidth*TileData.content[i].scale,this.squareHeight*TileData.content[i].scale,ctx,repeatx,repeaty,this.zoom*(1+TileData.content[i].scaleProgress),drawAngle);
+              } else {
+                TileData.content[i].box.render(ctx, repeatx, repeaty, this.zoom*TileData.content[i].scale);
+              };
             };
             // if(TileData.content[i].flipProgress<=0) TileData.content[i].box.render(ctx, repeatx, repeaty, this.zoom*(TileData.content[i].scale+TileData.content[i].scaleProgress));
             // if(TileData.content[i].flipProgress>=1) TileData.content[i].backbox.render(ctx, repeatx, repeaty, this.zoom*(TileData.content[i].scale+TileData.content[i].scaleProgress));
           //  };
 
           repeatx+=totalWorldWidth*this.zoom; //and scale
+          repeatwtx+=totalWorldWidth;
         } while(repeatx<=canvas.width);
         repeaty+=totalWorldHeight*this.zoom; //and scale
+        repeatwty+=totalWorldHeight;
       } while(repeaty<=canvas.height);
 
     };
