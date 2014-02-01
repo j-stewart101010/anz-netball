@@ -332,7 +332,7 @@
 												<div>Another grants content can go here, this is to demonstrate content.</div>
 											</li>
 										</ul>
-										<a class="btn btn-sm btn-default" data-flip="toggle" data-flip-target="#community-grants" href="#">More <i class="fa fa-angle-right"></i></a>
+										<a class="btn btn-sm btn-default" data-flip="toggle" data-flip-target="#community-grants" href="#"><i class="fa fa-angle-left"></i> Back</a>
 									</article>
 								</div>
 
@@ -529,6 +529,8 @@
 				<p class="copyright">© Australia and New Zealand Banking Group Limited (ANZ) 2012 ABN 11 005 357 522.</p>
 			</div>
 		</footer>
+
+		<div class="loading-overlay"></div>
 
 		<script data-main="javascript/main-content" src="bower_components/requirejs/require.js"></script>
 

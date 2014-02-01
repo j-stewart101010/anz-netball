@@ -12,11 +12,17 @@ helpers/match-media.js
 vendor/jquery.flippy.min.js
 polyfiller.js
 views/app-generic.js
-models/tile.js
+models/image.js
+collections/images.js
+models/gallery-slide.js
+collections/gallery-slides.js
 text!templates/outter-column.html
 text!templates/outter-row.html
 text!templates/outter-tile.html
 views/outter-tile.js
+config/config.js
+text!templates/gallery-slide.html
+views/gallery.js
 vendor/bootstrap-transition.js
 vendor/bootstrap-collapse.js
 vendor/bootstrap-modal.js
@@ -38,7 +44,7 @@ vendor/jquery.flippy.min.js
 polyfiller.js
 views/app-generic.js
 config/config.js
-models/tile.js
+collections/tiles-data.js
 modules/time.js
 modules/grid-button.js
 modules/double-spring.js
@@ -46,6 +52,8 @@ modules/box.js
 vendor/bootstrap-transition.js
 vendor/bootstrap-modal.js
 modules/grid.js
+models/tile.js
+collections/tiles.js
 modules/grid-dom.js
 modules/trackpad.js
 modules/asset-loader.js

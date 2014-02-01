@@ -1,0 +1,1 @@
+define(["jquery","underscore","backbone","models/gallery-slide"],function(e,t,n,r){var i=n.Collection.extend({model:r,url:"/javascript/data/gallery-data.json",initialize:function(){}});return new i});

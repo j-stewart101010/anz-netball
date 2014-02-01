@@ -8,12 +8,13 @@ define([
     'views/video-embed',
     'views/outter-tile',
     'views/gallery',
+    'modules/loader-screen',
     'match_media',
     'bootstrap_transition',    
     'bootstrap_collapse',
     'bootstrap_modal',
     'bootstrap_carousel'
-], function ($, _, Backbone, ImageCollection, GallerySlidesCollection, VideoEmbedView, OutterTile, GalleryView, MatchMedia) {
+], function ($, _, Backbone, ImageCollection, GallerySlidesCollection, VideoEmbedView, OutterTile, GalleryView, LoaderScreen, MatchMedia) {
 
     var _self;
 
@@ -60,9 +61,10 @@ define([
             //Don't start rendering the outter grid until a promise is returned from the server letting us know the model data has loaded.
             $.when(ImageCollection.fetch())
                 .done(function () {
+                    _self.loaderScreen = new LoaderScreen();
                     _self.render_outter_grid();
                 }
-            );                       
+            );
 
             $(window).on('resize' , _self.resize );
 
@@ -161,14 +163,16 @@ define([
         },
 
         preload_tiles : function ($tiles) {
-            $.each($tiles, function ($el) {
-                var $image = $(this).find('img');
+            if (!MatchMedia.mobile()) {
+                $.each($tiles, function ($el) {
+                    var $image = $(this).find('img');
 
-                $image.css({'visibility' : 'hidden', 'opacity' : 0 })
-                    .on('load', _self.stop_loader);
-                
-                _self.start_loader($(this), $image);
-            });
+                    $image.css({'visibility' : 'hidden', 'opacity' : 0 })
+                        .on('load', _self.stop_loader);
+                    
+                    _self.start_loader($(this), $image);
+                });
+            }
         },
 
         start_loader : function ($el, $image) {
@@ -247,7 +251,6 @@ define([
         },
 
         // animate_grid : function () {
-        //     //TODO: Clean this up
 
         //     var effect_off = { 'position' : 'relative', 'top' : 0, 'left' : 0, 'width' : '' },
         //         effect_on = { 'position' : 'absolute', 'top' : '25%', 'left' : '25%', 'width' : '' };
@@ -288,6 +291,7 @@ define([
 
             if (MatchMedia.tablet()) {
                 _self.$content.css({ 'width' : '', 'height' : '' });
+                _self.loaderScreen.onIntroComplete(); //Remove the loader
             }
             else {
                 //Remove all the previously rendered columns before continuing (for re-rendering)
@@ -325,6 +329,9 @@ define([
                         view.preload_tiles();
                     });
                 });
+
+                 _self.loaderScreen.onIntroComplete(); //Remove the loader
+                
             }
         },        
 

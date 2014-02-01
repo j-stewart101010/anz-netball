@@ -58,7 +58,7 @@ define([
             e.preventDefault();
 
             if (Modernizr.csstransforms3d) {
-                $flip_target.toggleClass('flip')
+                $flip_target.toggleClass('flip');
             }
             else {
                 $front = $flip_target.find('.front').filter(':first');
