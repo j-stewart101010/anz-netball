@@ -176,16 +176,16 @@ define([
         },
 
         load : function () {
-            _self.match_row_height();
+            _self.match_height();
         },      
 
         resize : function () {
-            _self.match_row_height();
+            _self.match_height();
             _self.calc_larger_flip_tile();
             _self.scale_enlarged_images();
         },
 
-        match_row_height : function () {
+        match_height : function () {
             if (MatchMedia.tablet()) {
                 $.each(_self.$content.find('[data-resize-height]'), function() {
                     $(this).css({ 'height' : '' }).css({ 'height' : $($(this).data('resize-height')).height()+'px' });
