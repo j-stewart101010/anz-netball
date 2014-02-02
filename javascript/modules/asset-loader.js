@@ -32,7 +32,7 @@ define([
 
     AssetLoader.prototype.onImageLoaded = function () {
         var a = this.images[this.position];
-        a.onLoad = null, 
+        a.onLoad = null,
         this.position == this.images.length - 1 ? this.onLoadComplete && this.onLoadComplete() : (this.position++, this.loadNext())
     };
 

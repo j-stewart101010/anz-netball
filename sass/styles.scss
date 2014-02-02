@@ -26,18 +26,6 @@ body {
 		// overflow-y: hidden;
 		overflow-x: hidden;
 	}
-
-	@media screen and (max-height: $grid-max-height) {
-		// min-height: $grid-max-height;
-		// overflow-y: scroll;
-	}
-
-	&.home .content {
-		max-width: none;
-		max-height: none;
-		height: auto;
-		overflow: hidden;		
-	}
 }
 
 // Master Head Module
@@ -56,7 +44,7 @@ body {
 	.nav-items {
 		position: relative;
 		float: right;
-		max-width: 85%;
+		width: 85%;
 		height: 100%;	
 	}
 
@@ -116,10 +104,6 @@ body {
 	}	
 
 	@media screen and (max-width: $screen-desktop) {
-		// .nav-items {
-		// 	max-width: 98.5%;
-		// }
-
 		.navigation {
 			li {
 				width: 20%;
@@ -260,11 +244,6 @@ body {
 		border-left: 1px solid lighten($brand-primary, 40%);
 		font-size: $font-size-small;
 	}
-
-	li:first-child a, li:first-child a:before {
-		border-left: 0;
-		border-right: 0;
-	}
 }
 
 .navigation {
@@ -309,15 +288,17 @@ body {
 
 		a {
 			display: block;
+			position: relative;
 			// border-left: 1px solid lighten($brand-primary, 5%);
 			border-left: 0;
 
 			&:before, &:after {
 				position: absolute;
 				content: "";
-				top: 25%;
+				top: 50%;
 				width: 1px;
-				height: 50%;			
+				min-height: 30px;
+				margin-top: -15px;		
 			}
 
 			&:before {
@@ -395,15 +376,15 @@ body {
 	}
 
 	.nbn-logo {
-		text-transform: uppercase;
-		font-family: $font-family-sans-serif;
-		color: white;
-		font-size: $font-size-large;
+		font-family: $font-family-logo;
+		font-size: ($font-size-extra-large - 2);
 		vertical-align: super;
+		color: $brand-primary;
 
-		b {
-			font-family: $font-family-sans-serif-bold;
-			font-weight: normal;
+		em {
+			margin-left: 5px;
+			font-style: normal; 
+			color: white;
 		}
 	}
 }
@@ -466,7 +447,7 @@ body {
 	@extend %icon;
 	position: relative;
 	line-height: 1.2;
-	margin-left: -2px;
+	margin-left: -3px;
 	padding: 0 3px;
 	
 	.fa-angle-left, .fa-angle-right {
@@ -545,8 +526,8 @@ body {
 			bottom: 0;
 		}
 
-	    @include transition-property(all);
-	    @include transition-duration(1s);		
+	    // @include transition-property(all);
+	    // @include transition-duration(1s);
 	}
 
 	img {
@@ -580,7 +561,7 @@ body {
 //====================================================================================================================================
 
 .content  {
-	position: relative;	
+	position: relative;
 
 	.grid {
 		position: relative;
@@ -693,7 +674,7 @@ body {
 	}
 
 	&.appended-col {
-		z-index: 100;
+		z-index: 98;
 		border-right: 1px solid white;		
 		top: 8%;
 
@@ -710,16 +691,12 @@ body {
 	&.appended-row {
 		width: 100%;
 		margin-top: -1px; //Hide sub pixel rendering issue
-		z-index: 101;
+		z-index: 99;
 		border-top: 1px solid white;
 
 		.image-wrap {
 			max-height: none;
 			border-right: 1px solid white;
-
-			&:first-child {
-				border-left: 1px solid white;
-			}
 		}
 
 		.grid, .col, .image-wrap {
@@ -729,7 +706,11 @@ body {
 		.col {
 			float: left;
 			padding-left: 0;
-			padding-right: 0;			
+			padding-right: 0;
+
+			&:first-child .image-wrap {
+				border-left: 1px solid white;
+			}
 		}		
 	}
 
@@ -787,8 +768,8 @@ body {
 		margin-bottom: 15px;
 
 		img {
-			max-width: 100%;
-			max-height: 80%; //This can be removed when the correct ratio for the resize is achieved		
+			max-width: 60%;
+			// max-height: 80%; //This can be removed when the correct ratio for the resize is achieved		
 		}
 
 		@media screen and (max-width: $screen-xsmall) {
@@ -958,7 +939,6 @@ body {
 	}	
 }
 
-
 // Carousel Module
 //====================================================================================================================================
 //====================================================================================================================================
@@ -1105,6 +1085,15 @@ body {
 	}
 }
 
+// Instruction Tile Module (Subset of .tile)
+//====================================================================================================================================
+//====================================================================================================================================
+
+.instruction-tile {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
 // Article Tile Module (Subset of .tile)
 //====================================================================================================================================
 //====================================================================================================================================
@@ -1148,8 +1137,13 @@ body {
 
 .loading-overlay {
 	@extend %overlay;
+	overflow: hidden;
 
 	background-color: $brand-primary;
+
+	.no-js & {
+		display: none;
+	}
 }
 
 .brand-overlay {
@@ -1188,6 +1182,7 @@ body {
 
 	.navigation li:first-child a {
 		padding-left: 0;
+		border-left: 0;
 	}
 
 	@media screen and (min-width: $screen-desktop) {
@@ -1251,6 +1246,13 @@ body {
 // Loading Module
 //====================================================================================================================================
 //====================================================================================================================================
+
+.loading {
+	overflow: hidden;
+}
+.no-js.loading, .no-js .loading {
+	overflow: visible;
+}
 	
 .loader {
 	content: "";
@@ -1306,6 +1308,14 @@ body {
 //====================================================================================================================================
 
 .video-pane {
+	position: relative;
+	height: 100%;
+}
+.video-pane iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
 	height: 100%;
 }
 
@@ -1495,9 +1505,13 @@ body {
     transition: 0.6s;
     transform-style: preserve-3d;
 
-    position: absolute;
+    // position: absolute;
     top: 0;
     left: 0;
+
+	@media screen and (min-width: $screen-desktop) {	
+		position: absolute;
+	}    
 }
 
 .back {
@@ -1528,6 +1542,12 @@ body {
 		position: relative;
 	}
 	.front {
+		position: absolute;
+	}
+}
+
+.flippy {
+	.back {
 		position: absolute;
 	}
 }

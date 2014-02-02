@@ -26,12 +26,15 @@ define([
             _self = this;
 
             _self.$content = _self.$el.find('.content');  
-            _self.$forms = _self.$content.find('form');    
+            _self.$forms = _self.$content.find('form');
+
+            _self.calc_larger_flip_tile();
+            _self.patch_mobile_transition_for_flip();
 
             $(window).on('resize' , _self.resize )
-                .on('load', _self.match_row_height );
+                .on('load', _self.load );
 
-            _self.shim_forms();                
+            _self.shim_forms();
         },
 
         shim_forms : function () {
@@ -50,40 +53,82 @@ define([
             $('#video-id-'+$(e.currentTarget).data('video-id')).trigger('click.video.close');
         },
 
+        calc_larger_flip_tile : function () {
+            if (MatchMedia.tablet()) {
+                $.each(this.$el.find('.flip-container'), function () {
+                    var $front = $(this).find('.front'),
+                        $back = $(this).find('.back');
+
+                    if ($front.children().height() > $back.children().height()) {
+                        $(this).addClass('front-led');
+                    }
+                    else {
+                        $(this).addClass('back-led');   
+                    }
+                });
+            }
+        },
+
+        patch_mobile_transition_for_flip : function () {
+            //The mobile version of flippy will not work correctly when we are dealing with a content pane that loads dynamic content (video for instance) because of this we need to set the heights of the front faces to them selves to stop them collapsing while animating 
+            $.each(this.$el.find('.flip-container'), function () {
+                var $front = $(this).find('.front');
+                
+                // if (!Modernizr.csstransforms3d) {
+                    if (MatchMedia.tablet()) {
+                        if ($(this).hasClass('front-led')) {
+                            $front.css({ 'height' : $front.height() });
+                        }
+                    }
+                // }
+            });
+        },
+
         flip_toggle : function (e) {
             var $target = $(e.currentTarget),
                 $flip_target = $($target.data('flip-target')),
-                $front, $back;
+                $front, $back, $front_height;
+
+                $front = $flip_target.find('.front').filter(':first');
+                $back = $flip_target.find('.back').filter(':first');              
 
             e.preventDefault();
 
             if (Modernizr.csstransforms3d) {
-                $flip_target.toggleClass('flip')
+                $flip_target.toggleClass('flip');
             }
             else {
                 $front = $flip_target.find('.front').filter(':first');
                 $back = $flip_target.find('.back').filter(':first');
 
-                if (MatchMedia.tablet()) {
-                    $flip_target.toggleClass('flip');
+                if ($target.hasClass('btn-action')) {
+                     $front.flippyReverse().parent();
                 }
                 else {
-
-                    if ($target.hasClass('btn-action')) {
-                         $front.flippyReverse();
-                    }
-                    else {
-                        $front.flippy({
-                            color_target : '#c4edf1',
-                            verso: $back.html(),
-                            direction: "LEFT",
-                            duration: "750",
-                            onFinish: function () {
-                                _self.$el.updatePolyfill();
-                            }
-                        });  
-                    }                    
-                }
+                    $front.flippy({
+                        color_target : $back.css('backgroundColor'),
+                        verso: $back.html(),
+                        direction: "LEFT",
+                        duration: "750",
+                        onStart : function () {
+                            console.log('start');
+                        },
+                        onFinish: function () {
+                            //Toggle class and reapply webshim polfill
+                            $front.parent().toggleClass('flippy');
+                            _self.$el.updatePolyfill();
+                        },
+                        onReverseStart : function () {
+                            console.log('rev');
+                            //Remove appended flippy styles and toggle class
+                            $front.parent().toggleClass('flippy');
+                        },
+                        onReverseFinish : function () {
+                            $front.css({ 'position' : '' });
+                        },
+                        noCSS : true //Because some devices only support 2D transitions, flippy attempts to use them and thus the tile does a 360 2D rotataion.
+                    });
+                }                    
             }
         },
 
@@ -128,10 +173,15 @@ define([
             });
             _self.$content.find($(e.target).data('video-target')).append(view.render().el);
             this.delegateEvents();
-        },             
+        },
+
+        load : function () {
+            _self.match_row_height();
+        },      
 
         resize : function () {
             _self.match_row_height();
+            _self.calc_larger_flip_tile();
             _self.scale_enlarged_images();
         },
 

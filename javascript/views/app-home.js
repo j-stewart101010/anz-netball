@@ -7,118 +7,162 @@ define([
     'modules/grid',
     'collections/tiles',
     'collections/tiles-data',
-    'modules/double-spring',
     'modules/box',
-    'modules/grid-dom',
     'modules/trackpad',
     'modules/loader-screen',
     'match_media',
     'bootstrap_transition',    
     'bootstrap_collapse'
-], function ($, _, Backbone, Config, Grid, TileCollection, TileData, DoubleSpring, Box, GridDom, Trackpad, LoaderScreen, MatchMedia) {
+], function ($, _, Backbone, Config, Grid, TileCollection, TileData, Box, Trackpad, LoaderScreen, MatchMedia) {
 
     var _self;
 
     var AppView = Backbone.View.extend({
 
+        el : 'body',
+
         initialize : function () {
             _self = this;
+
             app_compatible = !Modernizr.canvas || !MatchMedia.mobile();
-            
-            if (app_compatible) {
 
-                $.when(TileCollection.fetch())
-                    .done(function () {
-                        TileData.content = TileCollection.toJSON();
-                        _self.load();
-                    }
-                );
+            this.$el.addClass('home');
+            this.$master_head = this.$el.find('.master-head');
+            this.$master_foot = this.$el.find('.master-foot');                 
 
-                Config.mouse;
-                var d = window.innerWidth || document.documentElement.clientWidth,
-                    e = window.innerHeight || document.documentElement.clientHeight;
-                Config.mouse.x = d / 2, Config.mouse.y = e / 2;           
-            }
+            $.when(TileCollection.fetch())
+                .done(function () {
+                    TileData.content = TileCollection.toJSON();
+                    _self.load();
+                }
+            );
+
+            Config.mouse;
+            var d = window.innerWidth || document.documentElement.clientWidth,
+                e = window.innerHeight || document.documentElement.clientHeight;
+            Config.mouse.x = d / 2, Config.mouse.y = e / 2;           
         },
 
         load : function () {
-            loaderScreen = new LoaderScreen;
+            loaderScreen = new LoaderScreen(_self.generateImages());
             loaderScreen.onComplete = this.kickOff;
-            // document.body.appendChild(loaderScreen.view);
             _self.onResize();
             $(window).resize(_self.onResize);
         },
 
         kickOff : function() {
-            loaded = true;
-            holding = false;
-            var a = window.innerWidth || document.documentElement.clientWidth,
-                b = window.innerHeight || document.documentElement.clientHeight;
-            
-            if(app_compatible) {
-                canvas = document.getElementById("nbn"); 
-                canvas.width = a; 
-                canvas.height = b*0.87; //100%-8%-5% 
-                context = canvas.getContext("2d");
-                // canvas.style.position = "absolute";
-                //canvas.style.top = "20%";
-                canvas.style.left = "0px"; 
-                // document.body.appendChild(canvas);
-                canvas.style.display = "none"; 
-                $(canvas).fadeIn("slow"); 
-                $(canvas).mousedown(_self.onMouseDown);
-                $(canvas).mouseup(_self.onMouseUp);
-                $(canvas).mousemove(_self.onMouseMove);
-                $(canvas).mouseout(_self.onMouseOut);
-                $(canvas).bind("touchstart", _self.onTouchStart);
-                $(canvas).bind("touchend", _self.onTouchEnd);
-                $(canvas).bind("touchmove", _self.onTouchMove);
-                grid = new Grid(a, b);
-                grid.canvasOffset = b*0.08; //8%
-                trackpad = new Trackpad(canvas);
-            } else {
-                // grid = new GridDom(a, b);
-                // $(grid.domView).mousedown(onMouseDown);
-                // $(grid.domView).mouseup(onMouseUp);
-                // $(grid.domView).mousemove(onMouseMove);
-                // trackpad = new Trackpad(grid.domView); 
-                // for(var i=0;i<model.content.length;i++){
-                //     model.content[i].lines = grid.splitText(model.content[i].)
-                // }
-            };
+            if (app_compatible) {
+                loaded = true;
+                holding = false;
+                var a = window.innerWidth || document.documentElement.clientWidth,
+                    b = window.innerHeight || document.documentElement.clientHeight;
+                
+                // if (app_compatible) {
+                    canvas = document.getElementById("nbn"); 
+                    canvas.width = a; 
+                    canvas.height = b*0.87; //100%-8%-5% 
+                    context = canvas.getContext("2d");
+                    // canvas.style.position = "absolute";
+                    //canvas.style.top = "20%";
+                    canvas.style.left = "0px"; 
+                    // document.body.appendChild(canvas);
+                    canvas.style.display = "none"; 
+                    $(canvas).fadeIn("slow"); 
+                    $(canvas).mousedown(_self.onMouseDown);
+                    $(canvas).mouseup(_self.onMouseUp);
+                    $(canvas).mousemove(_self.onMouseMove);
+                    $(canvas).mouseout(_self.onMouseOut);
+                    $(canvas).bind("touchstart", _self.onTouchStart);
+                    $(canvas).bind("touchend", _self.onTouchEnd);
+                    $(canvas).bind("touchmove", _self.onTouchMove);
+                    grid = new Grid(a, b);
+                    grid.canvasOffset = b*0.08; //8%
+                    trackpad = new Trackpad(canvas);
 
-            grid.onTransitionFinished = function () {
-                loaderScreen.destroy();
-                document.body.removeChild(loaderScreen.view);
-            };
+                grid.onTransitionFinished = function () {
+                    loaderScreen.destroy();
+                    document.body.removeChild(loaderScreen.view);
+                };
 
-            _self.onResize();
-            _self.resizeCount = 9;
-            //trackpad.lock();
-            
-            //trackpad.setPosition(a / 2, b / 2);
-            //grid.onStartComplete = _self.onGridStartComplete;
-            requestAnimFrame(_self.update);
+                _self.onResize();
+                _self.resizeCount = 9;
+
+                requestAnimFrame(_self.update);
+            }
         },
 
-        onGridStartComplete :  function () {
-            // var a, b = window.location.hash,
-            //     c = b.split("=")[1];
-            // if (c) {
-            //     for (var d = 0; d < model.content.length; d++) {
-            //         if (c == model.content[d].rfid) {
-            //             a = model.content[d];
-            //             break
-            //         }
-            //     }
-            // }
-            // if (a) {
-            //     var e = -2,
-            //         f = -2;
-            //     a.positionX = (e + 2 - .5) * grid.squareWidth + grid.width / 2 - grid.squareWidth / 2 + 1;
-            //     a.positionY = (f + 1.5 - .5) * grid.squareWidth + grid.height / 2 - grid.squareWidth / 2 + 1;
-            // } 
-            // else 
+        generateImages : function () {
+            var imagelist = [], imgpath;
+
+            for (var i = 0; i < TileData.content.length; i++) {
+                tilescale = 1;
+                switch(TileData.content[i].tiletype) {
+                    case "text":
+                    case "textlink":
+                        TileData.content[i].image = new Image;
+                        TileData.content[i].image.src = Config.REMOTE_PATH + TileData.content[i].subimageurl;
+                        imagelist.push(Config.REMOTE_PATH + TileData.content[i].subimageurl);
+                    break;
+                    case "image":
+                        TileData.content[i].image = new Image;
+                        TileData.content[i].image.src = Config.REMOTE_PATH + TileData.content[i].imageurl;
+                        imagelist.push(Config.REMOTE_PATH + TileData.content[i].imageurl);
+                        TileData.content[i].storyimage = new Image;
+                        TileData.content[i].storyimage.src = Config.REMOTE_PATH + TileData.content[i].storyimageurl;
+                        imagelist.push(Config.REMOTE_PATH + TileData.content[i].storyimageurl);
+                    break;
+                    case "video":
+                        tilescale = 2;
+                        TileData.content[i].image = new Image;
+                        TileData.content[i].image.src = Config.REMOTE_PATH + TileData.content[i].imageurl;
+                        imagelist.push(Config.REMOTE_PATH + TileData.content[i].imageurl);
+                        //// small extra image for videos
+                        TileData.content[i].subimage = new Image;
+                        TileData.content[i].subimage.src = Config.REMOTE_PATH + TileData.content[i].subimageurl;
+                        imagelist.push(Config.REMOTE_PATH + TileData.content[i].subimageurl);
+                };
+
+                TileData.content[i].scale = tilescale;
+
+                checkpos = {x:0, y:0};
+                do {
+                    collision = false;
+                    //make sure none is hanging over the edge of the world
+                    if((checkpos.x + TileData.content[i].scale - 1)>=TileData.worldWidth) collision = true;
+                    //Dont bother checking other locations if part of it is already hanging over
+                    //if(!collision) {
+                        //for all the previously arranged positions
+                        for(var j = 0;j < i; j++) {
+                            //collision check x
+                            if((checkpos.x >= TileData.content[j].position.x) && (checkpos.x <= (TileData.content[j].position.x + TileData.content[j].scale - 1))) {
+                                //collision check y
+                                if ((checkpos.y >= TileData.content[j].position.y) && (checkpos.y <= (TileData.content[j].position.y + TileData.content[j].scale - 1))) collision = true;                        
+                            };
+                        };
+                    //};
+                    if(!collision) TileData.content[i].position = {x:checkpos.x, y:checkpos.y}; // = checkpos; maybe?
+                    
+                    checkpos.x+=1;
+                    if(checkpos.x >= TileData.worldWidth) {
+                        checkpos.x=0;
+                        checkpos.y+=1;
+                    };
+                    //console.log("checking "+checkpos.x+","+checkpos.y);
+
+                } while(collision && checkpos.y<100 && checkpos.x < 100); //end if there is a mistake and this lasts too long
+                //console.log(imgpath);
+                           //imagelist.push("http://lorempixel.com/300/300/sports/");
+            };
+
+            TileData.cornerArrow = new Image;
+            TileData.cornerArrow.src = Config.REMOTE_PATH + "images/corner-arrow.png";
+            imagelist.push(Config.REMOTE_PATH + "images/corner-arrow.png");
+
+
+            return imagelist;
+        },
+
+        onGridStartComplete : function () {
             _self.browseMode = true, setTimeout(_self.unlock, 1000);
         },
 
@@ -138,38 +182,23 @@ define([
 
         realResize : function () {
             console.log('REAL RESIZE');
-            var a = window.innerWidth || document.documentElement.clientWidth,
-                b = window.innerHeight || document.documentElement.clientHeight;
+
+            var h = $(window).height() - _self.$master_head.height() - _self.$master_foot.height();    
+            var w = window.innerWidth || document.documentElement.clientWidth;
+
             if (window.grid) {
                 if(window.canvas) {
-                    canvas.width = a;
-                    canvas.height = b*0.87;
-                    grid.canvasOffset = b*0.08;
+                    canvas.width = w;
+                    canvas.height = h;
+                    grid.canvasOffset = h*0.08;
                     //todo: change camera position based on previous size and new size
                 };
-                console.log(canvas.width+"x"+canvas.height+" offset="+grid.canvasOffset);
-                grid.resize(a, b);
-                // var c = {
-                //     x: 500,
-                //     y: 500
-                // };
-                // if(Config.isMobile) { 
-                //     c.x = a;
-                //     c.y = b;
-                //     //    window.usingForm ? a > 2 * b ? $(overlay).fadeIn() : $(overlay).fadeOut() : a > b ? $(overlay).fadeIn() : $(overlay).fadeOut();
-                //     // var d = c.x / 2,
-                //     //     e = c.y / 2;
-                //     // if(_self.pauseGridRender) {
-                //     //     if(app_compatible) {
-                //     //         grid.render(context);
-                //     //         viewer.render(context);                            
-                //     //     }
-                //     //     if(a != this.cacheW && b != this.cacheH) window.scrollTo(0, 0);
-                //         this.cacheW = a;
-                //         this.cacheH = b;
-                //         console.log("RESIZING");
-                //     };
-                // };
+                grid.resize(w, h);
+                var c = {
+                    x: 500,
+                    y: 500
+                };
+
             };
         },
 
@@ -228,29 +257,46 @@ define([
             Config.mouse.y = a.originalEvent.touches[0].clientY + document.body.scrollTop;
             // downAt.x = Config.mouse.x;
             // downAt.y = Config.mouse.y;
+
+ 
             Config.mouse.button = true;
             Config.mouse.dragDistance = 0;
+
+            // e.preventDefault();
+            // Config.mouse.x = e.originalEvent.touches[0].clientX + document.body.scrollLeft;
+            // Config.mouse.y = e.originalEvent.touches[0].clientY + document.body.scrollTop;
+            // Config.mouse.button = true;
+            // Config.mouse.dragDistance = 0;
         },
 
-        onTouchEnd : function (a) {
-            //this.onMouseUp(a);
+        onTouchEnd : function (e) {
+            e.preventDefault();
+            Config.mouse.button = false;
+            // alert(Config.mouse.button);
+            if(Config.mouse.dragDistance<15) grid.sentClick();
         },
 
-        onTouchMove : function(a) {
-            a.preventDefault();
-            Config.mouse.x = a.originalEvent.touches[0].clientX + document.body.scrollLeft;
-            Config.mouse.y = a.originalEvent.touches[0].clientY + document.body.scrollTop;
+        onTouchMove : function(e) {
+            e.preventDefault();
+            // //var newX = a.pageX + document.body.scrollLeft, newY = a.pageY + document.body.scrollTop;
+            var newX = e.originalEvent.touches[0].clientX + document.body.scrollLeft,
+                newY = e.originalEvent.touches[0].clientY + document.body.scrollTop;
+                // alert(Config.mouse.dragDistance);
+            var dx = Config.mouse.x - newX, dy = Config.mouse.y - newY;
+            Config.mouse.dragDistance += Math.sqrt(dx*dx+dy*dy);
+            //console.log(Config.mouse)
+            if(Config.mouse.dragDistance>1e4) {
+               Config.mouse.dragDistance=1e4; 
+            } 
+            Config.mouse.x = newX;
+            Config.mouse.y = newY;
         },
 
         onMouseMove : function (a) {
-
-    //             var rect = this.target.getBoundingClientRect();
-    // if (this.dragging) {
-    //     this.endPoint.x = event.pageX - rect.left;
-    //     this.endPoint.y = event.pageY - rect.top
-
             //var newX = a.pageX + document.body.scrollLeft, newY = a.pageY + document.body.scrollTop;
-            var newX = a.clientX + document.body.scrollLeft, newY = a.clientY + document.body.scrollTop;
+            var newX = a.clientX + document.body.scrollLeft, 
+                newY = a.clientY + document.body.scrollTop;
+            Config.newX = newX;
             var dx = Config.mouse.x - newX, dy = Config.mouse.y - newY;
             Config.mouse.dragDistance += Math.sqrt(dx*dx+dy*dy);
             //console.log(Config.mouse)

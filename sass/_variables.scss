@@ -88,6 +88,7 @@ $link-hover-color:      darken($link-color, 15%) !default;
 $font-family-sans-serif:  		"Helvetica W01 Light", Helvetica, Arial, sans-serif !default;
 $font-family-sans-serif-bold:	"Helvetica W01 Bold", Helvetica, Arial, sans-serif !default;
 $font-family-sans-serif-two:	"Andes W04 Regular", Helvetica, Arial, sans-serif !default;
+$font-family-logo:				"Helvetica W01 Roman", Helvetica, Arial, sans-serif !default;
 
 $font-family-base:        		"Helvetica W01 Roman", Helvetica, Arial, sans-serif !default;
 
@@ -144,14 +145,14 @@ $padding-base-horizontal:        12px !default;
 $padding-large-vertical:         10px !default;
 $padding-large-horizontal:       16px !default;
 
-$padding-small-vertical:         5px !default;
-$padding-small-horizontal:       10px !default;
+$padding-small-vertical:         8px !default;
+$padding-small-horizontal:       13px !default;
 
 $padding-extrasmall-vertical:    1px !default;
 $padding-extrasmall-horizontal:  5px !default;
 
-$line-height-large:              1.33 !default;
-$line-height-small:              1.5 !default;
+$line-height-large:              1 !default;
+$line-height-small:              1 !default;
 
 $border-radius-base:             4px !default;
 $border-radius-large:            6px !default;

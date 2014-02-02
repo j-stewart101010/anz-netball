@@ -13,21 +13,21 @@
 		<link href="css/styles.css" rel="stylesheet" type="text/css">
 		<link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/f8bca219-07d6-4bdf-9b18-02f0db46b33f.css"/>
 
-        <!--[if lt IE 9]>
-            <link href="/css/ie.css" rel="stylesheet" type="text/css">
-        <![endif]-->
+    	<!--[if IE 9]>
+	        <link href="css/ie.css" rel="stylesheet" type="text/css">
+	    <![endif]-->
 
 		<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
     </head>
 
-    <body class="community">
+    <body>
 
 		<header class="master-head">
 			<div class="branding col-md-4">
 				<div class="brand clearfix">
 					<div class="logos">
 						<a href="/" class="anz-logo"></a>
-						<a href="/" class="nbn-logo">Netball<b>Nation</b></a>
+						<a href="/" class="nbn-logo">Netball<em>Nation</em></a>
 					</div>
 					<span class="sharp-brand-angle"></span>
 
@@ -54,7 +54,7 @@
 			</nav>
 		</header>
 
-		<main class="content">
+		<main class="content community">
 
 			<section class="grid active">
 
@@ -101,7 +101,7 @@
 
 					<div id="apply-for-grant" class="flip-container">
 						<div class="flipper">
-							<div class="front">
+							<div class="front shade-two">
 
 
 
@@ -117,7 +117,7 @@
 
 
 							</div>
-							<div class="back">
+							<div class="back shade-two">
 
 
 
@@ -216,9 +216,9 @@
 
 				<div class="col col-md-6">
 
-					<div id="video-case-studies" class="flip-container front-led shade-one">
+					<div id="video-case-studies" class="flip-container shade-one">
 						<div class="flipper">
-							<div class="front">
+							<div class="front shade-one">
 
 
 
@@ -275,7 +275,7 @@
 								</article>
 
 							</div>
-							<div id="video-side" class="back">
+							<div id="video-side" class="back shade-two">
 								<!-- Dynamic content injected in here -->
 
 								<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#video-case-studies" data-video-id="19072376" data-video="close">
@@ -291,24 +291,55 @@
 				</div>
 
 				<div class="col col-md-2 center-tile shade-one">
-					<div data-resize-height="center" class="outter-tile vertical-center shade-one">
-						<article class="article-tile tile">
-							<h3 class="heading heading-default">Grants awarded</h3>
-							<ul class="article-list">
-								<li>
-									<div class="subheading">City of Melton</div>
-									<div class="subheading">$32K for a new court</div>
-									<div>For example, tiered funding for a freeway are very large grants negotiated.</div>
-								</li>
-								<li>
-									<div class="subheading">Jane Sample and the Mary St Magpies</div>
-									<div class="subheading">$50 for a new set of team bibs.</div>
-									<div>For example, tiered funding for a freeway are very.</div>
-								</li>
-							</ul>
-							<a class="btn btn-default btn-sm" href="/grants">More <i class="fa fa-angle-right"></i></a>
-						</article>
+
+					<div id="community-grants" class="flip-container">
+						<div class="flipper">
+							<div class="front shade-two">
+
+								<div data-resize-height="center" class="outter-tile vertical-center shade-one">
+									<article class="article-tile tile">
+										<h3 class="heading heading-default">Grants awarded</h3>
+										<ul class="article-list">
+											<li>
+												<div class="subheading">City of Melton</div>
+												<div class="subheading">$32K for a new court</div>
+												<div>For example, tiered funding for a freeway are very large grants negotiated.</div>
+											</li>
+											<li>
+												<div class="subheading">Jane Sample and the Mary St Magpies</div>
+												<div class="subheading">$50 for a new set of team bibs.</div>
+												<div>For example, tiered funding for a freeway are very.</div>
+											</li>
+										</ul>
+										<a class="btn btn-sm btn-default" data-flip="toggle" data-flip-target="#community-grants" href="#">More <i class="fa fa-angle-right"></i></a>
+									</article>
+								</div>
+
+							</div>
+							<div class="back shade-two">
+
+								<div data-resize-height="center" class="outter-tile vertical-center shade-one">
+									<article class="article-tile tile">
+										<ul class="article-list">
+											<li>
+												<div class="subheading">Another grant</div>
+												<div class="subheading">$21K for a new grant</div>
+												<div>Another grants content can go here, this is to demonstrate content.</div>
+											</li>
+											<li>
+												<div class="subheading">More grants</div>
+												<div class="subheading">$10K for a new grant</div>
+												<div>Another grants content can go here, this is to demonstrate content.</div>
+											</li>
+										</ul>
+										<a class="btn btn-sm btn-default btn-action" data-flip="toggle" data-flip-target="#community-grants" href="#"><i class="fa fa-angle-left"></i> Back</a>
+									</article>
+								</div>
+
+							</div>
+						</div>
 					</div>
+
 				</div>
 
 			</section>			
@@ -498,6 +529,8 @@
 				<p class="copyright">© Australia and New Zealand Banking Group Limited (ANZ) 2012 ABN 11 005 357 522.</p>
 			</div>
 		</footer>
+
+		<div class="loading-overlay"></div>
 
 		<script data-main="javascript/main-content" src="bower_components/requirejs/require.js"></script>
 

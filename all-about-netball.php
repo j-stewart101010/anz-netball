@@ -13,14 +13,14 @@
 		<link href="css/styles.css" rel="stylesheet" type="text/css">
 		<link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/f8bca219-07d6-4bdf-9b18-02f0db46b33f.css"/>
 
-	    <!--[if lt IE 9]>
-	        <link href="/css/ie.css" rel="stylesheet" type="text/css">
+	    <!--[if IE 9]>
+	        <link href="css/ie.css" rel="stylesheet" type="text/css">
 	    <![endif]-->
 
 		<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
     </head>
 
-    <body class="all-about-netball">
+    <body>
 
  		<!-- <div class="loading"></div> -->
 
@@ -29,7 +29,7 @@
 				<div class="brand clearfix">
 					<div class="logos">
 						<a href="/" class="anz-logo"></a>
-						<a href="/" class="nbn-logo">Netball<b>Nation</b></a>
+						<a href="/" class="nbn-logo">Netball<em>Nation</em></a>
 					</div>
 					<span class="sharp-brand-angle"></span>
 
@@ -56,12 +56,12 @@
 			</nav>
 		</header>
 
-		<main class="content">
+		<main class="content all-about-netball">
 
 			<section class="grid">
 
-				<div class="col col-xs-12 col-md-2 col-lg-2">
-					<div class="col-half col col-xs-12 col-md-12">
+				<div class="col col-md-2 col-lg-2">
+					<div class="col-half col col-md-12">
 						<div class="image-wrap set">
 							<img src="http://lorempixel.com/g/612/612/">
 						</div>
@@ -83,8 +83,8 @@
 					</div>
 				</div>
 
-				<div class="col col-xs-12 col-md-2 col-lg-2">
-					<div class="col-half col col-xs-12 col-md-12">
+				<div class="col col-md-2 col-lg-2 clearfix">
+					<div class="col-half col col-md-12">
 						<div class="image-wrap set">
 							<img src="http://lorempixel.com/g/612/612/">
 						</div>
@@ -94,7 +94,7 @@
 					</div>
 				</div>				
 
-				<div class="col col-sm-12 col-md-4 col-lg-4 clearfix shade-eleven fitness">
+				<div class="col col-md-4 col-lg-4 clearfix shade-eleven fitness">
 
 					<div id="fitness-info" class="flip-container">
 						<div class="flipper">
@@ -104,7 +104,7 @@
 									<article class="tile content-tile">
 										<hgroup>
 											<h1 class="heading heading-jumbo">Fitness</h1>
-											<h2 class="subheading heading-med">Netball is a great way to stay fit and healthy.</h2>
+											<h2 class="subheading heading-med">Netball is a great way to stay fit and healthy.</h2>																																																																																																		
 											<a class="btn btn-sm btn-default" data-flip="toggle" data-flip-target="#fitness-info" href="#">More <i class="fa fa-angle-right"></i></a>
 										</hgroup>
 									</article>
@@ -151,9 +151,10 @@
 									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-fitness" data-slide="prev"><i class="fa fa-angle-left"></i></a>
 									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-fitness" data-slide="next"><i class="fa fa-angle-right"></i></a>
 									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#fitness-info" href="#">		<div class="cross-icon">
-			<i class="fa fa-angle-left"></i>
-			<i class="fa fa-angle-right"></i>
-		</div></a>
+										<i class="fa fa-angle-left"></i>
+										<i class="fa fa-angle-right"></i>
+										</div>
+									</a>
 								</div>
 
 
@@ -169,7 +170,7 @@
 
 			<section class="grid">
 				
-				<div class="col col-sm-12 col-md-4 col-lg-4 clearfix shade-eleven rules">
+				<div class="col col-md-4 col-lg-4 clearfix shade-eleven rules">
 
 					<div id="rules-info" class="flip-container">
 						<div class="flipper">
@@ -235,9 +236,9 @@
 									<a class="btn btn-sm btn-action left carousel-control" href="#carousel-rules" data-slide="prev"><i class="fa fa-angle-left"></i></a>
 									<a class="btn btn-sm btn-action right carousel-control" href="#carousel-rules" data-slide="next"><i class="fa fa-angle-right"></i></a>
 									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#rules-info" href="#">		<div class="cross-icon">
-			<i class="fa fa-angle-left"></i>
-			<i class="fa fa-angle-right"></i>
-		</div></a>
+										<i class="fa fa-angle-left"></i>
+										<i class="fa fa-angle-right"></i>
+									</div></a>
 								</div>
 
 
@@ -247,11 +248,11 @@
 
 				</div>
 
-				<div class="col col-xs-12 col-sm-12 col-md-2 col-lg-2">
+				<div class="col col-md-2 col-lg-2 clearfix">
 					<div class="col-half col col-xs-6 col-md-12">
 						<div class="outter-tile group shade-thirteen">
 							<article data-resize-height="#grid-image-five" class="content-tile mini tile center">
-								<h1 class="heading heading-exmed">Set PLays</h1>
+								<h1 class="heading heading-exmed">Set<br> PLays</h1>
 								<p class="sub-content"><small>Get one up on the comp with a few plays from (name).</small></p>
 								<a class="btn btn-default btn-sm" href="/grants"><i class="fa fa-file-text-o"></i> Download</a>
 							</article>
@@ -264,7 +265,7 @@
 					</div>
 				</div>
 
-				<div class="col col-xs-12 col-sm-12 col-md-2 col-lg-2">
+				<div class="col col-md-2 col-lg-2 clearfix">
 					<div class="col-half col col-xs-6 col-md-12">
 						<div class="outter-tile group shade-ten">
 							<article data-resize-height="#grid-image-five" class="content-tile mini tile center">
@@ -307,7 +308,7 @@
 
 				</div>
 
-				<div class="col col-sm-12 col-md-4 col-lg-4 clearfix shade-thirteen equipment">
+				<div class="col col-md-4 col-lg-4 clearfix shade-thirteen equipment">
 
 					<div id="equipment-info" class="flip-container">
 						<div class="flipper">
