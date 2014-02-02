@@ -15,7 +15,6 @@ define([
 		this.fontColour="170,221,255", this.id="", this.align="left", this.textunderlay="fill";
 		this.visible=true, this.opacity=1;
 		
-		
 		$.each(properties, function(key, value) {
 			_self[key] = value;
 		});
@@ -132,6 +131,9 @@ define([
 	Box.prototype.render = function(ctx, drawx, drawy, drawScale) {
 		var cx,cy, j;
 		///woohoo its time to render
+		ctx.fillStyle="rgb("+this.backgroundColour+")";
+		ctx.fillRect(drawx,drawy,this.width*drawScale,this.height*drawScale);
+
 		for(var i=0;i<this.boxes.length;i++){
 			if(this.boxes[i].visible) {
 				if(this.boxes[i].contentType=="text") {
@@ -256,14 +258,14 @@ define([
 			    	this.ctx.textBaseline = 'top';
 			    	var maxWidth=(this.boxes[i].width-this.boxes[i].padding*2)*this.width*0.01;
 			    	this.boxes[i].splitLines = this.splitText(this.ctx,maxWidth,this.boxes[i].content);
-
+					this.boxes[i].boxHeight=this.boxes[i].padding*this.height*0.02+this.boxes[i].fontSize+this.boxes[i].lineHeight*(this.boxes[i].splitLines.length-1)+this.boxes[i].fontSize*0.1;
 					this.boxes[i].boxLeft=(this.boxes[i].margin+this.boxes[i].left)*this.width*0.01;
 			    	this.boxes[i].drawLeft=(this.boxes[i].margin+this.boxes[i].left+this.boxes[i].padding)*this.width*0.01;
 					this.boxes[i].boxTop=(this.boxes[i].margin+this.boxes[i].top)*this.height*0.01;
 					this.boxes[i].drawTop=(this.boxes[i].margin+this.boxes[i].top+this.boxes[i].padding)*this.height*0.01;
 					if(this.boxes[i].textunderlay=="fill") {
 						this.boxes[i].boxWidth=(this.boxes[i].width-this.boxes[i].margin*2)*this.width*0.01;
-			    		this.boxes[i].boxHeight=(this.boxes[i].height-this.boxes[i].margin*2)*this.height*0.01;
+			    		// this.boxes[i].boxHeight=(this.boxes[i].height-this.boxes[i].margin*2)*this.height*0.01;
 						this.boxes[i].drawWidth=(this.boxes[i].width-this.boxes[i].margin*2-this.boxes[i].padding*2)*this.height*0.01;
 //						this.boxes[i].drawHeight=(this.boxes[i].height-this.boxes[i].padding*2)*this.height*0.01;
 					};
@@ -272,9 +274,14 @@ define([
 						for(var j=0;j<this.boxes[i].splitLines.length;j++) {
 							if(this.boxes[i].splitLines[j].width>maxWidth) maxWidth = this.boxes[i].splitLines[j].width;
 						};
+
 						this.boxes[i].boxWidth=maxWidth+this.boxes[i].padding*2*this.width*0.01+this.boxes[i].fontSize*0.3;
+						if (this.boxes[i].align=="center") {
+							this.boxes[i].boxWidth=(this.boxes[i].width-this.boxes[i].margin*2)*this.width*0.01;
+							this.boxes[i].drawWidth=(this.boxes[i].width-this.boxes[i].margin*2-this.boxes[i].padding*2)*this.height*0.01;
+						}
 						this.boxes[i].drawWidth=maxWidth;
-						this.boxes[i].boxHeight=this.boxes[i].padding*this.height*0.02+this.boxes[i].fontSize+this.boxes[i].lineHeight*(this.boxes[i].splitLines.length-1)+this.boxes[i].fontSize*0.1;
+						// this.boxes[i].boxHeight=this.boxes[i].padding*this.height*0.02+this.boxes[i].fontSize+this.boxes[i].lineHeight*(this.boxes[i].splitLines.length-1)+this.boxes[i].fontSize*0.1;
 						
 					};
 				};

@@ -113,9 +113,15 @@ define([
                     break;
                     case "fliplink":
                         TileData.content[i].image = new Image;
-                        TileData.content[i].image.src = Config.REMOTE_PATH + TileData.content[i].subimageurl;
+                        TileData.content[i].image.src = Config.REMOTE_PATH + TileData.content[i].imageurl;
+                        imagelist.push(Config.REMOTE_PATH + TileData.content[i].imageurl);
+                        TileData.content[i].subimage = new Image;
+                        TileData.content[i].subimage.src = Config.REMOTE_PATH + TileData.content[i].subimageurl;
                         imagelist.push(Config.REMOTE_PATH + TileData.content[i].subimageurl);
-                    break;                    
+                        TileData.content[i].subimagetwo = new Image;
+                        TileData.content[i].subimagetwo.src = Config.REMOTE_PATH + TileData.content[i].subimagetwourl;
+                        imagelist.push(Config.REMOTE_PATH + TileData.content[i].subimagetwourl);
+                    break;
                     case "video":
                         tilescale = 2;
                         TileData.content[i].image = new Image;

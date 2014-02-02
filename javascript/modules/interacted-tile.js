@@ -68,7 +68,31 @@ define([
       //scan through model data and flip&scale back any others that were flipped
 
       if(this.tileType=="image") {
-
+        // if(TileData.content[i].scaleProgress==1 || TileData.content[i].scaleDirection>0) {
+        //   if(TileData.content[i].flipProgress==1 || TileData.content[i].flipDirection>0) {
+        //     //flipped or flipping to and scaled or scaling up
+        //     TileData.content[i].flipDirection = -0.027;
+        //     TileData.content[i].scaleDirection = -0.027;
+        //   };
+        //   if(TileData.content[i].flipProgress==0 || TileData.content[i].flipDirection<0) {
+        //     //unflipped or flipping from and scaled or scaling up
+        //     TileData.content[i].flipDirection = 0.027;         
+        //   };
+        // };
+        // if(TileData.content[i].scaleProgress==0 || TileData.content[i].scaleDirection<0) {
+        //   if(TileData.content[i].flipProgress==1 || TileData.content[i].flipDirection>0) {
+        //     //flipped or flipping to and unscaled or scaling down
+        //     //ok to be flipped and unscaled but this situation is usually triggered automatically somewhere else
+        //     //default is flip back
+        //     TileData.content[i].flipDirection = -0.027;
+        //   };
+        //   if(TileData.content[i].flipProgress==0 || TileData.content[i].flipDirection<0) {
+        //     //unflipped or flipping from and unscaled or scaling down
+        //     TileData.content[i].scaleDirection = 0.027;
+        //   };       
+        // };
+        // console.log("i:"+i+": "+"ScaleDirecshn:"+TileData.content[i].scaleDirection+" FlipDirecshn:"+TileData.content[i].flipDirection);
+        // console.log("ScaleProgress:"+TileData.content[i].scaleProgress+" FlipProgress:"+TileData.content[i].scaleProgress);
 
         if(this.scaleProgress==1 || this.scaleDirection>0) {
           if(this.flipProgress==1 && this.scaleProgress==1) {
@@ -112,11 +136,23 @@ define([
           //unflipped or flipping from and scaled or scaling up
           this.flipDirection = 0.027;         
 
+          // this.dragDisabled=36;
+          // this.centering=36;
+          // this.centerSize=500;
+          // this.centerZoom=this.centerSize/(TileData.content[i].scale*this.squareWidth);
+
+          // this.centerX=this.mouseHoverWorldX;//+TileData.content[i].scale*this.squareWidth*0.5;
+          // this.centerY=this.mouseHoverWorldY;//+TileData.content[i].scale*this.squareHeight*0.5;
           
         };
         
       };
-
+      // for(var j=0;j<TileData.content.length;j++){
+      //   if(j!=i) {
+      //     if(TileData.content[j].scaleProgress>0) TileData.content[j].scaleDirection = -0.027;
+      //     if(TileData.content[j].flipProgress>0) TileData.content[j].flipDirection = -0.027;
+      //   };
+      // };
     };
   };
 
@@ -132,27 +168,20 @@ define([
     if(this.tileType=="video") {
       //if(this.currentFace==1) this.flipFace=0;
       //if(this.currentFace==0) this.flipFace=1;
-      console.log(_self.modelIndex);
+      
       //this.renderDisabled=true;
-      //_self.flippedVideoTile=modelIndex;
-      $('body').append(new VideoEmbedView({ 
-        modal : true,
-        video_id : TileData.content[_self.modelIndex].videoid
-      }).render().el);
 
-      //this.flipDirection=-0.027;
+      // _self.flippedVideoTile=modelIndex;
+      // $('body').append(new VideoEmbedView({ 
+      //   modal : true,
+      //   video_id : TileData.content[this.modelIndex].videoid
+      // }).render().el);
     };
     if(this.tileType=="image") {
       //if(this.currentFace==1) this.flipFace=0;
       //if(this.currentFace==0) this.flipFace=1;
     };
 
-  };
-
-  InteractedTile.prototype.closedModal = function() {
-    //this.renderDisabled=false;
-    console.log('unflipped ');
-    this.flipDirection = -0.027;
   };
 
   InteractedTile.prototype.render = function (ctx, drawx, drawy, drawScale) {
@@ -183,23 +212,15 @@ define([
     };
 
     if(!this.mouseIsOver) {
-      this.hoverScale*=0.75;
-      if(this.hoverScale<0.002) this.hoverScale=0;
+      this.hoverScale-=this.hoverScale*0.1;
+      if(this.hoverScale<0.0045) this.hoverScale=0;
       if(this.hoverScale==0 && this.scaleProgress==0 && this.flipProgress==0) {
         //if(this.removeCounter=59) console.log("about to destroy");
         this.removeCounter++;
       };
     };
 
-    if(this.tileType=="image") {
-      this.boxes[this.currentFace].update("cornerbutton",{opacity:this.scaleProgress});
-      var cornerHighlight=this.overTime*0.0667;
-      if(cornerHighlight>1) cornerHighlight=1;
-      this.boxes[this.currentFace].update("cornerbuttonoverlay",{opacity:cornerHighlight});
-    };
-
-
-    var hoverOffset=this.pixelSize*drawScale*(1+this.scaleProgress+this.hoverScale)*this.hoverScale*0.5;//this.pixelSize*(this.scale+this.scaleProgress)*this.hoverScale*0.5*drawScale;
+    var hoverOffset=this.pixelSize*(this.scale+this.scaleProgress)*this.hoverScale*0.5*drawScale;
 
     if(this.flipProgress>0 && this.flipProgress<1){
       if(this.flipProgress<0.5) {
@@ -248,61 +269,21 @@ define([
     yint*=blklen;
     hint*=blklen;
 
+
     //loop through each source column
     for(var i=0;i<srcWidth;i+=blklen) {
       //take a pixel-wide strip from the source, scale and position it on the destination buffer
       //shorthand if reverses source to prevent image being drawn backwards
       //Math.ceil(drawScale) draws wider bands if greater scaling is necessary
       // dstCtx.drawImage(srcCtx.canvas, xint>0 ? i : srcWidth-i-blklen, 0, blklen, srcHeight-1, Math.floor(x), Math.floor(y), Math.ceil(drawScale)*blklen, h);
+
       dstCtx.drawImage(srcCtx.canvas, xint>0 ? i : srcWidth-i, 0, Math.ceil(blklen), srcHeight-1, Math.floor(x), Math.floor(y), Math.ceil(drawScale*blklen), h);
       x+=xint;
       y+=yint;
       h+=hint;
+
     };
   };
  
   return InteractedTile;
 });
-
-
-        // if(TileData.content[i].scaleProgress==1 || TileData.content[i].scaleDirection>0) {
-        //   if(TileData.content[i].flipProgress==1 || TileData.content[i].flipDirection>0) {
-        //     //flipped or flipping to and scaled or scaling up
-        //     TileData.content[i].flipDirection = -0.027;
-        //     TileData.content[i].scaleDirection = -0.027;
-        //   };
-        //   if(TileData.content[i].flipProgress==0 || TileData.content[i].flipDirection<0) {
-        //     //unflipped or flipping from and scaled or scaling up
-        //     TileData.content[i].flipDirection = 0.027;         
-        //   };
-        // };
-        // if(TileData.content[i].scaleProgress==0 || TileData.content[i].scaleDirection<0) {
-        //   if(TileData.content[i].flipProgress==1 || TileData.content[i].flipDirection>0) {
-        //     //flipped or flipping to and unscaled or scaling down
-        //     //ok to be flipped and unscaled but this situation is usually triggered automatically somewhere else
-        //     //default is flip back
-        //     TileData.content[i].flipDirection = -0.027;
-        //   };
-        //   if(TileData.content[i].flipProgress==0 || TileData.content[i].flipDirection<0) {
-        //     //unflipped or flipping from and unscaled or scaling down
-        //     TileData.content[i].scaleDirection = 0.027;
-        //   };       
-        // };
-        // console.log("i:"+i+": "+"ScaleDirecshn:"+TileData.content[i].scaleDirection+" FlipDirecshn:"+TileData.content[i].flipDirection);
-        // console.log("ScaleProgress:"+TileData.content[i].scaleProgress+" FlipProgress:"+TileData.content[i].scaleProgress);
-
-              // for(var j=0;j<TileData.content.length;j++){
-      //   if(j!=i) {
-      //     if(TileData.content[j].scaleProgress>0) TileData.content[j].scaleDirection = -0.027;
-      //     if(TileData.content[j].flipProgress>0) TileData.content[j].flipDirection = -0.027;
-      //   };
-      // };
-
-
-          // this.dragDisabled=36;
-          // this.centering=36;
-          // this.centerSize=500;
-          // this.centerZoom=this.centerSize/(TileData.content[i].scale*this.squareWidth);
-
-          // this.centerX=this.mouseHoverWorldX;//+TileData.content[i].scale*this.squareWidth*0.5;
-          // this.centerY=this.mouseHoverWorldY;//+TileData.content[i].scale*this.squareHeight*0.5;
