@@ -104,8 +104,8 @@ define([
         case "image":
           TileData.content[i].box = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].image, {width:100,height:100,contentType:"image"}));
-          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.cornerArrow, {left:95.571,top:95.285,width:4.428,height:4.714,contentType:"image",opacity:0,id:"cornerarrow"}));
-          TileData.content[i].box.addBox(new Box(this.offScreenCtx, "", {left:95.571,top:95.285,width:4.428,height:4.714,contentType:"text",backgroundColour:"128,192,255",backgroundOpacity:1,opacity:0,id:"cornerarrowoverlay"}));
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.cornerArrow, {left:95.571,top:95.285,width:4.428,height:4.714,contentType:"image",opacity:0,visible:false,id:"cornerarrow"}));
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, "", {left:95.571,top:95.285,width:4.428,height:4.714,contentType:"text",backgroundColour:"128,192,255",backgroundOpacity:1,opacity:0,visible:false,id:"cornerarrowoverlay"}));
           TileData.content[i].box.calculate();
 
           TileData.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
@@ -127,7 +127,7 @@ define([
           TileData.content[i].box = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].image, {width:100,height:100,contentType:"image"}));
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:"70,145,185",backgroundOpacity:0.11}));
-          TileData.content[i].box.addBox(new Box(this.offScreenCtx, "VIDEO: "+TileData.content[i].textname, {contentType:"text",fontStyle:"bold",left:8.5,top:10,width:80,height:25,padding:2,fontSize:9,backgroundColour:"0,0,0",backgroundOpacity:0.35,textunderlay:"fit"}));
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, "VIDEO: "+TileData.content[i].textname, {contentType:"text",left:8.5,top:10,width:80,height:25,padding:2,fontSize:9,backgroundColour:"0,0,0",backgroundOpacity:0.35,textunderlay:"fit"}));
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].textsubject, {contentType:"text",left:8.5,top:20,width:80,height:20,padding:2,fontSize:22,backgroundColour:"0,0,0",backgroundOpacity:0.35,textunderlay:"fit"}));
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].subimage, {left:7,top:85,contentType:"image",width:"original",height:"orignial"}));
           TileData.content[i].box.calculate();

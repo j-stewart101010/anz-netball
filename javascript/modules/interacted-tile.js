@@ -66,8 +66,23 @@ define([
   InteractedTile.prototype.sentClick = function (x, y) {
     if(this.flippable) {
       //scan through model data and flip&scale back any others that were flipped
+      if(this.tiletype=="fliplink") {
+        if(this.flipProgress==0) {
+          if(this.box(this.currentFace).hitTest(x/this.scale,y/this.scale))=="button" {
+            this.flipDirection = 0.027;
+          };
+        };
+        if(this.flipProgress==1) {
+          if(this.box(this.flipFace).hitTest(x/this.scale,y/this.scale))=="button" {
+            //take us there
+            document.location=TileData.content[i].linkurl;
+          };
+        };
+      };
+
 
       if(this.tileType=="image") {
+        console.log(this.boxes);
 
 
         if(this.scaleProgress==1 || this.scaleDirection>0) {
@@ -192,10 +207,10 @@ define([
     };
 
     if(this.tileType=="image") {
-      this.boxes[this.currentFace].update("cornerbutton",{opacity:this.scaleProgress});
-      var cornerHighlight=this.overTime*0.0667;
-      if(cornerHighlight>1) cornerHighlight=1;
-      this.boxes[this.currentFace].update("cornerbuttonoverlay",{opacity:cornerHighlight});
+      this.boxes[this.currentFace].update("cornerbutton",{visible:(this.scaleProgress>0?true:false)});
+      //var cornerHighlight=this.overTime*0.0667;
+      //if(cornerHighlight>1) cornerHighlight=1;
+      //this.boxes[this.currentFace].update("cornerbuttonoverlay",{opacity:cornerHighlight});
     };
 
 
