@@ -12,7 +12,8 @@ define([
 		this.ctx;
 		this.boxes=[], this.height, this.width=90, this.left=0, this.top=0, this.padding=0, this.margin=0, this.right, this.bottom;
 		this.content, this.contentType="text", this.properties, this.fontStyle="normal", this.fontSize=24, this.fontName="Helvetica W01 Light";
-		this.fontColour="#AADDFF", this.backgroundColour="rgba(0,0,0,0)", this.id="", this.align="left", this.textunderlay="fill";
+		this.fontColour="170,221,255", this.id="", this.align="left", this.textunderlay="fill";
+		this.visible=true, this.opacity=1;
 		
 		
 		$.each(properties, function(key, value) {
@@ -26,9 +27,27 @@ define([
 
 	Box.constructor = Box;
 
-	Box.prototype.update = function (content, properties) {
-		
-	//	this.calculate(this.ctx);
+	Box.prototype.update = function (id,content,properties) {
+		if(this.contentType=="container") {
+			for(var i=0;i<this.boxes.length;i++) {
+				this.boxes[i].update(id,content,properties);
+			};
+		} else {
+			if(this.id=id) {
+				$.each(properties, function(key, value) {
+				_self[key] = value;
+				});
+				if(typeof(content)!="undefined") {
+					if(this.contentType=="container") this.boxes = newContent;					
+					if(this.contentType=="text" || this.contentType=="image") this.content = newContent;
+					this.ctx=ctx;
+					if(typeof(this.lineHeight)=="undefined") this.lineHeight=this.fontSize*1.1;
+				};
+			};
+
+		};
+		//this.calculate();
+
 	};
 
 	// Box.prototype.findById = function (id) {
@@ -40,6 +59,7 @@ define([
 	// 	};
 	// 	if(this.id==id) return this;
 	// };
+
 	Box.prototype.last = function ()  {
 		if(typeof(this.boxes)=="undefined") return {right:0,bottom:0};
 		if(this.boxes.length==0) return {right:0,bottom:0};
@@ -49,6 +69,7 @@ define([
 	Box.prototype.addBox = function (newBox)  {
 	//	console.log(newBox);
 		if(typeof(this.boxes)!="undefined") this.boxes.push(newBox);
+		this.calculate();
 	};
 
 	// Box.prototype.destroyById = function (id) {
@@ -96,35 +117,63 @@ define([
 	    return lines;
 	};
 
+	Box.prototype.hitTest = function(hitX, hitY) {
+		for(var i=0;i<this.boxes.length;i++){
+			if(this.boxes[i].visible) {
+				if(this.boxes[i].contentType=="text" || this.boxes[i].contentType=="image") {
+					if(hitX>=this.boxes[i].boxLeft && hitX<=(this.boxes[i].boxLeft+this.boxes[i].boxWidth) && hitY>=this.boxes[i].boxTop && hitY<=(this.boxes[i].boxTop+this.boxes[i].boxHeight)) return this.boxes[i].id;
+				};
+			};
+		};
+		return null;
+	};
+
 	Box.prototype.render = function(ctx, drawx, drawy, drawScale) {
 		var cx,cy, j;
 		///woohoo its time to render
 		for(var i=0;i<this.boxes.length;i++){
-			if(this.boxes[i].contentType=="text") {
-				ctx.fillStyle=this.boxes[i].backgroundColour;
-				ctx.fillRect(drawx+this.boxes[i].boxLeft*drawScale,drawy+this.boxes[i].boxTop*drawScale,this.boxes[i].boxWidth*drawScale,this.boxes[i].boxHeight*drawScale);
-				if(drawScale>.01 && this.boxes[i].content.length>0) {
-
-					ctx.fillStyle=this.boxes[i].fontColour;
-					ctx.font = this.boxes[i].fontStyle + " " + this.boxes[i].fontSize + "px " + this.boxes[i].fontName;
-					ctx.textBaseline = 'top';
-					cy=drawy+this.boxes[i].drawTop*drawScale;//+this.boxes[i].lineHeight;
-					if(drawScale!=1) ctx.scale(drawScale,drawScale);
-					for(j=0;j<this.boxes[i].splitLines.length;j++) {
-						cx=drawx+(this.boxes[i].drawLeft)*drawScale; //default left justified
-						if(this.boxes[i].align=="center") cx=drawx+(this.boxes[i].drawLeft+(this.boxes[i].drawWidth-this.boxes[i].splitLines[j].width)*0.5)*drawScale;
-						if(this.boxes[i].align=="right") cx=drawx+(this.boxes[i].drawLeft+this.boxes[i].drawWidth-this.boxes[i].splitLines[j].width)*drawScale;
-						ctx.fillText(this.boxes[i].splitLines[j].text, cx/drawScale, cy/drawScale);
-
-						cy+=this.boxes[i].lineHeight*drawScale;
+			if(this.boxes[i].visible) {
+				if(this.boxes[i].contentType=="text") {
+					if(this.boxes[i].backgroundOpacity*this.boxes[i].opacity>0) {
+						if(this.boxes[i].backgroundOpacity*this.boxes[i].opacity<1) {
+							ctx.fillStyle="rgba("+this.boxes[i].backgroundColour+","+(this.boxes[i].backgroundOpacity*this.boxes[i].opacity)+")";
+						} else {
+							ctx.fillStyle="rgb("+this.boxes[i].backgroundColour+")";
+						};
+						ctx.fillRect(drawx+this.boxes[i].boxLeft*drawScale,drawy+this.boxes[i].boxTop*drawScale,this.boxes[i].boxWidth*drawScale,this.boxes[i].boxHeight*drawScale);
 					};
-					if(drawScale!=1) ctx.scale(1/drawScale,1/drawScale);
+					if(drawScale>.01 && this.boxes[i].content.length>0) {
+						if(this.boxes[i].opacity<1) {
+							ctx.fillStyle="rgba("+this.boxes[i].fontColour+","+(this.boxes[i].opacity)+")";
+						} else {
+							ctx.fillStyle="rgb("+this.boxes[i].fontColour+")";
+						};
+						ctx.font = this.boxes[i].fontStyle + " " + this.boxes[i].fontSize + "px " + this.boxes[i].fontName;
+						ctx.textBaseline = 'top';
+						cy=drawy+this.boxes[i].drawTop*drawScale;//+this.boxes[i].lineHeight;
+						if(drawScale!=1) ctx.scale(drawScale,drawScale);
+						for(j=0;j<this.boxes[i].splitLines.length;j++) {
+							cx=drawx+(this.boxes[i].drawLeft)*drawScale; //default left justified
+							if(this.boxes[i].align=="center") cx=drawx+(this.boxes[i].drawLeft+(this.boxes[i].drawWidth-this.boxes[i].splitLines[j].width)*0.5)*drawScale;
+							if(this.boxes[i].align=="right") cx=drawx+(this.boxes[i].drawLeft+this.boxes[i].drawWidth-this.boxes[i].splitLines[j].width)*drawScale;
+							ctx.fillText(this.boxes[i].splitLines[j].text, cx/drawScale, cy/drawScale);
+
+							cy+=this.boxes[i].lineHeight*drawScale;
+						};
+						if(drawScale!=1) ctx.scale(1/drawScale,1/drawScale);
+					};
 				};
-			};
-			if(this.boxes[i].contentType=="image") {
-				ctx.fillStyle=this.boxes[i].backgroundColour;
-				ctx.fillRect(drawx+this.boxes[i].boxLeft*drawScale,drawy+this.boxes[i].boxTop*drawScale,this.boxes[i].boxWidth*drawScale,this.boxes[i].boxHeight*drawScale);
-				ctx.drawImage(this.boxes[i].content,drawx+this.boxes[i].drawLeft*drawScale,drawy+this.boxes[i].drawTop*drawScale,this.boxes[i].drawWidth*drawScale,this.boxes[i].drawHeight*drawScale);		
+				if(this.boxes[i].contentType=="image") {
+					if(this.boxes[i].backgroundOpacity*this.boxes[i].opacity>0) {
+						if(this.boxes[i].backgroundOpacity*this.boxes[i].opacity<1) {
+							ctx.fillStyle="rgba("+this.boxes[i].backgroundColour+","+(this.boxes[i].backgroundOpacity*this.boxes[i].opacity)+")";
+						} else {
+							ctx.fillStyle="rgb("+this.boxes[i].backgroundColour+")";
+						};
+						ctx.fillRect(drawx+this.boxes[i].boxLeft*drawScale,drawy+this.boxes[i].boxTop*drawScale,this.boxes[i].boxWidth*drawScale,this.boxes[i].boxHeight*drawScale);
+					};
+					ctx.drawImage(this.boxes[i].content,drawx+this.boxes[i].drawLeft*drawScale,drawy+this.boxes[i].drawTop*drawScale,this.boxes[i].drawWidth*drawScale,this.boxes[i].drawHeight*drawScale);		
+				};
 			};
 		};
 	};
@@ -133,6 +182,9 @@ define([
 	Box.prototype.calculate = function () {
 		var apx,apy,pw,ph,mw,mh,i,j;
 		var dwidth, dheight;
+
+//this.boxes[i].width=(this.boxes[i].content.width*100)/this.width;
+
 		if(this.contentType=="container") {
 			//this. is the container
 			//this.boxes[i]. is the box
@@ -142,12 +194,20 @@ define([
 		    
 
 		    for(i=0;i<this.boxes.length;i++) {
-
+				if(typeof(this.boxes[i].backgroundOpacity)=="undefined") this.boxes[i].backgroundOpacity=1;
+				if(typeof(this.boxes[i].backgroundColour)=="undefined") this.boxes[i].backgroundOpacity=0;
+		    	
 		    	if(this.boxes[i].contentType=="image") { //if image is not supplied a size, make it same as image
 					if(typeof(this.boxes[i].width)=="undefined") this.boxes[i].width=(this.boxes[i].content.width*100)/this.width;
 					if(typeof(this.boxes[i].height)=="undefined") this.boxes[i].height=(this.boxes[i].content.height*100)/this.height;
 					if(this.boxes[i].width=="original") this.boxes[i].width=(this.boxes[i].content.width*100)/this.width;					
 					if(this.boxes[i].height=="original") this.boxes[i].height=(this.boxes[i].content.height*100)/this.height;					
+			
+					if(typeof(this.boxes[i].left)=="string") this.boxes[i].left = parseFloat(this.boxes[i].left)*this.width*0.01;
+					if(typeof(this.boxes[i].top)=="string") this.boxes[i].top = parseFloat(this.boxes[i].top)*this.height*0.01;
+					if(typeof(this.boxes[i].width)=="string") this.boxes[i].width = parseFloat(this.boxes[i].width)*this.width*0.01;
+					if(typeof(this.boxes[i].height)=="string") this.boxes[i].height = parseFloat(this.boxes[i].height)*this.height*0.01;
+
 
 					this.boxes[i].boxLeft=(this.boxes[i].margin+this.boxes[i].left)*this.width*0.01;
 			    	this.boxes[i].boxTop=(this.boxes[i].margin+this.boxes[i].top)*this.height*0.01;
@@ -186,6 +246,11 @@ define([
 			    	// pw=(this.boxes[i].width-this.boxes[i].padding*2)*this.width*0.01;
 			    	// if(mw>pw) 
 			    	//set actual text properties
+					if(typeof(this.boxes[i].left)=="string") this.boxes[i].left = parseFloat(this.boxes[i].left)*this.width*0.01;
+					if(typeof(this.boxes[i].top)=="string") this.boxes[i].top = parseFloat(this.boxes[i].top)*this.height*0.01;
+					if(typeof(this.boxes[i].width)=="string") this.boxes[i].width = parseFloat(this.boxes[i].width)*this.width*0.01;
+					if(typeof(this.boxes[i].height)=="string") this.boxes[i].height = parseFloat(this.boxes[i].height)*this.height*0.01;
+
 			    	this.ctx.font = this.boxes[i].fontStyle + " " + this.boxes[i].fontSize + "px " + this.boxes[i].fontName;
 			    	this.ctx.textBaseline = 'top';
 			    	var maxWidth=(this.boxes[i].width-this.boxes[i].padding*2)*this.width*0.01;

@@ -154,6 +154,11 @@ define([
                            //imagelist.push("http://lorempixel.com/300/300/sports/");
             };
 
+            TileData.cornerArrow = new Image;
+            TileData.cornerArrow.src = Config.REMOTE_PATH + "images/corner-arrow.png";
+            imagelist.push(Config.REMOTE_PATH + "images/corner-arrow.png");
+
+
             return imagelist;
         },
 
@@ -246,14 +251,14 @@ define([
             Config.mouse.button = false;
         },
 
-        onTouchStart : function (e) {
-            e.preventDefault();
-            // Config.downAt.x = e.originalEvent.touches[0].clientX + document.body.scrollLeft;
-            // Config.downAt.y = e.originalEvent.touches[0].clientY + document.body.scrollTop;
-            grid.mousefollow.x = e.originalEvent.touches[0].clientX;
-            grid.mousefollow.y = e.originalEvent.touches[0].clientY;  
-            Config.mouse.x = e.originalEvent.touches[0].clientX;
-            Config.mouse.y = e.originalEvent.touches[0].clientY;           
+        onTouchStart : function (a) {
+            a.preventDefault();
+            Config.mouse.x = a.originalEvent.touches[0].clientX + document.body.scrollLeft;
+            Config.mouse.y = a.originalEvent.touches[0].clientY + document.body.scrollTop;
+            // downAt.x = Config.mouse.x;
+            // downAt.y = Config.mouse.y;
+
+ 
             Config.mouse.button = true;
             Config.mouse.dragDistance = 0;
 
