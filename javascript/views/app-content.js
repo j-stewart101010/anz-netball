@@ -91,7 +91,6 @@ define([
         },
 
         resize : function () {
-            console.log('resizing');
             _self.resizing = true;
             clearTimeout(_self.resize_timer);
             _self.resize_timer = setTimeout(function() {

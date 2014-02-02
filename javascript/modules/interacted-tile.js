@@ -66,8 +66,6 @@ define([
   InteractedTile.prototype.sentClick = function (x, y) {
     if(this.flippable) {
       //scan through model data and flip&scale back any others that were flipped
-      
-
 
       if(this.tileType=="image") {
         // if(TileData.content[i].scaleProgress==1 || TileData.content[i].scaleDirection>0) {
@@ -128,7 +126,7 @@ define([
         };
       };
 
-      if(this.tileType=="video") {
+      if(this.tileType=="video" || this.tileType=="fliplink") {
         if(this.flipProgress==1 || this.flipDirection>0) {
           //flipped or flipping to and scaled or scaling up
           this.flipDirection = -0.027;

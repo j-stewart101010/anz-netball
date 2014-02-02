@@ -111,6 +111,11 @@ define([
                         TileData.content[i].storyimage.src = Config.REMOTE_PATH + TileData.content[i].storyimageurl;
                         imagelist.push(Config.REMOTE_PATH + TileData.content[i].storyimageurl);
                     break;
+                    case "fliplink":
+                        TileData.content[i].image = new Image;
+                        TileData.content[i].image.src = Config.REMOTE_PATH + TileData.content[i].subimageurl;
+                        imagelist.push(Config.REMOTE_PATH + TileData.content[i].subimageurl);
+                    break;                    
                     case "video":
                         tilescale = 2;
                         TileData.content[i].image = new Image;

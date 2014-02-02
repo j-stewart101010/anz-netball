@@ -80,7 +80,6 @@ define([
         case "text":
         //break;
         case "textlink":
-          console.log(TileData.content[i]);
           TileData.content[i].box = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:TileData.content[i].colour}));
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].title, {left:10,width:80,height:25,top:10,padding:0,fontSize:35,lineHeight:40,contentType:"text",align:"center"}));
@@ -88,8 +87,19 @@ define([
           TileData.content[i].box.calculate();
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].image, {width:100,top:60,left:0,align:"center",contentType:"image",id:"button"}));
           TileData.content[i].box.calculate();
-          console.log("text/textlink");
-          console.log(TileData.content[i].box);
+
+        case "fliplink":
+          TileData.content[i].box = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:TileData.content[i].colour}));
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].title, {left:10,width:80,height:25,top:10,padding:0,fontSize:35,lineHeight:40,contentType:"text",align:"center"}));
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].subtext, {left:10,width:80,height:25,top:35,padding:0,fontSize:15,lineHeight:17,contentType:"text",align:"center"}));
+          TileData.content[i].box.calculate();
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].image, {width:100,top:60,left:0,align:"center",contentType:"image",id:"button"}));
+          TileData.content[i].box.calculate(); 
+                 
+          TileData.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});          
+          TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:TileData.content[i].colour}));          
+          TileData.content[i].backbox.calculate();
         break;
         case "image":
           TileData.content[i].box = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
@@ -97,9 +107,7 @@ define([
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.cornerArrow, {left:95.571,top:95.285,width:4.428,height:4.714,contentType:"image",opacity:0,id:"cornerarrow"}));
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, "", {left:95.571,top:95.285,width:4.428,height:4.714,contentType:"text",backgroundColour:"128,192,255",backgroundOpacity:1,opacity:0,id:"cornerarrowoverlay"}));
           TileData.content[i].box.calculate();
-          console.log("image");
 
-          console.log(TileData.content[i].box);
           TileData.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
           TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:TileData.content[i].backcolour}));
           TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, TileData.content[i].storyimage, {top:25,left:5,width:13,height:13,contentType:"image"}));
@@ -113,9 +121,6 @@ define([
           TileData.content[i].backbox.calculate();
           TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, TileData.content[i].storytags, {top:TileData.content[i].backbox.last().bottom,left:21,width:60,height:20,textunderlay:"fit",padding:1.2,fontSize:9,contentType:"text",align:"left"}));
           TileData.content[i].backbox.calculate();
-
-          console.log("image backbox");
-          console.log(TileData.content[i].backbox);
         break;
         case "video":
 
@@ -128,9 +133,7 @@ define([
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].textsubject, {contentType:"text",left:8.5,top:20,width:80,height:20,padding:2,fontSize:22,backgroundColour:"0,0,0",backgroundOpacity:0.35,textunderlay:"fit"}));
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].subimage, {left:7,top:85,contentType:"image",width:"original",height:"orignial"}));
           TileData.content[i].box.calculate();
-
-          console.log("video");
-          console.log(TileData.content[i].box);    
+   
           TileData.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
           TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:"0,0,0"}));
           TileData.content[i].backbox.calculate();
@@ -151,23 +154,19 @@ define([
 
   Grid.prototype.closedModal = function() {
     //this.renderDisabled=false;
-    console.log('unflipped ' + _self.flippedVideoTile);
     TileData.content[_self.flippedVideoTile].flipDirection = -0.027;
   };
 
-  Grid.prototype.sentClick = function() {
+  Grid.prototype.sentClick = function() {  
     var i=this.mouseHoverIndex;
     if(i<0) return;
     //console.log("Clicked "+i);
-    //console.log(this.mouseHoverWorldX + ","+this.mouseHoverWorldY);
-    
+    //console.log(this.mouseHoverWorldX + ","+this.mouseHoverWorldY); 
     if(!this.mouseHoverInteract) return;
-    if(this.interactingTiles[i].flippable) {
+    if(this.interactingTiles[i].flippable) {     
       //scan through model data and flip&scale back any others that were flipped
-      
 
-
-      if(this.interactingTiles[i].tileType=="image") {
+      if(this.interactingTiles[i].tileType=="image" || this.interactingTiles[i].tileType=="fliplink") {
         // if(TileData.content[i].scaleProgress==1 || TileData.content[i].scaleDirection>0) {
         //   if(TileData.content[i].flipProgress==1 || TileData.content[i].flipDirection>0) {
         //     //flipped or flipping to and scaled or scaling up
@@ -415,7 +414,6 @@ define([
     };
     //console.log("want to destroy "+ this.interactingTilesDestroyList.length);
     for(i=0;i<this.interactingTilesDestroyList.length;i++) {
-      console.log("Destroyed index "+ this.interactingTilesDestroyList[i]);
       this.interactingTiles.splice(this.interactingTilesDestroyList[i],this.interactingTilesDestroyList[i]);
     };
 
@@ -445,6 +443,17 @@ define([
                                                        worldY:this.mouseHoverWorldY }));
         break;
         case "textlink":
+        case "fliplink":
+          this.interactingTiles.push(new InteractedTile({boxes:[TileData.content[i].box,
+                                                                TileData.content[i].backbox],
+                                                         tileType:TileData.content[i].tiletype,
+                                                         scale:TileData.content[i].scale,
+                                                         flippable:TileData.content[i].flippable,
+                                                         pixelSize:this.squareWidth,
+                                                         offScreenCtx:this.offScreenCtx,
+                                                         modelIndex:i,
+                                                         worldX:this.mouseHoverWorldX,
+                                                         worldY:this.mouseHoverWorldY }));        
         case "image":
         case "video":
         console.log("New tile #" + this.interactingTiles.length )

@@ -28,6 +28,8 @@ define([
             _self.$content = _self.$el.find('.content');  
             _self.$forms = _self.$content.find('form');
 
+            _self.resize_timer;
+
             _self.calc_larger_flip_tile();
             _self.patch_mobile_transition_for_flip();
 
@@ -60,10 +62,10 @@ define([
                         $back = $(this).find('.back');
 
                     if ($front.children().height() > $back.children().height()) {
-                        $(this).addClass('front-led');
+                        $(this).removeClass('back-led').addClass('front-led');
                     }
                     else {
-                        $(this).addClass('back-led');   
+                        $(this).removeClass('front-led').addClass('back-led'); 
                     }
                 });
             }
@@ -180,9 +182,13 @@ define([
         },      
 
         resize : function () {
-            _self.match_height();
-            _self.calc_larger_flip_tile();
-            _self.scale_enlarged_images();
+            _self.resizing = true;
+            clearTimeout(_self.resize_timer);
+            _self.resize_timer = setTimeout(function() {
+                _self.match_height();
+                _self.calc_larger_flip_tile();
+                _self.scale_enlarged_images();
+            }, 100);
         },
 
         match_height : function () {

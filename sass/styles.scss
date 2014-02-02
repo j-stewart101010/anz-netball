@@ -602,7 +602,6 @@ body {
 	}
 
 	.col {
-		height: 100%;
 		padding-left: 0;
 		padding-right: 0;
 	}
@@ -636,6 +635,10 @@ body {
 			&.half-length {
 				height: 50%;
 			}					
+		}
+
+		.col {
+			height: 100%;
 		}
 
 		.grid {

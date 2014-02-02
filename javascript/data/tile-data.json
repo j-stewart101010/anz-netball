@@ -78,12 +78,13 @@
         "storydescription":"Keeping Jen company at the Box Hill high courts, and giving her one or two coaching tips to share with the juniors. LOL ;)",
         "storytags":"#netballnation #besties #nothingbutlove #iheartnetball #teamplayer"},
 
-       {"tiletype":"textlink",
+       {"tiletype":"fliplink",
         "colour":"101,179,228",
         "title":"ANZ NetSetGo",
         "subtext":"Netball is a ball sport played by two teams of seven players.",
         "subimageurl":"images/subimage-more.png",
-        "linkurl":"http://localhost.anz-netball/ANZ-NetSetGo"},
+        "linkurl":"http://localhost.anz-netball/ANZ-NetSetGo",
+        "flippable": true},
 
        {"tiletype":"image",
         "imageurl":"images/005.jpg",
