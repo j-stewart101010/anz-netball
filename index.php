@@ -26,7 +26,7 @@
 				<div class="brand clearfix">
 					<div class="logos">
 						<a href="/" class="anz-logo"></a>
-						<a href="/" class="nbn-logo">Netball<b>Nation</b></a>
+						<a href="/" class="nbn-logo">Netball<em>Nation</em></a>
 					</div>
 					<span class="sharp-brand-angle"></span>
 
@@ -71,9 +71,9 @@
 
 				<div class="col col-md-8 col-lg-8 center-tile shade-two">
 
-					<div id="video-case-studies" class="flip-container front-led">
+					<div id="video-case-studies" class="flip-container">
 						<div class="flipper">
-							<div class="front">
+							<div class="front shade-two">
 								<article class="ambassador-video-tile tile shade-two">
 									<div class="video-tile-content">
 									
@@ -100,7 +100,7 @@
 									
 								</article>
 							</div>
-							<div id="video-side" class="back">
+							<div id="video-side" class="back shade-two">
 								<!-- Dynamic content injected in here -->
 							</div>
 						</div>
@@ -116,9 +116,9 @@
 
 				<div class="col col-sm-12 col-md-4 col-lg-4 clearfix shade-eleven">
 
-					<div id="user-story-box-one" class="flip-container front-led">
+					<div id="user-story-box-one" class="flip-container">
 						<div class="flipper">
-							<div class="front clearfix">
+							<div class="front shade-eleven clearfix">
 
 								<div class="col col-xs-12 col-sm-12 col-md-2 col-lg-2">
 									<div class="col col-xs-6">
@@ -177,7 +177,7 @@
 								</div>								
 
 							</div>
-							<div class="back">
+							<div class="back shade-eleven">
 
 								<a id="user-story-one" class="outter-tile shade-three collapse" data-enlage="toggle" data-enlarge-target="#user-story-image-one" data-enlarge-to-target="#user-story-box-one" data-toggle="collapse" data-target="#user-story-one" data-flip="toggle" data-flip-target="#user-story-box-one" href="#">
 									<article class="story-tile content-tile tile">

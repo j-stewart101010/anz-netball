@@ -28,3 +28,22 @@
 		}
 	}	
 }
+
+.flippy {
+	overflow: hidden!important;
+
+	.group.outter-tile {
+		.tile {
+			position: relative;
+			left: -15px;
+		}
+	}
+}
+
+.ie9 {
+	.community {
+		#apply-for-grant-signup {
+			background-color: transparent;
+		}
+	}		
+}

@@ -27,7 +27,7 @@
 				<div class="brand clearfix">
 					<div class="logos">
 						<a href="/" class="anz-logo"></a>
-						<a href="/" class="nbn-logo">Netball<b>Nation</b></a>
+						<a href="/" class="nbn-logo">Netball<em>Nation</em></a>
 					</div>
 					<span class="sharp-brand-angle"></span>
 
@@ -61,8 +61,8 @@
 				<div class="col col-md-6">
 					<div class="grid active">
 
-						<div class="col col-xs-12 col-md-4 col-lg-4">
-							<div class="col-half col col-xs-12 col-md-12">						
+						<div class="col col-md-4 col-lg-4 clearfix">
+							<div class="col-half col col-md-12">						
 								<div class="image-wrap set">
 									<img src="http://lorempixel.com/g/612/612/">
 								</div>						
@@ -124,9 +124,9 @@
 
 						<div class="col col-md-8 col-lg-8 center-tile shade-sixteen">
 
-							<div id="video-case-studies" class="flip-container front-led">
+							<div id="video-case-studies" class="flip-container">
 								<div class="flipper">
-									<div class="front">
+									<div class="front shade-sixteen">
 										<article class="ambassador-video-tile tile shade-sixteen">
 											<div class="video-tile-content">
 												<hgroup>
@@ -152,7 +152,7 @@
 											<span class="loader"></span>
 										</article>
 									</div>
-									<div id="video-side" class="back">
+									<div id="video-side" class="back shade-sixteen">
 										<!-- Dynamic content injected in here -->
 
 										<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#video-case-studies" data-video-id="19072376" data-video="close">

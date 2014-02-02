@@ -29,7 +29,7 @@
 				<div class="brand clearfix">
 					<div class="logos">
 						<a href="/" class="anz-logo"></a>
-						<a href="/" class="nbn-logo">Netball<b>Nation</b></a>
+						<a href="/" class="nbn-logo">Netball<em>Nation</em></a>
 					</div>
 					<span class="sharp-brand-angle"></span>
 
@@ -74,8 +74,8 @@
 					</div>
 				</div>
 
-				<div class="col col-xs-12 col-md-2 col-lg-2">
-					<div class="col-half col col-xs-12 col-md-12">
+				<div class="col col-md-2 col-lg-2">
+					<div class="col-half col col-md-12 clearfix">
 						<div class="image-wrap set">
 							<img src="http://lorempixel.com/g/612/612/">
 						</div>
@@ -85,13 +85,11 @@
 					</div>
 				</div>
 
-				<div class="col col-sm-12 col-md-4 col-lg-4 clearfix">
+				<div class="col col-md-4 col-lg-4 clearfix">
 
-					<div id="video-case-studies" class="flip-container front-led">
+					<div id="video-case-studies" class="flip-container">
 						<div class="flipper">
-							<div class="front">
-
-
+							<div class="front shade-seven">
 
 								<article class="ambassador-video-tile tile shade-seven">
 									<div class="video-tile-content">
@@ -118,7 +116,7 @@
 								</article>
 
 							</div>
-							<div id="video-side" class="back">
+							<div id="video-side" class="back shade-seven">
 								<!-- Dynamic content injected in here -->
 
 								<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#video-case-studies" data-video-id="19072376" data-video="close">
@@ -139,7 +137,7 @@
 
 			<section class="grid">
 				
-				<div class="col col-xs-12 col-sm-12 col-md-2 col-lg-2">
+				<div class="col col-md-2 col-lg-2">
 					<div class="col-half col col-xs-6 col-md-12">
 						<div id="grid-image-five" class="image-wrap">
 							<img src="http://lorempixel.com/g/612/612/">
@@ -152,7 +150,7 @@
 					</div>
 				</div>
 
-				<div class="col col-xs-12 col-sm-12 col-md-2 col-lg-2">
+				<div class="col col-md-2 col-lg-2 clearfix">
 					<div class="col-half col col-xs-6 col-md-12">
 
 						<div id="link-one" class="flip-container">
@@ -203,8 +201,8 @@
 					</div>
 				</div>
 
-				<div class="col col-xs-12 col-md-2 col-lg-2">
-					<div class="col-half col col-xs-12 col-md-12">
+				<div class="col col-md-2 col-lg-2">
+					<div class="col-half col col-md-12">
 						<div class="image-wrap set">
 							<img src="http://lorempixel.com/g/612/612/">
 						</div>
@@ -214,8 +212,8 @@
 					</div>
 				</div>
 
-				<div class="col col-xs-12 col-md-2 col-lg-2">
-					<div class="col-half col col-xs-12 col-md-12">
+				<div class="col col-md-2 col-lg-2">
+					<div class="col-half col col-md-12">
 						<div class="image-wrap set">
 							<img src="http://lorempixel.com/g/612/612/">
 						</div>

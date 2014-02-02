@@ -27,7 +27,7 @@
 				<div class="brand clearfix">
 					<div class="logos">
 						<a href="/" class="anz-logo"></a>
-						<a href="/" class="nbn-logo">Netball<b>Nation</b></a>
+						<a href="/" class="nbn-logo">Netball<em>Nation</em></a>
 					</div>
 					<span class="sharp-brand-angle"></span>
 
@@ -68,7 +68,7 @@
 						</div>
 						<div class="col col-sm-8 col-md-8 center-tile">
 
-							<div id="clinics-wrap-up" class="flip-container front-led">
+							<div id="clinics-wrap-up" class="flip-container">
 								<div class="flipper">
 									<div class="front shade-fifteen">
 
@@ -133,9 +133,9 @@
 						<div class="carousel-inner">
 							<div class="item active shade-fifteen">				
 
-								<div id="clinics-qld-sa" class="flip-container front-led shade-seventeen">
+								<div id="clinics-qld-sa" class="flip-container shade-seventeen">
 									<div class="flipper">
-										<div class="front">
+										<div class="front shade-seventeen">
 
 											<article class="video-tile tile shade-sixteen">
 												<div class="video-tile-content">
@@ -192,7 +192,7 @@
 
 										</div>	
 
-										<div id="video-side-two" class="back">
+										<div id="video-side-two" class="back shade-seventeen">
 											<!-- Dynamic content injected in here -->
 											<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#clinics-qld-sa"data-video-id="19072376" data-video="close">
 												<div class="cross-icon">
@@ -222,9 +222,9 @@
 						<div class="carousel-inner">
 							<div class="item active shade-fifteen">
 
-								<div id="clinics-nsw-act" class="flip-container front-led">
+								<div id="clinics-nsw-act" class="flip-container">
 									<div class="flipper">
-										<div class="front">
+										<div class="front shade-fifteen">
 
 											<article class="video-tile tile shade-sixteen">
 												<div class="video-tile-content">
@@ -280,7 +280,7 @@
 
 										</div>	
 
-										<div id="video-side-three" class="back">
+										<div id="video-side-three" class="back shade-fifteen">
 											<!-- Dynamic content injected in here -->
 											<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#clinics-nsw-act"data-video-id="19072376" data-video="close">
 												<div class="cross-icon">
@@ -307,9 +307,9 @@
 						<div class="carousel-inner">
 							<div class="item active shade-fifteen">
 
-								<div id="clinics-wa-vic" class="flip-container front-led shade-seventeen">
+								<div id="clinics-wa-vic" class="flip-container shade-seventeen">
 									<div class="flipper">
-										<div class="front">
+										<div class="front shade-seventeen">
 
 											<article class="video-tile tile shade-sixteen">
 												<div class="video-tile-content">
@@ -366,7 +366,7 @@
 
 										</div>	
 
-										<div id="video-side-four" class="back">
+										<div id="video-side-four" class="back shade-seventeen">
 											<!-- Dynamic content injected in here -->
 											<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#clinics-wa-vic"data-video-id="19072376" data-video="close">
 												<div class="cross-icon">
@@ -405,7 +405,7 @@
 		<script data-main="javascript/main-content" src="bower_components/requirejs/require.js"></script>
 
 		<!-- <script src="bower_components/requirejs/require.js"></script>
-		<script src="build/main-content.js"></script>
+		<script src="build/main-content.js"></script>-->
 
     </body>
 </html>

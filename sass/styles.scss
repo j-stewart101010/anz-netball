@@ -26,11 +26,6 @@ body {
 		// overflow-y: hidden;
 		overflow-x: hidden;
 	}
-
-	@media screen and (max-height: $grid-max-height) {
-		// min-height: $grid-max-height;
-		// overflow-y: scroll;
-	}
 }
 
 // Master Head Module
@@ -49,7 +44,7 @@ body {
 	.nav-items {
 		position: relative;
 		float: right;
-		max-width: 85%;
+		width: 85%;
 		height: 100%;	
 	}
 
@@ -109,10 +104,6 @@ body {
 	}	
 
 	@media screen and (max-width: $screen-desktop) {
-		// .nav-items {
-		// 	max-width: 98.5%;
-		// }
-
 		.navigation {
 			li {
 				width: 20%;
@@ -385,15 +376,15 @@ body {
 	}
 
 	.nbn-logo {
-		text-transform: uppercase;
-		font-family: $font-family-sans-serif;
-		color: white;
-		font-size: $font-size-large;
+		font-family: $font-family-logo;
+		font-size: ($font-size-extra-large - 2);
 		vertical-align: super;
+		color: $brand-primary;
 
-		b {
-			font-family: $font-family-sans-serif-bold;
-			font-weight: normal;
+		em {
+			margin-left: 5px;
+			font-style: normal; 
+			color: white;
 		}
 	}
 }
@@ -456,7 +447,7 @@ body {
 	@extend %icon;
 	position: relative;
 	line-height: 1.2;
-	margin-left: -2px;
+	margin-left: -3px;
 	padding: 0 3px;
 	
 	.fa-angle-left, .fa-angle-right {
@@ -1514,9 +1505,13 @@ body {
     transition: 0.6s;
     transform-style: preserve-3d;
 
-    position: absolute;
+    // position: absolute;
     top: 0;
     left: 0;
+
+	@media screen and (min-width: $screen-desktop) {	
+		position: absolute;
+	}    
 }
 
 .back {
@@ -1547,6 +1542,12 @@ body {
 		position: relative;
 	}
 	.front {
+		position: absolute;
+	}
+}
+
+.flippy {
+	.back {
 		position: absolute;
 	}
 }

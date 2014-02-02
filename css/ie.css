@@ -14,3 +14,18 @@
 .ie9 .navigation.block a:before, .navigation.block a:after {
   display: none;
 }
+
+/* line 32, ../sass/ie.scss */
+.flippy {
+  overflow: hidden !important;
+}
+/* line 36, ../sass/ie.scss */
+.flippy .group.outter-tile .tile {
+  position: relative;
+  left: -15px;
+}
+
+/* line 45, ../sass/ie.scss */
+.ie9 .community #apply-for-grant-signup {
+  background-color: transparent;
+}

@@ -27,7 +27,7 @@
 				<div class="brand clearfix">
 					<div class="logos">
 						<a href="/" class="anz-logo"></a>
-						<a href="/" class="nbn-logo">Netball<b>Nation</b></a>
+						<a href="/" class="nbn-logo">Netball<em>Nation</em></a>
 					</div>
 					<span class="sharp-brand-angle"></span>
 
@@ -216,9 +216,9 @@
 
 				<div class="col col-md-6">
 
-					<div id="video-case-studies" class="flip-container front-led shade-one">
+					<div id="video-case-studies" class="flip-container shade-one">
 						<div class="flipper">
-							<div class="front">
+							<div class="front shade-one">
 
 
 
@@ -275,7 +275,7 @@
 								</article>
 
 							</div>
-							<div id="video-side" class="back">
+							<div id="video-side" class="back shade-two">
 								<!-- Dynamic content injected in here -->
 
 								<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#video-case-studies" data-video-id="19072376" data-video="close">
@@ -332,7 +332,7 @@
 												<div>Another grants content can go here, this is to demonstrate content.</div>
 											</li>
 										</ul>
-										<a class="btn btn-sm btn-default" data-flip="toggle" data-flip-target="#community-grants" href="#"><i class="fa fa-angle-left"></i> Back</a>
+										<a class="btn btn-sm btn-default btn-action" data-flip="toggle" data-flip-target="#community-grants" href="#"><i class="fa fa-angle-left"></i> Back</a>
 									</article>
 								</div>
 
