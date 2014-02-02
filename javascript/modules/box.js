@@ -27,22 +27,23 @@ define([
 
 	Box.constructor = Box;
 
-	Box.prototype.update = function (id,content,properties) {
+	Box.prototype.update = function (id,properties) {
+		//console.log(id, properties);
 		if(this.contentType=="container") {
 			for(var i=0;i<this.boxes.length;i++) {
-				this.boxes[i].update(id,content,properties);
+				this.boxes[i].update(id,properties);
 			};
 		} else {
 			if(this.id=id) {
 				$.each(properties, function(key, value) {
 				_self[key] = value;
 				});
-				if(typeof(content)!="undefined") {
-					if(this.contentType=="container") this.boxes = newContent;					
-					if(this.contentType=="text" || this.contentType=="image") this.content = newContent;
-					this.ctx=ctx;
-					if(typeof(this.lineHeight)=="undefined") this.lineHeight=this.fontSize*1.1;
-				};
+				// if(typeof(content)!="undefined") {
+				// 	if(this.contentType=="container") this.boxes = content;					
+				// 	if(this.contentType=="text" || this.contentType=="image") this.content = content;
+				// 	//this.ctx=ctx;
+				// 	if(typeof(this.lineHeight)=="undefined") this.lineHeight=this.fontSize*1.1;
+				// };
 			};
 
 		};
