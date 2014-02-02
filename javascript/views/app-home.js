@@ -205,8 +205,8 @@ define([
 
         onMouseDown : function (a) {
             a.preventDefault();
-            Config.downAt.x = Config.mouse.x;
-            Config.downAt.y = Config.mouse.y;
+            // Config.downAt.x = Config.mouse.x;
+            // Config.downAt.y = Config.mouse.y;
             Config.mouse.button = true;
             Config.mouse.dragDistance = 0;
         },
@@ -226,8 +226,8 @@ define([
             a.preventDefault();
             Config.mouse.x = a.originalEvent.touches[0].clientX + document.body.scrollLeft;
             Config.mouse.y = a.originalEvent.touches[0].clientY + document.body.scrollTop;
-            downAt.x = Config.mouse.x;
-            downAt.y = Config.mouse.y;
+            // downAt.x = Config.mouse.x;
+            // downAt.y = Config.mouse.y;
             Config.mouse.button = true;
             Config.mouse.dragDistance = 0;
         },

@@ -86,6 +86,10 @@ define([
                        //imagelist.push("http://lorempixel.com/300/300/sports/");
         };
 
+        TileData.cornerArrow = new Image;
+        TileData.cornerArrow.src = Config.REMOTE_PATH + "images/corner-arrow.png";
+        imagelist.push(Config.REMOTE_PATH + "images/corner-arrow.png");
+
         _self.assetLoader.addImages(imagelist);
         _self.assetLoader.load();                   
     };

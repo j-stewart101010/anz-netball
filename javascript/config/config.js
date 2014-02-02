@@ -16,10 +16,6 @@ define([
             track : {
                   x: 0,
                   y: 0
-            },
-            downAt : {
-                  x: 0,
-                  y: 0
             }
       };
 
