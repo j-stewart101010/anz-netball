@@ -6,10 +6,9 @@ define([
         'modules/grid-button',
         'modules/interacted-tile',
         'modules/box',
-        'views/video-embed',
         'bootstrap_transition',    
         'bootstrap_modal',        
-], function ($, Config, TileData, GridButton, InteractedTile, Box, VideoEmbedView) {
+], function ($, Config, TileData, GridButton, InteractedTile, Box) {
   'use strict';
 
   var _self;
@@ -17,7 +16,7 @@ define([
   var Grid = function (w, h) {
     _self=this;
 
-    console.log("Grid");
+    $(document).on('hidden.bs.modal', this.closedModal );
 
     this.camera = {
       x: 0,
@@ -38,8 +37,6 @@ define([
     this.squareHeight = 306;
 
     this.resize(w, h);
-
-    $(document).on('hidden.bs.modal', this.closedModal );
    
     this.offScreen = document.createElement("canvas"); 
     this.offScreen.width = this.squareWidth*2;// this.squareWidth; 
@@ -148,7 +145,9 @@ define([
 
   Grid.prototype.closedModal = function() {
     //this.renderDisabled=false;
-    TileData.content[_self.flippedVideoTile].flipDirection = -0.027;
+    TileData.content[_self.flippedVideoTile.modelIndex].flipDirection = -0.027;
+    _self.flippedVideoTile.flipClose = true;
+    _self.flippedVideoTile.sentClick(this.mouseHoverTileX,this.mouseHoverTileY);
   };
 
   Grid.prototype.sentClick = function() {  
@@ -229,6 +228,7 @@ define([
 
           this.centerX=this.mouseHoverWorldX;//+TileData.content[i].scale*this.squareWidth*0.5;
           this.centerY=this.mouseHoverWorldY;//+TileData.content[i].scale*this.squareHeight*0.5;
+          this.flippedVideoTile = this.interactingTiles[i];
           this.interactingTiles[i].sentClick(this.mouseHoverTileX,this.mouseHoverTileY);
       };
       for(var j=0;j<this.interactingTiles.length;j++){
@@ -268,7 +268,6 @@ define([
 
     this.recalculateinterval++;
     this.recalculateinterval%=360;
-    console.log(this.recalculateinterval);
     if(this.recalculateinterval==0) {
       for(i=0;i<TileData.content.length;i++) {
          TileData.content[i].box.calculate();
@@ -353,8 +352,6 @@ define([
                                                          worldY:this.mouseHoverWorldY }));        
         case "image":
         case "video":
-        console.log("New tile #" + this.interactingTiles.length )
-
         this.interactingTiles.push(new InteractedTile({boxes:[TileData.content[i].box,
                                                               TileData.content[i].backbox],
                                                        tileType:TileData.content[i].tiletype,

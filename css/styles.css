@@ -4311,24 +4311,33 @@ td.visible-print {
   bottom: 0;
   left: 0;
   z-index: 1040;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  background-color: black;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 1s;
+  transition-duration: 1s;
 }
-/* line 70, ../sass/_modals.scss */
+/* line 76, ../sass/_modals.scss */
 .modal-backdrop.fade {
   opacity: 0;
   filter: alpha(opacity=0);
 }
-/* line 71, ../sass/_modals.scss */
+/* line 77, ../sass/_modals.scss */
 .modal-backdrop.in {
   opacity: 0.5;
   filter: alpha(opacity=50);
 }
 
-/* line 74, ../sass/_modals.scss */
+/* line 80, ../sass/_modals.scss */
 .modal-header {
   position: absolute;
 }
 
-/* line 78, ../sass/_modals.scss */
+/* line 84, ../sass/_modals.scss */
 .modal-body {
   height: 100%;
 }

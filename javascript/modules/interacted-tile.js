@@ -9,7 +9,7 @@ define([
         'views/video-embed',
         'bootstrap_transition',    
         'bootstrap_modal',        
-], function ($, Config, TileData, GridButton, InteractedTile, DoubleSpring, Box, VideoEmbedView) {
+], function ($, Config, TileData, GridButton, InteractedTile, Box, VideoEmbedView) {
   'use strict';
 
   var _self;
@@ -26,6 +26,7 @@ define([
     this.currentFace=0;
     this.flipFace=1;
     this.flippable=info.flippable;
+    this.flipClose = false;
     this.scaleProgress=0;
     this.scaleDirection=0;
     this.worldX=info.worldX;
@@ -37,9 +38,7 @@ define([
     this.overTime=0;
     this.hoverScale=0;
     this.removeCounter=0;
-    this.pixelSize=info.pixelSize
-
-    console.log("New InteractedTile: "+ this.worldX + ","+this.worldY);
+    this.pixelSize=info.pixelSize; 
   };
 
   InteractedTile.constructor = InteractedTile;
@@ -125,8 +124,9 @@ define([
           };       
         };
       };
-
+      
       if(this.tileType=="video" || this.tileType=="fliplink") {
+
         if(this.flipProgress==1 || this.flipDirection>0) {
           //flipped or flipping to and scaled or scaling up
           this.flipDirection = -0.027;
@@ -165,17 +165,18 @@ define([
   };
 
   InteractedTile.prototype.onFlip = function() {
+    console.log(this);
     if(this.tileType=="video") {
+      if (this.flipClose === false) {
+        $('body').append(new VideoEmbedView({
+          modal : true,
+          video_id : TileData.content[this.modelIndex].videoid
+        }).render().el);
+      }
       //if(this.currentFace==1) this.flipFace=0;
       //if(this.currentFace==0) this.flipFace=1;
-      
       //this.renderDisabled=true;
 
-      // _self.flippedVideoTile=modelIndex;
-      // $('body').append(new VideoEmbedView({ 
-      //   modal : true,
-      //   video_id : TileData.content[this.modelIndex].videoid
-      // }).render().el);
     };
     if(this.tileType=="image") {
       //if(this.currentFace==1) this.flipFace=0;

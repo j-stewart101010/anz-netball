@@ -28,7 +28,7 @@ define([
 
             this.$el.addClass('home');
             this.$master_head = this.$el.find('.master-head');
-            this.$master_foot = this.$el.find('.master-foot');                 
+            this.$master_foot = this.$el.find('.master-foot');
 
             $.when(TileCollection.fetch())
                 .done(function () {
