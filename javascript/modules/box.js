@@ -66,6 +66,12 @@ define([
 		return {right:this.boxes[this.boxes.length-1].right, bottom:this.boxes[this.boxes.length-1].bottom};
 	};
 
+	Box.prototype.index = function (index)  {
+		if(typeof(this.boxes)=="undefined") return {top:0,bottom:0,left:0,right:0};
+		if(this.boxes.length==0) return {top:0,bottom:0,left:0,right:0};
+		return {top:this.boxes[index].top, bottom:this.boxes[index].bottom,left:this.boxes[index].left, right:this.boxes[index].right};
+	};	
+
 	Box.prototype.addBox = function (newBox)  {
 	//	console.log(newBox);
 		if(typeof(this.boxes)!="undefined") this.boxes.push(newBox);

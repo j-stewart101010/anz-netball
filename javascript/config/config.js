@@ -5,7 +5,9 @@ define([
 
       var Config = {
 
-            REMOTE_PATH : "/",
+            REMOTE_PATH : "",
+
+            worldWidth : 5,
 
             mouse : {
                   x: 0,

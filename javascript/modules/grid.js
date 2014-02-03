@@ -31,7 +31,7 @@ define([
       y: Config.mouse.y
     };
 
-    this.recalculateinterval=0;
+    this.recalculateinterval=350;
     
     this.canvasOffset = 0;
     this.squareWidth = 306;
@@ -81,37 +81,25 @@ define([
         //break;
         case "textlink":
           TileData.content[i].box = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container",backgroundColour:TileData.content[i].colour});
-          // TileData.content[i].box.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:TileData.content[i].colour}));
-          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].title, {left:10,width:80,top:0,padding:0,fontSize:35,lineHeight:40,contentType:"text",align:"center"}));
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].title, {left:10,width:80,top:10,padding:0,fontSize:35,lineHeight:40,contentType:"text",align:"center"}));
           
           TileData.content[i].box.calculate();
-          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].subtext, {left:10,width:80,top:TileData.content[i].box.last().bottom,padding:0,fontSize:15,lineHeight:17,contentType:"text",align:"center"}));
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].subtext, {left:10,width:80,top:TileData.content[i].box.last().bottom,padding:0,fontSize:16,lineHeight:25,contentType:"text",align:"center"}));
           TileData.content[i].box.calculate();
-          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].image, {width:100,height:"original",top:TileData.content[i].box.last().bottom,left:0,align:"center",contentType:"image",id:"button"}));
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].image, {width:100,height:"original",top:TileData.content[i].box.last().bottom+10,left:0,align:"center",contentType:"image",id:"button"}));
           TileData.content[i].box.calculate();
-
-          // TileData.content[i].box = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
-          // TileData.content[i].box.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:TileData.content[i].colour}));
-          // TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].title, {left:10,width:80,height:25,top:10,padding:0,fontSize:35,lineHeight:40,contentType:"text",align:"center"}));
-          // TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].subtext, {left:10,width:80,height:25,top:35,padding:0,fontSize:15,lineHeight:17,contentType:"text",align:"center"}));
-          // TileData.content[i].box.calculate();
-          // TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].image, {width:100,top:60,left:0,align:"center",contentType:"image",id:"button"}));
-          // TileData.content[i].box.calculate();
         break;
         case "fliplink":
           TileData.content[i].box = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container",backgroundColour:TileData.content[i].colour});
-          // TileData.content[i].box.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:TileData.content[i].colour}));
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].title, {left:10,width:80,height:25,top:10,padding:0,fontSize:35,lineHeight:40,contentType:"text",align:"center"}));
-          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].subtext, {left:10,width:80,height:25,top:35,padding:0,fontSize:15,lineHeight:17,contentType:"text",align:"center"}));
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].subtext, {left:10,width:80,height:25,top:TileData.content[i].box.last().bottom+10,padding:0,fontSize:16,lineHeight:25,contentType:"text",align:"center"}));
           TileData.content[i].box.calculate();
-          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].image, {width:100,top:60,left:0,align:"center",contentType:"image",id:"button"}));
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].image, {width:100,top:TileData.content[i].box.last().bottom+10,left:0,align:"center",contentType:"image",id:"button"}));
           TileData.content[i].box.calculate();
                  
-          TileData.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});          
-          TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:TileData.content[i].backcolour}));
+          TileData.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container",backgroundColour:TileData.content[i].backcolour});          
           TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, TileData.content[i].subimage, {width:100,top:20,left:0,align:"center",contentType:"image",id:"button"}));           
           TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, TileData.content[i].subimagetwo, {width:100,top:70,left:0,align:"center",contentType:"image",id:"button"}));          
-          console.log(TileData.content[i].subimagetwo);
           TileData.content[i].backbox.calculate();
         break;
         case "image":
@@ -121,8 +109,7 @@ define([
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, "", {left:95.571,top:95.285,width:4.428,height:4.714,contentType:"text",backgroundColour:"128,192,255",backgroundOpacity:1,opacity:0,id:"cornerarrowoverlay"}));
           TileData.content[i].box.calculate();
 
-          TileData.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container",backgroundColour:TileData.content[i].colour});
-          // TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:TileData.content[i].backcolour}));
+          TileData.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container",backgroundColour:TileData.content[i].backcolour});
           TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, TileData.content[i].storyimage, {top:25,left:5,width:13,height:13,contentType:"image"}));
           TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, TileData.content[i].storyusername, {top:25,left:21,width:60,height:20,textunderlay:"fit",padding:0.9,fontSize:10,fontstyle:"bold",contentType:"text",align:"left"}));
           TileData.content[i].backbox.calculate();
@@ -145,7 +132,6 @@ define([
           TileData.content[i].box.calculate();
    
           TileData.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container",backgroundColour:TileData.content[i].colour});
-          // TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:"0,0,0"}));
           TileData.content[i].backbox.calculate();
         };
     };
@@ -282,8 +268,8 @@ define([
 
     this.recalculateinterval++;
     this.recalculateinterval%=360;
+    console.log(this.recalculateinterval);
     if(this.recalculateinterval==0) {
-      // console.log("recalculate");
       for(i=0;i<TileData.content.length;i++) {
          TileData.content[i].box.calculate();
       };
@@ -294,8 +280,8 @@ define([
     
   //use the difference to move the camera when holding
     if(!this.dragDisabled && Config.mouse.button) {
-    	this.camera.momentumx = (this.mousefollow.x-Config.mouse.x)*0.4;
-    	this.camera.momentumy = (this.mousefollow.y-Config.mouse.y)*0.4;       	
+      this.camera.momentumx = (this.mousefollow.x-Config.mouse.x)*0.4;
+      this.camera.momentumy = (this.mousefollow.y-Config.mouse.y)*0.4;        
     };
     if(this.dragDisabled>0) this.dragDisabled--;
 

@@ -1,11 +1,12 @@
 /*global define*/
 define([
-	'underscore'
-], function (_) {
+	'underscore',
+        'config/config'
+], function (_, Config) {
 
     var TileData = {
         content: '',
-        worldWidth: 5
+        worldWidth: Config.worldWidth
     };
 
     return TileData;
