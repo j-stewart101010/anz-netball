@@ -75,7 +75,7 @@ define([
     this.interactingTiles=[];
     this.interactingTilesDestroyList=[];
 
-    for(var i=0;i<TileData.content.length;i++) {
+    for(var i=0;i<TileData.contentLength;i++) {
       switch(TileData.content[i].tiletype) {
         case "text":
         //break;
@@ -107,8 +107,8 @@ define([
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].image, {width:100,top:60,left:0,align:"center",contentType:"image",id:"button"}));
           TileData.content[i].box.calculate();
                  
-          TileData.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});          
-          TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:TileData.content[i].backcolour}));
+          TileData.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container",backgroundColour:TileData.content[i].backcolour});          
+          // TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:TileData.content[i].backcolour}));
           TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, TileData.content[i].subimage, {width:100,top:20,left:0,align:"center",contentType:"image",id:"button"}));           
           TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, TileData.content[i].subimagetwo, {width:100,top:70,left:0,align:"center",contentType:"image",id:"button"}));          
           console.log(TileData.content[i].subimagetwo);
@@ -284,7 +284,7 @@ define([
     this.recalculateinterval%=360;
     if(this.recalculateinterval==0) {
       // console.log("recalculate");
-      for(i=0;i<TileData.content.length;i++) {
+      for(i=0;i<TileData.contentLength;i++) {
          TileData.content[i].box.calculate();
       };
     };
@@ -384,13 +384,14 @@ define([
 
     var x,y,wtx,wty;
     var totalWorldWidth=TileData.worldWidth*this.squareWidth;
-    var totalWorldHeight=5*this.squareHeight; //todo: make this dynamic later
+    var totalWorldHeight=TileData.worldHeight*this.squareHeight;
     var foundInteractedTile, foundInteractedTileScale;
     ctx.fillStyle = "#004165"
     ctx.fillRect(0,0,canvas.width, canvas.height);
+    ctx.strokeStyle="#FFFFFF";
+    ctx.lineWidth=1;
 
-    for(i=0; i<TileData.content.length; i++) {
-
+    for(i=0; i<TileData.contentLength; i++) {
       x=-Math.floor(this.camera.x);
       wtx=Math.floor(Math.floor(this.camera.x)/totalWorldWidth)*totalWorldWidth;
       if(x>0) wtx+=totalWorldWidth;
@@ -423,6 +424,7 @@ define([
           //REMEMBER THIS IS THE FIRST PASS
           if(!foundInteractedTile) {
             TileData.content[i].box.render(ctx, repeatx, repeaty, TileData.content[i].scale*this.zoom);
+            ctx.strokeRect(Math.floor(repeatx),Math.floor(repeaty),this.squareWidth*TileData.content[i].scale*this.zoom,this.squareHeight*TileData.content[i].scale*this.zoom);  
             if(Config.mouse.x>=repeatx && Config.mouse.x<(repeatx+TileData.content[i].scale*this.squareWidth*this.zoom) && (Config.mouse.y-this.canvasOffset)>=repeaty && (Config.mouse.y-this.canvasOffset)<(repeaty+TileData.content[i].scale*this.squareHeight*this.zoom)) {
               this.mouseHoverInteract=false;
               this.mouseHoverIndex=i;
@@ -441,8 +443,76 @@ define([
       } while(repeaty<=canvas.height);
     };
 
+    // ctx.strokeStyle="#FFFFFF";
+    // ctx.lineWidth=1;
+    // repeatx=(x-(this.zoomPos.x))*this.zoom+this.zoomPos.x;
+    // do {
+    //     ctx.strokeRect(Math.floor(repeatx),0,0,canvas.height);    
+    //     repeatx+=this.squareWidth*this.zoom;
+    // } while(repeatx<=canvas.width);
+    // repeaty=(y-(this.zoomPos.y))*this.zoom+this.zoomPos.y;
+    // do {
+    //     ctx.strokeRect(0,Math.floor(repeaty),canvas.width,0);    
+    //     repeaty+=this.squareHeight*this.zoom;
+    // } while(repeaty<=canvas.height);
+
 ////  SECOND PASS: interactive Tiles
-    for(i=0; i<TileData.content.length; i++) {
+    for(i=0; i<TileData.contentLength; i++) {
+      x=-Math.floor(this.camera.x);
+      wtx=Math.floor(Math.floor(this.camera.x)/totalWorldWidth)*totalWorldWidth;
+      if(x>0) wtx+=totalWorldWidth;
+      x%=totalWorldWidth;
+      x-=totalWorldWidth*Math.ceil(1+canvas.width/(totalWorldWidth*this.zoom*2));
+      wtx-=totalWorldWidth*Math.ceil(1+canvas.width/(totalWorldWidth+this.squareWidth*this.zoom*2));
+      x+=TileData.content[i].position.x*this.squareWidth;
+      wtx+=TileData.content[i].position.x*this.squareWidth;
+
+      y=-Math.floor(this.camera.y);
+      wty=Math.floor(Math.floor(this.camera.y)/totalWorldHeight)*totalWorldHeight;
+      if(y>0) wty+=totalWorldHeight;
+      y%=totalWorldHeight;
+      y-=totalWorldHeight*Math.ceil(1+canvas.height/(totalWorldHeight*this.zoom*2));
+      wty-=totalWorldHeight*Math.ceil(1+canvas.height/(totalWorldHeight*this.zoom*2));
+      y+=TileData.content[i].position.y*this.squareHeight;
+      wty+=TileData.content[i].position.y*this.squareHeight;
+
+      var repeatx,repeaty=(y-(this.zoomPos.y))*this.zoom+this.zoomPos.y, drawAngle;
+      var repeatwtx,repeatwty=wty;
+      do {
+        repeatx=(x-(this.zoomPos.x))*this.zoom+this.zoomPos.x;
+        repeatwtx=wtx;
+        do {
+      //collision with screen. whether it's worth drawing or not
+      //    if(repeatx>(-TileData.content[i].scale*this.squareWidth*this.zoom) && repeatx<canvas.width && repeaty>(-TileData.content[i].scale*this.squareHeight*this.zoom) && repeaty<canvas.height){
+          
+          for(j=0;j<this.interactingTiles.length;j++) {
+          //  if(this.interactingTiles[j].modelIndex==i && this.interactingTiles[j].worldX==repeatwtx && this.interactingTiles[j].worldY==repeatwty && this.interactingTiles[j].scaleProgress==0 && this.interactingTiles[j].flipProgress==0) {
+            if(( this.interactingTiles[j].modelIndex==i && this.interactingTiles[j].worldX==repeatwtx && this.interactingTiles[j].worldY==repeatwty ) && ( this.interactingTiles[j].scaleProgress>0 || this.interactingTiles[j].flipProgress>0 )) {
+          
+              this.interactingTiles[j].render(ctx, repeatx, repeaty, this.zoom);
+              ///REMEMBER THIS IS THE SECOND PASS
+              if(Config.mouse.x>=repeatx && Config.mouse.x<(repeatx+this.interactingTiles[j].getCurrentSize()*this.zoom) && (Config.mouse.y-this.canvasOffset)>=repeaty && (Config.mouse.y-this.canvasOffset)<(repeaty+this.interactingTiles[j].getCurrentSize()*this.zoom)) {
+                this.mouseHoverInteract=true;
+                this.mouseHoverIndex=j;
+                this.mouseHoverWorldX=repeatwtx;
+                this.mouseHoverWorldY=repeatwty;
+                this.mouseHoverTileX=(Config.mouse.x-repeatx)/this.zoom;
+                this.mouseHoverTileY=(Config.mouse.y-this.canvasOffset-repeaty)/this.zoom;
+              };
+            };
+          };
+
+          repeatx+=totalWorldWidth*this.zoom; //and scale
+          repeatwtx+=totalWorldWidth;
+        } while(repeatx<=canvas.width);
+
+        repeaty+=totalWorldHeight*this.zoom; //and scale
+        repeatwty+=totalWorldHeight;
+      } while(repeaty<=canvas.height);
+
+    };
+
+    for(i=0; i<TileData.contentLength; i++) {
       x=-Math.floor(this.camera.x);
       wtx=Math.floor(Math.floor(this.camera.x)/totalWorldWidth)*totalWorldWidth;
       if(x>0) wtx+=totalWorldWidth;
@@ -471,60 +541,8 @@ define([
       //    if(repeatx>(-TileData.content[i].scale*this.squareWidth*this.zoom) && repeatx<canvas.width && repeaty>(-TileData.content[i].scale*this.squareHeight*this.zoom) && repeaty<canvas.height){
           for(j=0;j<this.interactingTiles.length;j++) {
             if(this.interactingTiles[j].modelIndex==i && this.interactingTiles[j].worldX==repeatwtx && this.interactingTiles[j].worldY==repeatwty && this.interactingTiles[j].scaleProgress==0 && this.interactingTiles[j].flipProgress==0) {
-              this.interactingTiles[j].render(ctx, repeatx, repeaty, this.zoom);
-              ///REMEMBER THIS IS THE SECOND PASS
-              if(Config.mouse.x>=repeatx && Config.mouse.x<(repeatx+this.interactingTiles[j].getCurrentSize()*this.zoom) && (Config.mouse.y-this.canvasOffset)>=repeaty && (Config.mouse.y-this.canvasOffset)<(repeaty+this.interactingTiles[j].getCurrentSize()*this.zoom)) {
-                this.mouseHoverInteract=true;
-                this.mouseHoverIndex=j;
-                this.mouseHoverWorldX=repeatwtx;
-                this.mouseHoverWorldY=repeatwty;
-                this.mouseHoverTileX=(Config.mouse.x-repeatx)/this.zoom;
-                this.mouseHoverTileY=(Config.mouse.y-this.canvasOffset-repeaty)/this.zoom;
-              };
-            };
-          };
-
-          
- 
-          repeatx+=totalWorldWidth*this.zoom; //and scale
-          repeatwtx+=totalWorldWidth;
-        } while(repeatx<=canvas.width);
-        repeaty+=totalWorldHeight*this.zoom; //and scale
-        repeatwty+=totalWorldHeight;
-      } while(repeaty<=canvas.height);
-
-    };
-
-
-    for(i=0; i<TileData.content.length; i++) {
-      x=-Math.floor(this.camera.x);
-      wtx=Math.floor(Math.floor(this.camera.x)/totalWorldWidth)*totalWorldWidth;
-      if(x>0) wtx+=totalWorldWidth;
-      x%=totalWorldWidth;
-      x-=totalWorldWidth*Math.ceil(1+canvas.width/(totalWorldWidth*this.zoom*2));
-      wtx-=totalWorldWidth*Math.ceil(1+canvas.width/(totalWorldWidth+this.squareWidth*this.zoom*2));
-      x+=TileData.content[i].position.x*this.squareWidth;
-      wtx+=TileData.content[i].position.x*this.squareWidth;
-
-      y=-Math.floor(this.camera.y);
-      wty=Math.floor(Math.floor(this.camera.y)/totalWorldHeight)*totalWorldHeight;
-      if(y>0) wty+=totalWorldHeight;
-      y%=totalWorldHeight;
-      y-=totalWorldHeight*Math.ceil(1+canvas.height/(totalWorldHeight*this.zoom*2));
-      wty-=totalWorldHeight*Math.ceil(1+canvas.height/(totalWorldHeight*this.zoom*2));
-      y+=TileData.content[i].position.y*this.squareHeight;
-      wty+=TileData.content[i].position.y*this.squareHeight;
-
-      var repeatx,repeaty=(y-(this.zoomPos.y))*this.zoom+this.zoomPos.y, drawAngle;
-      var repeatwtx,repeatwty=wty;
-      do {
-        repeatx=(x-(this.zoomPos.x))*this.zoom+this.zoomPos.x;
-        repeatwtx=wtx;
-        do {
-      //collision with screen. whether it's worth drawing or not
-      //    if(repeatx>(-TileData.content[i].scale*this.squareWidth*this.zoom) && repeatx<canvas.width && repeaty>(-TileData.content[i].scale*this.squareHeight*this.zoom) && repeaty<canvas.height){
-          for(j=0;j<this.interactingTiles.length;j++) {
-            if(( this.interactingTiles[j].modelIndex==i && this.interactingTiles[j].worldX==repeatwtx && this.interactingTiles[j].worldY==repeatwty ) && ( this.interactingTiles[j].scaleProgress>0 || this.interactingTiles[j].flipProgress>0 )) {
+            
+            // if(( this.interactingTiles[j].modelIndex==i && this.interactingTiles[j].worldX==repeatwtx && this.interactingTiles[j].worldY==repeatwty ) && ( this.interactingTiles[j].scaleProgress>0 || this.interactingTiles[j].flipProgress>0 )) {
               
               this.interactingTiles[j].render(ctx, repeatx, repeaty, this.zoom);
               ///REMEMBER THIS IS THE LAST PASS
@@ -673,7 +691,7 @@ define([
 
     // var blid;
     // ////  LAST PASS: ANY SCALE WHILE FLIPPING TILES ONLY
-    // for(i=0; i<TileData.content.length; i++) {
+    // for(i=0; i<TileData.contentLength; i++) {
     //   x=-Math.floor(this.camera.x);
     //   wtx=Math.floor(Math.floor(this.camera.x)/totalWorldWidth)*totalWorldWidth;
     //   if(x>0) wtx+=totalWorldWidth;

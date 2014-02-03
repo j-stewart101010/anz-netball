@@ -94,7 +94,54 @@ define([
         generateImages : function () {
             var imagelist = [], imgpath;
 
-            for (var i = 0; i < TileData.content.length; i++) {
+            var worldSquare=TileData.content.length, numVideos=0;
+            for(var i=0;i<worldSquare;i++) {
+                if(TileData.content[i].tiletype=="video") numVideos++;
+            };
+            worldSquare+=numVideos*3;
+            
+            var worldpx=Math.sqrt(worldSquare)*(4/3),
+                worldpy=Math.sqrt(worldSquare)*(3/4);
+            var howClose=99999, closex, closey, closeTest;
+            var spreadx=Math.ceil(worldpx*0.35),
+                spready=Math.ceil(worldpy*0.35);
+            
+            for(var fortoy=0;fortoy<=spready;fortoy++) {
+                for(var fortox=0;fortox<=spreadx;fortox++) {
+                    for(var facty=Math.floor(worldpy-fortoy);facty<=Math.floor(worldpy+fortoy);facty++) {
+                        for(var factx=Math.floor(worldpx-fortox);factx<=Math.floor(worldpx+fortoy);factx++) {
+                            closeTest=worldSquare-factx*facty;
+                            if(closeTest>=0 && closeTest<howClose) {
+                                howClose=closeTest;
+                                closex=factx;
+                                closey=facty;
+                                if(howClose==0) { //all model data is able to be used.
+                                    //dirty way to end loops
+                                   fortoy=spready+1;
+                                   fortox=spreadx+1
+                                   facty=worldpy+fortoy;
+                                   break;
+                                };
+                            };
+                        };
+                    };
+                };
+            };
+            var modelLength=(closex*closey)-(3*numVideos);
+            console.log(closex,closey, modelLength, numVideos);
+
+            TileData.worldWidth = closex;
+            TileData.worldHeight = closey;
+            TileData.contentLength = modelLength;
+
+            if(howClose>0) console.log((TileData.content.length-modelLength) + " Model data elements did not fit.");
+            var numVideosAfter=0;
+            for(i=0;i<modelLength;i++) {
+                if(TileData.content[i].tiletype=="video") numVideosAfter++;
+            };
+            if(numVideos!=numVideosAfter) console.log("Warning: One or more Video tiles are unused!");
+
+            for (i = 0; i < TileData.contentLength; i++) {
                 tilescale = 1;
                 switch(TileData.content[i].tiletype) {
                     case "text":

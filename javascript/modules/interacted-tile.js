@@ -49,10 +49,10 @@ define([
     this.mouseIsOver=true;
     this.overTime++;
     
-    if(this.scaleProgress==0 && this.flipProgress==0) {
+    //if(this.scaleProgress==0 && this.flipProgress==0) {
       this.hoverScale+=(0.1-this.hoverScale)*0.05;
       if(this.hoverScale>0.045) this.hoverScale=0.05;
-    };
+    //};
   };
 
   InteractedTile.prototype.getCurrentSize = function () {
@@ -64,6 +64,7 @@ define([
   // };
 
   InteractedTile.prototype.sentClick = function (x, y) {
+    console.log("clicked "+this.modelIndex + " "+ TileData.content[this.modelIndex].imageurl) ;
     if(this.flippable) {
       //scan through model data and flip&scale back any others that were flipped
       if(this.tiletype=="fliplink") {
@@ -150,7 +151,7 @@ define([
         };
         if(this.flipProgress==0 || this.flipDirection<0) {
           //unflipped or flipping from and scaled or scaling up
-          this.flipDirection = 0.027;         
+          this.flipDirection = 0.00027;         
 
           // this.dragDisabled=36;
           // this.centering=36;
@@ -163,7 +164,7 @@ define([
         };
         
       };
-      // for(var j=0;j<TileData.content.length;j++){
+      // for(var j=0;j<TileData.contentLength;j++){
       //   if(j!=i) {
       //     if(TileData.content[j].scaleProgress>0) TileData.content[j].scaleDirection = -0.027;
       //     if(TileData.content[j].flipProgress>0) TileData.content[j].flipDirection = -0.027;
@@ -244,8 +245,9 @@ define([
     };
 
 
-    var hoverOffset=this.pixelSize*drawScale*(1+this.scaleProgress+this.hoverScale)*this.hoverScale*0.5;//this.pixelSize*(this.scale+this.scaleProgress)*this.hoverScale*0.5*drawScale;
-
+    var hoverOffset=this.pixelSize*drawScale*this.hoverScale*0.5;//this.pixelSize*(this.scale+this.scaleProgress)*this.hoverScale*0.5*drawScale;
+    ctx.strokeStyle="#FFFFFF";
+    ctx.lineWidth=1;
     if(this.flipProgress>0 && this.flipProgress<1){
       if(this.flipProgress<0.5) {
           //render the front side to offscreen buffer
@@ -256,11 +258,29 @@ define([
         this.boxes[this.flipFace].render(this.offScreenCtx, 0, 0, this.scale);
       };
       this.drawImagePerspective(this.offScreenCtx,this.pixelSize*this.scale,this.pixelSize*this.scale,ctx,drawx-hoverOffset,drawy-hoverOffset,drawScale*(1+this.scaleProgress+this.hoverScale),this.flipProgress*180);
+      //this.scale*drawScale*(1+this.scaleProgress+this.hoverScale)
+      
+      var xskew = -this.pixelSize*this.scale*0.5*Math.cos(this.flipProgress*Math.PI);
+      var yskew = -this.pixelSize*this.scale*0.13*Math.sin(this.flipProgress*Math.PI);
+      // var x=drawx+(this.pixelSize*this.scale*0.5-xskew)*drawScale*(1+this.scaleProgress+this.hoverScale);
+      // var y=dstDrawY-(yskew*drawScale*(1+this.scaleProgress+this.hoverScale));
+
+      //var ph=(this.pixelSize*this.scale+yskew)this.pixelSize*tscale;
+//drawx-hoverOffset,drawy-hoverOffset,this.pixelSize*drawScale*(this.scale+this.scaleProgress+this.hoverScale)
+      // ctx.beginPath();
+      // ctx.moveTo(drawx-hoverOffset+(this.pixelSize*this.scale*0.5+xskew)*drawScale*(1+this.scaleProgress+this.hoverScale),drawy-hoverOffset+(yskew*drawScale*(1+this.scaleProgress+this.hoverScale)));
+      // ctx.lineTo(drawx+hoverOffset+(this.pixelSize*this.scale*0.5-xskew)*drawScale*(1+this.scaleProgress+this.hoverScale),drawy-hoverOffset-(yskew*drawScale*(1+this.scaleProgress+this.hoverScale)));
+      // ctx.lineTo(drawx+hoverOffset+(this.pixelSize*this.scale*0.5-xskew)*drawScale*(1+this.scaleProgress+this.hoverScale),drawy+hoverOffset+(this.pixelSize*this.scale*drawScale+(yskew*drawScale*(1+this.scaleProgress+this.hoverScale)));
+      // ctx.lineTo(drawx-hoverOffset+(this.pixelSize*this.scale*0.5+xskew)*drawScale*(1+this.scaleProgress+this.hoverScale),drawy+hoverOffset+this.pixelSize*this.scale*drawScale-(yskew*drawScale*(1+this.scaleProgress+this.hoverScale)));
+      // ctx.lineTo(drawx-hoverOffset+(this.pixelSize*this.scale*0.5+xskew)*drawScale*(1+this.scaleProgress+this.hoverScale),drawy-hoverOffset+(yskew*drawScale*(1+this.scaleProgress+this.hoverScale)));
+      // ctx.stroke();
+      
     //             
     };
     if(this.flipProgress==0) this.boxes[this.currentFace].render(ctx, drawx-hoverOffset, drawy-hoverOffset, drawScale*(this.scale+this.scaleProgress+this.hoverScale));
     if(this.flipProgress==1) this.boxes[this.flipFace].render(ctx, drawx-hoverOffset, drawy-hoverOffset, drawScale*(this.scale+this.scaleProgress+this.hoverScale));
 
+    if(this.flipProgress==0 || this.flipProgress==1) ctx.strokeRect(drawx-hoverOffset,drawy-hoverOffset,this.pixelSize*drawScale*(this.scale+this.scaleProgress+this.hoverScale),this.pixelSize*drawScale*(this.scale+this.scaleProgress+this.hoverScale));
   };
 
   InteractedTile.prototype.drawImagePerspective = function(srcCtx,srcWidth,srcHeight,dstCtx,dstDrawX,dstDrawY,drawScale,drawAngle) {
