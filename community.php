@@ -72,7 +72,7 @@
 				</div>	
 
 				<div class="col col-sm-12 col-md-2 col-lg-2">
-					<div class="col-half col col-xs-12 col-md-12">				
+					<div class="half-length col col-xs-12 col-md-12">				
 						<div class="image-wrap set">
 							<img src="http://lorempixel.com/g/612/612/">
 						</div>
@@ -82,7 +82,7 @@
 					</div>
 				</div>
 				<div class="col col-sm-12 col-md-2 col-lg-2">
-					<div class="col-half col col-xs-12 col-md-12">				
+					<div class="half-length col col-xs-12 col-md-12">				
 						<div class="image-wrap set">
 							<img src="http://lorempixel.com/g/612/612/">
 						</div>

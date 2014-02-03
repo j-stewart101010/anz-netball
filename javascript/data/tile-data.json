@@ -50,9 +50,10 @@
        {"tiletype":"textlink",
         "colour":"101,179,228",
         "title":"COMMUNITY GRANTS",
+        "flippable":false,
         "subtext":"Netball is a ball sport played by two teams of seven players.",
         "subimageurl":"images/subimage-more.png",
-        "linkurl":"http://localhost.anz-netball/Community-Grants"},
+        "linkurl":"http://google.com/?q=community grants"},
 
        {"tiletype":"video",
         "textsubject":"TALKS NETBALL NATION",
@@ -82,7 +83,7 @@
         "imageurl":"images/subimage-more.png",
         "subimageurl":"images/anz-netset-icon.png",
         "subimagetwourl":"images/subimage-visit.png",
-        "linkurl":"http://localhost.anz-netball/ANZ-NetSetGo",
+        "linkurl":"http://google.com/?q=community grants",
         "flippable": true},
 
        {"tiletype":"image",

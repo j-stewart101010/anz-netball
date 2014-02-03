@@ -61,7 +61,7 @@
 			<section class="grid">
 
 				<div class="col col-md-2 col-lg-2">
-					<div class="col-half col col-md-12">
+					<div class="half-length col col-md-12">
 						<div class="image-wrap set">
 							<img src="http://lorempixel.com/g/612/612/">
 						</div>
@@ -84,7 +84,7 @@
 				</div>
 
 				<div class="col col-md-2 col-lg-2 clearfix">
-					<div class="col-half col col-md-12">
+					<div class="half-length col col-md-12">
 						<div class="image-wrap set">
 							<img src="http://lorempixel.com/g/612/612/">
 						</div>
@@ -249,7 +249,7 @@
 				</div>
 
 				<div class="col col-md-2 col-lg-2 clearfix">
-					<div class="col-half col col-xs-6 col-md-12">
+					<div class="half-length col col-xs-6 col-md-12">
 						<div class="outter-tile group shade-thirteen">
 							<article data-resize-height="#grid-image-five" class="content-tile mini tile center">
 								<h1 class="heading heading-exmed">Set<br> PLays</h1>
@@ -258,7 +258,7 @@
 							</article>
 						</div>
 					</div>
-					<div class="col-half col col-xs-6 col-md-12">
+					<div class="half-length col col-xs-6 col-md-12">
 						<div id="grid-image-five" class="image-wrap">
 							<img src="http://lorempixel.com/g/612/612/">
 						</div>
@@ -266,7 +266,7 @@
 				</div>
 
 				<div class="col col-md-2 col-lg-2 clearfix">
-					<div class="col-half col col-xs-6 col-md-12">
+					<div class="half-length col col-xs-6 col-md-12">
 						<div class="outter-tile group shade-ten">
 							<article data-resize-height="#grid-image-five" class="content-tile mini tile center">
 								<h1 class="heading heading-exmed">Training drills</h1>
@@ -276,7 +276,7 @@
 						</div>
 					</div>
 
-					<div class="col-half col col-xs-6 col-md-12">	
+					<div class="half-length col col-xs-6 col-md-12">	
 						<div id="link-one" class="flip-container">
 							<div class="flipper">
 								<div class="front">

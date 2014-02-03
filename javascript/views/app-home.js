@@ -28,7 +28,7 @@ define([
 
             this.$el.addClass('home');
             this.$master_head = this.$el.find('.master-head');
-            this.$master_foot = this.$el.find('.master-foot');                 
+            this.$master_foot = this.$el.find('.master-foot');
 
             $.when(TileCollection.fetch())
                 .done(function () {
@@ -232,9 +232,10 @@ define([
         update : function () {
             //console.log(Config.isMobile);
             _self.resizeCount++;
-           _self.resizeCount ==10 && _self.realResize(); 
+            if(_self.resizeCount==10) _self.realResize(); 
             
             if(!grid.renderDisabled) grid.render(context);
+            //console.log(grid.renderDisabled);
             requestAnimFrame(_self.update);
         },
 
@@ -309,14 +310,14 @@ define([
             Config.mouse.button = false;
         },
 
-        onTouchStart : function (a) {
-            a.preventDefault();
-            Config.mouse.x = a.originalEvent.touches[0].clientX + document.body.scrollLeft;
-            Config.mouse.y = a.originalEvent.touches[0].clientY + document.body.scrollTop;
-            // downAt.x = Config.mouse.x;
-            // downAt.y = Config.mouse.y;
-
- 
+        onTouchStart : function (e) {
+            e.preventDefault();
+            // Config.downAt.x = e.originalEvent.touches[0].clientX + document.body.scrollLeft;
+            // Config.downAt.y = e.originalEvent.touches[0].clientY + document.body.scrollTop;
+            grid.mousefollow.x = e.originalEvent.touches[0].clientX;
+            grid.mousefollow.y = e.originalEvent.touches[0].clientY;  
+            Config.mouse.x = e.originalEvent.touches[0].clientX;
+            Config.mouse.y = e.originalEvent.touches[0].clientY;           
             Config.mouse.button = true;
             Config.mouse.dragDistance = 0;
 

@@ -6,7 +6,20 @@ define([
 	'use strict';
 
 	var EventAggregator = {};
-	_.extend(EventAggregator, Backbone.Events);
+
+	var o = $({});
+
+	EventAggregator.subscribe = function() {
+		o.on.apply(o, arguments);
+	};
+
+	EventAggregator.unsubscribe = function() {
+		o.off.apply(o, arguments);
+	};
+
+	EventAggregator.publish = function() {
+		o.trigger.apply(o, arguments);
+	};
 
 	return EventAggregator;
 });

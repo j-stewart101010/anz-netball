@@ -7,9 +7,10 @@ define([
         'modules/interacted-tile',
         'modules/box',
         'views/video-embed',
+        'event_aggregator',
         'bootstrap_transition',    
-        'bootstrap_modal',        
-], function ($, Config, TileData, GridButton, InteractedTile, DoubleSpring, Box, VideoEmbedView) {
+        'bootstrap_modal',
+], function ($, Config, TileData, GridButton, InteractedTile, Box, VideoEmbedView, EventAggregator) {
   'use strict';
 
   var _self;
@@ -26,6 +27,7 @@ define([
     this.currentFace=0;
     this.flipFace=1;
     this.flippable=info.flippable;
+    //this.flipClose = false;
     this.scaleProgress=0;
     this.scaleDirection=0;
     this.worldX=info.worldX;
@@ -37,9 +39,7 @@ define([
     this.overTime=0;
     this.hoverScale=0;
     this.removeCounter=0;
-    this.pixelSize=info.pixelSize
-
-    console.log("New InteractedTile: "+ this.worldX + ","+this.worldY);
+    this.pixelSize=info.pixelSize; 
   };
 
   InteractedTile.constructor = InteractedTile;
@@ -50,9 +50,36 @@ define([
     this.overTime++;
     
     //if(this.scaleProgress==0 && this.flipProgress==0) {
-      this.hoverScale+=(0.1-this.hoverScale)*0.05;
-      if(this.hoverScale>0.045) this.hoverScale=0.05;
+    this.hoverScale+=(0.1-this.hoverScale)*0.05;
+    if(this.hoverScale>0.045) this.hoverScale=0.05;
     //};
+    if(this.tileType=="fliplink") {
+      if(this.flipProgress==0) {
+        if(this.boxes[this.currentFace].hitTest(x/this.scale,y/this.scale)=="button") {
+          canvas.style.cursor="pointer";
+        };
+      };        
+      if(this.flipProgress==1) {
+        if(this.boxes[this.flipFace].hitTest(x/this.scale,y/this.scale)=="button") {
+          canvas.style.cursor="pointer";
+         } 
+      };
+    };
+
+    if(this.tileType=="textlink") {
+      if(this.boxes[this.currentFace].hitTest(x/this.scale,y/this.scale)=="button") {
+          canvas.style.cursor="pointer";
+          
+          //this.boxes[this.currentFace].getBox("button").content.src=Config.REMOTE_PATH + "/images/subimage-more-hover.png";
+
+          //console.log(this.boxes[this.currentFace].getBox("button"));
+      };      
+    };
+
+    if(this.tileType=="image" || this.tileType=="video") {
+      canvas.style.cursor="pointer";
+    };
+
   };
 
   InteractedTile.prototype.getCurrentSize = function () {
@@ -64,19 +91,25 @@ define([
   // };
 
   InteractedTile.prototype.sentClick = function (x, y) {
-    console.log("clicked "+this.modelIndex + " "+ TileData.content[this.modelIndex].imageurl) ;
-    if(this.flippable) {
+    //console.log(TileData.content[this.modelIndex]);
+    //if(this.flippable) {
       //scan through model data and flip&scale back any others that were flipped
-      if(this.tiletype=="fliplink") {
+      if(this.tileType=="textlink") {
+        if(this.boxes[this.currentFace].hitTest(x/this.scale,y/this.scale)=="button") {
+          window.location=TileData.content[this.modelIndex].linkurl;
+        };
+      };
+
+      if(this.tileType=="fliplink") {
         if(this.flipProgress==0) {
-          if(this.box[this.currentFace].hitTest(x/this.scale,y/this.scale)=="button") {
+          if(this.boxes[this.currentFace].hitTest(x/this.scale,y/this.scale)=="button") {
             this.flipDirection = 0.027;
           };
         };
         if(this.flipProgress==1) {
-          if(this.box[this.currentFace].hitTest(x/this.scale,y/this.scale)=="button") {
+          if(this.boxes[this.flipFace].hitTest(x/this.scale,y/this.scale)=="button") {
             //take us there
-            document.location=TileData.content[i].linkurl;
+            window.location=TileData.content[this.modelIndex].linkurl;
           };
         };
       };
@@ -112,6 +145,7 @@ define([
 
 
         if(this.scaleProgress==1 || this.scaleDirection>0) {
+
           if(this.flipProgress==1 && this.scaleProgress==1) {
             //scaled and flipped
 
@@ -120,6 +154,12 @@ define([
             console.log("scale downward and flip back");
           } else if(this.flipProgress==0 || this.flipDirection<0) {
             //scaled or scaling & flipping back/unflipped
+
+            if(this.boxes[this.currentFace].hitTest(x/(this.scale+this.scaleProgress),y/(this.scale+this.scaleProgress))=="cornerarrow") {
+              this.scaleDirection = -0.027;
+              return;
+            };
+            
             console.log("flip forward");
             this.flipDirection = 0.027;         
             this.actionX=this.mouseHoverWorldX;
@@ -142,16 +182,17 @@ define([
           };       
         };
       };
+      
+      if(this.tileType=="video") {
 
-      if(this.tileType=="video" || this.tileType=="fliplink") {
-        if(this.flipProgress==1 || this.flipDirection>0) {
+        if(this.flipProgress==1) {
           //flipped or flipping to and scaled or scaling up
           this.flipDirection = -0.027;
 
         };
-        if(this.flipProgress==0 || this.flipDirection<0) {
+        if(this.flipProgress==0) {
           //unflipped or flipping from and scaled or scaling up
-          this.flipDirection = 0.00027;         
+          this.flipDirection = 0.027;         
 
           // this.dragDisabled=36;
           // this.centering=36;
@@ -170,7 +211,7 @@ define([
       //     if(TileData.content[j].flipProgress>0) TileData.content[j].flipDirection = -0.027;
       //   };
       // };
-    };
+   // };
   };
 
   InteractedTile.prototype.onScale = function() {
@@ -183,16 +224,19 @@ define([
 
   InteractedTile.prototype.onFlip = function() {
     if(this.tileType=="video") {
+      if(this.flipProgress==1) {
+
+        EventAggregator.publish('grid.pause');
+
+        $('body').append(new VideoEmbedView({
+          modal : true,
+          video_id : TileData.content[this.modelIndex].videoid
+        }).render().el);
+      }
       //if(this.currentFace==1) this.flipFace=0;
       //if(this.currentFace==0) this.flipFace=1;
-      
       //this.renderDisabled=true;
 
-      // _self.flippedVideoTile=modelIndex;
-      // $('body').append(new VideoEmbedView({ 
-      //   modal : true,
-      //   video_id : TileData.content[this.modelIndex].videoid
-      // }).render().el);
     };
     if(this.tileType=="image") {
       //if(this.currentFace==1) this.flipFace=0;
@@ -238,10 +282,8 @@ define([
     };
 
     if(this.tileType=="image") {
-      this.boxes[this.currentFace].update("cornerbutton",{visible:(this.scaleProgress>0?true:false)});
-      //var cornerHighlight=this.overTime*0.0667;
-      //if(cornerHighlight>1) cornerHighlight=1;
-      //this.boxes[this.currentFace].update("cornerbuttonoverlay",{opacity:cornerHighlight});
+      this.boxes[this.currentFace].getBox("cornerarrow").visible=this.scaleProgress>0?true:false;
+      
     };
 
 

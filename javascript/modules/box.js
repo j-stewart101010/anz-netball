@@ -26,26 +26,15 @@ define([
 
 	Box.constructor = Box;
 
-	Box.prototype.update = function (id, properties) {
+	Box.prototype.getBox = function (id) {
 		//console.log(id, properties);
 		if(this.contentType=="container") {
 			for(var i=0;i<this.boxes.length;i++) {
-				this.boxes[i].update(id,properties);
+				if(this.boxes[i].getBox(id)!=null) return this.boxes[i].getBox(id);
 			};
 		} else {
-			if(this.id=id) {
-				$.each(properties, function(key, value) {
-				 //console.log("update "+ key+" from "+_self[key]+" to "+ value);
-
-				  _self[key] = value;
-				});
-
-				// if(typeof(content)!="undefined") {
-				// 	if(this.contentType=="container") this.boxes = content;					
-				// 	if(this.contentType=="text" || this.contentType=="image") this.content = content;
-				// 	//this.ctx=ctx;
-				// 	if(typeof(this.lineHeight)=="undefined") this.lineHeight=this.fontSize*1.1;
-				// };
+			if(this.id==id) {
+				return this;
 			};
 		};
 		//this.calculate();
@@ -67,6 +56,12 @@ define([
 		if(this.boxes.length==0) return {right:0,bottom:0};
 		return {right:this.boxes[this.boxes.length-1].right, bottom:this.boxes[this.boxes.length-1].bottom};
 	};
+
+	Box.prototype.index = function (index)  {
+		if(typeof(this.boxes)=="undefined") return {top:0,bottom:0,left:0,right:0};
+		if(this.boxes.length==0) return {top:0,bottom:0,left:0,right:0};
+		return {top:this.boxes[index].top, bottom:this.boxes[index].bottom,left:this.boxes[index].left, right:this.boxes[index].right};
+	};	
 
 	Box.prototype.addBox = function (newBox)  {
 	//	console.log(newBox);
@@ -120,14 +115,17 @@ define([
 	};
 
 	Box.prototype.hitTest = function(hitX, hitY) {
+		var hitid ="";
 		for(var i=0;i<this.boxes.length;i++){
 			if(this.boxes[i].visible) {
 				if(this.boxes[i].contentType=="text" || this.boxes[i].contentType=="image") {
-					if(hitX>=this.boxes[i].boxLeft && hitX<=(this.boxes[i].boxLeft+this.boxes[i].boxWidth) && hitY>=this.boxes[i].boxTop && hitY<=(this.boxes[i].boxTop+this.boxes[i].boxHeight)) return this.boxes[i].id;
+					if(hitX>=this.boxes[i].boxLeft && hitX<=(this.boxes[i].boxLeft+this.boxes[i].boxWidth) && hitY>=this.boxes[i].boxTop && hitY<=(this.boxes[i].boxTop+this.boxes[i].boxHeight)) {
+						hitid=this.boxes[i].id;
+					};
 				};
 			};
 		};
-		return null;
+		return hitid;
 	};
 
 	Box.prototype.render = function(ctx, drawx, drawy, drawScale) {

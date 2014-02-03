@@ -610,9 +610,9 @@ body {
 		border-left: 0;
 	}
 
-	.col-half {
-		height: 50%; //@TODO: Remove this as its been replaced with more reusable classes - cannot remove it now due to specificity
-	}
+	// .col-half {
+	// 	height: 50%; //@TODO: Remove this as its been replaced with more reusable classes - cannot remove it now due to specificity
+	// }
 
 	@media screen and (min-width: $screen-desktop) {
 		max-width: $grid-max-width;
@@ -620,25 +620,23 @@ body {
 		height: 87%;
 		overflow: hidden;
 
+		.col {
+			height: 100%;
+		}
+
 		.grid, .col {
 			&.full-length {
 				height: 100%;
 			}
-
-			.three-quarters-length {
+			&.three-quarters-length {
 				height: 75%;
 			}
-
 			&.quarter-length {
 				height: 25%;
 			}		
 			&.half-length {
 				height: 50%;
 			}					
-		}
-
-		.col {
-			height: 100%;
 		}
 
 		.grid {
@@ -651,13 +649,6 @@ body {
 			width: auto;
 		}		
 	}
-
-	// @media screen and (max-width: $screen-xsmall) {
-	// 	.image-wrap {
-	// 		float: none;
-	// 		width: auto;
-	// 	}				
-	// }
 }
 
 // Appended Outter Tiles Module

@@ -77,8 +77,8 @@
 	.grid.three-quarters-length {
 		border-bottom: 0;
 	}
-	.half-length .col-half + .col-half .image-wrap,
-	.half-length + .half-length .col-half .image-wrap {
+	.half-length .half-length + .half-length .image-wrap,
+	.half-length + .half-length .half-length .image-wrap {
 		border-top: 1px solid white;
 	}
 

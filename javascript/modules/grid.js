@@ -1,15 +1,16 @@
 /*global define*/
 define([
         'jquery',
+        'underscore',
         'config/config',
         'collections/tiles-data',
         'modules/grid-button',
         'modules/interacted-tile',
         'modules/box',
-        'views/video-embed',
+        'event_aggregator',
         'bootstrap_transition',    
         'bootstrap_modal',        
-], function ($, Config, TileData, GridButton, InteractedTile, Box, VideoEmbedView) {
+], function ($, _, Config, TileData, GridButton, InteractedTile, Box, EventAggregator) {
   'use strict';
 
   var _self;
@@ -17,7 +18,8 @@ define([
   var Grid = function (w, h) {
     _self=this;
 
-    console.log("Grid");
+    EventAggregator.subscribe('grid.pause', _self.pause );
+    $(document).on('hide.bs.modal', _self.closedModal );
 
     this.camera = {
       x: 0,
@@ -31,15 +33,13 @@ define([
       y: Config.mouse.y
     };
 
-    this.recalculateinterval=0;
+    this.recalculateinterval=350;
     
     this.canvasOffset = 0;
     this.squareWidth = 306;
     this.squareHeight = 306;
 
     this.resize(w, h);
-
-    $(document).on('hidden.bs.modal', this.closedModal );
    
     this.offScreen = document.createElement("canvas"); 
     this.offScreen.width = this.squareWidth*2;// this.squareWidth; 
@@ -74,44 +74,55 @@ define([
 
     this.interactingTiles=[];
     this.interactingTilesDestroyList=[];
-
+    var spacing;
     for(var i=0;i<TileData.contentLength;i++) {
       switch(TileData.content[i].tiletype) {
         case "text":
         //break;
         case "textlink":
           TileData.content[i].box = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container",backgroundColour:TileData.content[i].colour});
-          // TileData.content[i].box.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:TileData.content[i].colour}));
-          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].title, {left:10,width:80,top:0,padding:0,fontSize:35,lineHeight:40,contentType:"text",align:"center"}));
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].title, {left:10,width:80,top:10,padding:0,fontSize:35,lineHeight:40,contentType:"text",align:"center"}));
           
           TileData.content[i].box.calculate();
-          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].subtext, {left:10,width:80,top:TileData.content[i].box.last().bottom,padding:0,fontSize:15,lineHeight:17,contentType:"text",align:"center"}));
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].subtext, {left:10,width:80,top:TileData.content[i].box.last().bottom,padding:0,fontSize:16,lineHeight:25,contentType:"text",align:"center"}));
           TileData.content[i].box.calculate();
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].image, {width:100,height:"original",top:TileData.content[i].box.last().bottom,left:0,align:"center",contentType:"image",id:"button"}));
           TileData.content[i].box.calculate();
+          spacing=100-TileData.content[i].box.last().bottom;
+          spacing/=4;
+          TileData.content[i].box = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container",backgroundColour:TileData.content[i].colour});
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].title, {left:10,width:80,top:spacing,padding:0,fontSize:35,lineHeight:40,contentType:"text",align:"center"}));
+          
+          TileData.content[i].box.calculate();
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].subtext, {left:10,width:80,top:TileData.content[i].box.last().bottom+spacing,padding:0,fontSize:16,lineHeight:25,contentType:"text",align:"center"}));
+          TileData.content[i].box.calculate();
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].image, {width:100,height:"original",top:TileData.content[i].box.last().bottom+spacing*1.3,left:0,align:"center",contentType:"image",id:"button"}));
+          TileData.content[i].box.calculate();
 
-          // TileData.content[i].box = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
-          // TileData.content[i].box.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:TileData.content[i].colour}));
-          // TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].title, {left:10,width:80,height:25,top:10,padding:0,fontSize:35,lineHeight:40,contentType:"text",align:"center"}));
-          // TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].subtext, {left:10,width:80,height:25,top:35,padding:0,fontSize:15,lineHeight:17,contentType:"text",align:"center"}));
-          // TileData.content[i].box.calculate();
-          // TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].image, {width:100,top:60,left:0,align:"center",contentType:"image",id:"button"}));
-          // TileData.content[i].box.calculate();
         break;
         case "fliplink":
           TileData.content[i].box = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container",backgroundColour:TileData.content[i].colour});
-          // TileData.content[i].box.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:TileData.content[i].colour}));
-          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].title, {left:10,width:80,height:25,top:10,padding:0,fontSize:35,lineHeight:40,contentType:"text",align:"center"}));
-          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].subtext, {left:10,width:80,height:25,top:35,padding:0,fontSize:15,lineHeight:17,contentType:"text",align:"center"}));
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].title, {left:10,width:80,top:10,padding:0,fontSize:35,lineHeight:40,contentType:"text",align:"center"}));
+          
           TileData.content[i].box.calculate();
-          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].image, {width:100,top:60,left:0,align:"center",contentType:"image",id:"button"}));
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].subtext, {left:10,width:80,top:TileData.content[i].box.last().bottom,padding:0,fontSize:16,lineHeight:25,contentType:"text",align:"center"}));
+          TileData.content[i].box.calculate();
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].image, {width:100,height:"original",top:TileData.content[i].box.last().bottom,left:0,align:"center",contentType:"image",id:"button"}));
+          TileData.content[i].box.calculate();
+          spacing=100-TileData.content[i].box.last().bottom;
+          spacing/=4;
+          TileData.content[i].box = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container",backgroundColour:TileData.content[i].colour});
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].title, {left:10,width:80,top:spacing,padding:0,fontSize:35,lineHeight:40,contentType:"text",align:"center"}));
+          
+          TileData.content[i].box.calculate();
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].subtext, {left:10,width:80,top:TileData.content[i].box.last().bottom+spacing,padding:0,fontSize:16,lineHeight:25,contentType:"text",align:"center"}));
+          TileData.content[i].box.calculate();
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].image, {width:100,height:"original",top:TileData.content[i].box.last().bottom+spacing*1.3,left:0,align:"center",contentType:"image",id:"button"}));
           TileData.content[i].box.calculate();
                  
           TileData.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container",backgroundColour:TileData.content[i].backcolour});          
-          // TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:TileData.content[i].backcolour}));
-          TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, TileData.content[i].subimage, {width:100,top:20,left:0,align:"center",contentType:"image",id:"button"}));           
+          TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, TileData.content[i].subimage, {width:100,top:20,left:0,align:"center",contentType:"image",id:""}));           
           TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, TileData.content[i].subimagetwo, {width:100,top:70,left:0,align:"center",contentType:"image",id:"button"}));          
-          console.log(TileData.content[i].subimagetwo);
           TileData.content[i].backbox.calculate();
         break;
         case "image":
@@ -121,8 +132,7 @@ define([
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, "", {left:95.571,top:95.285,width:4.428,height:4.714,contentType:"text",backgroundColour:"128,192,255",backgroundOpacity:1,opacity:0,visible:false,id:"cornerarrowoverlay"}));
           TileData.content[i].box.calculate();
 
-          TileData.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container",backgroundColour:TileData.content[i].colour});
-          // TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:TileData.content[i].backcolour}));
+          TileData.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container",backgroundColour:TileData.content[i].backcolour});
           TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, TileData.content[i].storyimage, {top:25,left:5,width:13,height:13,contentType:"image"}));
           TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, TileData.content[i].storyusername, {top:25,left:21,width:60,height:20,textunderlay:"fit",padding:0.9,fontSize:10,fontstyle:"bold",contentType:"text",align:"left"}));
           TileData.content[i].backbox.calculate();
@@ -144,8 +154,7 @@ define([
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].subimage, {left:7,top:85,contentType:"image",width:"original",height:"orignial"}));
           TileData.content[i].box.calculate();
    
-          TileData.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container",backgroundColour:TileData.content[i].colour});
-          // TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:"0,0,0"}));
+          TileData.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container",backgroundColour:"0,0,0"});
           TileData.content[i].backbox.calculate();
         };
     };
@@ -160,9 +169,17 @@ define([
     this.zoomPos={x:w/2,y:h/2};
   };
 
+  Grid.prototype.pause = function (w, h) {
+    setTimeout(function () { _self.renderDisabled = true; }, 550 );
+  };  
+
   Grid.prototype.closedModal = function() {
-    //this.renderDisabled=false;
-    TileData.content[_self.flippedVideoTile].flipDirection = -0.027;
+    _self.renderDisabled = false;
+    _self.dragDisabled=36;
+    _self.centering=36;
+    _self.flippedVideoTile.flipDirection = -0.027;
+    //_self.flippedVideoTile.flipClose = true;
+    //_self.flippedVideoTile.sentClick(this.mouseHoverTileX,this.mouseHoverTileY);
   };
 
   Grid.prototype.sentClick = function() {  
@@ -232,24 +249,29 @@ define([
         //     TileData.content[i].actionY=this.mouseHoverWorldY;
         //   };       
         // };
-        this.interactingTiles[i].sentClick(this.mouseHoverTileX,this.mouseHoverTileY);
+
       };
 
       if(this.interactingTiles[i].tileType=="video") {
-          this.dragDisabled=36*2;
-          this.centering=36;
+          this.dragDisabled=6000;
+          this.centering=6000;
           this.centerSize=500;
           this.centerZoom=this.centerSize/(this.interactingTiles[i].scale*this.squareWidth);
 
           this.centerX=this.mouseHoverWorldX;//+TileData.content[i].scale*this.squareWidth*0.5;
           this.centerY=this.mouseHoverWorldY;//+TileData.content[i].scale*this.squareHeight*0.5;
-          this.interactingTiles[i].sentClick(this.mouseHoverTileX,this.mouseHoverTileY);
+          this.flippedVideoTile = this.interactingTiles[i];
       };
-      for(var j=0;j<this.interactingTiles.length;j++){
-        if(j!=i) {
-          if(this.interactingTiles[j].scaleProgress>0) this.interactingTiles[j].scaleDirection = -0.027;
-          if(this.interactingTiles[j].flipProgress>0) this.interactingTiles[j].flipDirection = -0.027;
-        };
+
+
+    };
+
+    this.interactingTiles[i].sentClick(this.mouseHoverTileX,this.mouseHoverTileY);
+
+    for(var j=0;j<this.interactingTiles.length;j++){
+      if(j!=i) {
+        if(this.interactingTiles[j].scaleProgress>0) this.interactingTiles[j].scaleDirection = -0.027;
+        if(this.interactingTiles[j].flipProgress>0) this.interactingTiles[j].flipDirection = -0.027;
       };
     };
   };
@@ -294,8 +316,8 @@ define([
     
   //use the difference to move the camera when holding
     if(!this.dragDisabled && Config.mouse.button) {
-    	this.camera.momentumx = (this.mousefollow.x-Config.mouse.x)*0.4;
-    	this.camera.momentumy = (this.mousefollow.y-Config.mouse.y)*0.4;       	
+      this.camera.momentumx = (this.mousefollow.x-Config.mouse.x)*0.4;
+      this.camera.momentumy = (this.mousefollow.y-Config.mouse.y)*0.4;        
     };
     if(this.dragDisabled>0) this.dragDisabled--;
 
@@ -367,8 +389,6 @@ define([
                                                          worldY:this.mouseHoverWorldY }));        
         case "image":
         case "video":
-        console.log("New tile #" + this.interactingTiles.length )
-
         this.interactingTiles.push(new InteractedTile({boxes:[TileData.content[i].box,
                                                               TileData.content[i].backbox],
                                                        tileType:TileData.content[i].tiletype,
@@ -378,7 +398,7 @@ define([
                                                        offScreenCtx:this.offScreenCtx,
                                                        modelIndex:i,
                                                        worldX:this.mouseHoverWorldX,
-                                                       worldY:this.mouseHoverWorldY }));
+                                                       worldY:this.mouseHoverWorldY}));
       };
     };
 
@@ -568,9 +588,10 @@ define([
     for(i=0;i<this.interactingTiles.length;i++) {
       this.interactingTiles[i].mouseIsOver=false;
     };
+    canvas.style.cursor="default";
     if(this.mouseHoverInteract && this.mouseHoverIndex>=0) {
       //console.log("On MouseOver for index " + this.mouseHoverIndex)
-      if(typeof(this.interactingTiles[this.mouseHoverIndex])!="undefined") this.interactingTiles[this.mouseHoverIndex].mouseOver(this.mouseHoverTileX, this.mouseHoverTileY);
+      if(typeof(this.interactingTiles[this.mouseHoverIndex])!="undefined" && this.centering==0) this.interactingTiles[this.mouseHoverIndex].mouseOver(this.mouseHoverTileX, this.mouseHoverTileY);
     };   
 
     this.interactingTilesDestroyList=[];
@@ -582,7 +603,7 @@ define([
     };
     //console.log("want to destroy "+ this.interactingTilesDestroyList.length);
     for(i=0;i<this.interactingTilesDestroyList.length;i++) {
-      console.log("Destroyed index "+ this.interactingTilesDestroyList[i]);
+      //console.log("Destroyed index "+ this.interactingTilesDestroyList[i]);
       this.interactingTiles.splice(this.interactingTilesDestroyList[i],1);
     };
 
