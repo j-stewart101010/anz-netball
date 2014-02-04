@@ -43,12 +43,12 @@ require.config({
         	],
         	exports: '$.fn.flippy'
         },
-        flippy : {
+        shame : {
         	deps: [
         		'jquery'
         	],
         	exports: '$.fn.flippy'
-        }        
+        }
 	},
 	paths: {
 		jquery: '../bower_components/jquery/jquery',
@@ -60,7 +60,8 @@ require.config({
 		bootstrap_transition : 'vendor/bootstrap-transition',
         bootstrap_collapse : 'vendor/bootstrap-collapse',
         bootstrap_modal : 'vendor/bootstrap-modal',
-        flippy : 'vendor/jquery.flippy.min'
+        flippy : 'vendor/jquery.flippy.min',
+        shame : 'modules/shame'
 	}
 });
 

@@ -6,7 +6,8 @@ define([
     'views/video-embed',
     'match_media',
     'flippy',
-    'polyfiller'
+    'polyfiller',
+    'shame'
 ], function ($, _, Backbone, VideoEmbedView, MatchMedia) {
 
     var _self;
