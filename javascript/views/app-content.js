@@ -57,22 +57,31 @@ define([
             _self.update_checkbox();
             _self.build_selectbox();
             _self.preload_tiles(_self.$el.find('.image-wrap, .ambassador-video-tile'));
+            _self.loaderScreen = new LoaderScreen();
 
             //Don't start rendering the outter grid until a promise is returned from the server letting us know the model data has loaded.
             $.when(ImageCollection.fetch())
                 .done(function () {
-                    _self.loaderScreen = new LoaderScreen();
-                    _self.render_outter_grid();
+                    // setTimeout(function () {
+                        _self.render_outter_grid();
+                    // }, 3000);
                 }
             );
-
-            $(window).on('resize', _self.resize );
 
             //@TODO: We are not able to correclty calculate grid dimensions until images have finished loading. IE Fires its resize event early which breaks the layout on initial render.
             //Other browsers layouts break slightly if resized before the images have finished loading. Possible solution is to apply a page loader that masks content until page has finished rendering to avoid FOUCs
             if (ie_9 || ie_old) {
-                $(window).on('load', function() {
-                    $(this).trigger('resize');
+                $(window)
+                .on('resize', _self.resize )
+                .on('load', function() {
+                    if (_self.outter_columns.length > 0 || _self.outter_rows.length > 0) {
+                        _.each([_self.outter_columns, _self.outter_rows], function (child) {
+                            _.each(child, function (view) {
+                                view.update_values();
+                            });
+                        });
+                    }
+                    // $(this).trigger('resize');
                 });
             }
         },
@@ -192,6 +201,10 @@ define([
                     complete: function() {
                         if (!$image[0].complete) {
                             animate_rotate(360);
+                        }
+                        else {
+                            //Fall back for if events go out of sync due to server
+                            $image.trigger('load');
                         }
                     }
                 });

@@ -402,6 +402,8 @@
 			</div>
 		</footer>
 
+		<div class="loading-overlay"></div>
+
 		<script data-main="javascript/main-content" src="bower_components/requirejs/require.js"></script>
 
 		<!-- <script src="bower_components/requirejs/require.js"></script>
