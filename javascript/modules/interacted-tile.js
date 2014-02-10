@@ -38,7 +38,7 @@ define([
 
     this.overTime=0;
     this.hoverScale=0;
-    this.removeCounter=0;
+    this.removeCounter=1;
     this.pixelSize=info.pixelSize; 
   };
 
@@ -282,8 +282,10 @@ define([
 
     if(this.tileType=="image") {
       this.boxes[this.currentFace].getBox("cornerarrow").visible=this.scaleProgress>0?true:false;
-      
+      this.boxes[this.currentFace].getBox("overlay").visible=false;
+       
     };
+
   };
 
   InteractedTile.prototype.render = function (ctx, drawx, drawy, drawScale) {

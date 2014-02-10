@@ -36,6 +36,7 @@ define([
     this.recalculateinterval=350;
     
     this.canvasOffset = 0;
+    this.heightRemain = 0;
     this.squareWidth = 306;
     this.squareHeight = 306;
 
@@ -48,9 +49,9 @@ define([
 
     this.zoom = 0.2;
 
-    this.defaultZoom = canvas.width/(this.squareWidth*Math.round(canvas.width/(this.squareWidth))); //0.6 + (w / 10000); 0.6 + (canvas.width / 10000);
-    this.camera.x=this.squareWidth/(1-this.defaultZoom);//this.squareW;
-    this.camera.y=this.squareHeight/(1-this.defaultZoom);
+    //this.defaultZoom = canvas.width/(this.squareWidth*Math.round(canvas.width/(this.squareWidth)));
+    this.camera.x=(canvas.width*0.5)/this.defaultZoom-(canvas.width*0.5);
+    this.camera.y=(canvas.height*0.5)/this.defaultZoom-(canvas.height*0.5);//0;this.squareHeight/(1-this.defaultZoom);
 
     this.minZoom=0.3;
     this.dampZoom=0.003;
@@ -131,7 +132,7 @@ define([
           TileData.content[i].box = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container"});
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].image, {width:100,height:100,contentType:"image"}));
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.cornerArrow, {left:95.571,top:95.285,width:4.428,height:4.714,contentType:"image",opacity:0,visible:false,id:"cornerarrow"}));
-          TileData.content[i].box.addBox(new Box(this.offScreenCtx, "", {left:95.571,top:95.285,width:4.428,height:4.714,contentType:"text",backgroundColour:"128,192,255",backgroundOpacity:1,opacity:0,visible:false,id:"cornerarrowoverlay"}));
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, "", {left:95.571,top:95.285,width:4.428,height:4.714,contentType:"text",backgroundColour:"128,192,255",backgroundOpacity:1,opacity:0,visible:true,id:"overlay"}));
           TileData.content[i].box.calculate();
 
           TileData.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container",backgroundColour:TileData.content[i].backcolour});
@@ -153,7 +154,8 @@ define([
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, "", {width:100,height:100,contentType:"text",backgroundColour:"70,145,185",backgroundOpacity:0.11}));
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, "VIDEO: "+TileData.content[i].textname, {contentType:"text",left:8.5,top:10,width:80,height:25,padding:2,fontSize:9,backgroundColour:"0,0,0",backgroundOpacity:0.35,textunderlay:"fit"}));
           TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].textsubject, {contentType:"text",left:8.5,top:20,width:80,height:20,padding:2,fontSize:22,backgroundColour:"0,0,0",backgroundOpacity:0.35,textunderlay:"fit"}));
-          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].subimage, {left:7,top:85,contentType:"image",width:"original",height:"orignial"}));
+          //TileData.content[i].box.addBox(new Box(this.offScreenCtx, "", {width:22.3,height:9,top:82,left:8.5,contentType:"text",backgroundColour:"70,145,185",backgroundOpacity:0,visible:false,id:"overlay"}));
+          TileData.content[i].box.addBox(new Box(this.offScreenCtx, TileData.content[i].subimage, {width:22.3,height:9,top:82,left:8.5,contentType:"image",id:"button"}));
           TileData.content[i].box.calculate();
    
           TileData.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container",backgroundColour:"0,0,0"});
@@ -165,7 +167,7 @@ define([
   Grid.constructor = Grid;
 
   Grid.prototype.resize = function (w, h) {
-    this.defaultZoom = canvas.width/(this.squareWidth*Math.round(canvas.width/(this.squareWidth))); //0.6 + (w / 10000);
+    this.defaultZoom = w/(this.squareWidth*Math.round(w/(this.squareWidth)));
     this.width = w;
     this.height = h;
     this.zoomPos={x:w/2,y:h/2};
@@ -332,13 +334,13 @@ define([
       //var blah math to do zooming and centering 
       desiredZoom=this.centerZoom;
       var cameraPropX=this.centerX-canvas.width*0.5+(this.centerSize*0.5)/this.centerZoom;//(-canvas.width*0.5)+this.centerX;
-      var cameraPropY=this.centerY-canvas.height*0.5+(this.centerSize*0.5)/this.centerZoom+(window.innerHeight || document.documentElement.clientHeight)*0.035;
+      var cameraPropY=this.centerY-canvas.height*0.5+this.heightRemain*0.5+(this.centerSize*0.5)/this.centerZoom;//+(window.innerHeight || document.documentElement.clientHeight)*0.035;
       
         //((x-(this.zoomPos.x))*this.zoom+this.zoomPos.x)
         //=current+('target'-current)*30/(ABS('target'-current)^1.615)
-      this.camera.x+=(cameraPropX-this.camera.x)*.05;//30/Math.pow(Math.abs(cameraPropX-this.camera.x),1.615);///(Math.abs(cameraPropX-this.camera.x)+1);
+      this.camera.x+=(cameraPropX-this.camera.x)*.1;//30/Math.pow(Math.abs(cameraPropX-this.camera.x),1.615);///(Math.abs(cameraPropX-this.camera.x)+1);
       if(Math.abs(cameraPropX-this.camera.x)<2) this.camera.x=cameraPropX;
-      this.camera.y+=(cameraPropY-this.camera.y)*.05;//30/Math.pow(Math.abs(cameraPropY-this.camera.y),1.615);///(Math.abs(cameraPropX-this.camera.x)+1);
+      this.camera.y+=(cameraPropY-this.camera.y)*.1;//30/Math.pow(Math.abs(cameraPropY-this.camera.y),1.615);///(Math.abs(cameraPropX-this.camera.x)+1);
       if(Math.abs(cameraPropY-this.camera.y)<2) this.camera.y=cameraPropY;
     } else {
       desiredZoom=this.defaultZoom-Math.pow(this.camera.momentumx*this.camera.momentumx+this.camera.momentumy*this.camera.momentumy,0.4)/70;
@@ -352,8 +354,8 @@ define([
       };
 
     };
-      this.camera.momentumx *= 0.97;
-      this.camera.momentumy *= 0.97;
+      this.camera.momentumx *= 0.997;
+      this.camera.momentumy *= 0.997;
 
     if(desiredZoom<0.2) desiredZoom=0.2;
     this.zoom+=(desiredZoom-this.zoom)*this.dampZoom;
@@ -364,6 +366,9 @@ define([
 
     if(!this.mouseHoverInteract && this.mouseHoverIndex>=0) {
       i=this.mouseHoverIndex;
+      console.log(i,this.mouseHoverWorldX,this.mouseHoverWorldY);
+      this.mouseHoverWorldX
+
       //well we are interacting now! create a new interacted tile and send boxes and info
       switch(TileData.content[i].tiletype) {
         case "text":
@@ -479,34 +484,80 @@ define([
     // } while(repeaty<=canvas.height);
 
 ////  SECOND PASS: interactive Tiles
-    //for(i=this.interactingTiles.length-1;i>=0;i--) {
     for(i=0;i<this.interactingTiles.length;i++) {
       this.interactingTiles[i].process();
 
-      x=Math.floor(this.interactingTiles[i].worldX-this.camera.x);
-      x=(x-(this.zoomPos.x))*this.zoom+this.zoomPos.x;
-      y=Math.floor(this.interactingTiles[i].worldY-this.camera.y);
-      y=(y-(this.zoomPos.y))*this.zoom+this.zoomPos.y;
-      if(x>(-this.interactingTiles[i].scale*this.squareWidth*this.zoom) && x<canvas.width && y>(-this.interactingTiles[i].scale*this.squareHeight*this.zoom) && y<canvas.height){
-    //           ///REMEMBER THIS IS THE SECOND PASS
-        this.interactingTiles[i].render(ctx, x, y, this.zoom);
-        if(Config.mouse.x>=x && Config.mouse.x<(x+this.interactingTiles[i].getCurrentSize()*this.zoom) && (Config.mouse.y-this.canvasOffset)>=y && (Config.mouse.y-this.canvasOffset)<(y+this.interactingTiles[i].getCurrentSize()*this.zoom)) {
-          this.mouseHoverInteract=true;
-          this.mouseHoverIndex=i;
-          this.mouseHoverWorldX=this.interactingTiles[i].worldX;
-          this.mouseHoverWorldY=this.interactingTiles[i].worldY;
-          this.mouseHoverTileX=(Config.mouse.x-x)/this.zoom;
-          this.mouseHoverTileY=(Config.mouse.y-this.canvasOffset-y)/this.zoom;
-        };
-      };      
+      j=this.interactingTiles[i].modelIndex;
+      x=-Math.floor(this.camera.x);
+      wtx=Math.floor(Math.floor(this.camera.x)/totalWorldWidth)*totalWorldWidth;
+      if(x>0) wtx+=totalWorldWidth;
+      x%=totalWorldWidth;
+      x-=totalWorldWidth*Math.ceil(1+canvas.width/(totalWorldWidth*this.zoom*2));
+      wtx-=totalWorldWidth*Math.ceil(1+canvas.width/(totalWorldWidth+this.squareWidth*this.zoom*2));
+      x+=TileData.content[j].position.x*this.squareWidth;
+      wtx+=TileData.content[j].position.x*this.squareWidth;
+
+      y=-Math.floor(this.camera.y);
+      wty=Math.floor(Math.floor(this.camera.y)/totalWorldHeight)*totalWorldHeight;
+      if(y>0) wty+=totalWorldHeight;
+      y%=totalWorldHeight;
+      y-=totalWorldHeight*Math.ceil(1+canvas.height/(totalWorldHeight*this.zoom*2));
+      wty-=totalWorldHeight*Math.ceil(1+canvas.height/(totalWorldHeight*this.zoom*2));
+      y+=TileData.content[j].position.y*this.squareHeight;
+      wty+=TileData.content[j].position.y*this.squareHeight;
+
+      var repeatx,repeaty=(y-(this.zoomPos.y))*this.zoom+this.zoomPos.y, drawAngle;
+      var repeatwtx,repeatwty=wty;
+      do {
+        repeatx=(x-(this.zoomPos.x))*this.zoom+this.zoomPos.x;
+        repeatwtx=wtx;
+        do {
+      //collision with screen. whether it's worth drawing or not
+      //    if(repeatx>(-TileData.content[i].scale*this.squareWidth*this.zoom) && repeatx<canvas.width && repeaty>(-TileData.content[i].scale*this.squareHeight*this.zoom) && repeaty<canvas.height){
+          
+          if(this.interactingTiles[i].worldX==repeatwtx && this.interactingTiles[i].worldY==repeatwty) {
+            this.interactingTiles[i].render(ctx, repeatx, repeaty, this.zoom);
+                ///REMEMBER THIS IS THE SECOND PASS
+            if(Config.mouse.x>=repeatx && Config.mouse.x<(repeatx+this.interactingTiles[i].getCurrentSize()*this.zoom) && (Config.mouse.y-this.canvasOffset)>=repeaty && (Config.mouse.y-this.canvasOffset)<(repeaty+this.interactingTiles[i].getCurrentSize()*this.zoom)) {
+                this.mouseHoverInteract=true;
+                this.mouseHoverIndex=i;
+                this.mouseHoverWorldX=repeatwtx;
+                this.mouseHoverWorldY=repeatwty;
+                this.mouseHoverTileX=(Config.mouse.x-repeatx)/this.zoom;
+                this.mouseHoverTileY=(Config.mouse.y-this.canvasOffset-repeaty)/this.zoom;
+            };
+    
+          };
+          repeatx+=totalWorldWidth*this.zoom; //and scale
+          repeatwtx+=totalWorldWidth;
+        } while(repeatx<=canvas.width);
+
+        repeaty+=totalWorldHeight*this.zoom; //and scale
+        repeatwty+=totalWorldHeight;
+      } while(repeaty<=canvas.height);
+
     };
+      //console.log(x,y);
+     // if(x>(-this.interactingTiles[i].scale*this.squareWidth*this.zoom) && x<canvas.width && y>(-this.interactingTiles[i].scale*this.squareHeight*this.zoom) && y<canvas.height){
+    //           ///REMEMBER THIS IS THE SECOND PASS
+    //     this.interactingTiles[i].render(ctx, x, y, this.zoom);
+    //     if(Config.mouse.x>=x && Config.mouse.x<(x+this.interactingTiles[i].getCurrentSize()*this.zoom) && (Config.mouse.y-this.canvasOffset)>=y && (Config.mouse.y-this.canvasOffset)<(y+this.interactingTiles[i].getCurrentSize()*this.zoom)) {
+    //       this.mouseHoverInteract=true;
+    //       this.mouseHoverIndex=i;
+    //       this.mouseHoverWorldX=this.interactingTiles[i].worldX;
+    //       this.mouseHoverWorldY=this.interactingTiles[i].worldY;
+    //       this.mouseHoverTileX=(Config.mouse.x-x)/this.zoom;
+    //       this.mouseHoverTileY=(Config.mouse.y-this.canvasOffset-y)/this.zoom;
+    //     };
+    //  //};      
+    // };
 
 //----------------------W_#_#_#_)*#_)(&()*%Y#UHIJSBNF)
 
 
 
  //   for(i=0; i<TileData.contentLength; i++) {
-    //   x=Math.floor(this.interactingTiles[i].worldX-this.camera.x);
+    //   x=Math.floor(this.camera.x);
     //   wtx=Math.floor(Math.floor(this.camera.x)/totalWorldWidth)*totalWorldWidth;
     //   if(x>0) wtx+=totalWorldWidth;
     //   x%=totalWorldWidth;
@@ -631,7 +682,7 @@ define([
     };
     //console.log("want to destroy "+ this.interactingTilesDestroyList.length);
     for(i=0;i<this.interactingTilesDestroyList.length;i++) {
-      //console.log("Destroyed index "+ this.interactingTilesDestroyList[i]);
+   //   console.log("Destroyed index "+ this.interactingTilesDestroyList[i]);
       this.interactingTiles.splice(this.interactingTilesDestroyList[i],1);
     };
 
