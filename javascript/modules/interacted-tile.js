@@ -38,7 +38,7 @@ define([
 
     this.overTime=0;
     this.hoverScale=0;
-    this.removeCounter=0;
+    this.removeCounter=1;
     this.pixelSize=info.pixelSize; 
   };
 
@@ -245,8 +245,7 @@ define([
 
   };
 
-  InteractedTile.prototype.render = function (ctx, drawx, drawy, drawScale) {
-    
+  InteractedTile.prototype.process = function () {
     this.scaleProgress+=this.scaleDirection;
     if(this.scaleProgress>1) {
       this.scaleProgress=1;
@@ -283,10 +282,14 @@ define([
 
     if(this.tileType=="image") {
       this.boxes[this.currentFace].getBox("cornerarrow").visible=this.scaleProgress>0?true:false;
-      
+      this.boxes[this.currentFace].getBox("overlay").visible=false;
+       
     };
 
+  };
 
+  InteractedTile.prototype.render = function (ctx, drawx, drawy, drawScale) {
+    
     var hoverOffset=this.pixelSize*drawScale*this.hoverScale*0.5;//this.pixelSize*(this.scale+this.scaleProgress)*this.hoverScale*0.5*drawScale;
     ctx.strokeStyle="#FFFFFF";
     ctx.lineWidth=1;

@@ -155,7 +155,7 @@
 														</div>
 													</hgroup>
 
-													<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-qld-sa" data-video="toggle" data-video-target="#video-side-two" data-video-id="19072376" href=""><i class="fa fa-film fa-6"></i> Play</a>
+													<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-qld-sa" data-video="toggle" data-video-target="#video-side-two" data-video-id="M7lc1UVf-VE" href=""><i class="fa fa-film fa-6"></i> Play</a>
 												
 												</div>
 												<div class="brand-overlay shade-nineteen"></div>
@@ -181,7 +181,7 @@
 														</div>
 													</hgroup>
 
-													<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-qld-sa" data-video="toggle" data-video-target="#video-side-two" data-video-id="19072376" href="#"><i class="fa fa-film fa-6"></i> Play</a>
+													<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-qld-sa" data-video="toggle" data-video-target="#video-side-two" data-video-id="M7lc1UVf-VE" href="#"><i class="fa fa-film fa-6"></i> Play</a>
 												
 												</div>
 												<div class="brand-overlay shade-seventeen"></div>
@@ -194,7 +194,7 @@
 
 										<div id="video-side-two" class="back shade-seventeen">
 											<!-- Dynamic content injected in here -->
-											<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#clinics-qld-sa"data-video-id="19072376" data-video="close">
+											<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#clinics-qld-sa"data-video-id="M7lc1UVf-VE" data-video="close">
 												<div class="cross-icon">
 													<i class="fa fa-angle-left"></i>
 													<i class="fa fa-angle-right"></i>
@@ -269,7 +269,7 @@
 														</div>
 													</hgroup>
 
-													<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-nsw-act" data-video="toggle" data-video-target="#video-side-three" data-video-id="19072376" href="#"><i class="fa fa-film fa-6"></i> Play</a>
+													<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-nsw-act" data-video="toggle" data-video-target="#video-side-three" data-video-id="M7lc1UVf-VE" href="#"><i class="fa fa-film fa-6"></i> Play</a>
 												
 												</div>
 												<div class="brand-overlay shade-nineteen"></div>
@@ -282,7 +282,7 @@
 
 										<div id="video-side-three" class="back shade-fifteen">
 											<!-- Dynamic content injected in here -->
-											<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#clinics-nsw-act"data-video-id="19072376" data-video="close">
+											<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#clinics-nsw-act"data-video-id="M7lc1UVf-VE" data-video="close">
 												<div class="cross-icon">
 													<i class="fa fa-angle-left"></i>
 													<i class="fa fa-angle-right"></i>
@@ -328,7 +328,7 @@
 														</div>
 													</hgroup>
 
-													<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-wa-vic" data-video="toggle" data-video-target="#video-side-four" data-video-id="19072376" href=""><i class="fa fa-film fa-6"></i> Play</a>
+													<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-wa-vic" data-video="toggle" data-video-target="#video-side-four" data-video-id="M7lc1UVf-VE" href=""><i class="fa fa-film fa-6"></i> Play</a>
 												
 												</div>
 												<div class="brand-overlay shade-sixteen"></div>
@@ -354,7 +354,7 @@
 														</div>
 													</hgroup>
 
-													<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-wa-vic" data-video="toggle" data-video-target="#video-side-four" data-video-id="19072376" href="#"><i class="fa fa-film fa-6"></i> Play</a>
+													<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#clinics-wa-vic" data-video="toggle" data-video-target="#video-side-four" data-video-id="M7lc1UVf-VE" href="#"><i class="fa fa-film fa-6"></i> Play</a>
 													<a class="btn btn-sm btn-primary" data-gallery="toggle" data-gallery-id="123456789" data-gallery-target="#carousel-vic-wa-gallery" href="#carousel-vic-wa-gallery" data-slide="next"><i class="fa fa-picture-o"></i> View Gallery</a>
 												
 												</div>
@@ -368,7 +368,7 @@
 
 										<div id="video-side-four" class="back shade-seventeen">
 											<!-- Dynamic content injected in here -->
-											<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#clinics-wa-vic"data-video-id="19072376" data-video="close">
+											<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#clinics-wa-vic"data-video-id="M7lc1UVf-VE" data-video="close">
 												<div class="cross-icon">
 													<i class="fa fa-angle-left"></i>
 													<i class="fa fa-angle-right"></i>

@@ -326,10 +326,10 @@ body {
 	display: inline-block;
 	position: absolute;
 	top: -1px;
-	width: 20px;
+	width: 30px;
 	height: 100%;
 	margin: 15px;
-	right: -11px;
+	right: -17px;
 	margin: 0px;
 	z-index: 999;
 	@include skew(-16deg, 0deg);
@@ -355,7 +355,7 @@ body {
 		left: -10px;
 		bottom: 0;
 		width: 18px;
-		@include skew(-12deg, 0deg);
+		@include skew(-8deg, 0deg);
 		@include gradient-vertical($start-color: lighten($brand-primary, 2%), $end-color: darken($brand-primary, 13%));			
 	}
 }
@@ -669,8 +669,12 @@ body {
 
 	&.appended-col {
 		z-index: 98;
-		border-right: 1px solid white;		
+		border-left: 1px solid white;		
 		top: 8%;
+
+		&:first-child {
+			border-left: 0;
+		}
 
 		.image-wrap {
 			width: auto;

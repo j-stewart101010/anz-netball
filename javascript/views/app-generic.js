@@ -168,13 +168,13 @@ define([
         },
 
         show_video : function (e) {
-            var video_id = $(e.target).data('video-id'),
+            var video_id = $(e.currentTarget).data('video-id'),
                 view = new VideoEmbedView({
                 id : 'video-id-'+video_id,
                 modal : false,
                 video_id : video_id
             });
-            _self.$content.find($(e.target).data('video-target')).append(view.render().el);
+            _self.$content.find($(e.currentTarget).data('video-target')).append(view.render().el);
             this.delegateEvents();
         },
 

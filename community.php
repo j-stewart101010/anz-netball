@@ -239,7 +239,7 @@
 											</div>
 										</hgroup>
 
-										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-target="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
+										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-target="#video-side" data-video-id="M7lc1UVf-VE" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
 									
 									</div>
 									<div class="brand-overlay shade-three"></div>
@@ -265,7 +265,7 @@
 											</div>
 										</hgroup>	
 
-										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-target="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
+										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-target="#video-side" data-video-id="M7lc1UVf-VE" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
 
 									</div>
 									<div class="brand-overlay shade-three"></div>
@@ -278,7 +278,7 @@
 							<div id="video-side" class="back shade-two">
 								<!-- Dynamic content injected in here -->
 
-								<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#video-case-studies" data-video-id="19072376" data-video="close">
+								<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#video-case-studies" data-video-id="M7lc1UVf-VE" data-video="close">
 									<div class="cross-icon">
 										<i class="fa fa-angle-left"></i>
 										<i class="fa fa-angle-right"></i>

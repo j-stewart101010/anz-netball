@@ -92,7 +92,7 @@
 											</div>
 										</hgroup>
 
-										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-target="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
+										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-target="#video-side" data-video-id="M7lc1UVf-VE" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
 									
 									</div>
 									<div class="brand-overlay shade-three"></div>

@@ -232,7 +232,10 @@ define([
         update : function () {
             //console.log(Config.isMobile);
             _self.resizeCount++;
-            if(_self.resizeCount==10) _self.realResize(); 
+            if(_self.resizeCount==10) {
+                _self.realResize(); 
+                grid.render(context);
+            }
             
             if(!grid.renderDisabled) grid.render(context);
             //console.log(grid.renderDisabled);
@@ -244,12 +247,14 @@ define([
 
             var h = $(window).height() - _self.$master_head.height() - _self.$master_foot.height();    
             var w = window.innerWidth || document.documentElement.clientWidth;
+            var co= _self.$master_head.height();
 
             if (window.grid) {
                 if(window.canvas) {
                     canvas.width = w;
                     canvas.height = h;
-                    grid.canvasOffset = h*0.08;
+                    grid.canvasOffset = co;
+                    grid.heightRemain = _self.$master_head.height() + _self.$master_foot.height();// + _self.$master_foot.height();
                     //todo: change camera position based on previous size and new size
                 };
                 grid.resize(w, h);
