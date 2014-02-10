@@ -3,17 +3,19 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if IE 9]>         <html class="no-js lt-ie10 ie9"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
 		<title>ANZ Netball Nation - Community</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
 		<link href="css/styles.css" rel="stylesheet" type="text/css">
+		<link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/f8bca219-07d6-4bdf-9b18-02f0db46b33f.css"/>
 
-        <!--[if lt IE 9]>
-            <link href="/stylesheets/ie.css" rel="stylesheet" type="text/css">
-        <![endif]-->
+    	<!--[if IE 9]>
+	        <link href="css/ie.css" rel="stylesheet" type="text/css">
+	    <![endif]-->
 
 		<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
     </head>
@@ -21,11 +23,11 @@
     <body>
 
 		<header class="master-head">
-			<div class="branding">
+			<div class="branding col-md-4">
 				<div class="brand clearfix">
 					<div class="logos">
 						<a href="/" class="anz-logo"></a>
-						<a href="/" class="nbn-logo">Netball<b>Nation</b></a>
+						<a href="/" class="nbn-logo">Netball<em>Nation</em></a>
 					</div>
 					<span class="sharp-brand-angle"></span>
 
@@ -36,11 +38,11 @@
 					</a>
 				</div>
 			</div>
-			<nav class="main-nav">
+			<nav class="main-nav col-md-8">
 				<div class="nav-items">
-					<ul id="main-navigation" class="navigation block collapse">
-						<li class="active"><a href="/community-grants">Community grants</a></li>
-						<li><a href="/getting-started">Getting started</a></li>
+					<ul id="main-navigation" class="clearfix navigation block collapse">
+						<li><a href="/community-grants">Community grants</a></li>
+						<li class="active"><a href="/getting-started">Getting started</a></li>
 						<li><a href="/all-about-netball">All about netball</a></li>
 						<li><a href="/clinics">Clinics</a></li>
 					
@@ -52,9 +54,9 @@
 			</nav>
 		</header>
 
-		<main class="content">
+		<main class="content community">
 
-			<section class="grid">
+			<section class="grid active">
 
 				<div class="col col-md-8 col-lg-8 center-tile shade-one">
 					<div data-resize-height="center" class="outter-tile">
@@ -63,57 +65,43 @@
 								<h1 class="heading heading-exjumbo">Community Grants</h1>
 								<h2 class="subheading heading-med">We’re giving back and need your help!</h2>
 								<p>Grants are non-repayable funds disbursed by one party (grant makers), often a government department tion, foundation or trust, to a recipient, often (but not always) a nonprofit entity, educational stitution, business or an individual. In order to receive a grant, some form of "Grant Writing" often referred to as either a proposal or an application is usually required.</p>
+								<a data-descr="Frequently asked questions" class="btn btn-sm btn-default" data-slide="toggle" data-slide-target="#faq" href="#">Frequently asked questions <i class="fa fa-angle-right"></i></a>
 							</hgroup>
 						</article>
 					</div>
-				</div>
-
-<!-- 				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap">
-						<img src="images/netball-grid-one.jpg">
-					</div>
-					<div class="image-wrap">
-						<img src="images/netball-grid-two.jpg">
-					</div>
-				</div>
-				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap">
-						<img src="images/netball-grid-three.jpg">
-					</div>
-					<div class="image-wrap">
-						<img src="images/netball-grid-four.jpg">
-					</div>
-				</div>	 -->	
-
-				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/265/292/">
-					</div>
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/265/292/">
-					</div>
-				</div>
-				<div class="col col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/265/292/">
-					</div>
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/265/292/">
-					</div>
 				</div>	
 
-						
+				<div class="col col-sm-12 col-md-2 col-lg-2">
+					<div class="half-length col col-xs-12 col-md-12">				
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
+					</div>
+				</div>
+				<div class="col col-sm-12 col-md-2 col-lg-2">
+					<div class="half-length col col-xs-12 col-md-12">				
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
+					</div>
+				</div>		
 
 			</section>
 
-			<section class="grid">
+			<section class="grid active">
 				
 				<div class="col col-md-4 center-tile shade-two">
 
 
 					<div id="apply-for-grant" class="flip-container">
 						<div class="flipper">
-							<div class="front">
+							<div class="front shade-two">
 
 
 
@@ -129,11 +117,11 @@
 
 
 							</div>
-							<div class="back">
+							<div class="back shade-two">
 
 
 
-								<div class="outter-tile">
+								<div class="outter-tile vertical-center">
 									<form id="apply-for-grant-signup" action="/" method="POST" class="form content-tile tile shade-two">
 										<div class="form-group">
 											<input id="apply-for-grant-name" name="apply-for-grant-name" class="form-control" type="text" required="required" placeholder="Name">
@@ -165,18 +153,32 @@
 												<button class="btn btn-default btn-xs"><i class="fa fa-picture-o"></i> Image</button>
 												<input type="file" class="file-input" id="apply-for-grant-image" name="apply-for-grant-image">
 											</span>
-											File size limit 2mb
+											<span class="field-helper">File size limit 2mb</span>
+											
 											<span class="tooltip">
-												<i class="fa fa-question-circle"></i>
+												<div class="question-icon">
+													<i class="fa fa-question"></i>
+												</div>
+												<span class="tooltip-inner verbose">
+													Lorem ipsum dolor sit amet, consecteur adipiscing elit.
+												</span>
 											</span>
+											
 										</div>
 
 										<div class="form-group">
 											<label class="group-label" for="apply-for-grant-video">Attach VIDEO:</label>
 											<input class="form-control inline-control" type="text" placeholder="Enter YouTube URL" id="apply-for-grant-video" name="apply-for-grant-video">
+											
 											<span class="tooltip">
-												<i class="fa fa-question-circle"></i>
+												<div class="question-icon">
+													<i class="fa fa-question"></i>
+												</div>
+												<span class="tooltip-inner verbose">
+													Lorem ipsum dolor sit amet, consecteur adipiscing elit.
+												</span>
 											</span>
+
 										</div>
 
 										<div class="form-group">
@@ -191,10 +193,17 @@
 											</label>
 										</div>						
 										
-										<input class="btn btn-default btn-sm" type="submit" value="Apply now">
+										<button type="submit" class="btn btn-default btn-sm">Apply now <i class="fa fa-angle-right"></i></button>
+										<!-- <input class="btn btn-default btn-sm" type="submit" value="Apply now"> -->
 
 									</form>
-									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#apply-for-grant" href="#"><i class="fa fa-times"></i></a>
+									<a class="btn btn-sm btn-action flip-toggle" data-flip="toggle" data-flip-target="#apply-for-grant" href="#">
+										<!-- <i class="fa fa-times"></i> -->
+										<div class="cross-icon">
+											<i class="fa fa-angle-left"></i>
+											<i class="fa fa-angle-right"></i>
+										</div>
+									</a>
 								</div>
 
 
@@ -207,9 +216,9 @@
 
 				<div class="col col-md-6">
 
-					<div id="video-case-studies" class="flip-container">
+					<div id="video-case-studies" class="flip-container shade-one">
 						<div class="flipper">
-							<div class="front">
+							<div class="front shade-one">
 
 
 
@@ -230,11 +239,13 @@
 											</div>
 										</hgroup>
 
-										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-append="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
+										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-target="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
 									
 									</div>
 									<div class="brand-overlay shade-three"></div>
-									<img class="video-tile-image" alt="Video" src="images/video-background-one.jpg">
+									<div class="image-wrap video-tile-image">
+										<img class="" alt="Video" src="http://lorempixel.com/g/767/352/">
+									</div>
 								</article>
 
 								<article class="video-tile tile shade-one">
@@ -254,16 +265,25 @@
 											</div>
 										</hgroup>	
 
-										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-append="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
+										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-target="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
 
 									</div>
 									<div class="brand-overlay shade-three"></div>
-									<img class="video-tile-image" alt="Video" src="images/video-background-one.jpg">
+									<div class="image-wrap video-tile-image">
+										<img class="" alt="Video" src="http://lorempixel.com/g/767/352/">
+									</div>
 								</article>
 
 							</div>
-							<div id="video-side" class="back">
+							<div id="video-side" class="back shade-two">
 								<!-- Dynamic content injected in here -->
+
+								<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#video-case-studies" data-video-id="19072376" data-video="close">
+									<div class="cross-icon">
+										<i class="fa fa-angle-left"></i>
+										<i class="fa fa-angle-right"></i>
+									</div>
+								</a>								
 							</div>
 						</div>
 					</div>
@@ -271,27 +291,229 @@
 				</div>
 
 				<div class="col col-md-2 center-tile shade-one">
-					<div data-resize-height="center" class="outter-tile shade-one">
-						<article class="article-tile tile">
-							<h3 class="heading heading-default">Grants awarded</h3>
-							<ul class="article-list">
-								<li>
-									<div class="subheading">City of Melton</div>
-									<div class="subheading">$32K for a new court</div>
-									<div>For example, tiered funding for a freeway are very large grants negotiated.</div>
-								</li>
-								<li>
-									<div class="subheading">Jane Sample and the Mary St Magpies</div>
-									<div class="subheading">$50 for a new set of team bibs.</div>
-									<div>For example, tiered funding for a freeway are very.</div>
-								</li>
-							</ul>
-							<a class="btn btn-default btn-sm" href="/grants">More <i class="fa fa-angle-right"></i></a>
-						</article>
+
+					<div id="community-grants" class="flip-container">
+						<div class="flipper">
+							<div class="front shade-two">
+
+								<div data-resize-height="center" class="outter-tile vertical-center shade-one">
+									<article class="article-tile tile">
+										<h3 class="heading heading-default">Grants awarded</h3>
+										<ul class="article-list">
+											<li>
+												<div class="subheading">City of Melton</div>
+												<div class="subheading">$32K for a new court</div>
+												<div>For example, tiered funding for a freeway are very large grants negotiated.</div>
+											</li>
+											<li>
+												<div class="subheading">Jane Sample and the Mary St Magpies</div>
+												<div class="subheading">$50 for a new set of team bibs.</div>
+												<div>For example, tiered funding for a freeway are very.</div>
+											</li>
+										</ul>
+										<a class="btn btn-sm btn-default" data-flip="toggle" data-flip-target="#community-grants" href="#">More <i class="fa fa-angle-right"></i></a>
+									</article>
+								</div>
+
+							</div>
+							<div class="back shade-two">
+
+								<div data-resize-height="center" class="outter-tile vertical-center shade-one">
+									<article class="article-tile tile">
+										<ul class="article-list">
+											<li>
+												<div class="subheading">Another grant</div>
+												<div class="subheading">$21K for a new grant</div>
+												<div>Another grants content can go here, this is to demonstrate content.</div>
+											</li>
+											<li>
+												<div class="subheading">More grants</div>
+												<div class="subheading">$10K for a new grant</div>
+												<div>Another grants content can go here, this is to demonstrate content.</div>
+											</li>
+										</ul>
+										<a class="btn btn-sm btn-default btn-action" data-flip="toggle" data-flip-target="#community-grants" href="#"><i class="fa fa-angle-left"></i> Back</a>
+									</article>
+								</div>
+
+							</div>
+						</div>
 					</div>
+
 				</div>
 
 			</section>			
+
+			<div id="faq" class="alternate-content inactive">
+
+				<section class="grid full-length">
+
+					<div class="col col-md-6 col-lg-6 shade-one">
+						<div data-resize-height="center" class="outter-tile">
+							<article class="content-tile tile">
+
+								<hgroup>
+									<h1 class="heading heading-exjumbo">Frequently asked questions</h1>
+								</hgroup>
+	<!-- 										<li><a href="#who-can-apply" class="active" data-parent="#faq-answers" data-toggle="collapse">Who can apply for an ANZ Grant?</a></li>
+										<li><a href="#do-i-need-to-be-customer" data-parent="#faq-answers" data-toggle="collapse">Do I or my club or school need to be an ANZ customer to apply?</a></li>
+										<li><a href="#who-can-apply" data-toggle="collapse">>How do I know which category to apply for?</a></li>
+										<li><a href="#who-can-apply" data-toggle="collapse">Can I apply as an individual?</a></li>
+										<li><a href="#who-can-apply" data-toggle="collapse">Can I apply for more than one grant?</a></li>
+										<li><a href="#who-can-apply" data-toggle="collapse">Can I put in more than one application for my team/club?</a></li>
+										<li><a href="#who-can-apply" data-toggle="collapse">What grants can I apply for?</a></li>
+										<li><a href="#who-can-apply" data-toggle="collapse">The grant I want isn’t on the list of standard grants. Can I still apply?</a></li>
+										<li><a href="#who-can-apply" data-toggle="collapse">Can I change one of the standard gear grants?</a></li>
+										<li><a href="#who-can-apply" data-toggle="collapse">What happens if I apply without uploading a photo or video?</a></li>
+										<li><a href="#who-can-apply" data-toggle="collapse">When will successful ANZ Grant Scheme applications be announced?</a></li>
+										<li><a href="#who-can-apply" data-toggle="collapse">Will I get notified if my application has not been successful?</a></li>
+										<li><a href="#who-can-apply" data-toggle="collapse">How old do you have to be to apply for a grant?</a></li>
+										<li><a href="#who-can-apply" data-toggle="collapse">What information do the judges want to know?</a></li>
+	-->
+								<div class="accordian panel-group hidden-md hidden-lg" id="faq-answers-mob">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+												<a class="verbose" data-toggle="collapse" data-parent="#faq-answers-mob" href="#who-can-apply-mob">
+													Who can apply for an ANZ Grant?
+												</a>
+											</h4>
+										</div>
+										<div id="who-can-apply-mob" class="panel-collapse collapse in">
+											<article>
+												<p>The ANZ Grant Scheme has seven options for you to choose from. Select the option most relevant to you or your team, club or school, or tell us exactly what you need with the ‘custom grant’ option.</p>
+												<ul>
+													<li>Uniform grant - dresses, skirts, tops, bibs, netballs and bag</li>
+													<li>School and Club equipment grants - a full kit containing all the gear a school or Club team needs for netball training</li>
+													<li>Social team gear grant - gear for social teams including balls, bibs and gear bag</li>
+													<li>Senior team gear grant – gear for senior teams including balls, bibs and gear suitable for high level netball</li>
+													<li>Court equipment grant - such as free-standing or metal hoops with nets and post protectors.</li>
+													<li>ANZ Championship tickets – tickets to an Australian ANZ Championship match</li>
+													<li>Custom grant – a bespoke grant, select this option if you, or your club, would like to request something unique that would help your club. This could anything from a mini-bus hire to travel to and from a netball carnival to a BBQ to help support fundraising efforts.</li>								
+												</ul>	
+												<a class="btn btn-sm btn-default" data-slide="toggle" data-slide-target="#faq" href="#">Back to community grants <i class="fa fa-angle-right"></i></a>																									
+											</article>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+												<a class="verbose" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+													Collapsible Group Item #2
+												</a>
+											</h4>
+										</div>
+										<div id="collapseTwo" class="panel-collapse collapse">
+											<div class="panel-body">
+											Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+								<ul class="qa-list hidden-sm hidden-xs">
+									<li><a href="#who-can-apply" class="active" data-parent="#faq-answers" data-toggle="collapse">Who can apply for an ANZ Grant?</a></li>
+									<li><a href="#do-i-need-to-be-customer" data-parent="#faq-answers" data-toggle="collapse">Do I or my club or school need to be an ANZ customer to apply?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">How do I know which category to apply for?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">Can I apply as an individual?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">Can I apply for more than one grant?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">Can I put in more than one application for my team/club?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">What grants can I apply for?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">The grant I want isn’t on the list of standard grants. Can I still apply?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">Can I change one of the standard gear grants?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">What happens if I apply without uploading a photo or video?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">When will successful ANZ Grant Scheme applications be announced?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">Will I get notified if my application has not been successful?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">How old do you have to be to apply for a grant?</a></li>
+									<li><a href="#who-can-apply" data-toggle="collapse">What information do the judges want to know?</a></li>
+								</ul>
+							</article>
+						</div>
+					</div>	
+
+					<div class="col col-md-6 col-lg-6 hidden-sm hidden-xs">
+						<section class="grid quarter-length">
+							<div class="col col-md-4 col-lg-4">
+								<div class="image-wrap">
+									<img src="http://lorempixel.com/g/265/292/">
+								</div>
+							</div>
+							<div class="col col-md-4 col-lg-4">
+								<div class="image-wrap">
+									<img src="http://lorempixel.com/g/265/292/">
+								</div>
+							</div>
+							<div class="col col-md-4 col-lg-4">
+								<div class="image-wrap">
+									<img src="http://lorempixel.com/g/265/292/">
+								</div>
+							</div>														
+						</section>
+
+						<section class="grid">
+
+							<div class="panel-group answer-panel accorian-toggle shade-two" id="faq-answers">
+
+								<div class="panel panel-default">
+									<div id="who-can-apply" class="panel-collapse collapse in">
+										<div class="outter-tile vertical-center">
+											<article class="tile">
+												<p>The ANZ Grant Scheme has seven options for you to choose from. Select the option most relevant to you or your team, club or school, or tell us exactly what you need with the ‘custom grant’ option.</p>
+												<ul>
+													<li>Uniform grant - dresses, skirts, tops, bibs, netballs and bag</li>
+												</ul>
+												<a class="btn btn-sm btn-default" data-slide="toggle" data-slide-target="#faq" href="#">Back to community grants <i class="fa fa-angle-right"></i></a>																									
+											</article>
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-default">
+									<div id="do-i-need-to-be-customer" class="panel-collapse collapse">
+										<div class="outter-tile vertical-center">
+											<article class="tile">
+												<p>The ANZ Grant Scheme has seven options for you to choose from. Select the option most relevant to you or your team, club or school, or tell us exactly what you need with the ‘custom grant’ option.</p>
+												<ul>
+													<li>Uniform grant - dresses, skirts, tops, bibs, netballs and bag</li>
+													<li>School and Club equipment grants - a full kit containing all the gear a school or Club team needs for netball training</li>
+													<li>Social team gear grant - gear for social teams including balls, bibs and gear bag</li>
+													<li>Senior team gear grant – gear for senior teams including balls, bibs and gear suitable for high level netball</li>
+													<li>Court equipment grant - such as free-standing or metal hoops with nets and post protectors.</li>
+													<li>ANZ Championship tickets – tickets to an Australian ANZ Championship match</li>
+													<li>Custom grant – a bespoke grant, select this option if you, or your club, would like to request something unique that would help your club. This could anything from a mini-bus hire to travel to and from a netball carnival to a BBQ to help support fundraising efforts.</li>								
+												</ul>	
+												<a class="btn btn-sm btn-default" data-slide="toggle" data-slide-target="#faq" href="#">Back to community grants <i class="fa fa-angle-right"></i></a>																									
+											</article>
+											</div>
+									</div>
+								</div>								
+							</div>
+
+						</section>	
+
+						<section class="grid quarter-length">
+							<div class="col col-md-4 col-lg-4">
+								<div class="image-wrap">
+									<img src="http://lorempixel.com/g/265/292/">
+								</div>
+							</div>
+							<div class="col col-md-4 col-lg-4">
+								<div class="image-wrap">
+									<img src="http://lorempixel.com/g/265/292/">
+								</div>
+							</div>
+							<div class="col col-md-4 col-lg-4">
+								<div class="image-wrap">
+									<img src="http://lorempixel.com/g/265/292/">
+								</div>
+							</div>	
+						</section>							
+					</div>	
+
+				</section>	
+
+			</div>
 
 		</main>
 
@@ -307,6 +529,8 @@
 				<p class="copyright">© Australia and New Zealand Banking Group Limited (ANZ) 2012 ABN 11 005 357 522.</p>
 			</div>
 		</footer>
+
+		<div class="loading-overlay"></div>
 
 		<script data-main="javascript/main-content" src="bower_components/requirejs/require.js"></script>
 

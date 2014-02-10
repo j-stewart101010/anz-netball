@@ -1,33 +1,49 @@
 @import "compass/css3";
+ 
+@import "compass";
 
-/* Welcome to Compass. Use this file to write IE specific override styles.
- * Import this file using the following HTML or equivalent:
+@import "variables";
+@import "mixins";
+
+/* Import this file using the following HTML or equivalent:
  * <!--[if IE]>
  *   <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
  * <![endif]--> */
 
-.lt-ie9 {
-	body {
-		min-width: 940px;
-	}
-	
-	.products-list-caption {
-		position: static;
-		@include opacity(1);
+.navigation {
+	&.block {
 
-		&:hover {
-			@include opacity(1);
+		.social-media {
+			a {
+				border-left: 0;
+			}			
 		}
-	}
 
-	.master-foot {
-		background: image-url("ie-footer-background.png");
-		width: 100%;
+		a {
+			border-left: 1px solid lighten($brand-primary, 5%);
+
+			.ie9 &:before, &:after {
+				display: none;
+			}
+		}
+	}	
+}
+
+.flippy {
+	overflow: hidden!important;
+
+	.group.outter-tile {
+		.tile {
+			position: relative;
+			left: -15px;
+		}
 	}
 }
 
-.lt-ie8 {
-	.master-foot {
-		padding-bottom: 15px;
-	}
+.ie9 {
+	.community {
+		#apply-for-grant-signup {
+			background-color: transparent;
+		}
+	}		
 }

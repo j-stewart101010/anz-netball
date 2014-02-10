@@ -36,6 +36,18 @@ require.config({
 				'jquery'
 			],
 			exports: '$.fn.modal'
+        },
+        flippy : {
+        	deps: [
+        		'jquery'
+        	],
+        	exports: '$.fn.flippy'
+        },
+        shame : {
+        	deps: [
+        		'jquery'
+        	],
+        	exports: '$.fn.flippy'
         }
 	},
 	paths: {
@@ -45,9 +57,11 @@ require.config({
 		text: '../bower_components/requirejs-text/text',
 		polyfiller: '../bower_components/webshim/js-webshim/minified/polyfiller',
 		match_media: 'helpers/match-media',
-		bootstrap_transition : 'vendor/bootstrap-transition',		
+		bootstrap_transition : 'vendor/bootstrap-transition',
         bootstrap_collapse : 'vendor/bootstrap-collapse',
-        bootstrap_modal : 'vendor/bootstrap-modal'
+        bootstrap_modal : 'vendor/bootstrap-modal',
+        flippy : 'vendor/jquery.flippy.min',
+        shame : 'modules/shame'
 	}
 });
 

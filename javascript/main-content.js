@@ -6,6 +6,7 @@ require.config({
 	// The shim config allows us to configure dependencies for
 	// scripts that do not call define() to register a module
 	shim: {
+		// mainConfigFile: 'config/require-config.js',
 		underscore: {
 			exports: '_'
 		},
@@ -36,7 +37,22 @@ require.config({
 				'jquery'
 			],
 			exports: '$.fn.modal'
-        }
+        },
+        bootstrap_carousel : {
+			deps: [
+				'jquery'
+			],
+			exports: '$.fn.carousel'
+        },
+        flippy : {
+        	deps: [
+        		'jquery'
+        	],
+        	exports: '$.fn.flippy'
+        },
+        shame : {
+        	exports: 'Shame'
+        },                     
 	},
 	paths: {
 		jquery: '../bower_components/jquery/jquery',
@@ -47,7 +63,10 @@ require.config({
 		match_media: 'helpers/match-media',
 		bootstrap_transition : 'vendor/bootstrap-transition',		
         bootstrap_collapse : 'vendor/bootstrap-collapse',
-        bootstrap_modal : 'vendor/bootstrap-modal'
+        bootstrap_modal : 'vendor/bootstrap-modal',
+        bootstrap_carousel : 'vendor/bootstrap-carousel',
+        flippy : 'vendor/jquery.flippy.min',
+        shame : 'modules/shame'
 	}
 });
 

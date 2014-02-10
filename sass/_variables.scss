@@ -5,13 +5,20 @@
 $brand-primary:						#0098db;	//Ocean Blue
 $brand-secondary:					#004165;	//Deep Current
 
-$brand-accent-one:					#d0eef8;	//Baby blue
-$brand-accent-two:					#dfe9ea;	//Dirty blue
-$brand-accent-three:				#9f9f9f;	//Light gray
+$brand-accent-one:					#d0eef8;	//Baby Blue
+$brand-accent-two:					#dfe9ea;	//Dirty Blue
+$brand-accent-three:				#9f9f9f;	//Light Gray
 $brand-accent-four:					#6d9da2;	//Cerulean
+$brand-accent-five:					#cdeff3;	//Poppy Blue
+$brand-accent-six:					#37c0d0;	//Aqua
+$brand-accent-seven:				#facea8;	//Light Orange
+$brand-accent-eight:				#f3933e;	//Sand Orange
+$brand-accent-nine:					#51bbe1;	//Deep Sky Blue
+$brand-accent-ten:					#f05c09;	//Sunset Orange
 
 
-$brand-heading-accent-one:			#36778a;	//Puuissan blue
+
+$brand-heading-accent-one:			#36778a;	//Puuissan Blue
 
 
 
@@ -28,9 +35,62 @@ $link-hover-color:      darken($link-color, 15%) !default;
 // Typography
 // -------------------------
 
-$font-family-sans-serif:  		"Helvetica Neue", Helvetica, Arial, sans-serif !default;
-$font-family-sans-serif-two:	"Helvetica Neue", Helvetica, Arial, sans-serif !default;
-$font-family-base:        		$font-family-sans-serif !default;
+
+// font-family:'Helvetica W01 Light';
+// font-family:'Helvetica W01 Light Obl';
+// font-family:'Helvetica W01 Roman';
+// font-family:'Helvetica W01 Italic';
+// font-family:'Helvetica W01 Bold';
+// font-family:'HelveticaW01-BoldItalic';
+// font-family:'Helvetica W01 Blk';
+// font-family:'Helvetica W01 Blk Obl';
+// font-family:'Helvetica W01 Light Cn';
+// font-family:'HelveticaW01-LightCnObl';
+// font-family:'Helvetica W01 Cn';
+// font-family:'Helvetica W01 Cn Obl';
+// font-family:'Helvetica W01 Bd Cn';
+// font-family:'Helvetica W01 Bd Cn Obl';
+// font-family:'Helvetica W01 Blk Cn';
+// font-family:'HelveticaW01-BlkCnObl';
+// font-family:'Helvetica W01 Narrow Rg';
+// font-family:'HelveticaW01-NarrowRgOb';
+// font-family:'Helvetica W01 Narrow Bd';
+// font-family:'HelveticaW01-NarrowBdOb';
+// font-family:'Helvetica W01 Cm';
+// font-family:'Helvetica W01 Extra Cm';
+// font-family:'Helvetica W01 Ultra Cm';
+// font-family:'HelveticaInseratW01-Rg';
+// font-family:'HelveticaW01-RoundedBd';
+// font-family:'HelveticaW01-RoundedBdO';
+// font-family:'HelveticaW01-RoundedBlk 709929';
+// font-family:'HelveticaW01-RoundedBlk 709932';
+// font-family:'HelveticaW01-RoundedBdC 709938';
+// font-family:'HelveticaW01-RoundedBdC 709941';
+// font-family:'HelveticaW01-TextbookRg 709917';
+// font-family:'HelveticaW01-TextbookRg 709920';
+// font-family:'HelveticaW01-TextbookBd 709911';
+// font-family:'HelveticaW01-TextbookBd 709914';
+// font-family:'Helvetica W95 Fractions';
+// font-family:'HelveticaW95-FractionsB';
+// font-family:'Andes W04 UltraLt';
+// font-family:'Andes W04 XLt';
+// font-family:'Andes W04 Lt';
+// font-family:'Andes W04 Book';
+// font-family:'Andes W04 Regular';
+// font-family:'Andes W04 Md';
+// font-family:'Andes W04 SemiBold';
+// font-family:'Andes W04 Bold';
+// font-family:'Andes W04 XBold';
+// font-family:'Andes W04 Black';
+
+
+
+$font-family-sans-serif:  		"Helvetica W01 Light", Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif-bold:	"Helvetica W01 Bold", Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif-two:	"Andes W04 Regular", Helvetica, Arial, sans-serif !default;
+$font-family-logo:				"Helvetica W01 Roman", Helvetica, Arial, sans-serif !default;
+
+$font-family-base:        		"Helvetica W01 Roman", Helvetica, Arial, sans-serif !default;
 
 $font-size-base:          		14px !default;
 $font-size-small:         		ceil($font-size-base * 0.85) !default;	//12px
@@ -40,8 +100,8 @@ $font-size-extra-medium:  		ceil($font-size-base * 1.35) !default;	//19px
 $font-size-large:         		ceil($font-size-base * 1.55) !default;
 $font-size-extra-large:   		ceil($font-size-base * 2) !default;
 
-$font-size-jumbo:				40px !default;
-$font-size-extra-jumbo:			ceil($font-size-jumbo * 1.25) !default;		//50px
+$font-size-jumbo:				32px !default;
+$font-size-extra-jumbo:			ceil($font-size-jumbo * 1.25) !default;		//40px
 
 $line-height-base:        1.428571429 !default; // 20/14
 $line-height-computed:    floor($font-size-base * $line-height-base) !default; // ~20px
@@ -56,6 +116,7 @@ $headings-line-height:    1.1 !default;
 // -------------------------
 
 $btn-font-weight:                normal !default;
+$btn-font-family:				 $font-family-sans-serif-two;
 
 $btn-default-color:              #444 !default;
 $btn-default-bg:                 transparent !default;
@@ -64,24 +125,6 @@ $btn-default-border:             #444 !default;
 $btn-primary-color:              #fff !default;
 $btn-primary-bg:                 transparent !default;
 $btn-primary-border:             #fff !default;
-
-// $btn-success-color:              #fff !default;
-// $btn-success-bg:                 $brand-success !default;
-// $btn-success-border:             darken($btn-success-bg, 5%) !default;
-
-// $btn-warning-color:              #fff !default;
-// $btn-warning-bg:                 $brand-warning !default;
-// $btn-warning-border:             darken($btn-warning-bg, 5%) !default;
-
-// $btn-danger-color:               #fff !default;
-// $btn-danger-bg:                  $brand-danger !default;
-// $btn-danger-border:              darken($btn-danger-bg, 5%) !default;
-
-// $btn-info-color:                 #fff !default;
-// $btn-info-bg:                    $brand-info !default;
-// $btn-info-border:                darken($btn-info-bg, 5%) !default;
-
-// $btn-link-disabled-color:        $gray-light !default;
 
 
 
@@ -102,14 +145,14 @@ $padding-base-horizontal:        12px !default;
 $padding-large-vertical:         10px !default;
 $padding-large-horizontal:       16px !default;
 
-$padding-small-vertical:         5px !default;
-$padding-small-horizontal:       10px !default;
+$padding-small-vertical:         8px !default;
+$padding-small-horizontal:       13px !default;
 
 $padding-extrasmall-vertical:    1px !default;
 $padding-extrasmall-horizontal:  5px !default;
 
-$line-height-large:              1.33 !default;
-$line-height-small:              1.5 !default;
+$line-height-large:              1 !default;
+$line-height-small:              1 !default;
 
 $border-radius-base:             4px !default;
 $border-radius-large:            6px !default;
@@ -159,8 +202,13 @@ $hr-border:                   $brand-secondary !default;
 
 
 
-// Grid system
+// Grid system 
 // --------------------------------------------------
+
+//These values represent the max values of the grid, beyond these values the grid will have rows/columns appened to it to maintain ratio of grid tiles
+$grid-max-width:			1200px!default;
+$grid-max-height:			720px!default;
+// $grid-max-height:			700px!default;
 
 // Number of columns in the grid system
 $grid-columns:              12 !default;

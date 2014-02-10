@@ -130,6 +130,7 @@
 // Transformations
 @mixin rotate($degrees) {
   -webkit-transform: rotate($degrees);
+    -moz-transform: rotate($degrees);
       -ms-transform: rotate($degrees); // IE9+
           transform: rotate($degrees);
 }
@@ -285,6 +286,7 @@
   background-image: -moz-radial-gradient(circle, $inner-color, $outer-color);
   background-image: radial-gradient(circle, $inner-color, $outer-color);
   background-repeat: no-repeat;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($inner-color)}', endColorstr='#{ie-hex-str($outer-color)}', GradientType=0); // IE9 and down
 }
 @mixin gradient-striped($color: #555, $angle: 45deg) {
   background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, rgba(255,255,255,.15)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255,255,255,.15)), color-stop(.75, rgba(255,255,255,.15)), color-stop(.75, transparent), to(transparent));
@@ -323,6 +325,15 @@
   }
 }
 
+// Responsive image
+//
+// Keep images from scaling beyond the width of their parents.
+
+@mixin img-responsive($display: block) {
+  display: $display;
+  max-width: 100%; // Part 1: Set a maximum relative to the parent
+  height: auto; // Part 2: Scale the height according to the width, otherwise you get stretching
+}
 
 // COMPONENT MIXINS
 // --------------------------------------------------
@@ -384,11 +395,13 @@
   &:focus,
   &:active,
   &.active {
-    color: $color;
+    color: darken($brand-accent-one, 15%);
+    border-color: white;
+    background-color: white;
 
-    @if $background != "transparent" {    
+    @if $background != "transparent" {
       background-color: darken($background, 8%);
-        border-color: darken($border, 12%);
+      border-color: darken($border, 12%);
     }
   }
   .open & { &.dropdown-toggle {
@@ -396,7 +409,7 @@
 
     @if $background != "transparent" {      
       background-color: darken($background, 8%);
-        border-color: darken($border, 12%);
+      border-color: darken($border, 12%);
     }
   } }
   &:active,
@@ -617,4 +630,3 @@
 //
 // Example usage: change the default blue border and shadow to white for better
 // contrast against a dark gray background.
-

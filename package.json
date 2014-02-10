@@ -4,7 +4,9 @@
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-compass": "*",
-    "grunt-contrib-watch": "~0.4.4"
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt-contrib-requirejs": "~0.4.1",
+    "grunt-contrib-copy": "~0.5.0"
   },
   "readmeFilename": "README",
   "gitHead": "",

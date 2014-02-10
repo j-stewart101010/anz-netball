@@ -1,30 +1,31 @@
-/* Welcome to Compass. Use this file to write IE specific override styles.
- * Import this file using the following HTML or equivalent:
+/* Import this file using the following HTML or equivalent:
  * <!--[if IE]>
  *   <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
  * <![endif]--> */
-/* line 10, ../sass/ie.scss */
-.lt-ie9 body {
-  min-width: 940px;
+/* line 17, ../sass/ie.scss */
+.navigation.block .social-media a {
+  border-left: 0;
 }
-/* line 14, ../sass/ie.scss */
-.lt-ie9 .products-list-caption {
-  position: static;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
-  opacity: 1;
+/* line 22, ../sass/ie.scss */
+.navigation.block a {
+  border-left: 1px solid #00aaf4;
 }
-/* line 18, ../sass/ie.scss */
-.lt-ie9 .products-list-caption:hover {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
-  opacity: 1;
-}
-/* line 23, ../sass/ie.scss */
-.lt-ie9 .master-foot {
-  background: url('../images/ie-footer-background.png');
-  width: 100%;
+/* line 25, ../sass/ie.scss */
+.ie9 .navigation.block a:before, .navigation.block a:after {
+  display: none;
 }
 
-/* line 30, ../sass/ie.scss */
-.lt-ie8 .master-foot {
-  padding-bottom: 15px;
+/* line 32, ../sass/ie.scss */
+.flippy {
+  overflow: hidden !important;
+}
+/* line 36, ../sass/ie.scss */
+.flippy .group.outter-tile .tile {
+  position: relative;
+  left: -15px;
+}
+
+/* line 45, ../sass/ie.scss */
+.ie9 .community #apply-for-grant-signup {
+  background-color: transparent;
 }

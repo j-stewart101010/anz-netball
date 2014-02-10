@@ -16,14 +16,11 @@ require.config({
 			],
 			exports: 'Backbone'
 		},
-		tween_lite : {
-			exports: 'TweenLite'
-		},
-		expo : {
-			exports: 'Expo'
-		},
 		console_log : {
 			exports: 'console.log'
+		},
+		event_aggregator : {
+			exports : 'EventAggregator'
 		},
 		request_anim_frame : {
 			exports : 'requestAnimFrame'
@@ -48,7 +45,16 @@ require.config({
 				'jquery'
 			],
 			exports: '$.fn.modal'
-        }          
+        },
+        flippy : {
+        	deps: [
+        		'jquery'
+        	],
+        	exports: '$.fn.flippy'
+        },
+        shame : {
+        	exports: 'Shame'
+        }                  
 	},
 	paths: {
 		jquery: '../bower_components/jquery/jquery',
@@ -56,14 +62,15 @@ require.config({
 		backbone: '../bower_components/backbone/backbone',
 		text: '../bower_components/requirejs-text/text',
 		polyfiller: '../bower_components/webshim/js-webshim/minified/polyfiller',
-		tween_lite: 'vendor/TweenLite.min',
-		expo: 'vendor/EasePack.min',
 		console_log: 'helpers/console-log',
 		request_anim_frame: 'helpers/request-anim-frame',
 		match_media: 'helpers/match-media',
 		bootstrap_transition : 'vendor/bootstrap-transition',		
         bootstrap_collapse : 'vendor/bootstrap-collapse',
-        bootstrap_modal : 'vendor/bootstrap-modal'			
+        bootstrap_modal : 'vendor/bootstrap-modal',
+        flippy : 'vendor/jquery.flippy.min',
+        event_aggregator : 'helpers/event-aggregator',
+        shame : 'modules/shame'
 	}
 });
 
@@ -72,9 +79,7 @@ require([
 	'views/app-home',
 	'console_log',
 	'request_anim_frame',
-	'match_media',
-	'tween_lite',
-	'expo'
+	'match_media'
 ], function (AppGenericView, AppHomeView) {
 	/*jshint nonew:false*/
 

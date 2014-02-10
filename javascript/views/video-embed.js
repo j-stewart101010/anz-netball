@@ -17,21 +17,21 @@ define([
             top: '50%',
             left: '50%',
             width: 500,
-            height: 500,
-            marginTop: -250,
-            marginLeft: -250
+            height: 500
         },
 
         className : 'loading',
 
-        events : {
-            'click.video.close [data-video="close"]' : 'close'
-        },
+        // events : {
+        //     'click.video.close [data-video="close"]' : 'close'
+        // },
 
         initialize : function () {
             _self = this;
 
             _self.set_options();
+
+            this.$el.on('click.video.close', this.close);
 
             // Listen for messages from the player
             if (window.addEventListener){ window.addEventListener('message', _self.on_message_received, false); }
@@ -66,6 +66,7 @@ define([
 
                 this.$el.on('hidden.bs.modal', _self.close);
                 $(window).on('resize scroll', _self.resize);
+                _self.resize();
             }
             //Else we are just returning a result that contains the embedded video iframe
             else {
@@ -75,12 +76,14 @@ define([
         },
 
         resize : function () {
-            _self.set_options();
-            _self.$el.css(_self.view_style_options);
+            _self.$el.css({
+                marginTop : '-'+_self.view_style_options.height / 2+'px',
+                marginLeft : '-'+_self.view_style_options.width / 2+'px'
+            });
         },
 
         close : function (e) {
-            setTimeout(function() { _self.$el.remove() }, 400);
+            setTimeout(function() { _self.$el.remove(); }, 400);
         },
 
         render : function () {

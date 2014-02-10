@@ -1,0 +1,127 @@
+
+// Shame - (to be fixed at a later stage if there is time or in project future maintenance)
+// These are mostly to fix border issues with different grid layouts that are to varied to accomidate into global styles
+
+//Address button issues with icons
+.btn {
+	.fa-angle-right {
+		font-size: ($font-size-medium - 1);
+		margin-left: 5px;
+	}
+	.fa-angle-left {
+		font-size: ($font-size-medium - 1);
+		margin-right: 5px;
+	}	
+}
+
+//Row styling for last minute design change of form to make spacing between cols and rows even
+.form .row .form-group:first-child {
+	padding-right: 8px;
+}
+
+
+.content.community {
+	@media screen and (max-width: $screen-desktop) {
+		//Pad the signup form on community page
+
+		#apply-for-grant-signup {
+			padding-top: 30px;
+			padding-bottom: 30px;
+		}
+		.form .row .form-group:first-child {
+			margin-right: 8px;
+		}		
+	}
+}
+
+.home {
+	//Master foot is having issues filling the remainer of the page on tabet for home page, fix this. 
+	.master-foot {
+		@media screen and (min-width: $screen-small) {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			height: 5%;
+			padding: 8px 0;
+		}		
+	}
+}
+
+//Address border issues created by complex grid layout
+.content.clinics, .content.clinics-post {
+
+	.grid:first-child .col:first-child {
+		border-right: 0;
+	}
+
+	.grid.full-length .grid .col + .col {
+		border-right: 0;
+	}
+	.grid + .grid {
+		border-bottom: 0;
+	}
+	.grid.quarter-length {
+		border-bottom: 0;
+
+		.image-wrap {
+			min-height: 100%;
+
+			&:first-child {
+				border-left: 1px solid white;
+			}
+		}
+	}
+	.col.half-length:first-child .image-wrap + .image-wrap {
+		border-bottom: 1px solid white;
+	}
+	.grid.three-quarters-length {
+		border-bottom: 0;
+	}
+	.half-length .half-length + .half-length .image-wrap,
+	.half-length + .half-length .half-length .image-wrap {
+		border-top: 1px solid white;
+	}
+
+	.video-tile:first-child {
+		border-top: 1px solid white;
+	}
+}
+
+//For the clinics post template, we no longer want javascript to resize the tile to match its sister tile - but only for this layout as it drops to a single col at this stage. Important used to get around javascript inline styles. Also give them some padding to compensate 
+.clinics-post {
+	@media screen and (max-width: $screen-small) {
+		.content-tile.tile {
+			height: auto!important;
+			padding-top: 50px;
+			padding-bottom: 50px;			
+		}
+	}
+}
+
+//Global styles for max and min widths interfering with home page calculations
+.content.home {
+	max-width: none;
+	max-height: none;
+	height: auto;
+	overflow: hidden;		
+}	
+
+//Address border issues
+.all-about-netball {
+	.group + .group .tile {
+		border-top: 1px solid white;
+	}
+}
+
+//Remove all borders on mobile and tablet devices. !important used as no time to work on specificity issues as this is last day of project (apologies if this makes anyones life hard!)
+//@TODO: Fix this abomination of a solution!
+.content {
+	.col, .grid, .ambassador-video-tile, .image-wrap {
+		@media screen and (max-width: $screen-desktop) {
+			border-top: 0!important;
+			border-left: 0!important;
+			border-right: 0!important;
+			border-bottom: 0!important;
+		}
+	}		
+}

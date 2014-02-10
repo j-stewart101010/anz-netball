@@ -28,6 +28,7 @@ label {
   display: inline-block;
   margin-bottom: 5px;
   font-size: $font-size-small;
+  cursor: pointer;
 }
 
 
@@ -112,8 +113,8 @@ input[type="number"] {
   border: 1px solid #eee;
   font-size: $font-size-small;
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
-  color: lighten($brand-primary, 30%); 
   @include transition(border-color ease-in-out .15s, box-shadow ease-in-out .15s);
+  -webkit-appearance: none;
 
   // Customize the `:focus` state to imitate native WebKit styles.
   @include form-control-focus();
@@ -151,15 +152,24 @@ textarea.form-control {
   margin-right: 5px;
 }
 
+// Text not included in a tooltip to prompt user for a given field
+.field-helper {
+  padding: 0 5px;
+  font-size: $font-size-small;
+}
+
 .select-wrapper {
    display: block;
-   position: relative;   
-   border: 1px solid #d8d8d8;            
+   position: relative;            
    background: white;
    cursor: pointer;
 
    .holder {
       @extend .form-control;
+
+      &.first-option {
+        color: lighten($brand-primary, 30%);  
+      }
    }
 
    .angle-down-box {
@@ -194,11 +204,16 @@ textarea.form-control {
   margin-right: 10px;
   cursor: pointer;
 
+  input[type="checkbox"] {
+    position: relative;
+    top: 1px;
+  }
+
   .tickbox {
     position: absolute;
     top: -1px;
     left: 0;
-    padding: 2px 4px;
+    padding: 0px 2px;
     color: lighten($brand-primary, 30%);
     background-color: white;
 

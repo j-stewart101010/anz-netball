@@ -5,25 +5,18 @@ define([
 
       var Config = {
 
-            isMobile : false, //window.mobilecheck(),
-
-            REMOTE_PATH : "http://gbd.abulia.org.uk/",
-
-            REMOTE_PATH_2 : "http://localhost.anz-netball/",
+            REMOTE_PATH : "",
 
             mouse : {
                   x: 0,
                   y: 0,
-                  button: false
+                  button: false,
+                  dragDistance: 0
             },
             track : {
                   x: 0,
                   y: 0
-            },
-            downAt : {
-                  x: 0,
-                  y: 0
-            }            
+            }
       };
 
       return Config;

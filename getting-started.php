@@ -3,200 +3,33 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js lt-ie10 ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
-		<title>ANZ Netball Nation - Community</title>
+		<title>ANZ Netball Nation - Getting Started</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
 		<link href="css/styles.css" rel="stylesheet" type="text/css">
+		<link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/f8bca219-07d6-4bdf-9b18-02f0db46b33f.css"/>
 
-        <!--[if lt IE 9]>
-            <link href="/stylesheets/ie.css" rel="stylesheet" type="text/css">
-        <![endif]-->
-
-        <style>
-/*        .background-grid {
-        	height: 87%;
-			position: absolute;
-			top: 8%;
-			right: 0px;
-			width: 100%;
-			overflow: hidden;     	
-        }
-
-        .background-grid .row {
-        	height: 25%;
-        	overflow: hidden;
-        }
-
-		.background-grid .image-wrap {
-			overflow: hidden;
-			max-width: 100%;
-		}        
-
-		.background-grid img {
-			max-width: 100%;
-		}		
-
-        .background-grid .col {
-        	padding-left: 0;
-        	padding-right: 0;
-        }*/
-
-        .grid, .col {
-        	position: absolute;
-        	top: 25%;
-        	left: 25%;
-        	opacity: 0;
-        }
-        </style>
+    	<!--[if IE 9]>
+	        <link href="css/ie.css" rel="stylesheet" type="text/css">
+	    <![endif]-->
 
 		<script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
     </head>
 
     <body>
 
-<!-- 	<div class="background-grid ">
-		<div class="row">
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>	
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>				
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>		
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>	
-		</div>	
-		<div class="row">
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>		
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>	
-		</div>
-		<div class="row">
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>		
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>	
-		</div>	
-		<div class="row">
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>		
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>
-			<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-				<div class="image-wrap">
-					<img src="http://lorempixel.com/g/612/612/">
-				</div>						
-			</div>	
-		</div>									
-	</div>    
- -->
-
  		<!-- <div class="loading"></div> -->
 
 		<header class="master-head">
-			<div class="branding">
+			<div class="branding col-md-4">
 				<div class="brand clearfix">
 					<div class="logos">
 						<a href="/" class="anz-logo"></a>
-						<a href="/" class="nbn-logo">Netball<b>Nation</b></a>
+						<a href="/" class="nbn-logo">Netball<em>Nation</em></a>
 					</div>
 					<span class="sharp-brand-angle"></span>
 
@@ -207,9 +40,9 @@
 					</a>
 				</div>
 			</div>
-			<nav class="main-nav">
+			<nav class="main-nav col-md-8">
 				<div class="nav-items">
-					<ul id="main-navigation" class="navigation block collapse">
+					<ul id="main-navigation" class="clearfix navigation block collapse">
 						<li><a href="/community-grants">Community grants</a></li>
 						<li class="active"><a href="/getting-started">Getting started</a></li>
 						<li><a href="/all-about-netball">All about netball</a></li>
@@ -223,13 +56,13 @@
 			</nav>
 		</header>
 
-		<main class="content">
+		<main class="content getting-started">
 
 			<section class="grid">
 
 
 
-				<div class="col col-md-6 col-lg-6 center-tile shade-eight">
+				<div class="col col-md-6 col-lg-6 center-tile shade-six">
 					<div class="outter-tile">
 						<article class="content-tile tile">
 							<hgroup>
@@ -241,59 +74,61 @@
 					</div>
 				</div>
 
-				<div class="col col-xs-12 col-md-2 col-lg-2 hidden-sm">
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
+				<div class="col col-md-2 col-lg-2">
+					<div class="half-length col col-md-12 clearfix">
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
 					</div>
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
-					</div>								
 				</div>
 
-
-
-				<div class="col col-sm-12 col-md-4 col-lg-4 clearfix">
+				<div class="col col-md-4 col-lg-4 clearfix">
 
 					<div id="video-case-studies" class="flip-container">
 						<div class="flipper">
-							<div class="front">
+							<div class="front shade-seven">
 
-
-
-								<article class="ambassador-video-tile tile shade-one">
+								<article class="ambassador-video-tile tile shade-seven">
 									<div class="video-tile-content">
 										<hgroup>
 											<div>
 												<h2 class="tile-heading heading-sm">
-													<div class="brand-overlay shade-seven"></div>
+													<div class="brand-overlay shade-nine"></div>
 													Video Sharelle McMahon
 												</h2>
 											</div>
 											<div>
 												<h1 class="tile-heading">
-													<div class="brand-overlay shade-seven"></div>
+													<div class="brand-overlay shade-nine"></div>
 													Just do it
 												</h1>
 											</div>
 										</hgroup>
 
-										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-append="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
+										<a class="btn btn-sm btn-primary" data-flip="toggle" data-flip-target="#video-case-studies" data-video="toggle" data-video-target="#video-side" data-video-id="19072376" href="#video-modal"><i class="fa fa-film fa-6"></i> Play</a>
 									
 									</div>
-									<div class="brand-overlay shade-six"></div>
-									<img class="video-tile-image" alt="Video" src="http://lorempixel.com/512/550/sports">
+									<div class="brand-overlay shade-seven"></div>
+									<img class="video-tile-image" alt="Video" src="http://lorempixel.com/612/612/sports">
 								</article>
 
 							</div>
-							<div id="video-side" class="back">
+							<div id="video-side" class="back shade-seven">
 								<!-- Dynamic content injected in here -->
+
+								<a class="btn btn-sm btn-action video-toggle" data-flip="toggle" data-flip-target="#video-case-studies" data-video-id="19072376" data-video="close">
+									<div class="cross-icon">
+										<i class="fa fa-angle-left"></i>
+										<i class="fa fa-angle-right"></i>
+									</div>
+								</a>								
 							</div>
 						</div>
 					</div>
 
-
-
-					<!-- <img src="images/netball-seventeen.jpg">		 -->
 				</div>	
 
 
@@ -302,30 +137,60 @@
 
 			<section class="grid">
 				
-				<div class="col col-xs-12 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
+				<div class="col col-md-2 col-lg-2">
+					<div class="half-length col col-xs-6 col-md-12">
+						<div id="grid-image-five" class="image-wrap">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
 					</div>
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
-					</div>
-				</div>
-
-				<div class="col col-xs-12 col-sm-6 col-md-2 col-lg-2">
-					<div class="outter-tile group shade-ten">
-						<article class="content-tile tile center">
-							<h1 class="heading heading-lg verbose">ANZ NetSetGo</h1>
-							<p class="subheading heading-sm verbose">Netball is a ball sport played by two teams of seven players.</p>
-							<a class="btn btn-default btn-sm btn-primary" href="/grants">More <i class="fa fa-angle-right"></i></a>
-						</article>
-					</div>				
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
+					<div class="half-length col col-xs-6 col-md-12">
+						<div id="grid-image-five" class="image-wrap">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
 					</div>
 				</div>
 
-				<div class="col col-md-4 center-tile shade-nine">
-					<div class="outter-tile">
+				<div class="col col-md-2 col-lg-2 clearfix">
+					<div class="half-length col col-xs-6 col-md-12">
+
+						<div id="link-one" class="flip-container">
+							<div class="flipper">
+								<div class="front shade-seven">
+
+									<div class="outter-tile group shade-seven">
+										<article data-resize-height="#grid-image-five" class="content-tile mini tile center">
+											<h1 class="heading deaccented heading-exmed verbose">ANZ NetSetGo</h1>
+											<p class="sub-content"><small class="verbose">Netball is a ball sport played by two teams of six players.</small></p>
+											<a data-flip="toggle" data-flip-target="#link-one" class="btn btn-default btn-sm btn-primary" href="/grants">More <i class="fa fa-angle-right"></i></a>
+										</article>
+									</div>
+
+								</div>
+								<div class="back shade-twenty">
+
+									<div class="outter-tile group shade-twenty">
+										<aside data-resize-height="#grid-image-five" class="content-tile tile center">
+											<div class="content-image">
+												<img src="images/anz-netset-icon.png" alt="ANZ Netset">
+											</div>
+											<a class="btn btn-default btn-sm" href="/more">Visit site <i class="fa fa-angle-right"></i></a>
+										</aside>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="half-length col col-xs-6 col-md-12">
+						<div id="grid-image-five" class="image-wrap">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
+					</div>
+				</div>
+
+				<div class="col col-md-4 center-tile">
+					<div class="outter-tile shade-eight">
 						<article class="content-tile tile">
 							<hgroup>
 								<h1 class="heading heading-exjumbo muted">Find a club</h1>
@@ -336,23 +201,28 @@
 					</div>
 				</div>
 
-				<div class="col col-xs-12 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
-					</div>
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
+				<div class="col col-md-2 col-lg-2">
+					<div class="half-length col col-md-12">
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
 					</div>
 				</div>
 
-				<div class="col col-xs-12 col-sm-6 col-md-2 col-lg-2">
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
-					</div>				
-					<div class="image-wrap">
-						<img src="http://lorempixel.com/g/612/612/">
+				<div class="col col-md-2 col-lg-2">
+					<div class="half-length col col-md-12">
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
+						<div class="image-wrap set">
+							<img src="http://lorempixel.com/g/612/612/">
+						</div>
 					</div>
-				</div>
+				</div>				
+
 			</section>			
 
 		</main>
@@ -369,6 +239,8 @@
 				<p class="copyright">© Australia and New Zealand Banking Group Limited (ANZ) 2012 ABN 11 005 357 522.</p>
 			</div>
 		</footer>
+
+		<div class="loading-overlay"></div>
 
 		<script data-main="javascript/main-content" src="bower_components/requirejs/require.js"></script>
 
