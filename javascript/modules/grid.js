@@ -39,6 +39,8 @@ define([
     this.heightRemain = 0;
     this.squareWidth = 306;
     this.squareHeight = 306;
+    this.zoomPos={x:canvas.width/2,y:canvas.height/2};
+
 
     this.resize(w, h);
    
@@ -50,13 +52,13 @@ define([
     this.zoom = 0.2;
 
     //this.defaultZoom = canvas.width/(this.squareWidth*Math.round(canvas.width/(this.squareWidth)));
-    this.camera.x=(canvas.width*0.5)/this.defaultZoom-(canvas.width*0.5);
-    this.camera.y=(canvas.height*0.5)/this.defaultZoom-(canvas.height*0.5);//0;this.squareHeight/(1-this.defaultZoom);
+    //console.log(this.defaultZoom); 
+    this.camera.x=(this.zoomPos.x)/this.defaultZoom-(this.zoomPos.x);
+    this.camera.y=(this.zoomPos.y)/this.defaultZoom-(this.zoomPos.y);//0;this.squareHeight/(1-this.defaultZoom);
 
     this.minZoom=0.3;
     this.dampZoom=0.003;
-    this.zoomPos={x:canvas.width/2,y:canvas.height/2};
-
+    
     // _self.flippedVideoTile=0;
 
     //this.lastButton = 0;
@@ -136,7 +138,7 @@ define([
           TileData.content[i].box.calculate();
 
           TileData.content[i].backbox = new Box(this.offScreenCtx, [], {width:this.squareWidth,height:this.squareHeight,contentType:"container",backgroundColour:TileData.content[i].backcolour});
-          TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, TileData.content[i].storyimage, {top:25,left:5,width:13,height:13,contentType:"image"}));
+          TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, TileData.content[i].storyimage, {top:26.5,left:5,width:13,height:13,contentType:"image"}));
           TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, TileData.content[i].storyusername, {top:25,left:21,width:60,height:20,textunderlay:"fit",padding:0.9,fontSize:10,fontstyle:"bold",contentType:"text",align:"left"}));
           TileData.content[i].backbox.calculate();
           TileData.content[i].backbox.addBox(new Box(this.offScreenCtx, TileData.content[i].storyfullname, {top:TileData.content[i].backbox.last().bottom,left:21,width:60,height:20,textunderlay:"fit",padding:0.9,fontSize:7,contentType:"text",align:"left"}));
@@ -257,8 +259,8 @@ define([
       };
 
       if(this.interactingTiles[i].tileType=="video") {
-          this.dragDisabled=6000;
-          this.centering=6000;
+          this.dragDisabled=99999;
+          this.centering=99999;
           this.centerSize=500;
           this.centerZoom=this.centerSize/(this.interactingTiles[i].scale*this.squareWidth);
 
@@ -334,7 +336,7 @@ define([
       //var blah math to do zooming and centering 
       desiredZoom=this.centerZoom;
       var cameraPropX=this.centerX-canvas.width*0.5+(this.centerSize*0.5)/this.centerZoom;//(-canvas.width*0.5)+this.centerX;
-      var cameraPropY=this.centerY-canvas.height*0.5+this.heightRemain*0.5+(this.centerSize*0.5)/this.centerZoom;//+(window.innerHeight || document.documentElement.clientHeight)*0.035;
+      var cameraPropY=this.centerY-canvas.height*0.5+this.heightRemain*0.22+(this.centerSize*0.5)/this.centerZoom;//+(window.innerHeight || document.documentElement.clientHeight)*0.035;
       
         //((x-(this.zoomPos.x))*this.zoom+this.zoomPos.x)
         //=current+('target'-current)*30/(ABS('target'-current)^1.615)
@@ -354,8 +356,8 @@ define([
       };
 
     };
-      this.camera.momentumx *= 0.997;
-      this.camera.momentumy *= 0.997;
+      this.camera.momentumx *= 0.97;
+      this.camera.momentumy *= 0.97;
 
     if(desiredZoom<0.2) desiredZoom=0.2;
     this.zoom+=(desiredZoom-this.zoom)*this.dampZoom;
@@ -366,9 +368,7 @@ define([
 
     if(!this.mouseHoverInteract && this.mouseHoverIndex>=0) {
       i=this.mouseHoverIndex;
-      console.log(i,this.mouseHoverWorldX,this.mouseHoverWorldY);
-      this.mouseHoverWorldX
-
+      
       //well we are interacting now! create a new interacted tile and send boxes and info
       switch(TileData.content[i].tiletype) {
         case "text":
@@ -424,7 +424,7 @@ define([
       if(x>0) wtx+=totalWorldWidth;
       x%=totalWorldWidth;
       x-=totalWorldWidth*Math.ceil(1+canvas.width/(totalWorldWidth*this.zoom*2));
-      wtx-=totalWorldWidth*Math.ceil(1+canvas.width/(totalWorldWidth+this.squareWidth*this.zoom*2));
+      wtx-=totalWorldWidth*Math.ceil(1+canvas.width/(totalWorldWidth*this.zoom*2));
       x+=TileData.content[i].position.x*this.squareWidth;
       wtx+=TileData.content[i].position.x*this.squareWidth;
 
@@ -493,7 +493,7 @@ define([
       if(x>0) wtx+=totalWorldWidth;
       x%=totalWorldWidth;
       x-=totalWorldWidth*Math.ceil(1+canvas.width/(totalWorldWidth*this.zoom*2));
-      wtx-=totalWorldWidth*Math.ceil(1+canvas.width/(totalWorldWidth+this.squareWidth*this.zoom*2));
+      wtx-=totalWorldWidth*Math.ceil(1+canvas.width/(totalWorldWidth*this.zoom*2));
       x+=TileData.content[j].position.x*this.squareWidth;
       wtx+=TileData.content[j].position.x*this.squareWidth;
 
