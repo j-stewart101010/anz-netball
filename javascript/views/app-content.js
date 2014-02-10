@@ -68,11 +68,12 @@ define([
                 }
             );
 
+            $(window).on('resize', _self.resize );
+
             //@TODO: We are not able to correclty calculate grid dimensions until images have finished loading. IE Fires its resize event early which breaks the layout on initial render.
             //Other browsers layouts break slightly if resized before the images have finished loading. Possible solution is to apply a page loader that masks content until page has finished rendering to avoid FOUCs
             if (ie_9 || ie_old) {
                 $(window)
-                .on('resize', _self.resize )
                 .on('load', function() {
                     if (_self.outter_columns.length > 0 || _self.outter_rows.length > 0) {
                         _.each([_self.outter_columns, _self.outter_rows], function (child) {
