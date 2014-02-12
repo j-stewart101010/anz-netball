@@ -169,7 +169,7 @@ define([
   Grid.constructor = Grid;
 
   Grid.prototype.resize = function (w, h) {
-    this.defaultZoom = w/(this.squareWidth*Math.round(w/(this.squareWidth)));
+    this.defaultZoom = w/(this.squareWidth*Math.round(w/(this.squareWidth*(0.6+w/10000))));
     this.width = w;
     this.height = h;
     this.zoomPos={x:w/2,y:h/2};
